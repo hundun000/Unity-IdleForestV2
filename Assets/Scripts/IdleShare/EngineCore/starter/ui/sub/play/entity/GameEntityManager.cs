@@ -17,7 +17,7 @@ namespace hundun.idleshare.enginecore
     {
         private BaseIdleGame<T_GAME, T_SAVE> game;
         
-        public Dictionary<String, List<GameEntity>> gameEntitiesOfConstructionIds = new Dictionary<String, List<GameEntity>>();
+        public Dictionary<String, List<GameEntity>> gameEntitiesOfConstructionPrototypeIds = new Dictionary<String, List<GameEntity>>();
 
         public Dictionary<String, List<GameEntity>> gameEntitiesOfResourceIds = new Dictionary<String, List<GameEntity>>();
 
@@ -40,7 +40,7 @@ namespace hundun.idleshare.enginecore
 
         public void allEntityMoveForFrame()
         {
-            foreach (KeyValuePair<String, List<GameEntity>> entry in gameEntitiesOfConstructionIds)
+            foreach (KeyValuePair<String, List<GameEntity>> entry in gameEntitiesOfConstructionPrototypeIds)
             {
                 List<GameEntity> queue = entry.Value;
                 queue.ForEach(entity => {
@@ -121,6 +121,7 @@ namespace hundun.idleshare.enginecore
             while (gameEntities.size() > drawNum)
             {
                 game.frontend.log(this.getClass().getSimpleName(), "checkResourceEntityByOwnAmount " + resourceId + " remove, current = " + gameEntities.size() + " , target = " + drawNum);
+                UnityEngine.Object.Destroy(gameEntities.get(gameEntities.size() - 1).gameObject);
                 gameEntities.RemoveAt(gameEntities.size() - 1);
             }
             while (gameEntities.size() < drawNum)
@@ -166,11 +167,12 @@ namespace hundun.idleshare.enginecore
             int resourceNum = constructions.Select(it => it.workingLevel).Sum();
             int MAX_DRAW_NUM = 5;
             int drawNum = gameEntityFactory.calculateConstructionDrawNum(prototypeId, resourceNum, MAX_DRAW_NUM);
-            gameEntitiesOfConstructionIds.computeIfAbsent(prototypeId, k => new List<GameEntity>());
-            List<GameEntity> gameEntities = gameEntitiesOfConstructionIds.get(prototypeId);
+            gameEntitiesOfConstructionPrototypeIds.computeIfAbsent(prototypeId, k => new List<GameEntity>());
+            List<GameEntity> gameEntities = gameEntitiesOfConstructionPrototypeIds.get(prototypeId);
             while (gameEntities.size() > drawNum)
             {
                 game.frontend.log(this.getClass().getSimpleName(), "checkConstructionEntityByOwnAmount " + prototypeId + " remove, current = " + gameEntities.size() + " , target = " + drawNum);
+                UnityEngine.Object.Destroy(gameEntities.get(gameEntities.size() - 1).gameObject);
                 gameEntities.RemoveAt(gameEntities.size() - 1);
             }
             while (gameEntities.size() < drawNum)
@@ -190,12 +192,12 @@ namespace hundun.idleshare.enginecore
             }
         }
 
-        public void destoryNoNeedDrawConstructionIds(List<string> needDrawConstructionIds)
+        public void destoryNoNeedDrawConstructionPrototypeIds(List<string> needDrawConstructionPrototypeIds)
         {
-            foreach (KeyValuePair<String, List<GameEntity>> entry in gameEntitiesOfConstructionIds)
+            foreach (KeyValuePair<String, List<GameEntity>> entry in gameEntitiesOfConstructionPrototypeIds)
             {
                 List<GameEntity> queue = entry.Value;
-                if (!needDrawConstructionIds.Contains(entry.Key))
+                if (!needDrawConstructionPrototypeIds.Contains(entry.Key))
                 {
                     queue.ForEach(entity => UnityEngine.Object.Destroy(entity.gameObject));
                     queue.Clear();
