@@ -9,8 +9,8 @@ namespace hundun.idleshare.gamelib
 {
     public abstract class ChildGameConfig
     {
-        public Dictionary<String, List<String>> areaControlableConstructionIds;
-        public Dictionary<String, List<String>> areaShowEntityByOwnAmountConstructionIds;
+        public Dictionary<String, List<String>> areaControlableConstructionPrototypeIds;
+        public Dictionary<String, List<String>> areaShowEntityByOwnAmountConstructionPrototypeIds;
         public Dictionary<String, List<String>> areaShowEntityByOwnAmountResourceIds;
         public Dictionary<String, List<String>> areaShowEntityByChangeAmountResourceIds;
         public Dictionary<String, String> screenIdToFilePathMap;

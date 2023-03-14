@@ -37,5 +37,12 @@ namespace hundun.idleshare.gamelib
                 gameContext.eventManager.registerListener(it);
             }
         }
+
+        internal List<BaseConstruction> getConstructionsOfPrototype(string prototypeId)
+        {
+            return constructions.Values
+                .Where(it => it.prototypeId.Equals(prototypeId))
+                .ToList();
+        }
     }
 }

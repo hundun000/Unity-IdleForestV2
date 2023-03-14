@@ -11,8 +11,8 @@ namespace hundun.idleshare.gamelib
         protected int autoOutputProgress = 0;
 
 
-        public BaseAutoConstruction(String id
-                ) : base(id)
+        public BaseAutoConstruction(String prototypeId, String id
+                ) : base(prototypeId, id)
         {
         }
 

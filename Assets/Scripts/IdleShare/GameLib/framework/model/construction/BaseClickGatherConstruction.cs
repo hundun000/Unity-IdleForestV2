@@ -10,9 +10,9 @@ namespace hundun.idleshare.gamelib
     public class BaseClickGatherConstruction : BaseConstruction
     {
 
-    public BaseClickGatherConstruction(String id
-            ) : base(id)
-    {
+    public BaseClickGatherConstruction(String prototypeId, String id
+                ) : base(prototypeId, id)
+        {
     }
 
     override public void onClick()

@@ -10,7 +10,7 @@ namespace hundun.idleshare.gamelib
     {
         private readonly String buffId;
 
-        public BaseBuffConstruction(String id, String buffId) : base(id)
+        public BaseBuffConstruction(String prototypeId, String id, String buffId) : base(prototypeId, id)
         {
             this.buffId = buffId;
         }

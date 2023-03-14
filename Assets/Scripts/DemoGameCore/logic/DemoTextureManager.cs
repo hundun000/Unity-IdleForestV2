@@ -67,8 +67,8 @@ namespace Assets.Scripts.DemoGameCore.logic
                 var texture = getTexture2D("constructionEntities.png");
                 Sprite[][] regions = split(texture, 32, 32);
                 //constructionEntityMap.Add(ConstructionId.COOKIE_CLICK_PROVIDER, regions[0][0]);
-                constructionEntityMap.Add(ConstructionId.COOKIE_AUTO_PROVIDER, regions[0][1]);
-                constructionEntityMap.Add(ConstructionId.COOKIE_SELLER, regions[0][2]);
+                constructionEntityMap.Add(ConstructionPrototypeId.COOKIE_AUTO_PROVIDER, regions[0][1]);
+                constructionEntityMap.Add(ConstructionPrototypeId.COOKIE_SELLER, regions[0][2]);
                 //constructionEntityMap.Add(ConstructionId.WIN_PROVIDER, regions[0][3]);
             }
             {

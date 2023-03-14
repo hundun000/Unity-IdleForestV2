@@ -35,11 +35,11 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         {
             switch (id)
             {
-                case ConstructionId.COOKIE_CLICK_PROVIDER:
+                case ConstructionPrototypeId.COOKIE_CLICK_PROVIDER:
                     return null;
-                case ConstructionId.COOKIE_AUTO_PROVIDER:
+                case ConstructionPrototypeId.COOKIE_AUTO_PROVIDER:
                     return this.rowStableConstructionEntity(id, index, 1);
-                case ConstructionId.COOKIE_SELLER:
+                case ConstructionPrototypeId.COOKIE_SELLER:
                     return this.rowStableConstructionEntity(id, index, 0);
                 default:
                     // no need GameEntity

@@ -51,6 +51,13 @@ namespace hundun.idleshare.gamelib
                 return model.levelComponent.workingLevelChangable;
             }
         }
+        public int workingLevel
+        {
+            get
+            {
+                return model.saveData.workingLevel;
+            }
+        }
 
         public static ConstructionExportProxy fromModel(BaseConstruction model)
         {
@@ -94,9 +101,13 @@ namespace hundun.idleshare.gamelib
             return gameplayContext.storageManager.getResourceNumOrZero(resourceId);
         }
 
-        public BaseConstruction getConstruction(String id)
+
+        public List<ConstructionExportProxy> getConstructionsOfPrototype(String prototypeId)
         {
-            return gameplayContext.constructionFactory.getConstruction(id);
+            return gameplayContext.constructionFactory.getConstructionsOfPrototype(prototypeId)
+                .Select(it => ConstructionExportProxy.fromModel(it))
+                .ToList();
+                ;
         }
 
         public void onLogicFrame()

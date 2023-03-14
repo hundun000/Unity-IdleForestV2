@@ -32,7 +32,7 @@ namespace hundun.idleshare.enginecore
             
             String gameArea = parent.area;
 
-            List<String> needDrawConstructionIds = manager.areaShowEntityByOwnAmountConstructionIds.get(gameArea);
+            List<String> needDrawConstructionIds = manager.areaShowEntityByOwnAmountConstructionPrototypeIds.get(gameArea);
 
             manager.destoryNoNeedDrawConstructionIds(needDrawConstructionIds);
             manager.allEntityMoveForFrame();

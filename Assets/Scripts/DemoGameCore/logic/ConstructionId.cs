@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.DemoGameCore.logic
 {
-    public class ConstructionId
+    public class ConstructionPrototypeId
     {
         public const String COOKIE_CLICK_PROVIDER = "ENUM_CSTR@COOKIE_CLICK_PROVIDER";
         public const String COOKIE_AUTO_PROVIDER = "ENUM_CSTR@COOKIE_AUTO_PROVIDER";

@@ -30,17 +30,17 @@ namespace hundun.idleshare.gamelib
          */
         Dictionary<String, List<BaseConstruction>> areaControlableConstructions;
 
-        public void lazyInit(Dictionary<String, List<String>> areaControlableConstructionIds)
+        public void lazyInit(Dictionary<String, List<String>> areaControlableConstructionPrototypeIds)
         {
             areaControlableConstructions = new Dictionary<String, List<BaseConstruction>>();
-            if (areaControlableConstructionIds != null)
+            if (areaControlableConstructionPrototypeIds != null)
             {
-                foreach (KeyValuePair<String, List<String>> entry in areaControlableConstructionIds)
+                foreach (KeyValuePair<String, List<String>> entry in areaControlableConstructionPrototypeIds)
                 {
                     areaControlableConstructions.Add(
                             entry.Key,
                             entry.Value
-                                .Select(id => gameContext.constructionFactory.getConstruction(id))
+                                .SelectMany(id => gameContext.constructionFactory.getConstructionsOfPrototype(id))
                                 .ToList()
                     );
                 }

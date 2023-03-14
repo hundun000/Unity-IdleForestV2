@@ -21,19 +21,19 @@ namespace hundun.idleshare.enginecore
 
         public Dictionary<String, List<GameEntity>> gameEntitiesOfResourceIds = new Dictionary<String, List<GameEntity>>();
 
-        public Dictionary<String, List<String>> areaShowEntityByOwnAmountConstructionIds;
+        public Dictionary<String, List<String>> areaShowEntityByOwnAmountConstructionPrototypeIds;
 
         public Dictionary<String, List<String>> areaShowEntityByOwnAmountResourceIds;
 
         public Dictionary<String, List<String>> areaShowEntityByChangeAmountResourceIds;
 
 
-        public void lazyInit(BaseIdleGame<T_GAME, T_SAVE> game, Dictionary<String, List<String>> areaShowEntityByOwnAmountConstructionIds,
+        public void lazyInit(BaseIdleGame<T_GAME, T_SAVE> game, Dictionary<String, List<String>> areaShowEntityByOwnAmountConstructionPrototypeIds,
                 Dictionary<String, List<String>> areaShowEntityByOwnAmountResourceIds,
                 Dictionary<String, List<String>> areaShowEntityByChangeAmountResourceIds)
         {
             this.game = game;
-            this.areaShowEntityByOwnAmountConstructionIds = areaShowEntityByOwnAmountConstructionIds;
+            this.areaShowEntityByOwnAmountConstructionPrototypeIds = areaShowEntityByOwnAmountConstructionPrototypeIds;
             this.areaShowEntityByOwnAmountResourceIds = areaShowEntityByOwnAmountResourceIds;
             this.areaShowEntityByChangeAmountResourceIds = areaShowEntityByChangeAmountResourceIds;
         }
@@ -69,11 +69,11 @@ namespace hundun.idleshare.enginecore
 
         public void areaEntityCheckByOwnAmount(String gameArea, BaseGameEntityFactory<T_GAME, T_SAVE> gameEntityFactory)
         {
-            List<String> shownConstructionIds = this.areaShowEntityByOwnAmountConstructionIds.get(gameArea);
-            if (shownConstructionIds != null)
+            List<String> shownConstructionPrototypeIds = this.areaShowEntityByOwnAmountConstructionPrototypeIds.get(gameArea);
+            if (shownConstructionPrototypeIds != null)
             {
-                foreach (String shownConstructionId in shownConstructionIds) {
-                    checkConstructionEntityByOwnAmount(shownConstructionId, gameEntityFactory);
+                foreach (String shownConstructionPrototypeId in shownConstructionPrototypeIds) {
+                    checkConstructionEntityByOwnAmount(shownConstructionPrototypeId, gameEntityFactory);
                 }
             }
 
@@ -160,26 +160,26 @@ namespace hundun.idleshare.enginecore
             }
         }
 
-        private void checkConstructionEntityByOwnAmount(String id, BaseGameEntityFactory<T_GAME, T_SAVE> gameEntityFactory)
+        private void checkConstructionEntityByOwnAmount(String prototypeId, BaseGameEntityFactory<T_GAME, T_SAVE> gameEntityFactory)
         {
-            BaseConstruction construction = game.idleGameplayExport.getConstruction(id);
-            int resourceNum = construction.saveData.workingLevel;
-            int MAX_DRAW_NUM = construction.maxDrawNum;
-            int drawNum = gameEntityFactory.calculateConstructionDrawNum(id, resourceNum, MAX_DRAW_NUM);
-            gameEntitiesOfConstructionIds.computeIfAbsent(id, k => new List<GameEntity>());
-            List<GameEntity> gameEntities = gameEntitiesOfConstructionIds.get(id);
+            var constructions = game.idleGameplayExport.getConstructionsOfPrototype(prototypeId);
+            int resourceNum = constructions.Select(it => it.workingLevel).Sum();
+            int MAX_DRAW_NUM = 5;
+            int drawNum = gameEntityFactory.calculateConstructionDrawNum(prototypeId, resourceNum, MAX_DRAW_NUM);
+            gameEntitiesOfConstructionIds.computeIfAbsent(prototypeId, k => new List<GameEntity>());
+            List<GameEntity> gameEntities = gameEntitiesOfConstructionIds.get(prototypeId);
             while (gameEntities.size() > drawNum)
             {
-                game.frontend.log(this.getClass().getSimpleName(), "checkConstructionEntityByOwnAmount " + id + " remove, current = " + gameEntities.size() + " , target = " + drawNum);
+                game.frontend.log(this.getClass().getSimpleName(), "checkConstructionEntityByOwnAmount " + prototypeId + " remove, current = " + gameEntities.size() + " , target = " + drawNum);
                 gameEntities.RemoveAt(gameEntities.size() - 1);
             }
             while (gameEntities.size() < drawNum)
             {
                 int newIndex = gameEntities.size();
-                GameEntity gameEntity = gameEntityFactory.newConstructionEntity(id, newIndex);
+                GameEntity gameEntity = gameEntityFactory.newConstructionEntity(prototypeId, newIndex);
                 if (gameEntity != null)
                 {
-                    game.frontend.log(this.getClass().getSimpleName(), "checkConstructionEntityByOwnAmount " + id + " new, current = " + gameEntities.size() + " , target = " + drawNum);
+                    game.frontend.log(this.getClass().getSimpleName(), "checkConstructionEntityByOwnAmount " + prototypeId + " new, current = " + gameEntities.size() + " , target = " + drawNum);
                     gameEntities.Add(gameEntity);
                 }
                 else

@@ -103,7 +103,7 @@ namespace hundun.idleshare.enginecore
             this.gameImageDrawer = new GameImageDrawer<T_GAME, T_SAVE>();
             this.gameEntityManager = new GameEntityManager<T_GAME, T_SAVE>();
             gameEntityManager.lazyInit(this.game, 
-                game.childGameConfig.areaShowEntityByOwnAmountConstructionIds, 
+                game.childGameConfig.areaShowEntityByOwnAmountConstructionPrototypeIds, 
                 game.childGameConfig.areaShowEntityByOwnAmountResourceIds, 
                 game.childGameConfig.areaShowEntityByChangeAmountResourceIds);
 

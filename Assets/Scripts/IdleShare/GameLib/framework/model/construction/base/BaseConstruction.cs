@@ -32,6 +32,8 @@ namespace hundun.idleshare.gamelib
 
         public String id;
 
+        public String prototypeId;
+
         public String detailDescroptionConstPart;
 
         public DescriptionPackage descriptionPackage;
@@ -58,8 +60,8 @@ namespace hundun.idleshare.gamelib
         {
             this.gameContext = gameContext;
 
-            this.name = gameContext.gameDictionary.constructionIdToShowName(language, id);
-            this.detailDescroptionConstPart = gameContext.gameDictionary.constructionIdToDetailDescroptionConstPart(language, id);
+            this.name = gameContext.gameDictionary.constructionPrototypeIdToShowName(language, prototypeId);
+            this.detailDescroptionConstPart = gameContext.gameDictionary.constructionPrototypeIdToDetailDescroptionConstPart(language, prototypeId);
 
             outputComponent.lazyInitDescription();
             upgradeComponent.lazyInitDescription();
@@ -67,11 +69,12 @@ namespace hundun.idleshare.gamelib
             updateModifiedValues();
         }
 
-        public BaseConstruction(String id)
+        public BaseConstruction(String prototypeId, String id)
         {
 
             this.saveData = new ConstructionSaveData();
             this.id = id;
+            this.prototypeId = prototypeId;
         }
 
         public abstract void onClick();

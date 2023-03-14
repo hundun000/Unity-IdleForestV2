@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace hundun.idleshare.gamelib
 {
+    
     public class ConstructionSaveData
     {
         public int level;

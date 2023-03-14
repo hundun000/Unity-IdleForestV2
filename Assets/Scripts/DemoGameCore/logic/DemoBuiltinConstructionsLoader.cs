@@ -16,8 +16,11 @@ namespace Assets.Scripts.DemoGameCore.logic
         {
             List<BaseConstruction> constructions = new List<BaseConstruction>();
             // clicker-provider
+            for (int i = 0; i < 2; i ++)
             {
-                BaseConstruction construction = new BaseClickGatherConstruction(ConstructionId.COOKIE_CLICK_PROVIDER);
+                String prototypeId = ConstructionPrototypeId.COOKIE_CLICK_PROVIDER;
+                String id = prototypeId + "_" + i;
+                BaseConstruction construction = new BaseClickGatherConstruction(prototypeId, id);
                 construction.descriptionPackage = DescriptionPackageFactory.getGatherDescriptionPackage(language);
 
                 OutputComponent outputComponent = new OutputComponent(construction);
@@ -35,8 +38,11 @@ namespace Assets.Scripts.DemoGameCore.logic
                 constructions.Add(construction);
             }
             // auto-provider
+            for (int i = 0; i < 2; i++)
             {
-                BaseConstruction construction = new BaseAutoConstruction(ConstructionId.COOKIE_AUTO_PROVIDER);
+                String prototypeId = ConstructionPrototypeId.COOKIE_AUTO_PROVIDER;
+                String id = prototypeId + "_" + i;
+                BaseConstruction construction = new BaseAutoConstruction(prototypeId, id);
                 construction.descriptionPackage = DescriptionPackageFactory.getMaxLevelAutoDescriptionPackage(language);
 
                 OutputComponent outputComponent = new OutputComponent(construction);
@@ -58,8 +64,11 @@ namespace Assets.Scripts.DemoGameCore.logic
                 constructions.Add(construction);
             }
             // seller
+            for (int i = 0; i < 2; i++)
             {
-                BaseConstruction construction = new BaseAutoConstruction(ConstructionId.COOKIE_SELLER);
+                String prototypeId = ConstructionPrototypeId.COOKIE_SELLER;
+                String id = prototypeId + "_" + i;
+                BaseConstruction construction = new BaseAutoConstruction(prototypeId, id);
                 construction.descriptionPackage = DescriptionPackageFactory.getWorkingLevelAutoDescriptionPackage(language);
 
                 OutputComponent outputComponent = new OutputComponent(construction);
@@ -85,7 +94,9 @@ namespace Assets.Scripts.DemoGameCore.logic
             }
             // win
             {
-                BaseConstruction construction = new BaseBuffConstruction(ConstructionId.WIN_PROVIDER, BuffId.WIN);
+                String prototypeId = ConstructionPrototypeId.WIN_PROVIDER;
+                String id = prototypeId + "_Singleton";
+                BaseConstruction construction = new BaseBuffConstruction(prototypeId, id, BuffId.WIN);
                 construction.descriptionPackage = DescriptionPackageFactory.getWinDescriptionPackage(language);
 
                 OutputComponent outputComponent = new OutputComponent(construction);

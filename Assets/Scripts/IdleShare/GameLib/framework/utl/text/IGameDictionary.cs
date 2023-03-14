@@ -9,8 +9,8 @@ namespace hundun.idleshare.gamelib
 {
     public interface IGameDictionary
     {
-        String constructionIdToShowName(Language language, String constructionId);
-        String constructionIdToDetailDescroptionConstPart(Language language, String constructionId);
+        String constructionPrototypeIdToShowName(Language language, String prototypeId);
+        String constructionPrototypeIdToDetailDescroptionConstPart(Language language, String prototypeId);
         List<String> getMemuScreenTexts(Language language);
 
         Dictionary<Language, String> getLanguageShowNameMap();

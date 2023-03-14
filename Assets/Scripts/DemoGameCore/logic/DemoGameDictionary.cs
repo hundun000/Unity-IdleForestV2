@@ -11,34 +11,34 @@ namespace Assets.Scripts.DemoGameCore.logic
     public class DemoGameDictionary : IGameDictionary
     {
 
-        public String constructionIdToShowName(Language language, String constructionId)
+        public String constructionPrototypeIdToShowName(Language language, String prototypeId)
         {
             switch (language)
             {
                 case Language.CN:
-                    switch (constructionId)
+                    switch (prototypeId)
                     {
-                        case ConstructionId.COOKIE_CLICK_PROVIDER:
+                        case ConstructionPrototypeId.COOKIE_CLICK_PROVIDER:
                             return "大饼干";
-                        case ConstructionId.COOKIE_AUTO_PROVIDER:
+                        case ConstructionPrototypeId.COOKIE_AUTO_PROVIDER:
                             return "自动点击器";
-                        case ConstructionId.COOKIE_SELLER:
+                        case ConstructionPrototypeId.COOKIE_SELLER:
                             return "自动销售器";
-                        case ConstructionId.WIN_PROVIDER:
+                        case ConstructionPrototypeId.WIN_PROVIDER:
                             return "奖杯购买处";
                         default:
                             return "口口";
                     }
                 default:
-                    switch (constructionId)
+                    switch (prototypeId)
                     {
-                        case ConstructionId.COOKIE_CLICK_PROVIDER:
+                        case ConstructionPrototypeId.COOKIE_CLICK_PROVIDER:
                             return "main cookie";
-                        case ConstructionId.COOKIE_AUTO_PROVIDER:
+                        case ConstructionPrototypeId.COOKIE_AUTO_PROVIDER:
                             return "cliker";
-                        case ConstructionId.COOKIE_SELLER:
+                        case ConstructionPrototypeId.COOKIE_SELLER:
                             return "seller";
-                        case ConstructionId.WIN_PROVIDER:
+                        case ConstructionPrototypeId.WIN_PROVIDER:
                             return "win";
                         default:
                             return "[dic lost]";
@@ -48,34 +48,34 @@ namespace Assets.Scripts.DemoGameCore.logic
 
         }
 
-        public String constructionIdToDetailDescroptionConstPart(Language language, String constructionId)
+        public String constructionPrototypeIdToDetailDescroptionConstPart(Language language, String prototypeId)
         {
             switch (language)
             {
                 case Language.CN:
-                    switch (constructionId)
+                    switch (prototypeId)
                     {
-                        case ConstructionId.COOKIE_CLICK_PROVIDER:
+                        case ConstructionPrototypeId.COOKIE_CLICK_PROVIDER:
                             return "戳一戳，获得饼干";
-                        case ConstructionId.COOKIE_AUTO_PROVIDER:
+                        case ConstructionPrototypeId.COOKIE_AUTO_PROVIDER:
                             return "自动获得饼干";
-                        case ConstructionId.COOKIE_SELLER:
+                        case ConstructionPrototypeId.COOKIE_SELLER:
                             return "自动获得饼干";
-                        case ConstructionId.WIN_PROVIDER:
+                        case ConstructionPrototypeId.WIN_PROVIDER:
                             return "购买一个奖杯以赢得胜利";
                         default:
                             return "[dic lost]";
                     }
                 default:
-                    switch (constructionId)
+                    switch (prototypeId)
                     {
-                        case ConstructionId.COOKIE_CLICK_PROVIDER:
+                        case ConstructionPrototypeId.COOKIE_CLICK_PROVIDER:
                             return "Click gain some cookie";
-                        case ConstructionId.COOKIE_AUTO_PROVIDER:
+                        case ConstructionPrototypeId.COOKIE_AUTO_PROVIDER:
                             return "Auto gain some cookie";
-                        case ConstructionId.COOKIE_SELLER:
+                        case ConstructionPrototypeId.COOKIE_SELLER:
                             return "Auto sell cookies";
-                        case ConstructionId.WIN_PROVIDER:
+                        case ConstructionPrototypeId.WIN_PROVIDER:
                             return "Get a trophy and win the game";
                         default:
                             return "[dic lost]";
