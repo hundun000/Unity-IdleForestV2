@@ -28,7 +28,13 @@ namespace Assets.Scripts.DemoGameCore.logic
                             ConstructionSaveData.builder()
                                     .level(1)
                                     .workingLevel(0)
-                                    .build()));
+                                    .build(),
+                            ConstructionPrototypeId.GROWING_COOKIE_AUTO_PROVIDER + "_0",
+                            ConstructionSaveData.builder()
+                                    .level(100)
+                                    .workingLevel(10)
+                                    .build()
+                    ));
             gameplaySaveData.ownResoueces = (new Dictionary<String, long>());
             //gameplaySaveData.ownResoueces.Add(ResourceType.COOKIE, 42);
             gameplaySaveData.unlockedResourceTypes = (new HashSet<String>());
@@ -37,7 +43,7 @@ namespace Assets.Scripts.DemoGameCore.logic
             gameplaySaveData.unlockedAchievementNames = (new HashSet<String>());
 
             var systemSettingSaveData = new SystemSettingSaveData();
-            systemSettingSaveData.language = Language.EN;
+            systemSettingSaveData.language = Language.CN;
             var rootSaveData = new RootSaveData(gameplaySaveData, systemSettingSaveData);
             return rootSaveData;
 

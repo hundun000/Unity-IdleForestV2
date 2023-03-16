@@ -63,6 +63,31 @@ namespace Assets.Scripts.DemoGameCore.logic
                 construction.maxDrawNum = (9);
                 constructions.Add(construction);
             }
+            // growing-auto-provider
+            for (int i = 0; i < 1; i++)
+            {
+                String prototypeId = ConstructionPrototypeId.GROWING_COOKIE_AUTO_PROVIDER;
+                String id = prototypeId + "_" + i;
+                BaseConstruction construction = new IdleForestConstruction(prototypeId, id);
+                construction.descriptionPackage = getForestDescriptionPackage(language);
+                construction.maxLevel = 100;
+                construction.minWorkingLevel = 10;
+
+                OutputComponent outputComponent = new OutputComponent(construction);
+                outputComponent.outputGainPack = (toPack(JavaFeatureForGwt.mapOf(
+                        ResourceType.COOKIE, 1
+                        )));
+                construction.outputComponent = (outputComponent);
+
+                UpgradeComponent upgradeComponent = new UpgradeComponent(construction);
+                construction.upgradeComponent = (upgradeComponent);
+
+                LevelComponent levelComponent = new LevelComponent(construction, true);
+                construction.levelComponent = (levelComponent);
+
+                construction.maxDrawNum = (9);
+                constructions.Add(construction);
+            }
             // seller
             for (int i = 0; i < 2; i++)
             {
@@ -130,6 +155,20 @@ namespace Assets.Scripts.DemoGameCore.logic
         }
 
 
+        public static DescriptionPackage getForestDescriptionPackage(Language language)
+        {
+            switch (language)
+            {
+                default:// TODO
+                case Language.CN:
+                    return new DescriptionPackage(
+                            "自动消耗", "自动产出", "？", "？", "销毁",
+                            FOREST_DESCROPTION_PROVIDER);
+            }
+        }
 
+        public static ILevelDescroptionProvider FOREST_DESCROPTION_PROVIDER = (level, workingLevel, reachMaxLevel) => {
+            return "效率" + workingLevel + "%";
+        };
     }
 }

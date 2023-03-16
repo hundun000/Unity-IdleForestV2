@@ -20,6 +20,8 @@ namespace Assets.Scripts.DemoGameCore.logic
                     {
                         case ConstructionPrototypeId.COOKIE_CLICK_PROVIDER:
                             return "大饼干";
+                        case ConstructionPrototypeId.GROWING_COOKIE_AUTO_PROVIDER:
+                            return "饼干树";
                         case ConstructionPrototypeId.COOKIE_AUTO_PROVIDER:
                             return "自动点击器";
                         case ConstructionPrototypeId.COOKIE_SELLER:
@@ -57,6 +59,8 @@ namespace Assets.Scripts.DemoGameCore.logic
                     {
                         case ConstructionPrototypeId.COOKIE_CLICK_PROVIDER:
                             return "戳一戳，获得饼干";
+                        case ConstructionPrototypeId.GROWING_COOKIE_AUTO_PROVIDER:
+                            return "自动获得饼干，随时间成长";
                         case ConstructionPrototypeId.COOKIE_AUTO_PROVIDER:
                             return "自动获得饼干";
                         case ConstructionPrototypeId.COOKIE_SELLER:
