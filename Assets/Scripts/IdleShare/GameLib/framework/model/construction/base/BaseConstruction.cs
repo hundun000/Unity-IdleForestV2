@@ -11,13 +11,13 @@ namespace hundun.idleshare.gamelib
     public abstract class BaseConstruction : ILogicFrameListener, IBuffChangeListener {
 
         public static readonly int DEFAULT_MAX_LEVEL = 99;
-
         public int maxLevel = DEFAULT_MAX_LEVEL;
 
-
         public static readonly int DEFAULT_MAX_DRAW_NUM = 5;
-
         public int maxDrawNum = DEFAULT_MAX_DRAW_NUM;
+
+        public static readonly int DEFAULT_MIN_WORKING_LEVEL = 0;
+        public int minWorkingLevel = DEFAULT_MIN_WORKING_LEVEL;
 
         protected Random random = new Random();
 
