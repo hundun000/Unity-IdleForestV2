@@ -84,12 +84,12 @@ namespace hundun.idleshare.gamelib
             }
         }
 
-        override public long calculateModifiedOutput(long baseValue, int level)
+        override public long calculateModifiedOutput(long baseValue, int level, int proficiency)
         {
             return baseValue * level;
         }
 
-        override public long calculateModifiedOutputCost(long baseValue, int level)
+        override public long calculateModifiedOutputCost(long baseValue, int level, int proficiency)
         {
             return baseValue * level;
         }

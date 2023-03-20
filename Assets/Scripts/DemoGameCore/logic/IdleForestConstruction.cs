@@ -10,8 +10,8 @@ namespace Assets.Scripts.DemoGameCore.logic
     public class IdleForestConstruction : BaseConstruction
     {
         protected int autoOutputProgress = 0;
-        protected int autoGrowProgress = 0;
-        protected const int AUTO_GROW_SECOND_COUNT_MAX = 2; // 2秒生长一次
+        protected int autoProficiencyProgress = 0;
+        protected const int AUTO_PROFICIENCY_SECOND_MAX = 2; // 2秒生长一次
 
         public IdleForestConstruction(String prototypeId, String id
                 ) : base(prototypeId, id)
@@ -30,13 +30,25 @@ namespace Assets.Scripts.DemoGameCore.logic
             {
                 return;
             }
+            doUpgrade();
         }
 
         override public Boolean canClickEffect()
         {
-            return false;
+            return canUpgrade();
         }
 
+        private void doUpgrade()
+        {
+            List<ResourcePair> upgradeCostRule = upgradeComponent.upgradeCostPack.modifiedValues;
+            gameContext.storageManager.modifyAllResourceNum(upgradeCostRule, false);
+            saveData.level = (saveData.level + 1);
+            if (!levelComponent.workingLevelChangable)
+            {
+                saveData.workingLevel = (saveData.level);
+            }
+            updateModifiedValues();
+        }
 
         override public void onLogicFrame()
         {
@@ -48,23 +60,23 @@ namespace Assets.Scripts.DemoGameCore.logic
                 tryAutoOutputOnce();
             }
 
-            autoGrowProgress++;
-            int growFrameCountMax = AUTO_GROW_SECOND_COUNT_MAX * gameContext.LOGIC_FRAME_PER_SECOND;
-            if (autoGrowProgress >= growFrameCountMax)
+            autoProficiencyProgress++;
+            int proficiencyFrameCountMax = AUTO_PROFICIENCY_SECOND_MAX * gameContext.LOGIC_FRAME_PER_SECOND;
+            if (autoProficiencyProgress >= proficiencyFrameCountMax)
             {
-                autoGrowProgress = 0;
-                tryGrowOnce();
+                autoProficiencyProgress = 0;
+                tryProficiencyOnce();
             }
         }
 
-        private void tryGrowOnce()
+        private void tryProficiencyOnce()
         {
-            if (!levelComponent.canChangeWorkingLevel(1))
+            if (!proficiencyComponent.canChangeProficiency(1))
             {
                 //gameContext.frontend.log(this.id, "canOutput");
                 return;
             }
-            levelComponent.changeWorkingLevel(1);
+            proficiencyComponent.changeProficiency(1);
         }
 
         private void tryAutoOutputOnce()
@@ -85,14 +97,14 @@ namespace Assets.Scripts.DemoGameCore.logic
             }
         }
 
-        override public long calculateModifiedOutput(long baseValue, int level)
+        override public long calculateModifiedOutput(long baseValue, int level, int proficiency)
         {
-            return baseValue * level;
+            return (long)(baseValue * level * (proficiency / 50.0));
         }
 
-        override public long calculateModifiedOutputCost(long baseValue, int level)
+        override public long calculateModifiedOutputCost(long baseValue, int level, int proficiency)
         {
-            return baseValue * level;
+            return (long)(baseValue * level * (proficiency / 50.0));
         }
     }
 }

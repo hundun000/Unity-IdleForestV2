@@ -58,6 +58,13 @@ namespace hundun.idleshare.gamelib
                 return model.saveData.workingLevel;
             }
         }
+        public String proficiencyDescroption
+        {
+            get
+            {
+                return model.proficiencyComponent.getProficiencyDescroption();
+            }
+        }
 
         public static ConstructionExportProxy fromModel(BaseConstruction model)
         {

@@ -20,6 +20,7 @@ namespace hundun.idleshare.enginecore
         TextButton upWorkingLevelButton;
         TextButton downWorkingLevelButton;
         Text workingLevelLabel;
+        Text proficiencyLabel;
 
         TextButton clickEffectButton;
         Image background;
@@ -50,7 +51,7 @@ namespace hundun.idleshare.enginecore
             this.upWorkingLevelButton = this.transform.Find("group/upWorkingLevelButton").GetComponent<TextButton>();
             this.workingLevelLabel = this.transform.Find("group/workingLevelLabel").GetComponent<Text>();
             this.downWorkingLevelButton = this.transform.Find("group/downWorkingLevelButton").GetComponent<TextButton>();
-            
+            this.proficiencyLabel = this.transform.Find("proficiencyLabel").GetComponent<Text>();
         }
 
         public void postPrefabInitialization(BaseIdlePlayScreen<T_GAME, T_SAVE> parent, int index)
@@ -149,6 +150,7 @@ namespace hundun.idleshare.enginecore
             constructionNameLabel.text = (model.name);
             clickEffectButton.label.text = (model.buttonDescroption);
             workingLevelLabel.text = (model.workingLevelDescroption);
+            proficiencyLabel.text = (model.proficiencyDescroption);
 
             // ------ update clickable-state ------
             Boolean canClickEffect = parent.game.idleGameplayExport.constructionCanClickEffect(model.id);

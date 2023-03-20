@@ -31,8 +31,9 @@ namespace Assets.Scripts.DemoGameCore.logic
                                     .build(),
                             ConstructionPrototypeId.GROWING_COOKIE_AUTO_PROVIDER + "_0",
                             ConstructionSaveData.builder()
-                                    .level(100)
-                                    .workingLevel(10)
+                                    .level(1)
+                                    .workingLevel(1)
+                                    .proficiency(48)
                                     .build()
                     ));
             gameplaySaveData.ownResoueces = (new Dictionary<String, long>());

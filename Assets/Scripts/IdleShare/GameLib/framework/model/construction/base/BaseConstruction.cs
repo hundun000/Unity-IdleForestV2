@@ -19,6 +19,9 @@ namespace hundun.idleshare.gamelib
         public static readonly int DEFAULT_MIN_WORKING_LEVEL = 0;
         public int minWorkingLevel = DEFAULT_MIN_WORKING_LEVEL;
 
+        public static readonly int DEFAULT_MAX_PROFICIENCY = 100;
+        public int maxProficiency = DEFAULT_MAX_PROFICIENCY;
+
         protected Random random = new Random();
 
         public IdleGameplayContext gameContext;
@@ -55,6 +58,10 @@ namespace hundun.idleshare.gamelib
          */
         public LevelComponent levelComponent;
 
+        /**
+         * NotNull
+         */
+        public ProficiencyComponent proficiencyComponent;
 
         public void lazyInitDescription(IdleGameplayContext gameContext, Language language)
         {
@@ -75,6 +82,7 @@ namespace hundun.idleshare.gamelib
             this.saveData = new ConstructionSaveData();
             this.id = id;
             this.prototypeId = prototypeId;
+            this.proficiencyComponent = new ProficiencyComponent(this);
         }
 
         public abstract void onClick();
@@ -87,8 +95,8 @@ namespace hundun.idleshare.gamelib
         }
 
         //protected abstract long calculateModifiedUpgradeCost(long baseValue, int level);
-        public abstract long calculateModifiedOutput(long baseValue, int level);
-        public abstract long calculateModifiedOutputCost(long baseValue, int level);
+        public abstract long calculateModifiedOutput(long baseValue, int level, int proficiency);
+        public abstract long calculateModifiedOutputCost(long baseValue, int level, int proficiency);
 
 
 

@@ -16,8 +16,16 @@ namespace hundun.idleshare.gamelib
         public String upgradeMaxLevelDescription = "(max level)";
         public String buttonDescroption;
         public ILevelDescroptionProvider levelDescroptionProvider;
+        public IProficiencyDescroptionProvider proficiencyDescroptionProvider;
 
-        public DescriptionPackage(string outputCostDescriptionStart, string outputGainDescriptionStart, string upgradeCostDescriptionStart, string upgradeMaxLevelDescription, string buttonDescroption, ILevelDescroptionProvider levelDescroptionProvider)
+        public DescriptionPackage(string outputCostDescriptionStart, 
+            string outputGainDescriptionStart, 
+            string upgradeCostDescriptionStart, 
+            string upgradeMaxLevelDescription, 
+            string buttonDescroption, 
+            ILevelDescroptionProvider levelDescroptionProvider,
+            IProficiencyDescroptionProvider proficiencyDescroptionProvider
+            )
         {
             this.outputCostDescriptionStart = outputCostDescriptionStart;
             this.outputGainDescriptionStart = outputGainDescriptionStart;
@@ -25,14 +33,15 @@ namespace hundun.idleshare.gamelib
             this.upgradeMaxLevelDescription = upgradeMaxLevelDescription;
             this.buttonDescroption = buttonDescroption;
             this.levelDescroptionProvider = levelDescroptionProvider;
+            this.proficiencyDescroptionProvider = proficiencyDescroptionProvider;
         }
     }
 
     public delegate String ILevelDescroptionProvider(int level, int workingLevel, Boolean reachMaxLevel);
+    public delegate String IProficiencyDescroptionProvider(int proficiency, Boolean reachMaxProficiency);
 
 
 
-        
 
 
 }

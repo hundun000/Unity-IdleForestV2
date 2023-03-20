@@ -70,8 +70,6 @@ namespace Assets.Scripts.DemoGameCore.logic
                 String id = prototypeId + "_" + i;
                 BaseConstruction construction = new IdleForestConstruction(prototypeId, id);
                 construction.descriptionPackage = getForestDescriptionPackage(language);
-                construction.maxLevel = 100;
-                construction.minWorkingLevel = 10;
 
                 OutputComponent outputComponent = new OutputComponent(construction);
                 outputComponent.outputGainPack = (toPack(JavaFeatureForGwt.mapOf(
@@ -80,9 +78,12 @@ namespace Assets.Scripts.DemoGameCore.logic
                 construction.outputComponent = (outputComponent);
 
                 UpgradeComponent upgradeComponent = new UpgradeComponent(construction);
+                upgradeComponent.upgradeCostPack = (toPack(JavaFeatureForGwt.mapOf(
+                        ResourceType.COIN, 25
+                        )));
                 construction.upgradeComponent = (upgradeComponent);
 
-                LevelComponent levelComponent = new LevelComponent(construction, true);
+                LevelComponent levelComponent = new LevelComponent(construction, false);
                 construction.levelComponent = (levelComponent);
 
                 construction.maxDrawNum = (9);
@@ -162,13 +163,11 @@ namespace Assets.Scripts.DemoGameCore.logic
                 default:// TODO
                 case Language.CN:
                     return new DescriptionPackage(
-                            "自动消耗", "自动产出", "？", "？", "销毁",
-                            FOREST_DESCROPTION_PROVIDER);
+                            "自动消耗", "自动产出", "升级费用", "(已达到最大等级)", "升级",
+                            DescriptionPackageFactory.CN_ONLY_LEVEL_IMP,
+                            DescriptionPackageFactory.CN_PROFICIENCY_IMP);
             }
         }
 
-        public static ILevelDescroptionProvider FOREST_DESCROPTION_PROVIDER = (level, workingLevel, reachMaxLevel) => {
-            return "效率" + workingLevel + "%";
-        };
     }
 }

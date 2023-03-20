@@ -11,15 +11,17 @@ namespace hundun.idleshare.gamelib
     {
         public int level;
         public int workingLevel;
+        public int proficiency;
 
         public ConstructionSaveData()
         {
         }
 
-        public ConstructionSaveData(int level, int workingLevel)
+        public ConstructionSaveData(int level, int workingLevel, int _proficiency)
         {
             this.level = level;
             this.workingLevel = workingLevel;
+            this.proficiency = _proficiency;
         }
 
         public static Builder builder()
@@ -31,10 +33,11 @@ namespace hundun.idleshare.gamelib
         {
             public int _level;
             public int _workingLevel;
+            public int _proficiency;
 
             public ConstructionSaveData build()
             {
-                return new ConstructionSaveData(_level, _workingLevel);
+                return new ConstructionSaveData(_level, _workingLevel, _proficiency);
             }
 
             public Builder level(int _level)
@@ -46,6 +49,12 @@ namespace hundun.idleshare.gamelib
             public Builder workingLevel(int _workingLevel)
             {
                 this._workingLevel = _workingLevel;
+                return this;
+            }
+
+            public Builder proficiency(int _proficiency)
+            {
+                this._proficiency = _proficiency;
                 return this;
             }
         }
