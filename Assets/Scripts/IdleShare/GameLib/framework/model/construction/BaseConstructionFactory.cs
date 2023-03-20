@@ -1,4 +1,5 @@
 ﻿using hundun.idleshare.gamelib;
+using hundun.unitygame.adapters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,39 +11,37 @@ namespace hundun.idleshare.gamelib
 {
     public class BaseConstructionFactory
     {
-        Dictionary<String, BaseConstruction> constructions = new Dictionary<String, BaseConstruction>();
+        IdleGameplayContext gameContext;
+        Language language;
+        Dictionary<String, AbstractConstructionPrototype> providerMap;
+        
 
-        public BaseConstruction getConstruction(String id)
+
+
+        
+
+        public void lazyInit(IdleGameplayContext gameContext, Language language, Dictionary<String, AbstractConstructionPrototype> providerMap)
         {
-            BaseConstruction result = constructions[id];
-            if (result == null)
-            {
-                throw new SystemException("getConstruction " + id + " not found");
-            }
-            return result;
+            this.language = language;
+            this.providerMap = providerMap;
+            this.gameContext = gameContext;
         }
 
-        public List<BaseConstruction> getConstructions()
+        internal AbstractConstructionPrototype getPrototype(string prototypeId)
         {
-            return constructions.Values.ToList();
+            return providerMap.get(prototypeId);
         }
 
-        public void lazyInit(IdleGameplayContext gameContext, Language language, List<BaseConstruction> constructionsList)
+
+        internal BaseConstruction getInstanceOfPrototype(string prototypeId)
         {
-            constructionsList.ForEach(item => this.constructions.Add(item.id, item));
-            foreach (KeyValuePair<String, BaseConstruction> entry in constructions)
-            {
-                var it = entry.Value;
-                it.lazyInitDescription(gameContext, language);
-                gameContext.eventManager.registerListener(it);
-            }
+            AbstractConstructionPrototype prototype = providerMap.get(prototypeId);
+            BaseConstruction construction = prototype.getInstance(language);
+            construction.lazyInitDescription(gameContext, language);
+            gameContext.eventManager.registerListener(construction);
+            return construction;
         }
 
-        internal List<BaseConstruction> getConstructionsOfPrototype(string prototypeId)
-        {
-            return constructions.Values
-                .Where(it => it.prototypeId.Equals(prototypeId))
-                .ToList();
-        }
+
     }
 }

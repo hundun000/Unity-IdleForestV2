@@ -18,14 +18,8 @@ namespace Assets.Scripts.DemoGameCore.logic
                 case Language.CN:
                     switch (prototypeId)
                     {
-                        case ConstructionPrototypeId.COOKIE_CLICK_PROVIDER:
-                            return "大饼干";
                         case ConstructionPrototypeId.GROWING_COOKIE_AUTO_PROVIDER:
                             return "饼干树";
-                        case ConstructionPrototypeId.COOKIE_AUTO_PROVIDER:
-                            return "自动点击器";
-                        case ConstructionPrototypeId.COOKIE_SELLER:
-                            return "自动销售器";
                         case ConstructionPrototypeId.WIN_PROVIDER:
                             return "奖杯购买处";
                         default:
@@ -34,12 +28,6 @@ namespace Assets.Scripts.DemoGameCore.logic
                 default:
                     switch (prototypeId)
                     {
-                        case ConstructionPrototypeId.COOKIE_CLICK_PROVIDER:
-                            return "main cookie";
-                        case ConstructionPrototypeId.COOKIE_AUTO_PROVIDER:
-                            return "cliker";
-                        case ConstructionPrototypeId.COOKIE_SELLER:
-                            return "seller";
                         case ConstructionPrototypeId.WIN_PROVIDER:
                             return "win";
                         default:
@@ -57,14 +45,8 @@ namespace Assets.Scripts.DemoGameCore.logic
                 case Language.CN:
                     switch (prototypeId)
                     {
-                        case ConstructionPrototypeId.COOKIE_CLICK_PROVIDER:
-                            return "戳一戳，获得饼干";
                         case ConstructionPrototypeId.GROWING_COOKIE_AUTO_PROVIDER:
                             return "自动获得饼干，随时间成长";
-                        case ConstructionPrototypeId.COOKIE_AUTO_PROVIDER:
-                            return "自动获得饼干";
-                        case ConstructionPrototypeId.COOKIE_SELLER:
-                            return "自动获得饼干";
                         case ConstructionPrototypeId.WIN_PROVIDER:
                             return "购买一个奖杯以赢得胜利";
                         default:
@@ -73,12 +55,6 @@ namespace Assets.Scripts.DemoGameCore.logic
                 default:
                     switch (prototypeId)
                     {
-                        case ConstructionPrototypeId.COOKIE_CLICK_PROVIDER:
-                            return "Click gain some cookie";
-                        case ConstructionPrototypeId.COOKIE_AUTO_PROVIDER:
-                            return "Auto gain some cookie";
-                        case ConstructionPrototypeId.COOKIE_SELLER:
-                            return "Auto sell cookies";
                         case ConstructionPrototypeId.WIN_PROVIDER:
                             return "Get a trophy and win the game";
                         default:

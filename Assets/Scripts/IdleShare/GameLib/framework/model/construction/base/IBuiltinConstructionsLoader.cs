@@ -6,8 +6,25 @@ using System.Threading.Tasks;
 
 namespace hundun.idleshare.gamelib
 {
+
+    
+
+    public abstract class AbstractConstructionPrototype {
+
+        public readonly String prototypeId;
+
+        protected AbstractConstructionPrototype(String prototypeId)
+        {
+            this.prototypeId = prototypeId;
+        }
+
+        public abstract BaseConstruction getInstance(Language language);
+
+    }
+
+
     public interface IBuiltinConstructionsLoader
     {
-        List<BaseConstruction> provide(Language language);
+        public Dictionary<String, AbstractConstructionPrototype> getProviderMap();
     }
 }

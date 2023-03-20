@@ -11,28 +11,32 @@ using static UnityEditor.Progress;
 
 namespace hundun.idleshare.enginecore
 {
-    public abstract class AbstractConstructionControlBoardVM<T_GAME, T_SAVE> : MonoBehaviour, ILogicFrameListener, IGameAreaChangeListener where T_GAME : BaseIdleGame<T_GAME, T_SAVE>
+    public abstract class AbstractConstructionPrototypeControlBoardVM<T_GAME, T_SAVE> : MonoBehaviour, ILogicFrameListener, IGameAreaChangeListener where T_GAME : BaseIdleGame<T_GAME, T_SAVE>
     {
         protected BaseIdlePlayScreen<T_GAME, T_SAVE> parent;
+        public AbstractConstructionControlBoardVM<T_GAME, T_SAVE> brother;
         /**
          * 显示在当前screen的Construction集合。以ConstructionView形式存在。
          */
-        protected List<ConstructionControlNodeVM<T_GAME, T_SAVE>> constructionControlNodes = new List<ConstructionControlNodeVM<T_GAME, T_SAVE>>();
+        protected List<ConstructionPrototypeControlNodeVM<T_GAME, T_SAVE>> constructionControlNodes = new List<ConstructionPrototypeControlNodeVM<T_GAME, T_SAVE>>();
 
 
 
-        virtual public void postPrefabInitialization(BaseIdlePlayScreen<T_GAME, T_SAVE> parent)
+        virtual public void postPrefabInitialization(BaseIdlePlayScreen<T_GAME, T_SAVE> parent, AbstractConstructionControlBoardVM<T_GAME, T_SAVE> brother)
         {
             this.parent = parent;
+            this.brother = brother;
         }
         public void onLogicFrame()
         {
             constructionControlNodes.ForEach(item => item.update());
         }
 
-        public void onConstructionInstancesChange(String current)
+        public void onGameAreaChange(String last, String current)
         {
-            List<ConstructionExportProxy> newConstructions = parent.game.idleGameplayExport.getAreaShownConstructionsOrEmpty(current);
+
+
+            List<AbstractConstructionPrototype> newConstructions = parent.game.idleGameplayExport.getAreaShownConstructionPrototypesOrEmpty(current);
 
             int childrenSize = initChild(newConstructions.size());
 
@@ -44,15 +48,10 @@ namespace hundun.idleshare.enginecore
             {
                 constructionControlNodes.get(i).setModel(null);
             }
-            parent.game.frontend.log("ConstructionInfoBorad", "Constructions change to: " + String.Join(",",
-                newConstructions.Select(construction => construction.name))
+            parent.game.frontend.log(this.getClass().getSimpleName(), "ConstructionPrototypes change to: " + String.Join(",", 
+                newConstructions.Select(construction => construction.prototypeId))
             );
-        }
 
-
-        public void onGameAreaChange(String last, String current)
-        {
-            onConstructionInstancesChange(current);
         }
 
         /**

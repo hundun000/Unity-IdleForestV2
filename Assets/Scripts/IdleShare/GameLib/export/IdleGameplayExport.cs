@@ -111,7 +111,7 @@ namespace hundun.idleshare.gamelib
 
         public List<ConstructionExportProxy> getConstructionsOfPrototype(String prototypeId)
         {
-            return gameplayContext.constructionFactory.getConstructionsOfPrototype(prototypeId)
+            return gameplayContext.constructionManager.getConstructionsOfPrototype(prototypeId)
                 .Select(it => ConstructionExportProxy.fromModel(it))
                 .ToList();
                 ;
@@ -131,6 +131,13 @@ namespace hundun.idleshare.gamelib
                     ;
         }
 
+        public List<AbstractConstructionPrototype> getAreaShownConstructionPrototypesOrEmpty(String current)
+        {
+            return gameplayContext.constructionManager.getAreaShownConstructionPrototypesOrEmpty(current)
+                    ;
+            ;
+        }
+
         public void eventManagerRegisterListener(Object objecz)
         {
             gameplayContext.eventManager.registerListener(objecz);
@@ -143,31 +150,31 @@ namespace hundun.idleshare.gamelib
 
         public void constructionChangeWorkingLevel(String id, int delta)
         {
-            BaseConstruction model = gameplayContext.constructionFactory.getConstruction(id);
+            BaseConstruction model = gameplayContext.constructionManager.getConstruction(id);
             model.levelComponent.changeWorkingLevel(delta);
         }
 
         public void constructionOnClick(String id)
         {
-            BaseConstruction model = gameplayContext.constructionFactory.getConstruction(id);
+            BaseConstruction model = gameplayContext.constructionManager.getConstruction(id);
             model.onClick();
         }
 
         public Boolean constructionCanClickEffect(String id)
         {
-            BaseConstruction model = gameplayContext.constructionFactory.getConstruction(id);
+            BaseConstruction model = gameplayContext.constructionManager.getConstruction(id);
             return model.canClickEffect();
         }
 
         public Boolean constructionCanChangeWorkingLevel(String id, int delta)
         {
-            BaseConstruction model = gameplayContext.constructionFactory.getConstruction(id);
+            BaseConstruction model = gameplayContext.constructionManager.getConstruction(id);
             return model.levelComponent.canChangeWorkingLevel(delta);
         }
 
         public void applyGameplaySaveData(GameplaySaveData gameplaySaveData)
         {
-            List<BaseConstruction> constructions = gameplayContext.constructionFactory.getConstructions();
+            List<BaseConstruction> constructions = gameplayContext.constructionManager.getConstructions();
             foreach (BaseConstruction construction in constructions)
             {
                 if (gameplaySaveData.constructionSaveDataMap.ContainsKey(construction.id))
@@ -183,7 +190,7 @@ namespace hundun.idleshare.gamelib
 
         public void currentSituationToGameplaySaveData(GameplaySaveData gameplaySaveData)
         {
-            List<BaseConstruction> constructions = gameplayContext.constructionFactory.getConstructions();
+            List<BaseConstruction> constructions = gameplayContext.constructionManager.getConstructions();
             gameplaySaveData.constructionSaveDataMap = (constructions
                     .ToDictionary(
                             it => it.id,
@@ -201,7 +208,7 @@ namespace hundun.idleshare.gamelib
             gameplayContext.allLazyInit(
                     systemSettingSave.language,
                     childGameConfig,
-                    builtinConstructionsLoader.provide(systemSettingSave.language)
+                    builtinConstructionsLoader.getProviderMap()
                     );
             gameplayContext.frontend.log(this.getClass().getSimpleName(), "applySystemSetting done");
         }
@@ -211,5 +218,9 @@ namespace hundun.idleshare.gamelib
             systemSettingSave.language = (this.language);
         }
 
+        internal void constructionPrototypeOnClick(string prototypeId)
+        {
+            gameplayContext.constructionManager.createInstanceOfPrototype(prototypeId);
+        }
     }
 }

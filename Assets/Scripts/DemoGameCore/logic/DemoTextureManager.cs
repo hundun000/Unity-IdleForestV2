@@ -67,24 +67,19 @@ namespace Assets.Scripts.DemoGameCore.logic
                 var texture = getTexture2D("constructionEntities.png");
                 Sprite[][] regions = split(texture, 32, 32);
                 //constructionEntityMap.Add(ConstructionId.COOKIE_CLICK_PROVIDER, regions[0][0]);
-                constructionEntityMap.Add(ConstructionPrototypeId.COOKIE_AUTO_PROVIDER, regions[0][1]);
-                constructionEntityMap.Add(ConstructionPrototypeId.COOKIE_SELLER, regions[0][2]);
                 //constructionEntityMap.Add(ConstructionId.WIN_PROVIDER, regions[0][3]);
             }
             {
                 var texture = getTexture2D("gameAreaIcons.png");
                 Sprite[][] regions = split(texture, 100, 50);
                 gameAreaLeftPartRegionMap.Add(GameArea.AREA_COOKIE, regions[2][0]);
-                gameAreaLeftPartRegionMap.Add(GameArea.AREA_BUILDING, regions[1][0]);
                 gameAreaLeftPartRegionMap.Add(GameArea.AREA_WIN, regions[0][0]);
                 gameAreaRightPartRegionMap.Add(GameArea.AREA_COOKIE, regions[2][1]);
-                gameAreaRightPartRegionMap.Add(GameArea.AREA_BUILDING, regions[1][1]);
                 gameAreaRightPartRegionMap.Add(GameArea.AREA_WIN, regions[0][1]);
             }
             {
                 defaultAreaBack = getSprite("areas_0.png");
                 gameAreaBackMap.Add(GameArea.AREA_COOKIE, getSprite("areas_1.png"));
-                gameAreaBackMap.Add(GameArea.AREA_BUILDING, getSprite("areas_2.png"));
                 gameAreaBackMap.Add(GameArea.AREA_WIN, getSprite("areas_3.png"));
             }
         }
