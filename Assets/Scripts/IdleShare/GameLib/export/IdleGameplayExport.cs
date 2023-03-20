@@ -11,77 +11,6 @@ using Unity.VisualScripting;
 
 namespace hundun.idleshare.gamelib
 {
-    public class ConstructionExportProxy
-    {
-        private BaseConstruction model;
-
-        public String id;
-        public String name;
-        public DescriptionPackage descriptionPackage;
-        public ResourcePack outputGainPack;
-        public ResourcePack outputCostPack;
-        public UpgradeState upgradeState;
-        public ResourcePack upgradeCostPack;
-        // ------- need runtime calculate ------
-        public String buttonDescroption { 
-            get 
-            {
-                return model.getButtonDescroption();
-            } 
-        }
-        public String workingLevelDescroption
-        {
-            get
-            {
-                return model.levelComponent.getWorkingLevelDescroption();
-            }
-        }
-        public String detailDescroptionConstPart
-        {
-            get
-            {
-                return model.detailDescroptionConstPart;
-            }
-        }
-
-        public Boolean workingLevelChangable
-        {
-            get
-            {
-                return model.levelComponent.workingLevelChangable;
-            }
-        }
-        public int workingLevel
-        {
-            get
-            {
-                return model.saveData.workingLevel;
-            }
-        }
-        public String proficiencyDescroption
-        {
-            get
-            {
-                return model.proficiencyComponent.getProficiencyDescroption();
-            }
-        }
-
-        public static ConstructionExportProxy fromModel(BaseConstruction model)
-        {
-            ConstructionExportProxy result = new ConstructionExportProxy();
-            result.model = model;
-            result.id = (model.id);
-            result.name = (model.name);
-            result.outputCostPack = (model.outputComponent.outputCostPack);
-            result.outputGainPack = (model.outputComponent.outputGainPack);
-            result.upgradeState = (model.upgradeComponent.upgradeState);
-            result.upgradeCostPack = (model.upgradeComponent.upgradeCostPack);
-            result.descriptionPackage = (model.descriptionPackage);
-            return result;
-        }
-
-
-    }
 
     public class IdleGameplayExport : ILogicFrameListener, ISubGameplaySaveHandler<GameplaySaveData>, ISubSystemSettingSaveHandler<SystemSettingSaveData>
     {
@@ -109,11 +38,10 @@ namespace hundun.idleshare.gamelib
         }
 
 
-        public List<ConstructionExportProxy> getConstructionsOfPrototype(String prototypeId)
+        public List<BaseConstruction> getConstructionsOfPrototype(String prototypeId)
         {
             return gameplayContext.constructionManager.getConstructionsOfPrototype(prototypeId)
-                .Select(it => ConstructionExportProxy.fromModel(it))
-                .ToList();
+                
                 ;
         }
 
@@ -123,11 +51,9 @@ namespace hundun.idleshare.gamelib
             gameplayContext.storageManager.onSubLogicFrame();
         }
 
-        public List<ConstructionExportProxy> getAreaShownConstructionsOrEmpty(String current)
+        public List<BaseConstruction> getAreaShownConstructionsOrEmpty(String current)
         {
             return gameplayContext.constructionManager.getAreaShownConstructionsOrEmpty(current)
-                    .Select(it => ConstructionExportProxy.fromModel(it))
-                    .ToList();
                     ;
         }
 

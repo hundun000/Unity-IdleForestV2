@@ -32,7 +32,7 @@ namespace hundun.idleshare.enginecore
 
         public void onConstructionInstancesChange(String current)
         {
-            List<ConstructionExportProxy> newConstructions = parent.game.idleGameplayExport.getAreaShownConstructionsOrEmpty(current);
+            List<BaseConstruction> newConstructions = parent.game.idleGameplayExport.getAreaShownConstructionsOrEmpty(current);
 
             int childrenSize = initChild(newConstructions.size());
 

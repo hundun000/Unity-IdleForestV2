@@ -164,7 +164,7 @@ namespace hundun.idleshare.enginecore
         private void checkConstructionEntityByOwnAmount(String prototypeId, BaseGameEntityFactory<T_GAME, T_SAVE> gameEntityFactory)
         {
             var constructions = game.idleGameplayExport.getConstructionsOfPrototype(prototypeId);
-            int resourceNum = constructions.Select(it => it.workingLevel).Sum();
+            int resourceNum = constructions.Select(it => it.saveData.workingLevel).Sum();
             int MAX_DRAW_NUM = 5;
             int drawNum = gameEntityFactory.calculateConstructionDrawNum(prototypeId, resourceNum, MAX_DRAW_NUM);
             gameEntitiesOfConstructionPrototypeIds.computeIfAbsent(prototypeId, k => new List<GameEntity>());

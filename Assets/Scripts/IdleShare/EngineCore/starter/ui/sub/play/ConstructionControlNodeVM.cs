@@ -14,7 +14,7 @@ namespace hundun.idleshare.enginecore
     public class ConstructionControlNodeVM<T_GAME, T_SAVE> : MonoBehaviour where T_GAME : BaseIdleGame<T_GAME, T_SAVE>
     {
         BaseIdlePlayScreen<T_GAME, T_SAVE> parent;
-        ConstructionExportProxy model;
+        BaseConstruction model;
 
         Text constructionNameLabel;
         TextButton upWorkingLevelButton;
@@ -113,12 +113,12 @@ namespace hundun.idleshare.enginecore
 
         }
 
-        public void setModel(ConstructionExportProxy constructionExportData)
+        public void setModel(BaseConstruction constructionExportData)
         {
             this.model = constructionExportData;
             if (constructionExportData != null)
             {
-                if (constructionExportData.workingLevelChangable)
+                if (constructionExportData.levelComponent.workingLevelChangable)
                 {
                     initAsChangeWorkingLevelStyle();
                 }
@@ -148,9 +148,9 @@ namespace hundun.idleshare.enginecore
             }
             // ------ update text ------
             constructionNameLabel.text = (model.name);
-            clickEffectButton.label.text = (model.buttonDescroption);
-            workingLevelLabel.text = (model.workingLevelDescroption);
-            proficiencyLabel.text = (model.proficiencyDescroption);
+            clickEffectButton.label.text = (model.descriptionPackage.buttonDescroption);
+            workingLevelLabel.text = (model.levelComponent.getWorkingLevelDescroption());
+            proficiencyLabel.text = (model.proficiencyComponent.getProficiencyDescroption());
 
             // ------ update clickable-state ------
             Boolean canClickEffect = parent.game.idleGameplayExport.constructionCanClickEffect(model.id);
