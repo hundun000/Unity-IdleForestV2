@@ -134,7 +134,7 @@ namespace hundun.idleshare.gamelib
             gameplayContext.allLazyInit(
                     systemSettingSave.language,
                     childGameConfig,
-                    builtinConstructionsLoader.getProviderMap()
+                    builtinConstructionsLoader.getProviderMap(language)
                     );
             gameplayContext.frontend.log(this.getClass().getSimpleName(), "applySystemSetting done");
         }
@@ -144,9 +144,31 @@ namespace hundun.idleshare.gamelib
             systemSettingSave.language = (this.language);
         }
 
-        internal void constructionPrototypeOnClick(string prototypeId)
+        internal void constructionPrototypeOnClick(string prototypeId, GridPosition position)
         {
-            gameplayContext.constructionManager.createInstanceOfPrototype(prototypeId);
+            gameplayContext.constructionManager.createInstanceOfPrototype(prototypeId, position);
+        }
+
+        internal GridPosition getConnectedRandonPosition()
+        {
+            if (gameplayContext.constructionManager.runningConstructionModelMap.Count == 0)
+            {
+                return new GridPosition(0, 0);
+            }
+            else
+            {
+                foreach (var construction in gameplayContext.constructionManager.runningConstructionModelMap.Values)
+                {
+                    foreach (var neighborEntry in construction.neighbors)
+                    {
+                        if (neighborEntry.Value == null)
+                        {
+                            return TileNodeUtils.tileNeighborPosition(construction, gameplayContext.constructionManager, neighborEntry.Key);
+                        }
+                    }
+                }
+            }
+            throw new Exception("getConnectedRandonPosition fail");
         }
     }
 }

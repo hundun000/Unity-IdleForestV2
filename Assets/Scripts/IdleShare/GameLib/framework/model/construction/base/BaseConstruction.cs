@@ -1,4 +1,5 @@
 ﻿using hundun.unitygame.gamelib;
+using Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,8 @@ using static Unity.VisualScripting.Icons;
 
 namespace hundun.idleshare.gamelib
 {
-    public abstract class BaseConstruction : ILogicFrameListener, IBuffChangeListener {
+    public abstract class BaseConstruction : ILogicFrameListener, IBuffChangeListener, ITileNode<BaseConstruction>
+    {
 
         public static readonly int DEFAULT_MAX_LEVEL = 99;
         public int maxLevel = DEFAULT_MAX_LEVEL;
@@ -62,6 +64,11 @@ namespace hundun.idleshare.gamelib
          * NotNull
          */
         public ProficiencyComponent proficiencyComponent;
+
+        private Dictionary<TileNeighborDirection, BaseConstruction> _neighbors;
+
+        public GridPosition position { get => this.saveData.position; set => this.saveData.position = value; }
+        public Dictionary<TileNeighborDirection, BaseConstruction> neighbors { get => _neighbors; set => _neighbors = value; }
 
         public void lazyInitDescription(IdleGameplayContext gameContext, Language language)
         {

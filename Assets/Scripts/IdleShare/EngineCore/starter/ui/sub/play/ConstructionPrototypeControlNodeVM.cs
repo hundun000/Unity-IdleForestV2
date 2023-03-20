@@ -42,7 +42,9 @@ namespace hundun.idleshare.enginecore
             clickEffectButton.button.onClick.AddListener(() => {
             
                 parent.game.frontend.log(this.getClass().getSimpleName(), "clicked");
-                parent.game.idleGameplayExport.constructionPrototypeOnClick(model.prototypeId);
+                // FIXME 改为拖拽目的地坐标
+                GridPosition position = parent.game.idleGameplayExport.getConnectedRandonPosition();
+                parent.game.idleGameplayExport.constructionPrototypeOnClick(model.prototypeId, position);
                 constructionControlBoardVM.onConstructionInstancesChange(parent.area);
             });
 

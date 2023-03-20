@@ -5,11 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine.UIElements;
 using static UnityEditor.Progress;
 
 namespace hundun.idleshare.gamelib
 {
-    public class ConstructionManager
+    public class ConstructionManager : ITileNodeMap<BaseConstruction>
     {
         IdleGameplayContext gameContext;
 
@@ -24,7 +25,7 @@ namespace hundun.idleshare.gamelib
         /**
          * 运行中的设施集合。key: constructionId
          */
-        Dictionary<String, BaseConstruction> runningConstructionModelMap = new Dictionary<String, BaseConstruction>();
+        public Dictionary<String, BaseConstruction> runningConstructionModelMap = new Dictionary<String, BaseConstruction>();
 
         /**
          * 根据GameArea显示不同的Construction集合
@@ -102,13 +103,25 @@ namespace hundun.idleshare.gamelib
                 .ToList();
         }
 
-        internal void createInstanceOfPrototype(string prototypeId)
+        internal void createInstanceOfPrototype(string prototypeId, GridPosition position)
         {
-            BaseConstruction construction = gameContext.constructionFactory.getInstanceOfPrototype(prototypeId);
+            BaseConstruction construction = gameContext.constructionFactory.getInstanceOfPrototype(prototypeId, position);
             runningConstructionModelMap.put(construction.id, construction);
+            TileNodeUtils.updateNeighbors(construction, this);
+            construction.neighbors.Values.ToList()
+                .Where(it => it != null)
+                .ToList()
+                .ForEach(it => TileNodeUtils.updateNeighbors(it, this));
         }
 
+        
 
-
+        BaseConstruction ITileNodeMap<BaseConstruction>.getValidNodeOrNull(GridPosition position)
+        {
+            return runningConstructionModelMap.Values
+                .Where(it => it.saveData.position.x == position.x && it.saveData.position.y == position.y)
+                .FirstOrDefault()
+                ;
+        }
     }
 }

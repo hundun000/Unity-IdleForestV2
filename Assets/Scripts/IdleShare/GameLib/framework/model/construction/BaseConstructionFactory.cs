@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine.UIElements;
 using static UnityEditor.Progress;
 
 namespace hundun.idleshare.gamelib
@@ -33,10 +34,10 @@ namespace hundun.idleshare.gamelib
         }
 
 
-        internal BaseConstruction getInstanceOfPrototype(string prototypeId)
+        internal BaseConstruction getInstanceOfPrototype(string prototypeId, GridPosition position)
         {
             AbstractConstructionPrototype prototype = providerMap.get(prototypeId);
-            BaseConstruction construction = prototype.getInstance(language);
+            BaseConstruction construction = prototype.getInstance(position);
             construction.lazyInitDescription(gameContext, language);
             gameContext.eventManager.registerListener(construction);
             return construction;

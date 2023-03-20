@@ -17,12 +17,12 @@ namespace Assets.Scripts.DemoGameCore.logic
                             DescriptionPackageFactory.CN_ONLY_LEVEL_IMP,
                             DescriptionPackageFactory.CN_PROFICIENCY_IMP);
 
-        public CookieTreePrototype() : base(ConstructionPrototypeId.GROWING_COOKIE_AUTO_PROVIDER)
+        public CookieTreePrototype(Language language) : base(ConstructionPrototypeId.GROWING_COOKIE_AUTO_PROVIDER, language)
         {
 
         }
 
-        public override BaseConstruction getInstance(Language language)
+        public override BaseConstruction getInstance(GridPosition position)
         {
             String id = prototypeId + "_" + System.Guid.NewGuid().ToString();
             BaseConstruction construction = new IdleForestConstruction(prototypeId, id);
@@ -49,7 +49,7 @@ namespace Assets.Scripts.DemoGameCore.logic
             construction.saveData.level = 1;
             construction.saveData.workingLevel = 1;
             construction.saveData.proficiency = 47;
-
+            construction.saveData.position = position;
             return construction;
         }
     }
@@ -60,10 +60,10 @@ namespace Assets.Scripts.DemoGameCore.logic
     public class DemoBuiltinConstructionsLoader : IBuiltinConstructionsLoader
     {
 
-        public Dictionary<String, AbstractConstructionPrototype> getProviderMap()
+        public Dictionary<String, AbstractConstructionPrototype> getProviderMap(Language language)
         {
             return JavaFeatureForGwt.mapOf(
-                ConstructionPrototypeId.GROWING_COOKIE_AUTO_PROVIDER, (AbstractConstructionPrototype)new CookieTreePrototype()
+                ConstructionPrototypeId.GROWING_COOKIE_AUTO_PROVIDER, (AbstractConstructionPrototype)new CookieTreePrototype(language)
                 );
         }
 
