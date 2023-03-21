@@ -11,7 +11,7 @@ namespace hundun.idleshare.enginecore
 {
     public class FixedConstructionControlBoardVM<T_GAME, T_SAVE> : AbstractConstructionControlBoardVM<T_GAME, T_SAVE> where T_GAME : BaseIdleGame<T_GAME, T_SAVE>
     {
-        public static int FIXED_NODE_NUM = 5;
+        public static int FIXED_NODE_NUM = 10;
 
         GameObject nodesRoot;
         Image background;
