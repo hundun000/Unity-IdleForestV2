@@ -119,6 +119,7 @@ namespace hundun.idleshare.enginecore
             gameAreaChangeListeners.Add(gameAreaControlBoardVM);
 
             this.game.idleGameplayExport.eventManagerRegisterListener(this);
+            this.game.idleGameplayExport.eventManagerRegisterListener(constructionControlBoardVM);
             this.game.idleGameplayExport.eventManagerRegisterListener(gameImageDrawer);
         }
 

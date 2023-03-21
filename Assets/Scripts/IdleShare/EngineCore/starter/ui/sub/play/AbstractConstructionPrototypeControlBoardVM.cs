@@ -14,7 +14,6 @@ namespace hundun.idleshare.enginecore
     public abstract class AbstractConstructionPrototypeControlBoardVM<T_GAME, T_SAVE> : MonoBehaviour, ILogicFrameListener, IGameAreaChangeListener where T_GAME : BaseIdleGame<T_GAME, T_SAVE>
     {
         protected BaseIdlePlayScreen<T_GAME, T_SAVE> parent;
-        public AbstractConstructionControlBoardVM<T_GAME, T_SAVE> brother;
         /**
          * 显示在当前screen的Construction集合。以ConstructionView形式存在。
          */
@@ -22,10 +21,9 @@ namespace hundun.idleshare.enginecore
 
 
 
-        virtual public void postPrefabInitialization(BaseIdlePlayScreen<T_GAME, T_SAVE> parent, AbstractConstructionControlBoardVM<T_GAME, T_SAVE> brother)
+        virtual public void postPrefabInitialization(BaseIdlePlayScreen<T_GAME, T_SAVE> parent)
         {
             this.parent = parent;
-            this.brother = brother;
         }
         public void onLogicFrame()
         {

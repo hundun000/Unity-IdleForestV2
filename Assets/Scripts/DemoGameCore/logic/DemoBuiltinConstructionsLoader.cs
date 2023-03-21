@@ -13,7 +13,7 @@ namespace Assets.Scripts.DemoGameCore.logic
     public class CookieTreePrototype : AbstractConstructionPrototype
     {
         static DescriptionPackage descriptionPackageCN = new DescriptionPackage(
-                            "自动消耗", "自动产出", "升级费用", "(已达到最大等级)", "升级",
+                            "自动消耗", "自动产出", "升级费用", "(已达到最大等级)", "升级", "摧毁产出",
                             DescriptionPackageFactory.CN_ONLY_LEVEL_IMP,
                             DescriptionPackageFactory.CN_PROFICIENCY_IMP);
 
@@ -27,6 +27,9 @@ namespace Assets.Scripts.DemoGameCore.logic
             String id = prototypeId + "_" + System.Guid.NewGuid().ToString();
             BaseConstruction construction = new IdleForestConstruction(prototypeId, id);
             construction.descriptionPackage = descriptionPackageCN;
+            construction.destoryGainPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
+                    ResourceType.COOKIE, 1000
+                    )));
 
             OutputComponent outputComponent = new OutputComponent(construction);
             outputComponent.outputGainPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(

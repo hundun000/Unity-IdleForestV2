@@ -13,7 +13,9 @@ namespace hundun.idleshare.gamelib
         List<IBuffChangeListener> buffChangeListeners = new List<IBuffChangeListener>();
         List<IAchievementUnlockCallback> achievementUnlockListeners = new List<IAchievementUnlockCallback>();
         List<IOneFrameResourceChangeListener> oneFrameResourceChangeListeners = new List<IOneFrameResourceChangeListener>();
+        List<IConstructionCollectionListener> constructionCollectionListeners = new List<IConstructionCollectionListener>();
 
+        
         IdleGameplayContext gameContext;
 
 
@@ -32,6 +34,10 @@ namespace hundun.idleshare.gamelib
             }
             if (listener is IOneFrameResourceChangeListener && !oneFrameResourceChangeListeners.Contains(listener)) {
                 oneFrameResourceChangeListeners.Add((IOneFrameResourceChangeListener)listener);
+            }
+            if (listener is IConstructionCollectionListener && !constructionCollectionListeners.Contains(listener))
+            {
+                constructionCollectionListeners.Add((IConstructionCollectionListener)listener);
             }
         }
 
@@ -66,6 +72,15 @@ namespace hundun.idleshare.gamelib
             foreach (IAchievementUnlockCallback listener in achievementUnlockListeners)
             {
                 listener.onAchievementUnlock(prototype);
+            }
+        }
+
+        public void notifyConstructionCollectionChange()
+        {
+            //Gdx.app.log(this.getClass().getSimpleName(), "notifyOneFrameResourceChange");
+            foreach (IConstructionCollectionListener listener in constructionCollectionListeners)
+            {
+                listener.onConstructionCollectionChange();
             }
         }
     }

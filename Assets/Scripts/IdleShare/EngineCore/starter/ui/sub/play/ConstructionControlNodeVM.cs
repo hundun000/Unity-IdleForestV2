@@ -24,8 +24,9 @@ namespace hundun.idleshare.enginecore
         Text positionLabel;
 
         TextButton clickEffectButton;
+        TextButton destoryButton;
         Image background;
-
+        
         void OnMouseEnter()
         {
             if (model != null)
@@ -54,6 +55,7 @@ namespace hundun.idleshare.enginecore
             this.downWorkingLevelButton = this.transform.Find("group/downWorkingLevelButton").GetComponent<TextButton>();
             this.proficiencyLabel = this.transform.Find("proficiencyLabel").GetComponent<Text>();
             this.positionLabel = this.transform.Find("positionLabel").GetComponent<Text>();
+            this.destoryButton = this.transform.Find("destoryButton").GetComponent<TextButton>();
         }
 
         public void postPrefabInitialization(BaseIdlePlayScreen<T_GAME, T_SAVE> parent, int index)
@@ -64,11 +66,16 @@ namespace hundun.idleshare.enginecore
 
             clickEffectButton.button.onClick.AddListener(() => {
             
-                parent.game.frontend.log(this.getClass().getSimpleName(), "clicked");
+                parent.game.frontend.log(this.getClass().getSimpleName(), "clickEffectButton clicked");
                 parent.game.idleGameplayExport.constructionOnClick(model.id);
 
             });
+            destoryButton.button.onClick.AddListener(() => {
 
+                parent.game.frontend.log(this.getClass().getSimpleName(), "destoryButton clicked");
+                parent.game.idleGameplayExport.destoryConstruction(model.id);
+
+            });
 
             // ------ changeWorkingLevelGroup ------
             downWorkingLevelButton.button.onClick.AddListener(() => {
@@ -154,6 +161,7 @@ namespace hundun.idleshare.enginecore
             workingLevelLabel.text = (model.levelComponent.getWorkingLevelDescroption());
             proficiencyLabel.text = (model.proficiencyComponent.getProficiencyDescroption());
             positionLabel.text = (model.saveData.position.toShowText());
+            destoryButton.label.text = (model.descriptionPackage.destoryButtonDescroption);
 
             // ------ update clickable-state ------
             Boolean canClickEffect = parent.game.idleGameplayExport.constructionCanClickEffect(model.id);

@@ -14,7 +14,6 @@ namespace hundun.idleshare.enginecore
     public class ConstructionPrototypeControlNodeVM<T_GAME, T_SAVE> : MonoBehaviour where T_GAME : BaseIdleGame<T_GAME, T_SAVE>
     {
         BaseIdlePlayScreen<T_GAME, T_SAVE> parent;
-        AbstractConstructionControlBoardVM<T_GAME, T_SAVE> constructionControlBoardVM;
         AbstractConstructionPrototype model;
 
         Text constructionNameLabel;
@@ -33,11 +32,10 @@ namespace hundun.idleshare.enginecore
             this.clickEffectButton = this.transform.Find("clickEffectButton").GetComponent<TextButton>();
         }
 
-        public void postPrefabInitialization(BaseIdlePlayScreen<T_GAME, T_SAVE> parent, int index, AbstractConstructionControlBoardVM<T_GAME, T_SAVE> constructionControlBoardVM)
+        public void postPrefabInitialization(BaseIdlePlayScreen<T_GAME, T_SAVE> parent, int index)
         {
 
             this.parent = parent;
-            this.constructionControlBoardVM = constructionControlBoardVM;
 
             clickEffectButton.button.onClick.AddListener(() => {
             
@@ -45,7 +43,6 @@ namespace hundun.idleshare.enginecore
                 // FIXME 改为拖拽目的地坐标
                 GridPosition position = parent.game.idleGameplayExport.getConnectedRandonPosition();
                 parent.game.idleGameplayExport.constructionPrototypeOnClick(model.prototypeId, position);
-                constructionControlBoardVM.onConstructionInstancesChange(parent.area);
             });
 
 

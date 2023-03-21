@@ -71,11 +71,6 @@ namespace Assets.Scripts.DemoGameCore.logic
 
         private void tryProficiencyOnce()
         {
-            if (!proficiencyComponent.canChangeProficiency(1))
-            {
-                //gameContext.frontend.log(this.id, "canOutput");
-                return;
-            }
             proficiencyComponent.changeProficiency(1);
         }
 

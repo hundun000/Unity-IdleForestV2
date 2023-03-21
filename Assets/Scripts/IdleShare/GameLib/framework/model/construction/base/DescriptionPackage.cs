@@ -15,14 +15,17 @@ namespace hundun.idleshare.gamelib
         public String upgradeCostDescriptionStart;
         public String upgradeMaxLevelDescription = "(max level)";
         public String buttonDescroption;
+        public String destoryGainDescriptionStart;
         public ILevelDescroptionProvider levelDescroptionProvider;
         public IProficiencyDescroptionProvider proficiencyDescroptionProvider;
+        public String destoryButtonDescroption = "DESTORY";
 
         public DescriptionPackage(string outputCostDescriptionStart, 
             string outputGainDescriptionStart, 
             string upgradeCostDescriptionStart, 
             string upgradeMaxLevelDescription, 
-            string buttonDescroption, 
+            string buttonDescroption,
+            String destoryGainDescriptionStart,
             ILevelDescroptionProvider levelDescroptionProvider,
             IProficiencyDescroptionProvider proficiencyDescroptionProvider
             )
@@ -32,6 +35,7 @@ namespace hundun.idleshare.gamelib
             this.upgradeCostDescriptionStart = upgradeCostDescriptionStart;
             this.upgradeMaxLevelDescription = upgradeMaxLevelDescription;
             this.buttonDescroption = buttonDescroption;
+            this.destoryGainDescriptionStart = destoryGainDescriptionStart;
             this.levelDescroptionProvider = levelDescroptionProvider;
             this.proficiencyDescroptionProvider = proficiencyDescroptionProvider;
         }

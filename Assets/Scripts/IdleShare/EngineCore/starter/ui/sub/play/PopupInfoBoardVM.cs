@@ -70,6 +70,8 @@ namespace hundun.idleshare.enginecore
                 maxLevelGroupLabel_1.text = model.descriptionPackage.upgradeMaxLevelDescription;
             }
 
+            buildOnePack(model.destoryGainPack);
+
         }
 
         private void buildOnePack(ResourcePack pack)

@@ -1,5 +1,6 @@
 ﻿using hundun.unitygame.gamelib;
 using Map;
+using Mono.Cecil.Cil;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,6 @@ namespace hundun.idleshare.gamelib
         public static readonly int DEFAULT_MIN_WORKING_LEVEL = 0;
         public int minWorkingLevel = DEFAULT_MIN_WORKING_LEVEL;
 
-        public static readonly int DEFAULT_MAX_PROFICIENCY = 100;
-        public int maxProficiency = DEFAULT_MAX_PROFICIENCY;
-
         protected Random random = new Random();
 
         public IdleGameplayContext gameContext;
@@ -42,8 +40,10 @@ namespace hundun.idleshare.gamelib
         public String detailDescroptionConstPart;
 
         public DescriptionPackage descriptionPackage;
-
-
+        /**
+        * Nullable
+        */
+        public ResourcePack destoryGainPack;
         /**
          * NotNull
          */
@@ -79,6 +79,10 @@ namespace hundun.idleshare.gamelib
 
             outputComponent.lazyInitDescription();
             upgradeComponent.lazyInitDescription();
+            if (destoryGainPack != null)
+            {
+                this.destoryGainPack.descriptionStart = descriptionPackage.destoryGainDescriptionStart;
+            }
 
             updateModifiedValues();
         }
@@ -95,11 +99,6 @@ namespace hundun.idleshare.gamelib
         public abstract void onClick();
 
         public abstract Boolean canClickEffect();
-
-        public String getButtonDescroption()
-        {
-            return descriptionPackage.buttonDescroption;
-        }
 
         //protected abstract long calculateModifiedUpgradeCost(long baseValue, int level);
         public abstract long calculateModifiedOutput(long baseValue, int level, int proficiency);
@@ -118,6 +117,16 @@ namespace hundun.idleshare.gamelib
             upgradeComponent.updateModifiedValues(reachMaxLevel);
             outputComponent.updateModifiedValues();
 
+            if (destoryGainPack != null)
+            {
+                destoryGainPack.modifiedValues = destoryGainPack.baseValues;
+                destoryGainPack.modifiedValuesDescription = (String.Join(", ",
+                        destoryGainPack.modifiedValues
+                                .Select(pair => pair.type + "x" + pair.amount)
+                                .ToList())
+                                + "; "
+                );
+            }
         }
 
        

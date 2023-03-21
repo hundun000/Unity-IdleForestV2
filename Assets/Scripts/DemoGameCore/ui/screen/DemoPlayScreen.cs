@@ -67,7 +67,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             storageInfoBoardVM.postPrefabInitialization(this, ResourceType.VALUES_FOR_SHOW_ORDER);
 
             constructionControlBoardVM.postPrefabInitialization(this);
-            constructionPrototypeControlBoardVM.postPrefabInitialization(this, constructionControlBoardVM);
+            constructionPrototypeControlBoardVM.postPrefabInitialization(this);
             gameAreaControlBoardVM.postPrefabInitialization(this, GameArea.values);
         }
 

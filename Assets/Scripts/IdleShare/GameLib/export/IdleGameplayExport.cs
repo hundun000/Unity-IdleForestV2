@@ -98,6 +98,11 @@ namespace hundun.idleshare.gamelib
             return model.levelComponent.canChangeWorkingLevel(delta);
         }
 
+        public void destoryConstruction(String id)
+        {
+            gameplayContext.constructionManager.destoryInstance(id);
+        }
+
         public void applyGameplaySaveData(GameplaySaveData gameplaySaveData)
         {
             List<BaseConstruction> constructions = gameplayContext.constructionManager.getConstructions();

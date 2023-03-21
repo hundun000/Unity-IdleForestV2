@@ -43,12 +43,12 @@ namespace hundun.idleshare.gamelib
             {
                 case Language.CN:
                     return new DescriptionPackage(
-                            "自动消耗", "自动产出", "升级费用", "(已达到最大等级)", "升级",
+                            "自动消耗", "自动产出", "升级费用", "(已达到最大等级)", "升级", "摧毁产出",
                             CN_WORKING_LEVEL_IMP,
                             CN_PROFICIENCY_IMP);
                 default:
                     return new DescriptionPackage(
-                            "AutoCost", "AutoGain", "UpgradeCost", "(max level)", "Upgrade",
+                            "AutoCost", "AutoGain", "UpgradeCost", "(max level)", "Upgrade", "Destory Gain",
                             WORKING_LEVEL_IMP,
                             CN_PROFICIENCY_IMP);
             }
@@ -60,12 +60,12 @@ namespace hundun.idleshare.gamelib
             {
                 case Language.CN:
                     return new DescriptionPackage(
-                            "自动消耗", "自动产出", "升级费用", "(已达到最大等级)", "升级",
+                            "自动消耗", "自动产出", "升级费用", "(已达到最大等级)", "升级", "摧毁产出",
                             CN_ONLY_LEVEL_IMP,
                             CN_PROFICIENCY_IMP);
                 default:
                     return new DescriptionPackage(
-                            "AutoCost", "AutoGain", "UpgradeCost", "(max level)", "Upgrade",
+                            "AutoCost", "AutoGain", "UpgradeCost", "(max level)", "Upgrade", "Destory Gain",
                             ONLY_LEVEL_IMP,
                             CN_PROFICIENCY_IMP);
             }
@@ -77,12 +77,12 @@ namespace hundun.idleshare.gamelib
             {
                 case Language.CN:
                     return new DescriptionPackage(
-                            "自动出售", "自动获得", "升级费用", "(已达到最大等级)", "升级",
+                            "自动出售", "自动获得", "升级费用", "(已达到最大等级)", "升级", "摧毁产出",
                             CN_WORKING_LEVEL_IMP,
                             CN_PROFICIENCY_IMP);
                 default:
                     return new DescriptionPackage(
-                            "Sell", "Gain", "UpgradeCost", "(max level)", "Upgrade",
+                            "Sell", "Gain", "UpgradeCost", "(max level)", "Upgrade", "Destory Gain",
                             WORKING_LEVEL_IMP,
                             CN_PROFICIENCY_IMP);
             }
@@ -95,12 +95,12 @@ namespace hundun.idleshare.gamelib
             {
                 case Language.CN:
                     return new DescriptionPackage(
-                            "消耗", "获得", null, null, "采集",
+                            "消耗", "获得", null, null, "采集", "摧毁产出",
                             CN_EMPTY_IMP,
                             CN_PROFICIENCY_IMP);
                 default:
                     return new DescriptionPackage(
-                            "Pay", "Gain", null, null, "Gather",
+                            "Pay", "Gain", null, null, "Gather", "Destory Gain",
                             EMPTY_IMP,
                             CN_PROFICIENCY_IMP);
             }
@@ -113,12 +113,12 @@ namespace hundun.idleshare.gamelib
             {
                 case Language.CN:
                     return new DescriptionPackage(
-                            null, null, "支付", null, "解锁",
+                            null, null, "支付", null, "解锁", null,
                             CN_LOCK_IMP,
                             CN_PROFICIENCY_IMP);
                 default:
                     return new DescriptionPackage(
-                            null, null, "Pay", null, "Unlock",
+                            null, null, "Pay", null, "Unlock", null,
                             LOCK_IMP,
                             CN_PROFICIENCY_IMP);
             }
