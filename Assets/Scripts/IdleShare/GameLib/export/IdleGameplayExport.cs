@@ -103,6 +103,11 @@ namespace hundun.idleshare.gamelib
             gameplayContext.constructionManager.destoryInstance(id);
         }
 
+        public void promoteConstruction(String id)
+        {
+            gameplayContext.constructionManager.promoteInstance(id);
+        }
+
         public void applyGameplaySaveData(GameplaySaveData gameplaySaveData)
         {
             List<BaseConstruction> constructions = gameplayContext.constructionManager.getConstructions();

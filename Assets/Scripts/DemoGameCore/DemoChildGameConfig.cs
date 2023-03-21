@@ -22,7 +22,8 @@ namespace Assets.Scripts.DemoGameCore
 
             Dictionary<String, List<String>> areaShownConstructionPrototypeIds = new Dictionary<String, List<String>>();
             areaShownConstructionPrototypeIds.put(GameArea.AREA_COOKIE, JavaFeatureForGwt.arraysAsList(
-                     ConstructionPrototypeId.GROWING_COOKIE_AUTO_PROVIDER
+                     ConstructionPrototypeId.COOKIE_TREE,
+                     ConstructionPrototypeId.SUPPER_COOKIE_TREE
             ));
             areaShownConstructionPrototypeIds.put(GameArea.AREA_WIN, JavaFeatureForGwt.arraysAsList(
                     ConstructionPrototypeId.WIN_PROVIDER

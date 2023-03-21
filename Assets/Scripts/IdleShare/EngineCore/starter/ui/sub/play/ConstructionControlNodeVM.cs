@@ -25,6 +25,8 @@ namespace hundun.idleshare.enginecore
 
         TextButton clickEffectButton;
         TextButton destoryButton;
+        TextButton promoteButton;
+        TextButton demoteButton;
         Image background;
         
         void OnMouseEnter()
@@ -56,6 +58,8 @@ namespace hundun.idleshare.enginecore
             this.proficiencyLabel = this.transform.Find("proficiencyLabel").GetComponent<Text>();
             this.positionLabel = this.transform.Find("positionLabel").GetComponent<Text>();
             this.destoryButton = this.transform.Find("destoryButton").GetComponent<TextButton>();
+            this.promoteButton = this.transform.Find("promoteButton").GetComponent<TextButton>();
+            this.demoteButton = this.transform.Find("demoteButton").GetComponent<TextButton>();
         }
 
         public void postPrefabInitialization(BaseIdlePlayScreen<T_GAME, T_SAVE> parent, int index)
@@ -76,6 +80,20 @@ namespace hundun.idleshare.enginecore
                 parent.game.idleGameplayExport.destoryConstruction(model.id);
 
             });
+            promoteButton.button.onClick.AddListener(() => {
+
+                parent.game.frontend.log(this.getClass().getSimpleName(), "promoteButton clicked");
+                parent.game.idleGameplayExport.promoteConstruction(model.id);
+
+            });
+            demoteButton.button.onClick.AddListener(() => {
+
+                parent.game.frontend.log(this.getClass().getSimpleName(), "demoteButton clicked");
+                // TODO
+
+            });
+
+
 
             // ------ changeWorkingLevelGroup ------
             downWorkingLevelButton.button.onClick.AddListener(() => {
@@ -166,8 +184,6 @@ namespace hundun.idleshare.enginecore
             // ------ update clickable-state ------
             Boolean canClickEffect = parent.game.idleGameplayExport.constructionCanClickEffect(model.id);
             //clickEffectButton.setTouchable(clickable ? Touchable.enabled : Touchable.disabled);
-
-
             if (canClickEffect)
             {
                 clickEffectButton.button.interactable = (true);
@@ -176,6 +192,31 @@ namespace hundun.idleshare.enginecore
             else
             {
                 clickEffectButton.button.interactable = (false);
+                //clickEffectButton.SetColor(Color.red);
+            }
+
+            Boolean canPromoteEffect = model.proficiencyComponent.canPromote();
+            //clickEffectButton.setTouchable(clickable ? Touchable.enabled : Touchable.disabled);
+            if (canPromoteEffect)
+            {
+                promoteButton.button.interactable = (true);
+                //clickEffectButton.SetColor(Color.white);
+            }
+            else
+            {
+                promoteButton.button.interactable = (false);
+                //clickEffectButton.SetColor(Color.red);
+            }
+            Boolean canDemoteEffect = model.proficiencyComponent.canDemote();
+            //clickEffectButton.setTouchable(clickable ? Touchable.enabled : Touchable.disabled);
+            if (canDemoteEffect)
+            {
+                demoteButton.button.interactable = (true);
+                //clickEffectButton.SetColor(Color.white);
+            }
+            else
+            {
+                demoteButton.button.interactable = (false);
                 //clickEffectButton.SetColor(Color.red);
             }
 

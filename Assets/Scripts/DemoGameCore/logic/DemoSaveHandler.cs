@@ -24,7 +24,7 @@ namespace Assets.Scripts.DemoGameCore.logic
             var gameplaySaveData = new GameplaySaveData();
             gameplaySaveData.constructionSaveDataMap = (
                     JavaFeatureForGwt.mapOf(
-                            ConstructionPrototypeId.GROWING_COOKIE_AUTO_PROVIDER + "_0",
+                            ConstructionPrototypeId.COOKIE_TREE + "_0",
                             ConstructionSaveData.builder()
                                     .level(1)
                                     .workingLevel(1)
