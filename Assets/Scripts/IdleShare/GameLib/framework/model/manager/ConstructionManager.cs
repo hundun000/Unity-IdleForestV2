@@ -131,9 +131,25 @@ namespace hundun.idleshare.gamelib
                 .ForEach(it => TileNodeUtils.updateNeighbors(it, this));
         }
 
+        internal void loadInstance(ConstructionSaveData saveData)
+        {
+            string prototypeId = saveData.prototypeId;
+            GridPosition position = saveData.position;
+            BaseConstruction construction = gameContext.constructionFactory.getInstanceOfPrototype(prototypeId, position);
+            construction.saveData = saveData;
+            construction.updateModifiedValues();
+
+            runningConstructionModelMap.put(construction.id, construction);
+            TileNodeUtils.updateNeighbors(construction, this);
+            construction.neighbors.Values.ToList()
+                .Where(it => it != null)
+                .ToList()
+                .ForEach(it => TileNodeUtils.updateNeighbors(it, this));
+        }
         internal void createInstanceOfPrototype(string prototypeId, GridPosition position)
         {
             BaseConstruction construction = gameContext.constructionFactory.getInstanceOfPrototype(prototypeId, position);
+            
             runningConstructionModelMap.put(construction.id, construction);
             TileNodeUtils.updateNeighbors(construction, this);
             construction.neighbors.Values.ToList()

@@ -35,7 +35,7 @@ namespace hundun.idleshare.gamelib
 
         public String id;
 
-        public String prototypeId;
+        public String prototypeId { get => saveData.prototypeId; }
 
         public String detailDescroptionConstPart;
 
@@ -90,9 +90,8 @@ namespace hundun.idleshare.gamelib
         public BaseConstruction(String prototypeId, String id)
         {
 
-            this.saveData = new ConstructionSaveData();
+            this.saveData = new ConstructionSaveData(prototypeId);
             this.id = id;
-            this.prototypeId = prototypeId;
             this.proficiencyComponent = new ProficiencyComponent(this);
         }
 

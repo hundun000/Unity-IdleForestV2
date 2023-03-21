@@ -26,9 +26,11 @@ namespace Assets.Scripts.DemoGameCore.logic
                     JavaFeatureForGwt.mapOf(
                             ConstructionPrototypeId.COOKIE_TREE + "_0",
                             ConstructionSaveData.builder()
+                                    .prototypeId(ConstructionPrototypeId.COOKIE_TREE)
                                     .level(1)
                                     .workingLevel(1)
                                     .proficiency(48)
+                                    .position(new GridPosition(0, 0))
                                     .build()
                     ));
             gameplaySaveData.ownResoueces = (new Dictionary<String, long>());
