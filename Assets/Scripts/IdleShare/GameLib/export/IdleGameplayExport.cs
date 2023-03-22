@@ -103,6 +103,11 @@ namespace hundun.idleshare.gamelib
             gameplayContext.constructionManager.destoryInstanceAndNotify(id);
         }
 
+        public void transferConstruction(String id)
+        {
+            gameplayContext.constructionManager.transferInstanceAndNotify(id);
+        }
+
         public void applyGameplaySaveData(GameplaySaveData gameplaySaveData)
         {
             gameplaySaveData.constructionSaveDataMap.Values.ToList().ForEach(it => {
@@ -146,7 +151,8 @@ namespace hundun.idleshare.gamelib
 
         internal void constructionPrototypeOnClick(string prototypeId, GridPosition position)
         {
-            gameplayContext.constructionManager.createInstanceOfPrototypeAndNotify(prototypeId, position);
+            gameplayContext.constructionManager.createInstanceOfPrototype(prototypeId, position);
+            gameplayContext.eventManager.notifyConstructionCollectionChange();
         }
 
         internal GridPosition getConnectedRandonPosition()

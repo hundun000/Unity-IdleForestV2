@@ -123,7 +123,15 @@ namespace hundun.idleshare.gamelib
         {
             BaseConstruction construction = runningConstructionModelMap[id];
             removeInstance(construction);
-            createInstanceOfPrototypeAndNotify(construction.proficiencyComponent.promoteConstructionPrototypeId, construction.position);
+            createInstanceOfPrototype(construction.proficiencyComponent.promoteConstructionPrototypeId, construction.position);
+            gameContext.eventManager.notifyConstructionCollectionChange();
+        }
+
+        internal void transferInstanceAndNotify(String id)
+        {
+            BaseConstruction construction = runningConstructionModelMap[id];
+            removeInstance(construction);
+            createInstanceOfPrototype(construction.upgradeComponent.transferConstructionPrototypeId, construction.position);
             gameContext.eventManager.notifyConstructionCollectionChange();
         }
 
@@ -169,7 +177,7 @@ namespace hundun.idleshare.gamelib
             runningConstructionModelMap.put(construction.id, construction);
             TileNodeUtils.updateNeighborsAllStep(construction, this);
         }
-        internal void createInstanceOfPrototypeAndNotify(string prototypeId, GridPosition position)
+        internal void createInstanceOfPrototype(string prototypeId, GridPosition position)
         {
             removeInstanceAt(position);
             
@@ -178,7 +186,7 @@ namespace hundun.idleshare.gamelib
             runningConstructionModelMap.put(construction.id, construction);
             TileNodeUtils.updateNeighborsAllStep(construction, this);
 
-            gameContext.eventManager.notifyConstructionCollectionChange();
+            
         }
 
         

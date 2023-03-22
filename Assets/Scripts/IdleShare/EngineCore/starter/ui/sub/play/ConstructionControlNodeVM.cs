@@ -25,6 +25,7 @@ namespace hundun.idleshare.enginecore
 
         TextButton clickEffectButton;
         TextButton destoryButton;
+        TextButton transferButton;
         Image background;
         
         void OnMouseEnter()
@@ -56,6 +57,7 @@ namespace hundun.idleshare.enginecore
             this.proficiencyLabel = this.transform.Find("proficiencyLabel").GetComponent<Text>();
             this.positionLabel = this.transform.Find("positionLabel").GetComponent<Text>();
             this.destoryButton = this.transform.Find("destoryButton").GetComponent<TextButton>();
+            this.transferButton = this.transform.Find("transferButton").GetComponent<TextButton>();
         }
 
         public void postPrefabInitialization(BaseIdlePlayScreen<T_GAME, T_SAVE> parent, int index)
@@ -76,7 +78,12 @@ namespace hundun.idleshare.enginecore
                 parent.game.idleGameplayExport.destoryConstruction(model.id);
 
             });
+            transferButton.button.onClick.AddListener(() => {
 
+                parent.game.frontend.log(this.getClass().getSimpleName(), "transferButton clicked");
+                parent.game.idleGameplayExport.transferConstruction(model.id);
+
+            });
 
 
             // ------ changeWorkingLevelGroup ------
@@ -181,6 +188,14 @@ namespace hundun.idleshare.enginecore
             else
             {
                 destoryButton.button.interactable = (false);
+            }
+            if (model.upgradeComponent.canTransfer())
+            {
+                transferButton.button.interactable = (true);
+            }
+            else
+            {
+                transferButton.button.interactable = (false);
             }
 
             Boolean canUpWorkingLevel = parent.game.idleGameplayExport.constructionCanChangeWorkingLevel(model.id, 1);

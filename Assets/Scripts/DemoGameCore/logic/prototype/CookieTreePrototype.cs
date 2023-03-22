@@ -27,9 +27,13 @@ namespace Assets.Scripts.DemoGameCore.logic
                     )));
 
             construction.upgradeComponent.upgradeCostPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COOKIE, 25
+                    ResourceType.COOKIE, 10
                     )));
-            construction.proficiencyComponent.promoteConstructionPrototypeId = ConstructionPrototypeId.SUPPER_COOKIE_TREE;
+            construction.upgradeComponent.transferCostPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
+                    ResourceType.COOKIE, 50
+                    )));
+            construction.upgradeComponent.transferCostPack.modifiedValuesDescription = "转职费用";
+            construction.upgradeComponent.transferConstructionPrototypeId = ConstructionPrototypeId.SUPPER_COOKIE_TREE;
 
             construction.saveData.level = 1;
             construction.saveData.workingLevel = 1;

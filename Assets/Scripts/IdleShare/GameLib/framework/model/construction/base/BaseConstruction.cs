@@ -13,7 +13,7 @@ namespace hundun.idleshare.gamelib
     public abstract class BaseConstruction : ILogicFrameListener, IBuffChangeListener, ITileNode<BaseConstruction>
     {
 
-        public static readonly int DEFAULT_MAX_LEVEL = 99;
+        public static readonly int DEFAULT_MAX_LEVEL = 10;
         public int maxLevel = DEFAULT_MAX_LEVEL;
 
         public static readonly int DEFAULT_MAX_DRAW_NUM = 5;
@@ -148,11 +148,33 @@ namespace hundun.idleshare.gamelib
         {
             return outputComponent.canOutput();
         }
+        protected void doOutput()
+        {
+            if (outputComponent.hasCost())
+            {
+                gameContext.storageManager.modifyAllResourceNum(outputComponent.outputCostPack.modifiedValues, false);
+            }
+            if (outputComponent.outputGainPack != null)
+            {
+                gameContext.storageManager.modifyAllResourceNum(outputComponent.outputGainPack.modifiedValues, true);
+            }
+        }
 
-
-        protected Boolean canUpgrade()
+            protected Boolean canUpgrade()
         {
             return upgradeComponent.canUpgrade();
+        }
+
+        protected void doUpgrade()
+        {
+            List<ResourcePair> upgradeCostRule = upgradeComponent.upgradeCostPack.modifiedValues;
+            gameContext.storageManager.modifyAllResourceNum(upgradeCostRule, false);
+            saveData.level = (saveData.level + 1);
+            if (!levelComponent.workingLevelChangable)
+            {
+                saveData.workingLevel = (saveData.level);
+            }
+            updateModifiedValues();
         }
 
         /**

@@ -65,17 +65,7 @@ namespace Assets.Scripts.DemoGameCore.logic
             return canUpgrade();
         }
 
-        private void doUpgrade()
-        {
-            List<ResourcePair> upgradeCostRule = upgradeComponent.upgradeCostPack.modifiedValues;
-            gameContext.storageManager.modifyAllResourceNum(upgradeCostRule, false);
-            saveData.level = (saveData.level + 1);
-            if (!levelComponent.workingLevelChangable)
-            {
-                saveData.workingLevel = (saveData.level);
-            }
-            updateModifiedValues();
-        }
+        
 
         
 

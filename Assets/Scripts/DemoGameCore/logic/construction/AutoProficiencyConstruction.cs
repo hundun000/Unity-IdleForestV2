@@ -58,14 +58,7 @@ namespace Assets.Scripts.DemoGameCore.logic
                 return;
             }
             //gameContext.frontend.log(this.id, "AutoOutput");
-            if (outputComponent.hasCost())
-            {
-                gameContext.storageManager.modifyAllResourceNum(outputComponent.outputCostPack.modifiedValues, false);
-            }
-            if (outputComponent.outputGainPack != null)
-            {
-                gameContext.storageManager.modifyAllResourceNum(outputComponent.outputGainPack.modifiedValues, true);
-            }
+            doOutput();
         }
 
     }

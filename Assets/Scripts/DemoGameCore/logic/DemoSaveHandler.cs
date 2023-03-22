@@ -72,7 +72,7 @@ namespace Assets.Scripts.DemoGameCore.logic
                     it => it
                 );
             gameplaySaveData.ownResoueces = (new Dictionary<String, long>());
-            //gameplaySaveData.ownResoueces.Add(ResourceType.COOKIE, 42);
+            gameplaySaveData.ownResoueces.Add(ResourceType.COOKIE, 10000);
             gameplaySaveData.unlockedResourceTypes = (new HashSet<String>());
             gameplaySaveData.unlockedResourceTypes.Add(ResourceType.COOKIE);
             gameplaySaveData.unlockedResourceTypes.Add(ResourceType.COIN);
