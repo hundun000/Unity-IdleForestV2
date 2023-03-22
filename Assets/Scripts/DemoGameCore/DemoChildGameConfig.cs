@@ -20,18 +20,25 @@ namespace Assets.Scripts.DemoGameCore
             //        this.setConstructions(builtinConstructionsLoader.load());
 
 
-            Dictionary<String, List<String>> areaShownConstructionPrototypeIds = new Dictionary<String, List<String>>();
-            areaShownConstructionPrototypeIds.put(GameArea.AREA_COOKIE, JavaFeatureForGwt.arraysAsList(
+            Dictionary<String, List<String>> areaControlableConstructionVMPrototypeIds = new Dictionary<String, List<String>>();
+            areaControlableConstructionVMPrototypeIds.put(GameArea.AREA_COOKIE, JavaFeatureForGwt.arraysAsList(
                      ConstructionPrototypeId.COOKIE_TREE,
                      ConstructionPrototypeId.SUPPER_COOKIE_TREE,
                      ConstructionPrototypeId.DESERT
             ));
-            areaShownConstructionPrototypeIds.put(GameArea.AREA_WIN, JavaFeatureForGwt.arraysAsList(
+            areaControlableConstructionVMPrototypeIds.put(GameArea.AREA_WIN, JavaFeatureForGwt.arraysAsList(
                     ConstructionPrototypeId.WIN_PROVIDER
             ));
 
-            this.areaControlableConstructionPrototypeIds = (areaShownConstructionPrototypeIds);
-            this.areaShowEntityByOwnAmountConstructionPrototypeIds = (areaShownConstructionPrototypeIds);
+            this.areaControlableConstructionVMPrototypeIds = areaControlableConstructionVMPrototypeIds;
+
+            Dictionary<String, List<String>> areaControlableConstructionPrototypeVMPrototypeIds = new Dictionary<String, List<String>>();
+            areaControlableConstructionPrototypeVMPrototypeIds.put(GameArea.AREA_COOKIE, JavaFeatureForGwt.arraysAsList(
+                     ConstructionPrototypeId.COOKIE_TREE
+            ));
+            this.areaControlableConstructionPrototypeVMPrototypeIds = areaControlableConstructionPrototypeVMPrototypeIds;
+
+            this.areaShowEntityByOwnAmountConstructionPrototypeIds = new Dictionary<String, List<String>>();
 
             Dictionary<String, List<String>> areaShowEntityByOwnAmountResourceIds = new Dictionary<String, List<String>>();
             this.areaShowEntityByOwnAmountResourceIds = (areaShowEntityByOwnAmountResourceIds);

@@ -30,14 +30,19 @@ namespace hundun.idleshare.gamelib
         public Dictionary<String, BaseConstruction> runningConstructionModelMap = new Dictionary<String, BaseConstruction>();
 
         /**
-         * 根据GameArea显示不同的Construction集合
+         * 根据GameArea显示不同的ConstructionVM集合
          */
-        Dictionary<String, List<String>> areaControlableConstructionPrototypeIds;
+        Dictionary<String, List<String>> areaControlableConstructionVMPrototypeIds;
 
+        /**
+         * 根据GameArea显示不同的ConstructionPrototypeVM集合
+         */
+        Dictionary<string, List<string>> areaControlableConstructionPrototypeVMPrototypeIds;
 
-        public void lazyInit(Dictionary<String, List<String>> areaControlableConstructionPrototypeIds)
+        public void lazyInit(Dictionary<String, List<String>> areaControlableConstructionVMPrototypeIds, Dictionary<string, List<string>> areaControlableConstructionPrototypeVMPrototypeIds)
         {
-            this.areaControlableConstructionPrototypeIds = areaControlableConstructionPrototypeIds;
+            this.areaControlableConstructionVMPrototypeIds = areaControlableConstructionVMPrototypeIds;
+            this.areaControlableConstructionPrototypeVMPrototypeIds = areaControlableConstructionPrototypeVMPrototypeIds;
             //if (areaControlableConstructionPrototypeIds != null)
             //{
             //    foreach (KeyValuePair<String, List<String>> entry in areaControlableConstructionPrototypeIds)
@@ -57,7 +62,7 @@ namespace hundun.idleshare.gamelib
             //    items.ForEach(item => runningConstructionModelMap.TryAdd(item.id, item));
             //}
 
-                
+
         }
         public void onSubLogicFrame()
         {
@@ -80,14 +85,14 @@ namespace hundun.idleshare.gamelib
         public List<BaseConstruction> getAreaShownConstructionsOrEmpty(String gameArea)
         {
             return runningConstructionModelMap.Values
-                .Where(it => areaControlableConstructionPrototypeIds.ContainsKey(gameArea) && 
-                        areaControlableConstructionPrototypeIds.get(gameArea).Contains(it.prototypeId))
+                .Where(it => areaControlableConstructionVMPrototypeIds.ContainsKey(gameArea) && 
+                        areaControlableConstructionVMPrototypeIds.get(gameArea).Contains(it.prototypeId))
                 .ToList();
         }
 
         public List<AbstractConstructionPrototype> getAreaShownConstructionPrototypesOrEmpty(String gameArea)
         {
-            return areaControlableConstructionPrototypeIds.get(gameArea)
+            return areaControlableConstructionPrototypeVMPrototypeIds.get(gameArea)
                 .Select(it => gameContext.constructionFactory.getPrototype(it))
                 .ToList();
         }
