@@ -40,6 +40,11 @@ namespace hundun.idleshare.gamelib
         public String detailDescroptionConstPart;
 
         public DescriptionPackage descriptionPackage;
+
+        /**
+        * Nullable
+        */
+        public ResourcePack destoryCostPack;
         /**
         * Nullable
         */
@@ -92,7 +97,6 @@ namespace hundun.idleshare.gamelib
 
             this.saveData = new ConstructionSaveData(prototypeId);
             this.id = id;
-            this.proficiencyComponent = new ProficiencyComponent(this);
         }
 
         public abstract void onClick();
@@ -149,6 +153,14 @@ namespace hundun.idleshare.gamelib
         protected Boolean canUpgrade()
         {
             return upgradeComponent.canUpgrade();
+        }
+
+        /**
+        * Nullable
+        */
+        public Boolean canDestory() 
+        {
+            return destoryCostPack != null;
         }
 
         public String getSaveDataKey()

@@ -23,18 +23,54 @@ namespace Assets.Scripts.DemoGameCore.logic
 
         override protected RootSaveData genereateStarterRootSaveData()
         {
-            var gameplaySaveData = new GameplaySaveData();
-            gameplaySaveData.constructionSaveDataMap = (
-                    JavaFeatureForGwt.mapOf(
-                            ConstructionPrototypeId.COOKIE_TREE + "_0",
-                            ConstructionSaveData.builder()
+            var starterConstructionSaveDatas = new List<ConstructionSaveData>();
+            starterConstructionSaveDatas.Add(
+                ConstructionSaveData.builder()
                                     .prototypeId(ConstructionPrototypeId.COOKIE_TREE)
                                     .level(1)
                                     .workingLevel(1)
                                     .proficiency(48)
-                                    .position(new GridPosition(X_OFFSET, Y_OFFSET))
+                                    .position(new GridPosition(0, 0))
                                     .build()
-                    ));
+                );
+            starterConstructionSaveDatas.Add(
+                ConstructionSaveData.builder()
+                                    .prototypeId(ConstructionPrototypeId.DESERT)
+                                    .proficiency(97)
+                                    .position(new GridPosition(0, 1))
+                                    .build()
+                );
+            starterConstructionSaveDatas.Add(
+                ConstructionSaveData.builder()
+                                    .prototypeId(ConstructionPrototypeId.DESERT)
+                                    .position(new GridPosition(-1, 0))
+                                    .build()
+                );
+            starterConstructionSaveDatas.Add(
+                ConstructionSaveData.builder()
+                                    .prototypeId(ConstructionPrototypeId.DESERT)
+                                    .position(new GridPosition(0, 2))
+                                    .build()
+                );
+            starterConstructionSaveDatas.Add(
+                ConstructionSaveData.builder()
+                                    .prototypeId(ConstructionPrototypeId.DESERT)
+                                    .position(new GridPosition(0, 3))
+                                    .build()
+                );
+            starterConstructionSaveDatas.ForEach(it => { 
+                it.position.x += X_OFFSET;
+                it.position.y += Y_OFFSET;
+            });
+
+
+
+            var gameplaySaveData = new GameplaySaveData();
+            gameplaySaveData.constructionSaveDataMap = starterConstructionSaveDatas
+                .ToDictionary(
+                    it => it.prototypeId + System.Guid.NewGuid().ToString(),
+                    it => it
+                );
             gameplaySaveData.ownResoueces = (new Dictionary<String, long>());
             //gameplaySaveData.ownResoueces.Add(ResourceType.COOKIE, 42);
             gameplaySaveData.unlockedResourceTypes = (new HashSet<String>());

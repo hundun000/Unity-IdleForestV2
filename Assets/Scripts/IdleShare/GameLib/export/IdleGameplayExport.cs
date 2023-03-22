@@ -103,11 +103,6 @@ namespace hundun.idleshare.gamelib
             gameplayContext.constructionManager.destoryInstanceAndNotify(id);
         }
 
-        public void promoteConstruction(String id)
-        {
-            gameplayContext.constructionManager.promoteInstanceAndNotify(id);
-        }
-
         public void applyGameplaySaveData(GameplaySaveData gameplaySaveData)
         {
             gameplaySaveData.constructionSaveDataMap.Values.ToList().ForEach(it => {

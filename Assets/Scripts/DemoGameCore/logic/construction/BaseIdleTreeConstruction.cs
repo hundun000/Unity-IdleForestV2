@@ -1,0 +1,92 @@
+﻿using hundun.idleshare.gamelib;
+using hundun.unitygame.gamelib;
+using Mono.Cecil.Cil;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assets.Scripts.DemoGameCore.logic
+{
+    public abstract class BaseIdleTreeConstruction : BaseConstruction
+    {
+
+        public BaseIdleTreeConstruction(
+            String prototypeId, 
+            String id, 
+            GridPosition position, 
+            Language language) : base(prototypeId, id)
+        {
+
+            switch (language)
+            {
+                case Language.CN:
+                    this.descriptionPackage = DemoBuiltinConstructionsLoader.descriptionPackageCN;
+                    break;
+                default:
+                    this.descriptionPackage = DemoBuiltinConstructionsLoader.descriptionPackageEN;
+                    break;
+            }
+            
+
+            OutputComponent outputComponent = new OutputComponent(this);
+            this.outputComponent = (outputComponent);
+
+            UpgradeComponent upgradeComponent = new UpgradeComponent(this);
+            this.upgradeComponent = (upgradeComponent);
+
+            LevelComponent levelComponent = new LevelComponent(this, false);
+            this.levelComponent = (levelComponent);
+
+            ProficiencyComponent proficiencyComponent = new ProficiencyComponent(this);
+            this.proficiencyComponent = (proficiencyComponent);
+
+            this.saveData.position = position;
+        }
+
+        override protected void printDebugInfoAfterConstructed()
+        {
+        
+        }
+
+
+        override public void onClick()
+        {
+            if (!canClickEffect())
+            {
+                return;
+            }
+            doUpgrade();
+        }
+
+        override public Boolean canClickEffect()
+        {
+            return canUpgrade();
+        }
+
+        private void doUpgrade()
+        {
+            List<ResourcePair> upgradeCostRule = upgradeComponent.upgradeCostPack.modifiedValues;
+            gameContext.storageManager.modifyAllResourceNum(upgradeCostRule, false);
+            saveData.level = (saveData.level + 1);
+            if (!levelComponent.workingLevelChangable)
+            {
+                saveData.workingLevel = (saveData.level);
+            }
+            updateModifiedValues();
+        }
+
+        
+
+        override public long calculateModifiedOutput(long baseValue, int level, int proficiency)
+        {
+            return (long)(baseValue * level * (proficiency / 50.0));
+        }
+
+        override public long calculateModifiedOutputCost(long baseValue, int level, int proficiency)
+        {
+            return (long)(baseValue * level * (proficiency / 50.0));
+        }
+    }
+}

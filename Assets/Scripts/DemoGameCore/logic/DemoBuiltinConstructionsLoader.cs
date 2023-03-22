@@ -11,112 +11,25 @@ namespace Assets.Scripts.DemoGameCore.logic
 {
 
 
-    public class SuperCookieTreePrototype : AbstractConstructionPrototype
-    {
-        static DescriptionPackage descriptionPackageCN = new DescriptionPackage(
-                            "自动消耗", "自动产出", "升级费用", "(已达到最大等级)", "升级", "摧毁产出",
-                            DescriptionPackageFactory.CN_ONLY_LEVEL_IMP,
-                            DescriptionPackageFactory.CN_PROFICIENCY_IMP);
-
-        public SuperCookieTreePrototype(Language language) : base(ConstructionPrototypeId.SUPPER_COOKIE_TREE, language)
-        {
-
-        }
-
-        public override BaseConstruction getInstance(GridPosition position)
-        {
-            String id = prototypeId + "_" + System.Guid.NewGuid().ToString();
-            BaseConstruction construction = new IdleForestConstruction(prototypeId, id);
-            construction.descriptionPackage = descriptionPackageCN;
-            construction.destoryGainPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COOKIE, 2000
-                    )));
-
-            OutputComponent outputComponent = new OutputComponent(construction);
-            outputComponent.outputGainPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COOKIE, 1
-                    )));
-            construction.outputComponent = (outputComponent);
-
-            UpgradeComponent upgradeComponent = new UpgradeComponent(construction);
-            upgradeComponent.upgradeCostPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COOKIE, 25
-                    )));
-            construction.upgradeComponent = (upgradeComponent);
-
-            LevelComponent levelComponent = new LevelComponent(construction, false);
-            construction.levelComponent = (levelComponent);
-
-            ProficiencyComponent proficiencyComponent = new ProficiencyComponent(construction);
-            construction.proficiencyComponent = (proficiencyComponent);
-
-            construction.saveData.level = 1;
-            construction.saveData.workingLevel = 1;
-            construction.saveData.proficiency = 47;
-            construction.saveData.position = position;
-            return construction;
-        }
-    }
-
-    public class CookieTreePrototype : AbstractConstructionPrototype
-    {
-        static DescriptionPackage descriptionPackageCN = new DescriptionPackage(
-                            "自动消耗", "自动产出", "升级费用", "(已达到最大等级)", "升级", "摧毁产出",
-                            DescriptionPackageFactory.CN_ONLY_LEVEL_IMP,
-                            DescriptionPackageFactory.CN_PROFICIENCY_IMP);
-
-        public CookieTreePrototype(Language language) : base(ConstructionPrototypeId.COOKIE_TREE, language)
-        {
-
-        }
-
-        public override BaseConstruction getInstance(GridPosition position)
-        {
-            String id = prototypeId + "_" + System.Guid.NewGuid().ToString();
-            BaseConstruction construction = new IdleForestConstruction(prototypeId, id);
-            construction.descriptionPackage = descriptionPackageCN;
-            construction.destoryGainPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COOKIE, 1000
-                    )));
-
-            OutputComponent outputComponent = new OutputComponent(construction);
-            outputComponent.outputGainPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COOKIE, 1
-                    )));
-            construction.outputComponent = (outputComponent);
-
-            UpgradeComponent upgradeComponent = new UpgradeComponent(construction);
-            upgradeComponent.upgradeCostPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COOKIE, 25
-                    )));
-            construction.upgradeComponent = (upgradeComponent);
-
-            LevelComponent levelComponent = new LevelComponent(construction, false);
-            construction.levelComponent = (levelComponent);
-
-            ProficiencyComponent proficiencyComponent = new ProficiencyComponent(construction);
-            proficiencyComponent.promoteConstructionPrototypeId = ConstructionPrototypeId.SUPPER_COOKIE_TREE;
-            construction.proficiencyComponent = (proficiencyComponent);
-
-            construction.saveData.level = 1;
-            construction.saveData.workingLevel = 1;
-            construction.saveData.proficiency = 47 + UnityEngine.Random.Range(0, 2) * 50;
-            construction.saveData.position = position;
-            return construction;
-        }
-    }
-
-
 
 
     public class DemoBuiltinConstructionsLoader : IBuiltinConstructionsLoader
     {
+        public static DescriptionPackage descriptionPackageEN = new DescriptionPackage(
+                            "TODO", "TODO", "TODO", "TODO", "TODO", "TODO",
+                            DescriptionPackageFactory.CN_ONLY_LEVEL_IMP,
+                            DescriptionPackageFactory.CN_PROFICIENCY_IMP);
+        public static DescriptionPackage descriptionPackageCN = new DescriptionPackage(
+                            "自动消耗", "自动产出", "升级费用", "(已达到最大等级)", "升级", "摧毁产出",
+                            DescriptionPackageFactory.CN_ONLY_LEVEL_IMP,
+                            DescriptionPackageFactory.CN_PROFICIENCY_IMP);
 
         public Dictionary<String, AbstractConstructionPrototype> getProviderMap(Language language)
         {
             return JavaFeatureForGwt.mapOf(
                 ConstructionPrototypeId.COOKIE_TREE, (AbstractConstructionPrototype)new CookieTreePrototype(language),
-                ConstructionPrototypeId.SUPPER_COOKIE_TREE, (AbstractConstructionPrototype)new SuperCookieTreePrototype(language)
+                ConstructionPrototypeId.SUPPER_COOKIE_TREE, (AbstractConstructionPrototype)new SuperCookieTreePrototype(language),
+                ConstructionPrototypeId.DESERT, (AbstractConstructionPrototype)new DesertPrototype(language)
                 );
         }
 

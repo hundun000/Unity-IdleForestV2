@@ -20,6 +20,25 @@ namespace hundun.idleshare.gamelib
             this.y = y;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is GridPosition))
+            {
+                return false;
+            }
+            return (this.x == ((GridPosition)obj).x)
+                && (this.y == ((GridPosition)obj).y);
+        }
+
+        public override int GetHashCode()
+        {
+            return x.GetHashCode() ^ y.GetHashCode();
+        }
+
         internal string toShowText()
         {
             return JavaFeatureForGwt.stringFormat("({0},{1})", x, y);
@@ -65,7 +84,18 @@ namespace hundun.idleshare.gamelib
             TileNeighborDirection.RIGHT_DOWN
         };
 
-        public static void updateNeighbors<T>(ITileNode<T> target, ITileNodeMap<T> map) where T : ITileNode<T>
+        public static void updateNeighborsAllStep<T>(ITileNode<T> target, ITileNodeMap<T> map) where T : ITileNode<T>
+        {
+            // update self
+            updateNeighborsOneStep(target, map);
+            // update new neighbors
+            target.neighbors.Values.ToList()
+                    .Where(it => it != null)
+                    .ToList()
+                    .ForEach(it => updateNeighborsOneStep(it, map));
+        }
+
+        public static void updateNeighborsOneStep<T>(ITileNode<T> target, ITileNodeMap<T> map) where T : ITileNode<T>
         {
             GridPosition position;
             T neighbor;

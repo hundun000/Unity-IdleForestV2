@@ -1,4 +1,6 @@
 ﻿using hundun.idleshare.gamelib;
+using hundun.unitygame.gamelib;
+using Mono.Cecil.Cil;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,48 +9,21 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.DemoGameCore.logic
 {
-    public class IdleForestConstruction : BaseConstruction
+    public class AutoProficiencyConstruction : BaseIdleTreeConstruction
     {
         protected int autoOutputProgress = 0;
         protected int autoProficiencyProgress = 0;
         protected const int AUTO_PROFICIENCY_SECOND_MAX = 2; // 2秒生长一次
 
-        public IdleForestConstruction(String prototypeId, String id
-                ) : base(prototypeId, id)
+        public AutoProficiencyConstruction(
+            String prototypeId, 
+            String id, 
+            GridPosition position, 
+            Language language) : base(prototypeId, id, position, language)
         {
+
         }
 
-        override protected void printDebugInfoAfterConstructed()
-        {
-        
-        }
-
-
-        override public void onClick()
-        {
-            if (!canClickEffect())
-            {
-                return;
-            }
-            doUpgrade();
-        }
-
-        override public Boolean canClickEffect()
-        {
-            return canUpgrade();
-        }
-
-        private void doUpgrade()
-        {
-            List<ResourcePair> upgradeCostRule = upgradeComponent.upgradeCostPack.modifiedValues;
-            gameContext.storageManager.modifyAllResourceNum(upgradeCostRule, false);
-            saveData.level = (saveData.level + 1);
-            if (!levelComponent.workingLevelChangable)
-            {
-                saveData.workingLevel = (saveData.level);
-            }
-            updateModifiedValues();
-        }
 
         override public void onLogicFrame()
         {
@@ -67,9 +42,10 @@ namespace Assets.Scripts.DemoGameCore.logic
                 autoProficiencyProgress = 0;
                 tryProficiencyOnce();
             }
+
         }
 
-        private void tryProficiencyOnce()
+        virtual protected void tryProficiencyOnce()
         {
             proficiencyComponent.changeProficiency(1);
         }
@@ -92,14 +68,5 @@ namespace Assets.Scripts.DemoGameCore.logic
             }
         }
 
-        override public long calculateModifiedOutput(long baseValue, int level, int proficiency)
-        {
-            return (long)(baseValue * level * (proficiency / 50.0));
-        }
-
-        override public long calculateModifiedOutputCost(long baseValue, int level, int proficiency)
-        {
-            return (long)(baseValue * level * (proficiency / 50.0));
-        }
     }
 }

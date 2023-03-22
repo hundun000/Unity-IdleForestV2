@@ -1,6 +1,8 @@
 ﻿using hundun.idleshare.gamelib;
 using hundun.unitygame.adapters;
+using Mono.Cecil.Cil;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -61,8 +63,17 @@ namespace hundun.idleshare.gamelib
         {
             foreach (KeyValuePair<String, BaseConstruction> entry in runningConstructionModelMap)
             {
-                var item = entry.Value;
-                item.onLogicFrame();
+                var construction = entry.Value;
+                construction.onLogicFrame();
+
+                if (construction.proficiencyComponent.canPromote())
+                {
+                    promoteInstanceAndNotify(construction.id);
+                } 
+                else if (construction.proficiencyComponent.canDemote())
+                {
+                    // TODO
+                }
             }
         }
 
@@ -122,14 +133,24 @@ namespace hundun.idleshare.gamelib
             gameContext.eventManager.notifyConstructionCollectionChange();
         }
 
+        private void removeInstanceAt(GridPosition position)
+        {
+            var toRemove = runningConstructionModelMap
+                         .Where(pair => pair.Value.position.Equals(position))
+                         .ToList();
+
+            foreach (var pair in toRemove)
+            {
+                runningConstructionModelMap.Remove(pair.Key);
+                TileNodeUtils.updateNeighborsAllStep(pair.Value, this);
+            }
+        }
+
+
         private void removeInstance(BaseConstruction construction)
         {
             runningConstructionModelMap.Remove(construction.id);
-            TileNodeUtils.updateNeighbors(construction, this);
-            construction.neighbors.Values.ToList()
-                .Where(it => it != null)
-                .ToList()
-                .ForEach(it => TileNodeUtils.updateNeighbors(it, this));
+            TileNodeUtils.updateNeighborsAllStep(construction, this);
         }
 
         internal void loadInstance(ConstructionSaveData saveData)
@@ -141,22 +162,17 @@ namespace hundun.idleshare.gamelib
             construction.updateModifiedValues();
 
             runningConstructionModelMap.put(construction.id, construction);
-            TileNodeUtils.updateNeighbors(construction, this);
-            construction.neighbors.Values.ToList()
-                .Where(it => it != null)
-                .ToList()
-                .ForEach(it => TileNodeUtils.updateNeighbors(it, this));
+            TileNodeUtils.updateNeighborsAllStep(construction, this);
         }
         internal void createInstanceOfPrototypeAndNotify(string prototypeId, GridPosition position)
         {
+            removeInstanceAt(position);
+            
             BaseConstruction construction = gameContext.constructionFactory.getInstanceOfPrototype(prototypeId, position);
             
             runningConstructionModelMap.put(construction.id, construction);
-            TileNodeUtils.updateNeighbors(construction, this);
-            construction.neighbors.Values.ToList()
-                .Where(it => it != null)
-                .ToList()
-                .ForEach(it => TileNodeUtils.updateNeighbors(it, this));
+            TileNodeUtils.updateNeighborsAllStep(construction, this);
+
             gameContext.eventManager.notifyConstructionCollectionChange();
         }
 

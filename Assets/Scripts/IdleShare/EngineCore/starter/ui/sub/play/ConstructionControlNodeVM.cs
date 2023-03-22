@@ -25,8 +25,6 @@ namespace hundun.idleshare.enginecore
 
         TextButton clickEffectButton;
         TextButton destoryButton;
-        TextButton promoteButton;
-        TextButton demoteButton;
         Image background;
         
         void OnMouseEnter()
@@ -58,8 +56,6 @@ namespace hundun.idleshare.enginecore
             this.proficiencyLabel = this.transform.Find("proficiencyLabel").GetComponent<Text>();
             this.positionLabel = this.transform.Find("positionLabel").GetComponent<Text>();
             this.destoryButton = this.transform.Find("destoryButton").GetComponent<TextButton>();
-            this.promoteButton = this.transform.Find("promoteButton").GetComponent<TextButton>();
-            this.demoteButton = this.transform.Find("demoteButton").GetComponent<TextButton>();
         }
 
         public void postPrefabInitialization(BaseIdlePlayScreen<T_GAME, T_SAVE> parent, int index)
@@ -78,18 +74,6 @@ namespace hundun.idleshare.enginecore
 
                 parent.game.frontend.log(this.getClass().getSimpleName(), "destoryButton clicked");
                 parent.game.idleGameplayExport.destoryConstruction(model.id);
-
-            });
-            promoteButton.button.onClick.AddListener(() => {
-
-                parent.game.frontend.log(this.getClass().getSimpleName(), "promoteButton clicked");
-                parent.game.idleGameplayExport.promoteConstruction(model.id);
-
-            });
-            demoteButton.button.onClick.AddListener(() => {
-
-                parent.game.frontend.log(this.getClass().getSimpleName(), "demoteButton clicked");
-                // TODO
 
             });
 
@@ -182,69 +166,42 @@ namespace hundun.idleshare.enginecore
             destoryButton.label.text = (model.descriptionPackage.destoryButtonDescroption);
 
             // ------ update clickable-state ------
-            Boolean canClickEffect = parent.game.idleGameplayExport.constructionCanClickEffect(model.id);
-            //clickEffectButton.setTouchable(clickable ? Touchable.enabled : Touchable.disabled);
-            if (canClickEffect)
+            if (model.canClickEffect())
             {
                 clickEffectButton.button.interactable = (true);
-                //clickEffectButton.SetColor(Color.white);
             }
             else
             {
                 clickEffectButton.button.interactable = (false);
-                //clickEffectButton.SetColor(Color.red);
             }
-
-            Boolean canPromoteEffect = model.proficiencyComponent.canPromote();
-            //clickEffectButton.setTouchable(clickable ? Touchable.enabled : Touchable.disabled);
-            if (canPromoteEffect)
+            if (model.canDestory())
             {
-                promoteButton.button.interactable = (true);
-                //clickEffectButton.SetColor(Color.white);
+                destoryButton.button.interactable = (true);
             }
             else
             {
-                promoteButton.button.interactable = (false);
-                //clickEffectButton.SetColor(Color.red);
-            }
-            Boolean canDemoteEffect = model.proficiencyComponent.canDemote();
-            //clickEffectButton.setTouchable(clickable ? Touchable.enabled : Touchable.disabled);
-            if (canDemoteEffect)
-            {
-                demoteButton.button.interactable = (true);
-                //clickEffectButton.SetColor(Color.white);
-            }
-            else
-            {
-                demoteButton.button.interactable = (false);
-                //clickEffectButton.SetColor(Color.red);
+                destoryButton.button.interactable = (false);
             }
 
             Boolean canUpWorkingLevel = parent.game.idleGameplayExport.constructionCanChangeWorkingLevel(model.id, 1);
             if (canUpWorkingLevel)
             {
                 upWorkingLevelButton.button.interactable = (true);
-                //upWorkingLevelButton.getLabel().setColor(Color.WHITE);
             }
             else
             {
                 upWorkingLevelButton.button.interactable = (false);
-                //upWorkingLevelButton.getLabel().setColor(Color.RED);
             }
 
             Boolean canDownWorkingLevel = parent.game.idleGameplayExport.constructionCanChangeWorkingLevel(model.id, -1);
             if (canDownWorkingLevel)
             {
                 downWorkingLevelButton.button.interactable = (true);
-                //downWorkingLevelButton.getLabel().setColor(Color.WHITE);
             }
             else
             {
                 downWorkingLevelButton.button.interactable = (false);
-                //downWorkingLevelButton.getLabel().setColor(Color.RED);
             }
-            // ------ update model ------
-            //model.onLogicFrame();
 
         }
     }
