@@ -110,7 +110,7 @@ namespace hundun.idleshare.gamelib
             int x;
             y = target.position.y;
             x = target.position.x + 1;
-            return new GridPosition(y, x);
+            return new GridPosition(x, y);
         }
 
 
@@ -120,15 +120,15 @@ namespace hundun.idleshare.gamelib
             int x;
             if (target.position.y % 2 == 0)
             {
-                y = target.position.y - 1;
-                x = target.position.x;
+                y = target.position.y + 1;
+                x = target.position.x + 1;
             }
             else
             {
-                y = target.position.y - 1;
-                x = target.position.x + 1;
+                y = target.position.y + 1;
+                x = target.position.x;
             }
-            return new GridPosition(y, x);
+            return new GridPosition(x, y);
         }
 
 
@@ -138,15 +138,15 @@ namespace hundun.idleshare.gamelib
             int x;
             if (target.position.y % 2 == 0)
             {
-                y = target.position.y + 1;
-                x = target.position.x;
+                y = target.position.y - 1;
+                x = target.position.x + 1;
             }
             else
             {
-                y = target.position.y + 1;
-                x = target.position.x + 1;
+                y = target.position.y - 1;
+                x = target.position.x;
             }
-            return new GridPosition(y, x);
+            return new GridPosition(x, y);
         }
 
         public static GridPosition tileLeftUpNeighbor<T>(ITileNode<T> target, ITileNodeMap<T> map) where T : ITileNode<T>
@@ -155,15 +155,15 @@ namespace hundun.idleshare.gamelib
             int x;
             if (target.position.y % 2 == 0)
             {
-                y = target.position.y - 1;
-                x = target.position.x - 1;
+                y = target.position.y + 1;
+                x = target.position.x;
             }
             else
             {
-                y = target.position.y - 1;
-                x = target.position.x;
+                y = target.position.y + 1;
+                x = target.position.x - 1;
             }
-            return new GridPosition(y, x);
+            return new GridPosition(x, y);
         }
 
         public static GridPosition tileLeftMidNeighbor<T>(ITileNode<T> target, ITileNodeMap<T> map) where T : ITileNode<T>
@@ -172,7 +172,7 @@ namespace hundun.idleshare.gamelib
             int x;
             y = target.position.y;
             x = target.position.x - 1;
-            return new GridPosition(y, x);
+            return new GridPosition(x, y);
         }
 
         public static GridPosition tileLeftDownNeighbor<T>(ITileNode<T> target, ITileNodeMap<T> map) where T : ITileNode<T>
@@ -181,15 +181,15 @@ namespace hundun.idleshare.gamelib
             int x;
             if (target.position.y % 2 == 0)
             {
-                y = target.position.y + 1;
-                x = target.position.x - 1;
+                y = target.position.y - 1;
+                x = target.position.x;
             }
             else
             {
-                y = target.position.y + 1;
-                x = target.position.x;
+                y = target.position.y - 1;
+                x = target.position.x - 1;
             }
-            return new GridPosition(y, x);
+            return new GridPosition(x, y);
         }
 
 

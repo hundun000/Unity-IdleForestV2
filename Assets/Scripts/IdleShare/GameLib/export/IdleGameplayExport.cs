@@ -100,12 +100,12 @@ namespace hundun.idleshare.gamelib
 
         public void destoryConstruction(String id)
         {
-            gameplayContext.constructionManager.destoryInstance(id);
+            gameplayContext.constructionManager.destoryInstanceAndNotify(id);
         }
 
         public void promoteConstruction(String id)
         {
-            gameplayContext.constructionManager.promoteInstance(id);
+            gameplayContext.constructionManager.promoteInstanceAndNotify(id);
         }
 
         public void applyGameplaySaveData(GameplaySaveData gameplaySaveData)
@@ -151,7 +151,7 @@ namespace hundun.idleshare.gamelib
 
         internal void constructionPrototypeOnClick(string prototypeId, GridPosition position)
         {
-            gameplayContext.constructionManager.createInstanceOfPrototype(prototypeId, position);
+            gameplayContext.constructionManager.createInstanceOfPrototypeAndNotify(prototypeId, position);
         }
 
         internal GridPosition getConnectedRandonPosition()

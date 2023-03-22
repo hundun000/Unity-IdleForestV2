@@ -103,14 +103,15 @@ namespace hundun.idleshare.gamelib
                 .ToList();
         }
 
-        internal void promoteInstance(String id)
+        internal void promoteInstanceAndNotify(String id)
         {
             BaseConstruction construction = runningConstructionModelMap[id];
             removeInstance(construction);
-            createInstanceOfPrototype(construction.proficiencyComponent.promoteConstructionPrototypeId, construction.position);
+            createInstanceOfPrototypeAndNotify(construction.proficiencyComponent.promoteConstructionPrototypeId, construction.position);
+            gameContext.eventManager.notifyConstructionCollectionChange();
         }
 
-        internal void destoryInstance(String id)
+        internal void destoryInstanceAndNotify(String id)
         {
             BaseConstruction construction = runningConstructionModelMap[id];
             removeInstance(construction);
@@ -146,7 +147,7 @@ namespace hundun.idleshare.gamelib
                 .ToList()
                 .ForEach(it => TileNodeUtils.updateNeighbors(it, this));
         }
-        internal void createInstanceOfPrototype(string prototypeId, GridPosition position)
+        internal void createInstanceOfPrototypeAndNotify(string prototypeId, GridPosition position)
         {
             BaseConstruction construction = gameContext.constructionFactory.getInstanceOfPrototype(prototypeId, position);
             
