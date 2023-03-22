@@ -12,6 +12,8 @@ namespace Assets.Scripts.DemoGameCore.logic
 {
     internal class DemoSaveHandler : PairChildrenSaveHandler<RootSaveData, SystemSettingSaveData, GameplaySaveData>
     {
+        public const int X_OFFSET = 10;
+        public const int Y_OFFSET = 10;
 
         public DemoSaveHandler(IFrontend frontEnd, ISaveTool<RootSaveData> saveTool) : base(frontEnd, Factory.INSTANCE, saveTool)
         {
@@ -30,7 +32,7 @@ namespace Assets.Scripts.DemoGameCore.logic
                                     .level(1)
                                     .workingLevel(1)
                                     .proficiency(48)
-                                    .position(new GridPosition(0, 0))
+                                    .position(new GridPosition(X_OFFSET, Y_OFFSET))
                                     .build()
                     ));
             gameplaySaveData.ownResoueces = (new Dictionary<String, long>());
