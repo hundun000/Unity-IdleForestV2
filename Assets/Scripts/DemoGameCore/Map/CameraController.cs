@@ -58,22 +58,22 @@ namespace Map
         /// </summary>
         private void KeyBoardControl()
         {
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             {
                 cameraTrans.Translate(Vector3.up * Time.deltaTime * keyMoveSpeed);
             }
 
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
             {
                 cameraTrans.Translate(Vector3.down * Time.deltaTime * keyMoveSpeed);
             }
 
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
                 cameraTrans.Translate(Vector3.left * Time.deltaTime * keyMoveSpeed);
             }
 
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
                 cameraTrans.Translate(Vector3.right * Time.deltaTime * keyMoveSpeed);
             }
@@ -104,7 +104,6 @@ namespace Map
 
             mainCamera.orthographicSize = mainCamera.orthographicSize - Input.GetAxis(_mouseScrollWheel) * sensitivetyMouseWheel;
             mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, cameraSizeMin, cameraSizeMax);
-            Debug.Log(mainCamera.orthographicSize);
         }
     }
 }

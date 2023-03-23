@@ -6,6 +6,8 @@ namespace Map
 {
     public class MapController : MonoBehaviour
     {
+        public bool isTest = false;
+
         public Camera sceneCamera;     // 场景的相机
         public GameObject cellRoot;    // 格位根物体，下有全部格位
         public Cell cellPrefab;        // 格位预制体
@@ -30,10 +32,6 @@ namespace Map
             {
                 Destroy(child.gameObject);
             }
-            foreach (Transform child in cellRoot.transform)
-            {
-                Destroy(child.gameObject);
-            }
 
             // 加载网格
             zeroPos = levelInfo.zeroPos;
@@ -47,6 +45,7 @@ namespace Map
                     mapLayout[i, j].StateChangeTo(levelInfo.mapInfo[i, j]);
                     mapLayout[i, j].location = new Vector2(i, j);
                     mapLayout[i, j].transform.position = CalculatePosition(mapLayout[i, j].location);
+                    if (isTest) mapLayout[i, j].GetComponent<Cell>().testDataPrint(sceneCamera);
                 }
             }
 

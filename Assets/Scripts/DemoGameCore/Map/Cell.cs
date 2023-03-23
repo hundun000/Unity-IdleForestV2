@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Map
 {
@@ -28,7 +29,9 @@ namespace Map
         private int weight;           // 格位权重，根据相邻格位中运行着的工厂数量得出
 
         public SpriteRenderer fieldRenderer;  // 土地贴图渲染器
-        public SpriteRenderer UpperRenderer;  // 工厂/森林渲染器
+        public SpriteRenderer upperRenderer;  // 工厂/森林渲染器
+        public Canvas cellCanvas;             // 每个格位自己的画布
+        public GameObject coordinateText;     // 测试时用的坐标显示器
 
         public void StateChangeTo(CellState stateTo)
         {
@@ -38,28 +41,35 @@ namespace Map
                     // 不属于可用格位，不加载任何内容
                     break;
                 case CellState.IdleField:
-                    //UpperRenderer.sprite = SpriteLoader.field[0];
+                    //upperRenderer.sprite = SpriteLoader.field[0];
                     break;
                 case CellState.lockedAccess:
-                    //UpperRenderer.sprite = SpriteLoader.field[1];
-                    UpperRenderer.color = new Color(0.5f, 0.5f, 0.5f);
+                    //upperRenderer.sprite = SpriteLoader.field[1];
+                    upperRenderer.color = new Color(0.5f, 0.5f, 0.5f);
                     break;
                 case CellState.NoAccess:
-                    //UpperRenderer.sprite = SpriteLoader.field[2];
-                    UpperRenderer.color = new Color(0.75f, 0f, 0f);
+                    //upperRenderer.sprite = SpriteLoader.field[2];
+                    upperRenderer.color = new Color(0.75f, 0f, 0f);
                     break;
                 case CellState.Waters:
-                    //UpperRenderer.sprite = SpriteLoader.field[3];
-                    UpperRenderer.color = new Color(0f, 0.5f, 1f);
+                    //upperRenderer.sprite = SpriteLoader.field[3];
+                    upperRenderer.color = new Color(0f, 0.5f, 1f);
                     break;
                 case CellState.Factory:
-                    UpperRenderer.color = new Color(0f, 0f, 0.5f);
+                    upperRenderer.color = new Color(0f, 0f, 0.5f);
                     break;
                 case CellState.Forest:
-                    UpperRenderer.color = new Color(0f, 0.75f, 0f);
+                    upperRenderer.color = new Color(0f, 0.75f, 0f);
                     break;
             }
         }
         
+        public void testDataPrint(Camera _camera)
+        {
+            cellCanvas.worldCamera = _camera;
+            coordinateText.transform.position = gameObject.transform.position;
+            coordinateText.GetComponent<Text>().text = "(" + location.x + ", " + location.y + ")";
+            coordinateText.SetActive(true);
+        }
     }
 }
