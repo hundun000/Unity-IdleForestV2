@@ -24,7 +24,9 @@ namespace Assets.Scripts.DemoGameCore
             areaControlableConstructionVMPrototypeIds.put(GameArea.AREA_COOKIE, JavaFeatureForGwt.arraysAsList(
                      ConstructionPrototypeId.COOKIE_TREE,
                      ConstructionPrototypeId.SUPPER_COOKIE_TREE,
-                     ConstructionPrototypeId.DESERT
+                     ConstructionPrototypeId.DESERT,
+                     ConstructionPrototypeId.DIRT,
+                     ConstructionPrototypeId.RUBBISH
             ));
             areaControlableConstructionVMPrototypeIds.put(GameArea.AREA_WIN, JavaFeatureForGwt.arraysAsList(
                     ConstructionPrototypeId.WIN_PROVIDER
@@ -45,7 +47,9 @@ namespace Assets.Scripts.DemoGameCore
 
             Dictionary<String, List<String>> areaShowEntityByChangeAmountResourceIds = new Dictionary<String, List<String>>();
             areaShowEntityByChangeAmountResourceIds.put(GameArea.AREA_COOKIE, JavaFeatureForGwt.arraysAsList(
-                ResourceType.COOKIE
+                ResourceType.COIN,
+                ResourceType.WOOD,
+                ResourceType.CARBON
             ));
             this.areaShowEntityByChangeAmountResourceIds = (areaShowEntityByChangeAmountResourceIds);
 

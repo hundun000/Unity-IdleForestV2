@@ -16,7 +16,7 @@ namespace Assets.Scripts.DemoGameCore.logic
             String prototypeId, 
             String id, 
             GridPosition position, 
-            Language language) : base(prototypeId, id, position, language)
+            Language language) : base(prototypeId, id, position, language, null)
         {
 
         }

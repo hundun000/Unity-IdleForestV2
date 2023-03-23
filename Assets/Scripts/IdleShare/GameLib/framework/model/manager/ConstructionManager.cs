@@ -177,7 +177,26 @@ namespace hundun.idleshare.gamelib
             runningConstructionModelMap.put(construction.id, construction);
             TileNodeUtils.updateNeighborsAllStep(construction, this);
         }
-        internal void createInstanceOfPrototype(string prototypeId, GridPosition position)
+
+        internal bool canBuyInstanceOfPrototype(string prototypeId, GridPosition position)
+        {
+            AbstractConstructionPrototype prototype = gameContext.constructionFactory.getPrototype(prototypeId);
+            bool isCostEnough = this.gameContext.storageManager.isEnough(prototype.buyInstanceCostPack.modifiedValues);
+            bool positionAllow = runningConstructionModelMap
+                         .Where(pair => pair.Value.position.Equals(position) || pair.Value.allowPositionOverwrite)
+                         .Count() == 0;
+            return isCostEnough && positionAllow;
+
+        }
+
+        internal void buyInstanceOfPrototype(string prototypeId, GridPosition position)
+        {
+            AbstractConstructionPrototype prototype = gameContext.constructionFactory.getPrototype(prototypeId);
+            this.gameContext.storageManager.modifyAllResourceNum(prototype.buyInstanceCostPack.modifiedValues, false);
+            createInstanceOfPrototype(prototypeId, position);   
+        }
+
+        private void createInstanceOfPrototype(string prototypeId, GridPosition position)
         {
             removeInstanceAt(position);
             

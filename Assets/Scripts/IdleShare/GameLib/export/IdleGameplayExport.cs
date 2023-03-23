@@ -149,9 +149,14 @@ namespace hundun.idleshare.gamelib
             systemSettingSave.language = (this.language);
         }
 
-        internal void constructionPrototypeOnClick(string prototypeId, GridPosition position)
+
+        internal bool canBuyInstanceOfPrototype(string prototypeId, GridPosition position)
         {
-            gameplayContext.constructionManager.createInstanceOfPrototype(prototypeId, position);
+            return gameplayContext.constructionManager.canBuyInstanceOfPrototype(prototypeId, position);
+        }
+        internal void buyInstanceOfPrototype(string prototypeId, GridPosition position)
+        {
+            gameplayContext.constructionManager.buyInstanceOfPrototype(prototypeId, position);
             gameplayContext.eventManager.notifyConstructionCollectionChange();
         }
 

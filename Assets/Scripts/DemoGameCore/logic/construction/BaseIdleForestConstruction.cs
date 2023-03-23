@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.DemoGameCore.logic
 {
-    public abstract class BaseIdleTreeConstruction : BaseConstruction
+    public abstract class BaseIdleForestConstruction : BaseConstruction
     {
 
-        public BaseIdleTreeConstruction(
+        public BaseIdleForestConstruction(
             String prototypeId, 
             String id, 
             GridPosition position, 
@@ -43,6 +43,8 @@ namespace Assets.Scripts.DemoGameCore.logic
             this.proficiencyComponent = (proficiencyComponent);
 
             this.saveData.position = position;
+            this.saveData.level = 1;
+            this.saveData.workingLevel = 1;
         }
 
         override protected void printDebugInfoAfterConstructed()

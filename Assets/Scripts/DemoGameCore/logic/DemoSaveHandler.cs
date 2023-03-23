@@ -42,13 +42,13 @@ namespace Assets.Scripts.DemoGameCore.logic
                 );
             starterConstructionSaveDatas.Add(
                 ConstructionSaveData.builder()
-                                    .prototypeId(ConstructionPrototypeId.DESERT)
+                                    .prototypeId(ConstructionPrototypeId.DIRT)
                                     .position(new GridPosition(-1, 0))
                                     .build()
                 );
             starterConstructionSaveDatas.Add(
                 ConstructionSaveData.builder()
-                                    .prototypeId(ConstructionPrototypeId.DESERT)
+                                    .prototypeId(ConstructionPrototypeId.RUBBISH)
                                     .position(new GridPosition(0, 2))
                                     .build()
                 );
@@ -72,10 +72,11 @@ namespace Assets.Scripts.DemoGameCore.logic
                     it => it
                 );
             gameplaySaveData.ownResoueces = (new Dictionary<String, long>());
-            gameplaySaveData.ownResoueces.Add(ResourceType.COOKIE, 10000);
+            gameplaySaveData.ownResoueces.Add(ResourceType.COIN, 10000);
             gameplaySaveData.unlockedResourceTypes = (new HashSet<String>());
-            gameplaySaveData.unlockedResourceTypes.Add(ResourceType.COOKIE);
             gameplaySaveData.unlockedResourceTypes.Add(ResourceType.COIN);
+            gameplaySaveData.unlockedResourceTypes.Add(ResourceType.WOOD);
+            gameplaySaveData.unlockedResourceTypes.Add(ResourceType.CARBON);
             gameplaySaveData.unlockedAchievementNames = (new HashSet<String>());
 
             var systemSettingSaveData = new SystemSettingSaveData();

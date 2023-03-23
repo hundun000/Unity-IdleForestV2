@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 namespace Assets.Scripts.DemoGameCore.logic
 {
-    public class DesertPrototype : AbstractConstructionPrototype
+    public class DirtPrototype : AbstractConstructionPrototype
     {
 
-        public DesertPrototype(Language language) : base(ConstructionPrototypeId.DESERT, language, null)
+        public DirtPrototype(Language language) : base(ConstructionPrototypeId.DIRT, language, null)
         {
 
         }
@@ -16,9 +16,7 @@ namespace Assets.Scripts.DemoGameCore.logic
         public override BaseConstruction getInstance(GridPosition position)
         {
             String id = prototypeId + "_" + System.Guid.NewGuid().ToString();
-            BaseConstruction construction = new DesertConstruction(prototypeId, id, position, language);
-
-            construction.proficiencyComponent.promoteConstructionPrototypeId = ConstructionPrototypeId.COOKIE_TREE;
+            BaseConstruction construction = new AutoProficiencyConstruction(prototypeId, id, position, language, 0);
 
             return construction;
         }

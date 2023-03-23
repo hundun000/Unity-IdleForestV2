@@ -9,7 +9,7 @@ namespace Assets.Scripts.DemoGameCore.logic
     {
         
 
-        public SuperCookieTreePrototype(Language language) : base(ConstructionPrototypeId.SUPPER_COOKIE_TREE, language)
+        public SuperCookieTreePrototype(Language language) : base(ConstructionPrototypeId.SUPPER_COOKIE_TREE, language, null)
         {
 
         }
@@ -17,22 +17,21 @@ namespace Assets.Scripts.DemoGameCore.logic
         public override BaseConstruction getInstance(GridPosition position)
         {
             String id = prototypeId + "_" + System.Guid.NewGuid().ToString();
-            BaseConstruction construction = new AutoProficiencyConstruction(prototypeId, id, position, language);
+            BaseConstruction construction = new AutoProficiencyConstruction(prototypeId, id, position, language, 1);
             construction.destoryCostPack = DemoBuiltinConstructionsLoader.toPack(new Dictionary<string, int>());
             construction.destoryGainPack = DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COOKIE, 2000
+                    ResourceType.WOOD, 2000
                     ));
 
             construction.outputComponent.outputGainPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COOKIE, 1
+                    ResourceType.WOOD, 1
                     )));
 
             construction.upgradeComponent.upgradeCostPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COOKIE, 25
+                    ResourceType.COIN, 25
                     )));
 
-            construction.saveData.level = 1;
-            construction.saveData.workingLevel = 1;
+            // FIXME for debug
             construction.saveData.proficiency = 47;
             return construction;
         }

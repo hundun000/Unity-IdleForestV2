@@ -71,6 +71,7 @@ namespace hundun.idleshare.gamelib
         public ProficiencyComponent proficiencyComponent;
 
         private Dictionary<TileNeighborDirection, BaseConstruction> _neighbors;
+        internal bool allowPositionOverwrite = false;
 
         public GridPosition position { get => this.saveData.position; set => this.saveData.position = value; }
         public Dictionary<TileNeighborDirection, BaseConstruction> neighbors { get => _neighbors; set => _neighbors = value; }
@@ -87,6 +88,7 @@ namespace hundun.idleshare.gamelib
             if (destoryGainPack != null)
             {
                 this.destoryGainPack.descriptionStart = descriptionPackage.destoryGainDescriptionStart;
+                this.destoryCostPack.descriptionStart = descriptionPackage.destoryCostDescriptionStart;
             }
 
             updateModifiedValues();

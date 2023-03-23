@@ -10,6 +10,7 @@ namespace Assets.Scripts.DemoGameCore.logic
     {
         public const String DIRT = "ENUM_CSTR@DIRT";
         public const String DESERT = "ENUM_CSTR@DESERT";
+        public const String RUBBISH = "ENUM_CSTR@RUBBISH";
         public const String COOKIE_TREE = "ENUM_CSTR@COOKIE_TREE";
         public const String SUPPER_COOKIE_TREE = "ENUM_CSTR@SUPPER_COOKIE_TREE";
         public const String WIN_PROVIDER = "ENUM_CSTR@WIN_PROVIDER";

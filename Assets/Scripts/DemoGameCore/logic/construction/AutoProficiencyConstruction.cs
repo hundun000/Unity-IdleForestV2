@@ -9,19 +9,22 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.DemoGameCore.logic
 {
-    public class AutoProficiencyConstruction : BaseIdleTreeConstruction
+    public class AutoProficiencyConstruction : BaseIdleForestConstruction
     {
         protected int autoOutputProgress = 0;
         protected int autoProficiencyProgress = 0;
         protected const int AUTO_PROFICIENCY_SECOND_MAX = 2; // 2秒生长一次
+        int? constProficiencySpeed;
 
         public AutoProficiencyConstruction(
             String prototypeId, 
             String id, 
             GridPosition position, 
-            Language language) : base(prototypeId, id, position, language)
+            Language language,
+            int? constProficiencySpeed
+            ) : base(prototypeId, id, position, language)
         {
-
+            this.constProficiencySpeed = constProficiencySpeed;
         }
 
 
@@ -47,7 +50,7 @@ namespace Assets.Scripts.DemoGameCore.logic
 
         virtual protected void tryProficiencyOnce()
         {
-            proficiencyComponent.changeProficiency(1);
+            proficiencyComponent.changeProficiency(constProficiencySpeed.Value);
         }
 
         private void tryAutoOutputOnce()
