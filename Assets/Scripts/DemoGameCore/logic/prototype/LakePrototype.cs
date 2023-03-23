@@ -29,7 +29,10 @@ namespace Assets.Scripts.DemoGameCore.logic
         public override BaseConstruction getInstance(GridPosition position)
         {
             String id = prototypeId + "_" + System.Guid.NewGuid().ToString();
-            BaseConstruction construction = new BaseIdleForestConstruction(prototypeId, id, position, language);
+            AutoProficiencyConstruction construction = new AutoProficiencyConstruction(prototypeId, id, position, language);
+            construction.proficiencySpeedCalculator = LAKE_PROFICIENCY_SPEED_CALCULATOR;
+
+            construction.proficiencyComponent.demoteConstructionPrototypeId = ConstructionPrototypeId.DIRT;
 
             return construction;
         }

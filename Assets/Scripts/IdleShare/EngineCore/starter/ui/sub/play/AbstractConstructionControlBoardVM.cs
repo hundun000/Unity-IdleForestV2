@@ -37,6 +37,7 @@ namespace hundun.idleshare.enginecore
         public void onConstructionCollectionChange()
         {
             List<BaseConstruction> newConstructions = parent.game.idleGameplayExport.getAreaShownConstructionsOrEmpty(parent.area);
+            newConstructions = filterConstructions(newConstructions);
 
             int childrenSize = initChild(newConstructions.size());
 
@@ -51,6 +52,14 @@ namespace hundun.idleshare.enginecore
             parent.game.frontend.log("ConstructionInfoBorad", "Constructions change to: " + String.Join(",",
                 newConstructions.Select(construction => construction.name))
             );
+        }
+
+        /**
+         * 子类可添加筛选
+         */
+        virtual protected List<BaseConstruction> filterConstructions(List<BaseConstruction> constructions)
+        {
+            return constructions;
         }
 
 

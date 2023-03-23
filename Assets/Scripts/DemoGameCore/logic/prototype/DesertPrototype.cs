@@ -29,7 +29,7 @@ namespace Assets.Scripts.DemoGameCore.logic
             AutoProficiencyConstruction construction = new AutoProficiencyConstruction(prototypeId, id, position, language);
             construction.proficiencySpeedCalculator = DESERT_PROFICIENCY_SPEED_CALCULATOR;
 
-            construction.proficiencyComponent.promoteConstructionPrototypeId = ConstructionPrototypeId.SMALL_TREE;
+            construction.proficiencyComponent.promoteConstructionPrototypeId = ConstructionPrototypeId.DIRT;
 
             return construction;
         }

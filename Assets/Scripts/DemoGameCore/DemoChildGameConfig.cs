@@ -21,7 +21,7 @@ namespace Assets.Scripts.DemoGameCore
 
 
             Dictionary<String, List<String>> areaControlableConstructionVMPrototypeIds = new Dictionary<String, List<String>>();
-            areaControlableConstructionVMPrototypeIds.put(GameArea.AREA_COOKIE, JavaFeatureForGwt.arraysAsList(
+            areaControlableConstructionVMPrototypeIds.put(GameArea.AREA_SINGLE, JavaFeatureForGwt.arraysAsList(
                      ConstructionPrototypeId.SMALL_TREE,
                      ConstructionPrototypeId.BIG_TREE,
                      ConstructionPrototypeId.SMALL_FACTORY,
@@ -29,16 +29,15 @@ namespace Assets.Scripts.DemoGameCore
                      ConstructionPrototypeId.DESERT,
                      ConstructionPrototypeId.DIRT,
                      ConstructionPrototypeId.RUBBISH,
-                     ConstructionPrototypeId.LAKE
+                     ConstructionPrototypeId.LAKE,
+                     ConstructionPrototypeId.GOVERNMENT
             ));
-            areaControlableConstructionVMPrototypeIds.put(GameArea.AREA_WIN, JavaFeatureForGwt.arraysAsList(
-                    ConstructionPrototypeId.WIN_PROVIDER
-            ));
+
 
             this.areaControlableConstructionVMPrototypeIds = areaControlableConstructionVMPrototypeIds;
 
             Dictionary<String, List<String>> areaControlableConstructionPrototypeVMPrototypeIds = new Dictionary<String, List<String>>();
-            areaControlableConstructionPrototypeVMPrototypeIds.put(GameArea.AREA_COOKIE, JavaFeatureForGwt.arraysAsList(
+            areaControlableConstructionPrototypeVMPrototypeIds.put(GameArea.AREA_SINGLE, JavaFeatureForGwt.arraysAsList(
                      ConstructionPrototypeId.SMALL_TREE,
                      ConstructionPrototypeId.SMALL_FACTORY
             ));
@@ -50,7 +49,7 @@ namespace Assets.Scripts.DemoGameCore
             this.areaShowEntityByOwnAmountResourceIds = (areaShowEntityByOwnAmountResourceIds);
 
             Dictionary<String, List<String>> areaShowEntityByChangeAmountResourceIds = new Dictionary<String, List<String>>();
-            areaShowEntityByChangeAmountResourceIds.put(GameArea.AREA_COOKIE, JavaFeatureForGwt.arraysAsList(
+            areaShowEntityByChangeAmountResourceIds.put(GameArea.AREA_SINGLE, JavaFeatureForGwt.arraysAsList(
                 ResourceType.COIN,
                 ResourceType.WOOD,
                 ResourceType.CARBON

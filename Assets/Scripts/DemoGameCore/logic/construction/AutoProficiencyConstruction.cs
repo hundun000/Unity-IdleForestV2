@@ -23,7 +23,7 @@ namespace Assets.Scripts.DemoGameCore.logic
 
         protected int autoOutputProgress = 0;
         protected int autoProficiencyProgress = 0;
-        protected const int AUTO_PROFICIENCY_SECOND_MAX = 2; // 2秒生长一次
+        protected const int AUTO_PROFICIENCY_SECOND_MAX = 2; // n秒生长一次
 
         public AutoProficiencyConstruction(
             String prototypeId, 

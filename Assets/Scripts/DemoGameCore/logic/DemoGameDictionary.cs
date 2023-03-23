@@ -35,8 +35,8 @@ namespace Assets.Scripts.DemoGameCore.logic
                             return "湖";
                         case ConstructionPrototypeId.RUBBISH:
                             return "垃圾堆";
-                        case ConstructionPrototypeId.WIN_PROVIDER:
-                            return "奖杯购买处";
+                        case ConstructionPrototypeId.GOVERNMENT:
+                            return "政府";
                         default:
                             return "口口";
                     }
@@ -77,8 +77,8 @@ namespace Assets.Scripts.DemoGameCore.logic
                             return "无法建设，可因污染变为土地";
                         case ConstructionPrototypeId.RUBBISH:
                             return "无法建设，可摧毁之变为土地";
-                        case ConstructionPrototypeId.WIN_PROVIDER:
-                            return "购买一个奖杯以赢得胜利";
+                        case ConstructionPrototypeId.GOVERNMENT:
+                            return "每隔一段时间根据碳排放量进行奖惩";
                         default:
                             return "[dic lost]";
                     }

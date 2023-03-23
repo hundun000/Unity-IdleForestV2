@@ -8,11 +8,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.MaterialProperty;
 
 namespace hundun.idleshare.enginecore
 {
     public abstract class BaseIdlePlayScreen<T_GAME, T_SAVE> : 
-        BaseHundunScreen<T_GAME, T_SAVE>, IAchievementUnlockCallback, ISecondaryInfoBoardCallback<BaseConstruction> 
+        BaseHundunScreen<T_GAME, T_SAVE>, 
+        IAchievementUnlockCallback, 
+        INotificationBoardCallerAndCallback, 
+        ISecondaryInfoBoardCallback<BaseConstruction> 
         where T_GAME : BaseIdleGame<T_GAME, T_SAVE>
     {
         // ----- unity adapter ------
@@ -32,6 +36,7 @@ namespace hundun.idleshare.enginecore
         
         // ----- popup ui ------
         protected AchievementMaskBoard<T_GAME, T_SAVE> achievementMaskBoard;
+        protected NotificationMaskBoard<T_GAME, T_SAVE> notificationMaskBoard;
         protected PopupInfoBoardVM<T_GAME, T_SAVE> popupInfoBoardVM;
 
         // ----- not ui ------
@@ -58,6 +63,7 @@ namespace hundun.idleshare.enginecore
 
             this.popupInfoBoardVM = this.PopoupRoot.transform.Find("PopupInfoBoardVM").gameObject.GetComponent<PopupInfoBoardVM<T_GAME, T_SAVE>>();
             this.achievementMaskBoard = this.PopoupRoot.transform.Find("AchievementMaskBoard").gameObject.GetComponent<AchievementMaskBoard<T_GAME, T_SAVE>>();
+            this.notificationMaskBoard = this.PopoupRoot.transform.Find("NotificationMaskBoard").gameObject.GetComponent<NotificationMaskBoard<T_GAME, T_SAVE>>();
         }
 
         virtual public void postMonoBehaviourInitialization(T_GAME game, String startArea,
@@ -158,14 +164,32 @@ namespace hundun.idleshare.enginecore
         {
             game.frontend.log(this.getClass().getSimpleName(), "hideAchievementMaskBoard called");
             achievementMaskBoard.gameObject.SetActive(false);
+            logicFrameHelper.logicFramePause = false;
         }
 
-        public void onAchievementUnlock(AchievementPrototype prototype)
+        public void showAchievementMaskBoard(AchievementPrototype prototype)
         {
-            game.frontend.log(this.getClass().getSimpleName(), "onAchievementUnlock called");
+            game.frontend.log(this.getClass().getSimpleName(), "showAchievementMaskBoard called");
             achievementMaskBoard.gameObject.SetActive(true);
             achievementMaskBoard.setAchievementPrototype(prototype);
+            logicFrameHelper.logicFramePause = true;
         }
+
+        public void hideNotificationMaskBoard()
+        {
+            game.frontend.log(this.getClass().getSimpleName(), "hideNotificationMaskBoard called");
+            notificationMaskBoard.gameObject.SetActive(false);
+            logicFrameHelper.logicFramePause = false;
+        }
+
+        public void showNotificationMaskBoard(String data)
+        {
+            game.frontend.log(this.getClass().getSimpleName(), "showNotificationMaskBoard called");
+            notificationMaskBoard.gameObject.SetActive(true);
+            notificationMaskBoard.setData(data);
+            logicFrameHelper.logicFramePause = true;
+        }
+
     }
 
 }

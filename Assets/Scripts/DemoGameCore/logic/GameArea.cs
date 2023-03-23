@@ -11,9 +11,8 @@ namespace Assets.Scripts.DemoGameCore.logic
 {
     internal class GameArea
     {
-        public const String AREA_COOKIE = "ENUM_AREA@AREA_COOKIE";
-        public const String AREA_WIN = "ENUM_AREA@AREA_WIN";
+        public const String AREA_SINGLE = "ENUM_AREA@AREA_SINGLE";
     
-        public static readonly List<String> values = JavaFeatureExtension.ArraysAsList(AREA_COOKIE, AREA_WIN);
+        public static readonly List<String> values = JavaFeatureExtension.ArraysAsList(AREA_SINGLE);
     }
 }

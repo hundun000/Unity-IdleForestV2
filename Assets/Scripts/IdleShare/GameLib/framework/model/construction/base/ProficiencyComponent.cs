@@ -43,6 +43,15 @@ namespace hundun.idleshare.gamelib
 
 
         }
+
+        public void cleanProficiency()
+        {
+
+            construction.saveData.proficiency = 0;
+            construction.updateModifiedValues();
+            construction.gameContext.frontend.log(construction.name, "cleanProficiency");
+
+        }
     }
 }
 

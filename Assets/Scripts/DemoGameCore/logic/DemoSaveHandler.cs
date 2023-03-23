@@ -71,7 +71,12 @@ namespace Assets.Scripts.DemoGameCore.logic
                 it.position.x += X_OFFSET;
                 it.position.y += Y_OFFSET;
             });
-
+            starterConstructionSaveDatas.Add(
+                ConstructionSaveData.builder()
+                                    .prototypeId(ConstructionPrototypeId.GOVERNMENT)
+                                    .position(new GridPosition(-1, -1))
+                                    .build()
+                );
 
 
             var gameplaySaveData = new GameplaySaveData();

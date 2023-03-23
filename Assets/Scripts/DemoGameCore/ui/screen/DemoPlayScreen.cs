@@ -22,6 +22,8 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
         public const String SCENE_NAME = "PlayScene";
 
         DemoGameEntityFactory gameEntityFactory;
+        protected SpecialConstructionControlBoardVM specialConstructionControlBoardVM;
+
         Transform drawContaioner;
 
         override protected void Awake()
@@ -30,6 +32,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
             this.gameEntityFactory = this.UiRoot.transform.Find("cell_drawContaioner/GameEntityFactory").GetComponent<DemoGameEntityFactory>();
             this.drawContaioner = this.UiRoot.transform.Find("cell_drawContaioner/root").transform;
+            this.specialConstructionControlBoardVM = this.UiRoot.transform.Find("cell_4/SpecialConstructionControlBoardVM").GetComponent<SpecialConstructionControlBoardVM>();
         }
 
 
@@ -41,7 +44,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
         override public void postMonoBehaviourInitialization(DemoIdleGame game)
         {
-            base.postMonoBehaviourInitialization(game, GameArea.AREA_COOKIE, DemoIdleGame.LOGIC_FRAME_PER_SECOND);
+            base.postMonoBehaviourInitialization(game, GameArea.AREA_SINGLE, DemoIdleGame.LOGIC_FRAME_PER_SECOND);
         }
 
         protected override void lazyInitBackUiAndPopupUiContent()
@@ -57,7 +60,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
             popupInfoBoardVM.postPrefabInitialization(this);
             achievementMaskBoard.postPrefabInitialization(this);
-
+            notificationMaskBoard.postPrefabInitialization(this);
         }
 
 
@@ -68,6 +71,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
             constructionControlBoardVM.postPrefabInitialization(this);
             constructionPrototypeControlBoardVM.postPrefabInitialization(this);
+            specialConstructionControlBoardVM.postPrefabInitialization(this);
             gameAreaControlBoardVM.postPrefabInitialization(this, GameArea.values);
         }
 
@@ -77,6 +81,11 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
             gameEntityFactory.postPrefabInitialization(this, drawContaioner);
             gameImageDrawer.lazyInit(this, gameEntityFactory);
+
+            logicFrameListeners.Add(specialConstructionControlBoardVM);
+            gameAreaChangeListeners.Add(specialConstructionControlBoardVM);
+            this.game.idleGameplayExport.eventManagerRegisterListener(specialConstructionControlBoardVM);
+
         }
     }
 }
