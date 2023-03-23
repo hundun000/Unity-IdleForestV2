@@ -22,11 +22,14 @@ namespace Assets.Scripts.DemoGameCore
 
             Dictionary<String, List<String>> areaControlableConstructionVMPrototypeIds = new Dictionary<String, List<String>>();
             areaControlableConstructionVMPrototypeIds.put(GameArea.AREA_COOKIE, JavaFeatureForGwt.arraysAsList(
-                     ConstructionPrototypeId.COOKIE_TREE,
-                     ConstructionPrototypeId.SUPPER_COOKIE_TREE,
+                     ConstructionPrototypeId.SMALL_TREE,
+                     ConstructionPrototypeId.BIG_TREE,
+                     ConstructionPrototypeId.SMALL_FACTORY,
+                     ConstructionPrototypeId.BIG_FACTORY,
                      ConstructionPrototypeId.DESERT,
                      ConstructionPrototypeId.DIRT,
-                     ConstructionPrototypeId.RUBBISH
+                     ConstructionPrototypeId.RUBBISH,
+                     ConstructionPrototypeId.LAKE
             ));
             areaControlableConstructionVMPrototypeIds.put(GameArea.AREA_WIN, JavaFeatureForGwt.arraysAsList(
                     ConstructionPrototypeId.WIN_PROVIDER
@@ -36,7 +39,8 @@ namespace Assets.Scripts.DemoGameCore
 
             Dictionary<String, List<String>> areaControlableConstructionPrototypeVMPrototypeIds = new Dictionary<String, List<String>>();
             areaControlableConstructionPrototypeVMPrototypeIds.put(GameArea.AREA_COOKIE, JavaFeatureForGwt.arraysAsList(
-                     ConstructionPrototypeId.COOKIE_TREE
+                     ConstructionPrototypeId.SMALL_TREE,
+                     ConstructionPrototypeId.SMALL_FACTORY
             ));
             this.areaControlableConstructionPrototypeVMPrototypeIds = areaControlableConstructionPrototypeVMPrototypeIds;
 

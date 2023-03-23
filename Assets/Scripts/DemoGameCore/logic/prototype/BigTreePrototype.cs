@@ -5,11 +5,14 @@ using System.Collections.Generic;
 
 namespace Assets.Scripts.DemoGameCore.logic
 {
-    public class SuperCookieTreePrototype : AbstractConstructionPrototype
+    public class BigTreePrototype : AbstractConstructionPrototype
     {
-        
+        protected static ProficiencySpeedCalculator BIG_TREE_PROFICIENCY_SPEED_CALCULATOR = (thiz) =>
+        {
+            return 1;
+        };
 
-        public SuperCookieTreePrototype(Language language) : base(ConstructionPrototypeId.SUPPER_COOKIE_TREE, language, null)
+        public BigTreePrototype(Language language) : base(ConstructionPrototypeId.BIG_TREE, language, null)
         {
 
         }
@@ -17,7 +20,8 @@ namespace Assets.Scripts.DemoGameCore.logic
         public override BaseConstruction getInstance(GridPosition position)
         {
             String id = prototypeId + "_" + System.Guid.NewGuid().ToString();
-            BaseConstruction construction = new AutoProficiencyConstruction(prototypeId, id, position, language, 1);
+            AutoProficiencyConstruction construction = new AutoProficiencyConstruction(prototypeId, id, position, language);
+            construction.proficiencySpeedCalculator = BIG_TREE_PROFICIENCY_SPEED_CALCULATOR;
             construction.destoryCostPack = DemoBuiltinConstructionsLoader.toPack(new Dictionary<string, int>());
             construction.destoryGainPack = DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
                     ResourceType.WOOD, 2000

@@ -16,7 +16,7 @@ namespace Assets.Scripts.DemoGameCore.logic
         public override BaseConstruction getInstance(GridPosition position)
         {
             String id = prototypeId + "_" + System.Guid.NewGuid().ToString();
-            BaseConstruction construction = new AutoProficiencyConstruction(prototypeId, id, position, language, 0);
+            BaseConstruction construction = new BaseIdleForestConstruction(prototypeId, id, position, language);
 
             construction.destoryCostPack = DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
                     ResourceType.COIN, 1000

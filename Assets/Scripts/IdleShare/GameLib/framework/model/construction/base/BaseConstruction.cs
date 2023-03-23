@@ -124,6 +124,13 @@ namespace hundun.idleshare.gamelib
 
             if (destoryGainPack != null)
             {
+                destoryCostPack.modifiedValues = destoryCostPack.baseValues;
+                destoryCostPack.modifiedValuesDescription = (String.Join(", ",
+                        destoryCostPack.modifiedValues
+                                .Select(pair => pair.type + "x" + pair.amount)
+                                .ToList())
+                                + "; "
+                );
                 destoryGainPack.modifiedValues = destoryGainPack.baseValues;
                 destoryGainPack.modifiedValuesDescription = (String.Join(", ",
                         destoryGainPack.modifiedValues
@@ -132,6 +139,7 @@ namespace hundun.idleshare.gamelib
                                 + "; "
                 );
             }
+
         }
 
        
@@ -162,7 +170,7 @@ namespace hundun.idleshare.gamelib
             }
         }
 
-            protected Boolean canUpgrade()
+        protected Boolean canUpgrade()
         {
             return upgradeComponent.canUpgrade();
         }
@@ -179,12 +187,9 @@ namespace hundun.idleshare.gamelib
             updateModifiedValues();
         }
 
-        /**
-        * Nullable
-        */
         public Boolean canDestory() 
         {
-            return destoryCostPack != null;
+            return destoryCostPack != null && gameContext.storageManager.isEnough(destoryCostPack.modifiedValues);
         }
 
         public String getSaveDataKey()

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.DemoGameCore.logic
 {
-    public abstract class BaseIdleForestConstruction : BaseConstruction
+    public class BaseIdleForestConstruction : BaseConstruction
     {
 
         public BaseIdleForestConstruction(
@@ -79,6 +79,11 @@ namespace Assets.Scripts.DemoGameCore.logic
         override public long calculateModifiedOutputCost(long baseValue, int level, int proficiency)
         {
             return (long)(baseValue * level * (proficiency / 50.0));
+        }
+
+        public override void onLogicFrame()
+        {
+            // base do nothing
         }
     }
 }

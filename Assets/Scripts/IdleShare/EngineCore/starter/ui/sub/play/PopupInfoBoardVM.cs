@@ -72,6 +72,7 @@ namespace hundun.idleshare.enginecore
                 buildOnePack(model.upgradeComponent.transferCostPack);
             }
 
+            buildOnePack(model.destoryCostPack);
             buildOnePack(model.destoryGainPack);
 
             

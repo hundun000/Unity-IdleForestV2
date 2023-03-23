@@ -18,14 +18,23 @@ namespace Assets.Scripts.DemoGameCore.logic
                 case Language.CN:
                     switch (prototypeId)
                     {
-                        case ConstructionPrototypeId.DIRT:
-                            return "土";
+                        
+                        case ConstructionPrototypeId.SMALL_TREE:
+                            return "小树";
+                        case ConstructionPrototypeId.BIG_TREE:
+                            return "大树";
+                        case ConstructionPrototypeId.SMALL_FACTORY:
+                            return "小工厂";
+                        case ConstructionPrototypeId.BIG_FACTORY:
+                            return "大工厂";
                         case ConstructionPrototypeId.DESERT:
                             return "沙漠";
-                        case ConstructionPrototypeId.COOKIE_TREE:
-                            return "饼干树";
-                        case ConstructionPrototypeId.SUPPER_COOKIE_TREE:
-                            return "超级饼干树";
+                        case ConstructionPrototypeId.DIRT:
+                            return "土";
+                        case ConstructionPrototypeId.LAKE:
+                            return "湖";
+                        case ConstructionPrototypeId.RUBBISH:
+                            return "垃圾堆";
                         case ConstructionPrototypeId.WIN_PROVIDER:
                             return "奖杯购买处";
                         default:
@@ -51,13 +60,23 @@ namespace Assets.Scripts.DemoGameCore.logic
                 case Language.CN:
                     switch (prototypeId)
                     {
+                        
+                        case ConstructionPrototypeId.SMALL_TREE:
+                            return "自动获得少量木头";
+                        case ConstructionPrototypeId.BIG_TREE:
+                            return "自动获得大量木头";
+                        case ConstructionPrototypeId.SMALL_FACTORY:
+                            return "自动获得少量金钱";
+                        case ConstructionPrototypeId.BIG_FACTORY:
+                            return "自动获得大量金钱";
                         case ConstructionPrototypeId.DIRT:
                             return "可以建设";
                         case ConstructionPrototypeId.DESERT:
-                            return "无法建设";
-                        case ConstructionPrototypeId.COOKIE_TREE:
-                        case ConstructionPrototypeId.SUPPER_COOKIE_TREE:
-                            return "自动获得饼干，随时间成长";
+                            return "无法建设，可因绿化变为土地";
+                        case ConstructionPrototypeId.LAKE:
+                            return "无法建设，可因污染变为土地";
+                        case ConstructionPrototypeId.RUBBISH:
+                            return "无法建设，可摧毁之变为土地";
                         case ConstructionPrototypeId.WIN_PROVIDER:
                             return "购买一个奖杯以赢得胜利";
                         default:

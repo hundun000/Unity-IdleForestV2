@@ -26,13 +26,16 @@ namespace Assets.Scripts.DemoGameCore.logic
 
         public Dictionary<String, AbstractConstructionPrototype> getProviderMap(Language language)
         {
-            return JavaFeatureForGwt.mapOf(
-                ConstructionPrototypeId.COOKIE_TREE, (AbstractConstructionPrototype)new CookieTreePrototype(language),
-                ConstructionPrototypeId.SUPPER_COOKIE_TREE, (AbstractConstructionPrototype)new SuperCookieTreePrototype(language),
-                ConstructionPrototypeId.DESERT, (AbstractConstructionPrototype)new DesertPrototype(language),
-                ConstructionPrototypeId.RUBBISH, (AbstractConstructionPrototype)new RubbishPrototype(language),
-                ConstructionPrototypeId.DIRT, (AbstractConstructionPrototype)new DirtPrototype(language)
-                );
+            Dictionary < String, AbstractConstructionPrototype > map = new Dictionary<string, AbstractConstructionPrototype>();
+            map.Add(ConstructionPrototypeId.SMALL_TREE, (AbstractConstructionPrototype)new SmallTreePrototype(language));
+            map.Add(ConstructionPrototypeId.BIG_TREE, (AbstractConstructionPrototype)new BigTreePrototype(language));
+            map.Add(ConstructionPrototypeId.SMALL_FACTORY, (AbstractConstructionPrototype)new SmallFactoryPrototype(language));
+            map.Add(ConstructionPrototypeId.BIG_FACTORY, (AbstractConstructionPrototype)new BigFactoryPrototype(language));
+            map.Add(ConstructionPrototypeId.DESERT, (AbstractConstructionPrototype)new DesertPrototype(language));
+            map.Add(ConstructionPrototypeId.DIRT, (AbstractConstructionPrototype)new DirtPrototype(language));
+            map.Add(ConstructionPrototypeId.LAKE, (AbstractConstructionPrototype)new LakePrototype(language));
+            map.Add(ConstructionPrototypeId.RUBBISH, (AbstractConstructionPrototype)new RubbishPrototype(language));
+            return map;
         }
 
         public static ResourcePack toPack(Dictionary<String, int> map)

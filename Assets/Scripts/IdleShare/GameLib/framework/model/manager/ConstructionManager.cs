@@ -66,6 +66,11 @@ namespace hundun.idleshare.gamelib
         }
         public void onSubLogicFrame()
         {
+
+            // 迭代期间不应修改runningConstructionModelMap
+            List<BaseConstruction> promoteList = new List<BaseConstruction>();
+            List<BaseConstruction> demoteList = new List<BaseConstruction>();
+
             foreach (KeyValuePair<String, BaseConstruction> entry in runningConstructionModelMap)
             {
                 var construction = entry.Value;
@@ -73,13 +78,16 @@ namespace hundun.idleshare.gamelib
 
                 if (construction.proficiencyComponent.canPromote())
                 {
-                    promoteInstanceAndNotify(construction.id);
+                    promoteList.Add(construction);
                 } 
                 else if (construction.proficiencyComponent.canDemote())
                 {
-                    // TODO
+                    demoteList.Add(construction);
                 }
             }
+
+            promoteList.ForEach(it => promoteInstanceAndNotify(it.id));
+            demoteList.ForEach(it => demoteInstanceAndNotify(it.id));
         }
 
         public List<BaseConstruction> getAreaShownConstructionsOrEmpty(String gameArea)
@@ -127,6 +135,14 @@ namespace hundun.idleshare.gamelib
             gameContext.eventManager.notifyConstructionCollectionChange();
         }
 
+        internal void demoteInstanceAndNotify(String id)
+        {
+            BaseConstruction construction = runningConstructionModelMap[id];
+            removeInstance(construction);
+            createInstanceOfPrototype(construction.proficiencyComponent.demoteConstructionPrototypeId, construction.position);
+            gameContext.eventManager.notifyConstructionCollectionChange();
+        }
+
         internal void transferInstanceAndNotify(String id)
         {
             BaseConstruction construction = runningConstructionModelMap[id];
@@ -139,6 +155,10 @@ namespace hundun.idleshare.gamelib
         {
             BaseConstruction construction = runningConstructionModelMap[id];
             removeInstance(construction);
+            if (construction.destoryCostPack != null)
+            {
+                gameContext.storageManager.modifyAllResourceNum(construction.destoryCostPack.modifiedValues, false);
+            }
             if (construction.destoryGainPack != null)
             {
                 gameContext.storageManager.modifyAllResourceNum(construction.destoryGainPack.modifiedValues, true);

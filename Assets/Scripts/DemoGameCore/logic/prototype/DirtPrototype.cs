@@ -10,13 +10,15 @@ namespace Assets.Scripts.DemoGameCore.logic
 
         public DirtPrototype(Language language) : base(ConstructionPrototypeId.DIRT, language, null)
         {
-
+           
         }
 
         public override BaseConstruction getInstance(GridPosition position)
         {
             String id = prototypeId + "_" + System.Guid.NewGuid().ToString();
-            BaseConstruction construction = new AutoProficiencyConstruction(prototypeId, id, position, language, 0);
+            BaseConstruction construction = new BaseIdleForestConstruction(prototypeId, id, position, language);
+
+            construction.allowPositionOverwrite = true;
 
             return construction;
         }

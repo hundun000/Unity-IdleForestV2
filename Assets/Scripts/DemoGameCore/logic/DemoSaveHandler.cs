@@ -26,7 +26,7 @@ namespace Assets.Scripts.DemoGameCore.logic
             var starterConstructionSaveDatas = new List<ConstructionSaveData>();
             starterConstructionSaveDatas.Add(
                 ConstructionSaveData.builder()
-                                    .prototypeId(ConstructionPrototypeId.COOKIE_TREE)
+                                    .prototypeId(ConstructionPrototypeId.SMALL_TREE)
                                     .level(1)
                                     .workingLevel(1)
                                     .proficiency(48)
@@ -35,27 +35,36 @@ namespace Assets.Scripts.DemoGameCore.logic
                 );
             starterConstructionSaveDatas.Add(
                 ConstructionSaveData.builder()
-                                    .prototypeId(ConstructionPrototypeId.DESERT)
-                                    .proficiency(97)
+                                    .prototypeId(ConstructionPrototypeId.SMALL_FACTORY)
+                                    .level(1)
+                                    .workingLevel(1)
+                                    .proficiency(48)
                                     .position(new GridPosition(0, 1))
                                     .build()
                 );
             starterConstructionSaveDatas.Add(
                 ConstructionSaveData.builder()
-                                    .prototypeId(ConstructionPrototypeId.DIRT)
-                                    .position(new GridPosition(-1, 0))
-                                    .build()
-                );
-            starterConstructionSaveDatas.Add(
-                ConstructionSaveData.builder()
-                                    .prototypeId(ConstructionPrototypeId.RUBBISH)
+                                    .prototypeId(ConstructionPrototypeId.DESERT)
+                                    .proficiency(97)
                                     .position(new GridPosition(0, 2))
                                     .build()
                 );
             starterConstructionSaveDatas.Add(
                 ConstructionSaveData.builder()
-                                    .prototypeId(ConstructionPrototypeId.DESERT)
+                                    .prototypeId(ConstructionPrototypeId.DIRT)
                                     .position(new GridPosition(0, 3))
+                                    .build()
+                );
+            starterConstructionSaveDatas.Add(
+                ConstructionSaveData.builder()
+                                    .prototypeId(ConstructionPrototypeId.RUBBISH)
+                                    .position(new GridPosition(0, 4))
+                                    .build()
+                );
+            starterConstructionSaveDatas.Add(
+                ConstructionSaveData.builder()
+                                    .prototypeId(ConstructionPrototypeId.LAKE)
+                                    .position(new GridPosition(0, 5))
                                     .build()
                 );
             starterConstructionSaveDatas.ForEach(it => { 
