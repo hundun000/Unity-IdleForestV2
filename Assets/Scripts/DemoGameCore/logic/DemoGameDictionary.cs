@@ -18,8 +18,14 @@ namespace Assets.Scripts.DemoGameCore.logic
                 case Language.CN:
                     switch (prototypeId)
                     {
-                        case ConstructionPrototypeId.GROWING_COOKIE_AUTO_PROVIDER:
+                        case ConstructionPrototypeId.DIRT:
+                            return "土";
+                        case ConstructionPrototypeId.DESERT:
+                            return "沙漠";
+                        case ConstructionPrototypeId.COOKIE_TREE:
                             return "饼干树";
+                        case ConstructionPrototypeId.SUPPER_COOKIE_TREE:
+                            return "超级饼干树";
                         case ConstructionPrototypeId.WIN_PROVIDER:
                             return "奖杯购买处";
                         default:
@@ -45,7 +51,12 @@ namespace Assets.Scripts.DemoGameCore.logic
                 case Language.CN:
                     switch (prototypeId)
                     {
-                        case ConstructionPrototypeId.GROWING_COOKIE_AUTO_PROVIDER:
+                        case ConstructionPrototypeId.DIRT:
+                            return "可以建设";
+                        case ConstructionPrototypeId.DESERT:
+                            return "无法建设";
+                        case ConstructionPrototypeId.COOKIE_TREE:
+                        case ConstructionPrototypeId.SUPPER_COOKIE_TREE:
                             return "自动获得饼干，随时间成长";
                         case ConstructionPrototypeId.WIN_PROVIDER:
                             return "购买一个奖杯以赢得胜利";

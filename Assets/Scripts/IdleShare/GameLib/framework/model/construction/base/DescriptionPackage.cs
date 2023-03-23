@@ -15,14 +15,48 @@ namespace hundun.idleshare.gamelib
         public String upgradeCostDescriptionStart;
         public String upgradeMaxLevelDescription = "(max level)";
         public String buttonDescroption;
+        public String destoryGainDescriptionStart;
+        public String destoryCostDescriptionStart;
         public ILevelDescroptionProvider levelDescroptionProvider;
         public IProficiencyDescroptionProvider proficiencyDescroptionProvider;
+        public String destoryButtonDescroption = "DESTORY";
 
-        public DescriptionPackage(string outputCostDescriptionStart, 
+        /**
+         * for idleShare
+         */
+        public DescriptionPackage(
+            string outputCostDescriptionStart,
+            string outputGainDescriptionStart,
+            string upgradeCostDescriptionStart,
+            string upgradeMaxLevelDescription,
+            string buttonDescroption,
+            ILevelDescroptionProvider levelDescroptionProvider,
+            IProficiencyDescroptionProvider proficiencyDescroptionProvider
+            ) : this(
+                outputCostDescriptionStart,
+                outputGainDescriptionStart,
+                upgradeCostDescriptionStart,
+                upgradeMaxLevelDescription,
+                buttonDescroption,
+                null,
+                null,
+                levelDescroptionProvider,
+                proficiencyDescroptionProvider
+                )
+        {
+        }
+
+        /**
+         * for idleForest
+         */
+        public DescriptionPackage(
+            string outputCostDescriptionStart, 
             string outputGainDescriptionStart, 
             string upgradeCostDescriptionStart, 
             string upgradeMaxLevelDescription, 
-            string buttonDescroption, 
+            string buttonDescroption,
+            String destoryGainDescriptionStart,
+            String destoryCostDescriptionStart,
             ILevelDescroptionProvider levelDescroptionProvider,
             IProficiencyDescroptionProvider proficiencyDescroptionProvider
             )
@@ -32,6 +66,8 @@ namespace hundun.idleshare.gamelib
             this.upgradeCostDescriptionStart = upgradeCostDescriptionStart;
             this.upgradeMaxLevelDescription = upgradeMaxLevelDescription;
             this.buttonDescroption = buttonDescroption;
+            this.destoryGainDescriptionStart = destoryGainDescriptionStart;
+            this.destoryCostDescriptionStart = destoryCostDescriptionStart;
             this.levelDescroptionProvider = levelDescroptionProvider;
             this.proficiencyDescroptionProvider = proficiencyDescroptionProvider;
         }

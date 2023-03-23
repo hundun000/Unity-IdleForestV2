@@ -56,12 +56,17 @@ namespace Assets.Scripts.DemoGameCore.logic
 
                 defaultIcon = regions[0][0];
                 resourceIconMap.Add(ResourceType.COIN, regions[0][1]);
-                resourceIconMap.Add(ResourceType.COOKIE, regions[0][2]);
+                //resourceIconMap.Add(ResourceType.COOKIE, regions[0][2]);
+                resourceIconMap.Add(ResourceType.WOOD, regions[0][3]);
+                resourceIconMap.Add(ResourceType.CARBON, regions[0][4]);
             }
             {
                 var texture = getTexture2D("resourceEntities.png");
                 Sprite[][] regions = split(texture, 32, 32);
-                resourceEntityMap.Add(ResourceType.COOKIE, regions[0][1]);
+                resourceEntityMap.Add(ResourceType.COIN, regions[0][1]);
+                //resourceEntityMap.Add(ResourceType.COOKIE, regions[0][2]);
+                resourceEntityMap.Add(ResourceType.WOOD, regions[0][3]);
+                resourceEntityMap.Add(ResourceType.CARBON, regions[0][4]);
             }
             {
                 var texture = getTexture2D("constructionEntities.png");

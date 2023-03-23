@@ -15,7 +15,7 @@ namespace Assets.Scripts.DemoGameCore
     {
         public const int LOGIC_FRAME_PER_SECOND = 30;
 
-        public DemoIdleGame() : base(640, 480)
+        public DemoIdleGame() : base(1024, 768)
         {
             //this.textFormatTool = new TextFormatTool();
             this.saveHandler = new DemoSaveHandler(frontend, new UnitySaveTool<RootSaveData>());

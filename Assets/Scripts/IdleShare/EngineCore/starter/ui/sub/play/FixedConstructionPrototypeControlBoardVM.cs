@@ -24,10 +24,10 @@ namespace hundun.idleshare.enginecore
             this.nodePrefab = this.transform.Find("_templates/nodePrefab").GetComponent<ConstructionPrototypeControlNodeVM<T_GAME, T_SAVE>>();
         }
 
-        override public void postPrefabInitialization(BaseIdlePlayScreen<T_GAME, T_SAVE> parent, AbstractConstructionControlBoardVM<T_GAME, T_SAVE> brother)
+        override public void postPrefabInitialization(BaseIdlePlayScreen<T_GAME, T_SAVE> parent)
         {
 
-            base.postPrefabInitialization(parent, brother);
+            base.postPrefabInitialization(parent);
             this.background.sprite = (parent.game.textureManager.defaultBoardNinePatchTexture);
 
         }
@@ -42,7 +42,7 @@ namespace hundun.idleshare.enginecore
             for (int i = 0; i < childrenSize; i++)
             {
                 ConstructionPrototypeControlNodeVM<T_GAME, T_SAVE> constructionView = nodesRoot.transform.AsTableAdd<ConstructionPrototypeControlNodeVM<T_GAME, T_SAVE>>(nodePrefab.gameObject);
-                constructionView.postPrefabInitialization(parent, i, brother);
+                constructionView.postPrefabInitialization(parent, i);
                 constructionControlNodes.Add(constructionView);
             }
 

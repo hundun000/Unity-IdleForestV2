@@ -11,7 +11,11 @@ using static UnityEditor.Progress;
 
 namespace hundun.idleshare.enginecore
 {
-    public abstract class AbstractConstructionControlBoardVM<T_GAME, T_SAVE> : MonoBehaviour, ILogicFrameListener, IGameAreaChangeListener where T_GAME : BaseIdleGame<T_GAME, T_SAVE>
+    public abstract class AbstractConstructionControlBoardVM<T_GAME, T_SAVE> : MonoBehaviour, 
+        ILogicFrameListener, 
+        IGameAreaChangeListener, 
+        IConstructionCollectionListener 
+        where T_GAME : BaseIdleGame<T_GAME, T_SAVE>
     {
         protected BaseIdlePlayScreen<T_GAME, T_SAVE> parent;
         /**
@@ -30,9 +34,9 @@ namespace hundun.idleshare.enginecore
             constructionControlNodes.ForEach(item => item.update());
         }
 
-        public void onConstructionInstancesChange(String current)
+        public void onConstructionCollectionChange()
         {
-            List<BaseConstruction> newConstructions = parent.game.idleGameplayExport.getAreaShownConstructionsOrEmpty(current);
+            List<BaseConstruction> newConstructions = parent.game.idleGameplayExport.getAreaShownConstructionsOrEmpty(parent.area);
 
             int childrenSize = initChild(newConstructions.size());
 
@@ -52,7 +56,7 @@ namespace hundun.idleshare.enginecore
 
         public void onGameAreaChange(String last, String current)
         {
-            onConstructionInstancesChange(current);
+            onConstructionCollectionChange();
         }
 
         /**

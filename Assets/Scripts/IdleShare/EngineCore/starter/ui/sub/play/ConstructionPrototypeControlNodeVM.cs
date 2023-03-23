@@ -14,12 +14,13 @@ namespace hundun.idleshare.enginecore
     public class ConstructionPrototypeControlNodeVM<T_GAME, T_SAVE> : MonoBehaviour where T_GAME : BaseIdleGame<T_GAME, T_SAVE>
     {
         BaseIdlePlayScreen<T_GAME, T_SAVE> parent;
-        AbstractConstructionControlBoardVM<T_GAME, T_SAVE> constructionControlBoardVM;
         AbstractConstructionPrototype model;
 
         Text constructionNameLabel;
-
+        Text costLabel;
         TextButton clickEffectButton;
+        InputField xInputField;
+        InputField yInputField;
         Image background;
 
 
@@ -30,32 +31,48 @@ namespace hundun.idleshare.enginecore
         {
             this.background = this.transform.Find("background").GetComponent<Image>();
             this.constructionNameLabel = this.transform.Find("constructionNameLabel").GetComponent<Text>();
+            this.costLabel = this.transform.Find("costLabel").GetComponent<Text>();
             this.clickEffectButton = this.transform.Find("clickEffectButton").GetComponent<TextButton>();
+            this.xInputField = this.transform.Find("xInputField").GetComponent<InputField>();
+            this.yInputField = this.transform.Find("yInputField").GetComponent<InputField>();
         }
 
-        public void postPrefabInitialization(BaseIdlePlayScreen<T_GAME, T_SAVE> parent, int index, AbstractConstructionControlBoardVM<T_GAME, T_SAVE> constructionControlBoardVM)
+        public void postPrefabInitialization(BaseIdlePlayScreen<T_GAME, T_SAVE> parent, int index)
         {
 
             this.parent = parent;
-            this.constructionControlBoardVM = constructionControlBoardVM;
 
             clickEffectButton.button.onClick.AddListener(() => {
             
                 parent.game.frontend.log(this.getClass().getSimpleName(), "clicked");
                 // FIXME 改为拖拽目的地坐标
-                GridPosition position = parent.game.idleGameplayExport.getConnectedRandonPosition();
-                parent.game.idleGameplayExport.constructionPrototypeOnClick(model.prototypeId, position);
-                constructionControlBoardVM.onConstructionInstancesChange(parent.area);
+                int x = int.Parse(xInputField.text);
+                int y = int.Parse(yInputField.text);
+                //GridPosition position = parent.game.idleGameplayExport.getConnectedRandonPosition();
+                GridPosition position = new GridPosition(x, y);
+                parent.game.idleGameplayExport.buyInstanceOfPrototype(model.prototypeId, position);
             });
-
-
-
-
 
             background.sprite = parent.game.textureManager.defaultBoardNinePatchTexture;
         }
 
+        private void updateCanCreateInstance()
+        {
+            bool enable;
+            try
+            {
+                int x = int.Parse(xInputField.text);
+                int y = int.Parse(yInputField.text);
+                GridPosition position = new GridPosition(x, y);
+                enable = parent.game.idleGameplayExport.canBuyInstanceOfPrototype(model.prototypeId, position);
+            }
+            catch
+            {
+                enable = false;
+            }
 
+            clickEffectButton.button.interactable = enable;
+        }
 
         public void setModel(AbstractConstructionPrototype constructionExportData)
         {
@@ -81,7 +98,7 @@ namespace hundun.idleshare.enginecore
             }
             // ------ update text ------
             constructionNameLabel.text = parent.game.idleGameplayExport.gameDictionary.constructionPrototypeIdToShowName(parent.game.idleGameplayExport.language, model.prototypeId);
-            clickEffectButton.label.text = "TODO";
+            costLabel.text = model.buyInstanceCostPack.modifiedValuesDescription;
 
             // ------ update clickable-state ------
             Boolean canClickEffect = true;
@@ -99,7 +116,7 @@ namespace hundun.idleshare.enginecore
                 //clickEffectButton.SetColor(Color.red);
             }
 
-
+            updateCanCreateInstance();
         }
     }
 }

@@ -59,7 +59,9 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         {
             switch (resourceId)
             {
-                case ResourceType.COOKIE:
+                case ResourceType.COIN:
+                case ResourceType.WOOD:
+                case ResourceType.CARBON:
                     return this.failingResourcEntity(resourceId, EXPECTED_DRAW_MIN_X, EXPECTED_DRAW_MAX_X, EXPECTED_DRAW_MAX_Y, EXPECTED_DRAW_MIN_Y, FLY_UNION_SPEED, FLY_UNION_SPEED * 0.2, HIDEN_FRAME_RANGE);
                 //return this.randomMoveResourcEntity(resourceId, layoutConst.EXPECTED_DRAW_MIN_X, layoutConst.EXPECTED_DRAW_MAX_X, layoutConst.EXPECTED_DRAW_MIN_Y, layoutConst.EXPECTED_DRAW_MAX_Y, FLY_UNION_SPEED);
                 default:

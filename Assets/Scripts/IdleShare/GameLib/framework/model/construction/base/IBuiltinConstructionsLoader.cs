@@ -13,11 +13,25 @@ namespace hundun.idleshare.gamelib
 
         public readonly String prototypeId;
         public readonly Language language;
+        public ResourcePack buyInstanceCostPack;
 
-        protected AbstractConstructionPrototype(String prototypeId, Language language)
+        protected AbstractConstructionPrototype(String prototypeId, Language language, ResourcePack buyInstanceCostPack)
         {
             this.prototypeId = prototypeId;
             this.language = language;
+            this.buyInstanceCostPack = buyInstanceCostPack;
+
+            if (buyInstanceCostPack != null)
+            {
+                buyInstanceCostPack.modifiedValues = buyInstanceCostPack.baseValues;
+                buyInstanceCostPack.modifiedValuesDescription = (String.Join(", ",
+                            buyInstanceCostPack.modifiedValues
+                                    .Select(pair => pair.type + "x" + pair.amount)
+                                    .ToList())
+                                    + "; "
+                    );
+            }
+            
         }
 
         public abstract BaseConstruction getInstance(GridPosition position);

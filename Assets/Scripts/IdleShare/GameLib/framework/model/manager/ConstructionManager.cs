@@ -1,6 +1,8 @@
 ﻿using hundun.idleshare.gamelib;
 using hundun.unitygame.adapters;
+using Mono.Cecil.Cil;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,14 +30,19 @@ namespace hundun.idleshare.gamelib
         public Dictionary<String, BaseConstruction> runningConstructionModelMap = new Dictionary<String, BaseConstruction>();
 
         /**
-         * 根据GameArea显示不同的Construction集合
+         * 根据GameArea显示不同的ConstructionVM集合
          */
-        Dictionary<String, List<String>> areaControlableConstructionPrototypeIds;
+        Dictionary<String, List<String>> areaControlableConstructionVMPrototypeIds;
 
+        /**
+         * 根据GameArea显示不同的ConstructionPrototypeVM集合
+         */
+        Dictionary<string, List<string>> areaControlableConstructionPrototypeVMPrototypeIds;
 
-        public void lazyInit(Dictionary<String, List<String>> areaControlableConstructionPrototypeIds)
+        public void lazyInit(Dictionary<String, List<String>> areaControlableConstructionVMPrototypeIds, Dictionary<string, List<string>> areaControlableConstructionPrototypeVMPrototypeIds)
         {
-            this.areaControlableConstructionPrototypeIds = areaControlableConstructionPrototypeIds;
+            this.areaControlableConstructionVMPrototypeIds = areaControlableConstructionVMPrototypeIds;
+            this.areaControlableConstructionPrototypeVMPrototypeIds = areaControlableConstructionPrototypeVMPrototypeIds;
             //if (areaControlableConstructionPrototypeIds != null)
             //{
             //    foreach (KeyValuePair<String, List<String>> entry in areaControlableConstructionPrototypeIds)
@@ -55,28 +62,37 @@ namespace hundun.idleshare.gamelib
             //    items.ForEach(item => runningConstructionModelMap.TryAdd(item.id, item));
             //}
 
-                
+
         }
         public void onSubLogicFrame()
         {
             foreach (KeyValuePair<String, BaseConstruction> entry in runningConstructionModelMap)
             {
-                var item = entry.Value;
-                item.onLogicFrame();
+                var construction = entry.Value;
+                construction.onLogicFrame();
+
+                if (construction.proficiencyComponent.canPromote())
+                {
+                    promoteInstanceAndNotify(construction.id);
+                } 
+                else if (construction.proficiencyComponent.canDemote())
+                {
+                    // TODO
+                }
             }
         }
 
         public List<BaseConstruction> getAreaShownConstructionsOrEmpty(String gameArea)
         {
             return runningConstructionModelMap.Values
-                .Where(it => areaControlableConstructionPrototypeIds.ContainsKey(gameArea) && 
-                        areaControlableConstructionPrototypeIds.get(gameArea).Contains(it.prototypeId))
+                .Where(it => areaControlableConstructionVMPrototypeIds.ContainsKey(gameArea) && 
+                        areaControlableConstructionVMPrototypeIds.get(gameArea).Contains(it.prototypeId))
                 .ToList();
         }
 
         public List<AbstractConstructionPrototype> getAreaShownConstructionPrototypesOrEmpty(String gameArea)
         {
-            return areaControlableConstructionPrototypeIds.get(gameArea)
+            return areaControlableConstructionPrototypeVMPrototypeIds.get(gameArea)
                 .Select(it => gameContext.constructionFactory.getPrototype(it))
                 .ToList();
         }
@@ -103,15 +119,93 @@ namespace hundun.idleshare.gamelib
                 .ToList();
         }
 
-        internal void createInstanceOfPrototype(string prototypeId, GridPosition position)
+        internal void promoteInstanceAndNotify(String id)
         {
+            BaseConstruction construction = runningConstructionModelMap[id];
+            removeInstance(construction);
+            createInstanceOfPrototype(construction.proficiencyComponent.promoteConstructionPrototypeId, construction.position);
+            gameContext.eventManager.notifyConstructionCollectionChange();
+        }
+
+        internal void transferInstanceAndNotify(String id)
+        {
+            BaseConstruction construction = runningConstructionModelMap[id];
+            removeInstance(construction);
+            createInstanceOfPrototype(construction.upgradeComponent.transferConstructionPrototypeId, construction.position);
+            gameContext.eventManager.notifyConstructionCollectionChange();
+        }
+
+        internal void destoryInstanceAndNotify(String id)
+        {
+            BaseConstruction construction = runningConstructionModelMap[id];
+            removeInstance(construction);
+            if (construction.destoryGainPack != null)
+            {
+                gameContext.storageManager.modifyAllResourceNum(construction.destoryGainPack.modifiedValues, true);
+            }
+            gameContext.eventManager.notifyConstructionCollectionChange();
+        }
+
+        private void removeInstanceAt(GridPosition position)
+        {
+            var toRemove = runningConstructionModelMap
+                         .Where(pair => pair.Value.position.Equals(position))
+                         .ToList();
+
+            foreach (var pair in toRemove)
+            {
+                runningConstructionModelMap.Remove(pair.Key);
+                TileNodeUtils.updateNeighborsAllStep(pair.Value, this);
+            }
+        }
+
+
+        private void removeInstance(BaseConstruction construction)
+        {
+            runningConstructionModelMap.Remove(construction.id);
+            TileNodeUtils.updateNeighborsAllStep(construction, this);
+        }
+
+        internal void loadInstance(ConstructionSaveData saveData)
+        {
+            string prototypeId = saveData.prototypeId;
+            GridPosition position = saveData.position;
             BaseConstruction construction = gameContext.constructionFactory.getInstanceOfPrototype(prototypeId, position);
+            construction.saveData = saveData;
+            construction.updateModifiedValues();
+
             runningConstructionModelMap.put(construction.id, construction);
-            TileNodeUtils.updateNeighbors(construction, this);
-            construction.neighbors.Values.ToList()
-                .Where(it => it != null)
-                .ToList()
-                .ForEach(it => TileNodeUtils.updateNeighbors(it, this));
+            TileNodeUtils.updateNeighborsAllStep(construction, this);
+        }
+
+        internal bool canBuyInstanceOfPrototype(string prototypeId, GridPosition position)
+        {
+            AbstractConstructionPrototype prototype = gameContext.constructionFactory.getPrototype(prototypeId);
+            bool isCostEnough = this.gameContext.storageManager.isEnough(prototype.buyInstanceCostPack.modifiedValues);
+            bool positionAllow = runningConstructionModelMap
+                         .Where(pair => pair.Value.position.Equals(position) || pair.Value.allowPositionOverwrite)
+                         .Count() == 0;
+            return isCostEnough && positionAllow;
+
+        }
+
+        internal void buyInstanceOfPrototype(string prototypeId, GridPosition position)
+        {
+            AbstractConstructionPrototype prototype = gameContext.constructionFactory.getPrototype(prototypeId);
+            this.gameContext.storageManager.modifyAllResourceNum(prototype.buyInstanceCostPack.modifiedValues, false);
+            createInstanceOfPrototype(prototypeId, position);   
+        }
+
+        private void createInstanceOfPrototype(string prototypeId, GridPosition position)
+        {
+            removeInstanceAt(position);
+            
+            BaseConstruction construction = gameContext.constructionFactory.getInstanceOfPrototype(prototypeId, position);
+            
+            runningConstructionModelMap.put(construction.id, construction);
+            TileNodeUtils.updateNeighborsAllStep(construction, this);
+
+            
         }
 
         

@@ -20,6 +20,9 @@ namespace hundun.idleshare.gamelib
         private readonly BaseConstruction construction;
 
         public ResourcePack upgradeCostPack { get; set; }
+
+        public ResourcePack transferCostPack { get; set; }
+        public string transferConstructionPrototypeId;
         public UpgradeState upgradeState { get; private set; }
 
 
@@ -27,7 +30,8 @@ namespace hundun.idleshare.gamelib
          * 影响升级后下一级费用，详见具体公式
          */
         private static readonly double upgradeCostLevelUpArg = 1.05;
-        private static readonly Func<long, int, long> DEFAULT_CALCULATE_COST_FUNCTION = (baseValue, level) => {
+        private static readonly Func<long, int, long> DEFAULT_CALCULATE_COST_FUNCTION = (baseValue, level) =>
+        {
             return (long)(
                     baseValue
                     * (1 + 1 * level)
@@ -35,7 +39,7 @@ namespace hundun.idleshare.gamelib
                     );
         };
         public Func<long, int, long> calculateCostFunction = DEFAULT_CALCULATE_COST_FUNCTION;
-
+        
 
         public UpgradeComponent(BaseConstruction construction)
         {
@@ -67,19 +71,30 @@ namespace hundun.idleshare.gamelib
                 {
                     this.upgradeCostPack.modifiedValues = (
                             upgradeCostPack.baseValues
-                                    .Select(pair => {
+                                    .Select(pair =>
+                                    {
                                         long newAmout = calculateCostFunction.Invoke(pair.amount, construction.saveData.level);
                                         return new ResourcePair(pair.type, newAmout);
                                     })
                                     .ToList()
                     );
                     this.upgradeCostPack.modifiedValuesDescription = (String.Join(", ",
-                            upgradeCostPack.baseValues
+                            upgradeCostPack.modifiedValues
                                     .Select(pair => pair.type + "x" + pair.amount)
                                     .ToList())
                                     + "; "
                     );
                 }
+            }
+            if (transferCostPack != null)
+            {
+                this.transferCostPack.modifiedValues = transferCostPack.baseValues;
+                this.transferCostPack.modifiedValuesDescription = (String.Join(", ",
+                        transferCostPack.modifiedValues
+                                .Select(pair => pair.type + "x" + pair.amount)
+                                .ToList())
+                                + "; "
+                );
             }
         }
 
@@ -91,6 +106,17 @@ namespace hundun.idleshare.gamelib
             }
 
             List<ResourcePair> compareTarget = upgradeCostPack.modifiedValues;
+            return construction.gameContext.storageManager.isEnough(compareTarget);
+        }
+
+        public Boolean canTransfer()
+        {
+            if (construction.saveData.level != construction.maxLevel || transferCostPack == null)
+            {
+                return false;
+            }
+
+            List<ResourcePair> compareTarget = transferCostPack.modifiedValues;
             return construction.gameContext.storageManager.isEnough(compareTarget);
         }
     }

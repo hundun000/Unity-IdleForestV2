@@ -98,17 +98,22 @@ namespace hundun.idleshare.gamelib
             return model.levelComponent.canChangeWorkingLevel(delta);
         }
 
+        public void destoryConstruction(String id)
+        {
+            gameplayContext.constructionManager.destoryInstanceAndNotify(id);
+        }
+
+        public void transferConstruction(String id)
+        {
+            gameplayContext.constructionManager.transferInstanceAndNotify(id);
+        }
+
         public void applyGameplaySaveData(GameplaySaveData gameplaySaveData)
         {
-            List<BaseConstruction> constructions = gameplayContext.constructionManager.getConstructions();
-            foreach (BaseConstruction construction in constructions)
-            {
-                if (gameplaySaveData.constructionSaveDataMap.ContainsKey(construction.id))
-                {
-                    construction.saveData = (gameplaySaveData.constructionSaveDataMap.get(construction.id));
-                    construction.updateModifiedValues();
-                }
-            }
+            gameplaySaveData.constructionSaveDataMap.Values.ToList().ForEach(it => {
+                gameplayContext.constructionManager.loadInstance(it);
+            });
+
             gameplayContext.storageManager.unlockedResourceTypes = (gameplaySaveData.unlockedResourceTypes);
             gameplayContext.storageManager.ownResoueces = (gameplaySaveData.ownResoueces);
             gameplayContext.achievementManager.unlockedAchievementNames = (gameplaySaveData.unlockedAchievementNames);
@@ -144,9 +149,15 @@ namespace hundun.idleshare.gamelib
             systemSettingSave.language = (this.language);
         }
 
-        internal void constructionPrototypeOnClick(string prototypeId, GridPosition position)
+
+        internal bool canBuyInstanceOfPrototype(string prototypeId, GridPosition position)
         {
-            gameplayContext.constructionManager.createInstanceOfPrototype(prototypeId, position);
+            return gameplayContext.constructionManager.canBuyInstanceOfPrototype(prototypeId, position);
+        }
+        internal void buyInstanceOfPrototype(string prototypeId, GridPosition position)
+        {
+            gameplayContext.constructionManager.buyInstanceOfPrototype(prototypeId, position);
+            gameplayContext.eventManager.notifyConstructionCollectionChange();
         }
 
         internal GridPosition getConnectedRandonPosition()

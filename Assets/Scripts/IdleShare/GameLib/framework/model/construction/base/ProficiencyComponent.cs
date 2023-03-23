@@ -10,6 +10,8 @@ namespace hundun.idleshare.gamelib
     public class ProficiencyComponent
     {
         private readonly BaseConstruction construction;
+        public String promoteConstructionPrototypeId;
+        public String demoteConstructionPrototypeId;
 
         public ProficiencyComponent(BaseConstruction construction)
         {
@@ -18,32 +20,27 @@ namespace hundun.idleshare.gamelib
 
         public String getProficiencyDescroption()
         {
-            Boolean reachMaxLevel = construction.saveData.proficiency == construction.maxProficiency;
+            Boolean reachMaxLevel = construction.saveData.proficiency >= 100;
             return construction.descriptionPackage.proficiencyDescroptionProvider.Invoke(construction.saveData.proficiency, reachMaxLevel);
         }
 
-        public Boolean canChangeProficiency(int delta)
+        public Boolean canPromote()
         {
-            int next = construction.saveData.proficiency + delta;
-            if (next > construction.maxProficiency || next < 0)
-            {
-                return false;
-            }
-            return true;
+            return (construction.saveData.proficiency >= 100) && promoteConstructionPrototypeId != null;
+        }
+
+        public Boolean canDemote()
+        {
+            return (construction.saveData.proficiency < 0) && demoteConstructionPrototypeId != null;
         }
 
         public void changeProficiency(int delta)
         {
-            if (canChangeProficiency(delta))
-            {
-                construction.saveData.proficiency = (construction.saveData.proficiency + delta);
-                construction.updateModifiedValues();
-                construction.gameContext.frontend.log(construction.name, "changeProficiency delta = " + delta + ", success to " + construction.saveData.proficiency);
-            }
-            else
-            {
-                construction.gameContext.frontend.log(construction.name, "canChangeProficiency delta = " + delta + ", but cannot!");
-            }
+
+            construction.saveData.proficiency = (construction.saveData.proficiency + delta);
+            construction.updateModifiedValues();
+            construction.gameContext.frontend.log(construction.name, "changeProficiency delta = " + delta + ", success to " + construction.saveData.proficiency);
+
 
         }
     }

@@ -1,5 +1,6 @@
 ﻿using hundun.unitygame.gamelib;
 using Map;
+using Mono.Cecil.Cil;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace hundun.idleshare.gamelib
     public abstract class BaseConstruction : ILogicFrameListener, IBuffChangeListener, ITileNode<BaseConstruction>
     {
 
-        public static readonly int DEFAULT_MAX_LEVEL = 99;
+        public static readonly int DEFAULT_MAX_LEVEL = 10;
         public int maxLevel = DEFAULT_MAX_LEVEL;
 
         public static readonly int DEFAULT_MAX_DRAW_NUM = 5;
@@ -20,9 +21,6 @@ namespace hundun.idleshare.gamelib
 
         public static readonly int DEFAULT_MIN_WORKING_LEVEL = 0;
         public int minWorkingLevel = DEFAULT_MIN_WORKING_LEVEL;
-
-        public static readonly int DEFAULT_MAX_PROFICIENCY = 100;
-        public int maxProficiency = DEFAULT_MAX_PROFICIENCY;
 
         protected Random random = new Random();
 
@@ -37,13 +35,20 @@ namespace hundun.idleshare.gamelib
 
         public String id;
 
-        public String prototypeId;
+        public String prototypeId { get => saveData.prototypeId; }
 
         public String detailDescroptionConstPart;
 
         public DescriptionPackage descriptionPackage;
 
-
+        /**
+        * Nullable
+        */
+        public ResourcePack destoryCostPack;
+        /**
+        * Nullable
+        */
+        public ResourcePack destoryGainPack;
         /**
          * NotNull
          */
@@ -66,6 +71,7 @@ namespace hundun.idleshare.gamelib
         public ProficiencyComponent proficiencyComponent;
 
         private Dictionary<TileNeighborDirection, BaseConstruction> _neighbors;
+        internal bool allowPositionOverwrite = false;
 
         public GridPosition position { get => this.saveData.position; set => this.saveData.position = value; }
         public Dictionary<TileNeighborDirection, BaseConstruction> neighbors { get => _neighbors; set => _neighbors = value; }
@@ -79,6 +85,11 @@ namespace hundun.idleshare.gamelib
 
             outputComponent.lazyInitDescription();
             upgradeComponent.lazyInitDescription();
+            if (destoryGainPack != null)
+            {
+                this.destoryGainPack.descriptionStart = descriptionPackage.destoryGainDescriptionStart;
+                this.destoryCostPack.descriptionStart = descriptionPackage.destoryCostDescriptionStart;
+            }
 
             updateModifiedValues();
         }
@@ -86,20 +97,13 @@ namespace hundun.idleshare.gamelib
         public BaseConstruction(String prototypeId, String id)
         {
 
-            this.saveData = new ConstructionSaveData();
+            this.saveData = new ConstructionSaveData(prototypeId);
             this.id = id;
-            this.prototypeId = prototypeId;
-            this.proficiencyComponent = new ProficiencyComponent(this);
         }
 
         public abstract void onClick();
 
         public abstract Boolean canClickEffect();
-
-        public String getButtonDescroption()
-        {
-            return descriptionPackage.buttonDescroption;
-        }
 
         //protected abstract long calculateModifiedUpgradeCost(long baseValue, int level);
         public abstract long calculateModifiedOutput(long baseValue, int level, int proficiency);
@@ -118,6 +122,16 @@ namespace hundun.idleshare.gamelib
             upgradeComponent.updateModifiedValues(reachMaxLevel);
             outputComponent.updateModifiedValues();
 
+            if (destoryGainPack != null)
+            {
+                destoryGainPack.modifiedValues = destoryGainPack.baseValues;
+                destoryGainPack.modifiedValuesDescription = (String.Join(", ",
+                        destoryGainPack.modifiedValues
+                                .Select(pair => pair.type + "x" + pair.amount)
+                                .ToList())
+                                + "; "
+                );
+            }
         }
 
        
@@ -136,11 +150,41 @@ namespace hundun.idleshare.gamelib
         {
             return outputComponent.canOutput();
         }
+        protected void doOutput()
+        {
+            if (outputComponent.hasCost())
+            {
+                gameContext.storageManager.modifyAllResourceNum(outputComponent.outputCostPack.modifiedValues, false);
+            }
+            if (outputComponent.outputGainPack != null)
+            {
+                gameContext.storageManager.modifyAllResourceNum(outputComponent.outputGainPack.modifiedValues, true);
+            }
+        }
 
-
-        protected Boolean canUpgrade()
+            protected Boolean canUpgrade()
         {
             return upgradeComponent.canUpgrade();
+        }
+
+        protected void doUpgrade()
+        {
+            List<ResourcePair> upgradeCostRule = upgradeComponent.upgradeCostPack.modifiedValues;
+            gameContext.storageManager.modifyAllResourceNum(upgradeCostRule, false);
+            saveData.level = (saveData.level + 1);
+            if (!levelComponent.workingLevelChangable)
+            {
+                saveData.workingLevel = (saveData.level);
+            }
+            updateModifiedValues();
+        }
+
+        /**
+        * Nullable
+        */
+        public Boolean canDestory() 
+        {
+            return destoryCostPack != null;
         }
 
         public String getSaveDataKey()

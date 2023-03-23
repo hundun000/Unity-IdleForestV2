@@ -37,18 +37,6 @@ namespace hundun.idleshare.gamelib
             doUpgrade();
         }
 
-        private void doUpgrade()
-        {
-            List<ResourcePair> upgradeCostRule = upgradeComponent.upgradeCostPack.modifiedValues;
-            gameContext.storageManager.modifyAllResourceNum(upgradeCostRule, false);
-            saveData.level = (saveData.level + 1);
-            if (!levelComponent.workingLevelChangable)
-            {
-                saveData.workingLevel = (saveData.level);
-            }
-            updateModifiedValues();
-        }
-
         override public Boolean canClickEffect()
         {
             return canUpgrade();

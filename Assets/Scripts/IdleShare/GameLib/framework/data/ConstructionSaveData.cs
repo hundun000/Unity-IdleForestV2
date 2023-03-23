@@ -11,6 +11,7 @@ namespace hundun.idleshare.gamelib
 
     public class ConstructionSaveData
     {
+        public String prototypeId;
         public int level;
         public int workingLevel;
         public int proficiency;
@@ -20,11 +21,18 @@ namespace hundun.idleshare.gamelib
         {
         }
 
-        public ConstructionSaveData(int level, int workingLevel, int _proficiency)
+        public ConstructionSaveData(string prototypeId)
         {
+            this.prototypeId = prototypeId;
+        }
+
+        public ConstructionSaveData(String prototypeId, int level, int workingLevel, int proficiency, GridPosition position)
+        {
+            this.prototypeId = prototypeId;
             this.level = level;
             this.workingLevel = workingLevel;
-            this.proficiency = _proficiency;
+            this.proficiency = proficiency;
+            this.position = position;
         }
 
         public static Builder builder()
@@ -34,6 +42,7 @@ namespace hundun.idleshare.gamelib
 
         public class Builder
         {
+            public String _prototypeId;
             public int _level;
             public int _workingLevel;
             public int _proficiency;
@@ -41,7 +50,13 @@ namespace hundun.idleshare.gamelib
 
             public ConstructionSaveData build()
             {
-                return new ConstructionSaveData(_level, _workingLevel, _proficiency);
+                return new ConstructionSaveData(_prototypeId, _level, _workingLevel, _proficiency, _position);
+            }
+
+            public Builder prototypeId(String _prototypeId)
+            {
+                this._prototypeId = _prototypeId;
+                return this;
             }
 
             public Builder level(int _level)
