@@ -11,7 +11,7 @@ namespace Map
         public Camera sceneCamera;     // 场景的相机
         public GameObject cellRoot;    // 格位根物体，下有全部格位
         public Cell cellPrefab;        // 格位预制体
-        public Vector3 zeroPos;        // 坐标系原点
+        private Vector3 _zeroPos;      // 坐标系原点
         public Cell[,] mapLayout;      // 地图布局
 
         private void Awake()
@@ -34,7 +34,7 @@ namespace Map
             }
 
             // 加载网格
-            zeroPos = levelInfo.zeroPos;
+            _zeroPos = levelInfo.zeroPos;
             mapLayout = new Cell[levelInfo.mapInfo.GetLength(0), levelInfo.mapInfo.GetLength(1)];
             for (var i = 0; i < levelInfo.mapInfo.GetLength(0); ++i)
             {
@@ -59,7 +59,7 @@ namespace Map
         // 换算：预设的二维坐标系坐标 -> 六边形坐标系在屏幕空间的映射
         private Vector3 CalculatePosition(Vector2 pos)
         {
-            Vector3 newposition = zeroPos;
+            Vector3 newposition = _zeroPos;
             newposition.y += 0.75f * pos.y;
             newposition.x += Mathf.Sqrt(3) / 2  * (pos.x - (pos.y % 2) / 2);
             return newposition;

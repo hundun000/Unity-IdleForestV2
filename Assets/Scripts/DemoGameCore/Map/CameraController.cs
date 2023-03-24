@@ -43,7 +43,7 @@ namespace Map
 
             KeyBoardControl();
 
-            if (!isDragging && Input.GetMouseButton(0))
+            if (!isDragging && Input.GetMouseButton(1))
             {
                 isDragging = true;
                 departurePos = Input.mousePosition;
@@ -80,11 +80,11 @@ namespace Map
         }
 
         /// <summary>
-        /// Êó±ê×ó¼üÍÏ×§ÉãÏñ»ú
+        /// Êó±êÓÒ¼üÍÏ×§ÉãÏñ»ú
         /// </summary>
         private IEnumerator MouseLeftDragControl()
         {
-            while (Input.GetMouseButton(0))
+            while (Input.GetMouseButton(1))
             {
                 //Debug.Log("Êó±ê£º" + departurePos + "  >>>>>  " + Input.mousePosition);
                 cameraTrans.position -= (Input.mousePosition - departurePos) * sensitivityDrag * 0.01f;
