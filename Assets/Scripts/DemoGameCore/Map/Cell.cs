@@ -1,4 +1,6 @@
 using Assets.Scripts.DemoGameCore.logic;
+using Assets.Scripts.DemoGameCore.ui.screen;
+using hundun.idleshare.enginecore;
 using hundun.idleshare.gamelib;
 using Mono.Cecil.Cil;
 using System;
@@ -32,6 +34,7 @@ namespace Map
         public Canvas cellCanvas;             // 每个格位自己的画布
         public GameObject coordinateText;     // 测试时用的坐标显示器
 
+        public DemoPlayScreen parent; // 后端Screen引用
         public BaseConstruction construction; // 后端数据引用
 
         public void StateChangeTo(BaseConstruction construction)
@@ -74,6 +77,11 @@ namespace Map
         {
             this.level = construction.saveData.level;
             this.isRunning = construction.saveData.workingLevel == construction.saveData.level;
+        }
+
+        internal void fakeOnClick()
+        {
+            parent.cellDetailBoardVM.updateDetail(construction);
         }
     }
 }
