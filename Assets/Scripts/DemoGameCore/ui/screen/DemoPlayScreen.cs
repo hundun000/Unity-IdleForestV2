@@ -24,9 +24,10 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
         DemoGameEntityFactory gameEntityFactory;
         protected SpecialConstructionControlBoardVM specialConstructionControlBoardVM;
+        public CellDetailBoardVM cellDetailBoardVM;
         // bind by editer
         public MapController mapController;
-
+        
 
         Transform drawContaioner;
 
@@ -37,6 +38,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             this.gameEntityFactory = this.UiRoot.transform.Find("cell_drawContaioner/GameEntityFactory").GetComponent<DemoGameEntityFactory>();
             this.drawContaioner = this.UiRoot.transform.Find("cell_drawContaioner/root").transform;
             this.specialConstructionControlBoardVM = this.UiRoot.transform.Find("cell_4/SpecialConstructionControlBoardVM").GetComponent<SpecialConstructionControlBoardVM>();
+            this.cellDetailBoardVM = this.UiRoot.transform.Find("cellDetailBoardVM").GetComponent<CellDetailBoardVM>();
         }
 
 
@@ -65,6 +67,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             popupInfoBoardVM.postPrefabInitialization(this);
             achievementMaskBoard.postPrefabInitialization(this);
             notificationMaskBoard.postPrefabInitialization(this);
+            cellDetailBoardVM.postPrefabInitialization(this);
         }
 
 

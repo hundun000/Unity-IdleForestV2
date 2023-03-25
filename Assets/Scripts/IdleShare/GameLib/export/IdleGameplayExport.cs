@@ -103,6 +103,11 @@ namespace hundun.idleshare.gamelib
             gameplayContext.constructionManager.destoryInstanceAndNotify(id);
         }
 
+        internal AbstractConstructionPrototype previewPrototype(string prototypeId)
+        {
+            return gameplayContext.constructionFactory.getPrototype(prototypeId);
+        }
+
         public void transferConstruction(String id)
         {
             gameplayContext.constructionManager.transferInstanceAndNotify(id);

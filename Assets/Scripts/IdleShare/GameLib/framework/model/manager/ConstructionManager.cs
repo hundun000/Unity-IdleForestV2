@@ -209,6 +209,8 @@ namespace hundun.idleshare.gamelib
 
         }
 
+        
+
         internal void buyInstanceOfPrototype(string prototypeId, GridPosition position)
         {
             AbstractConstructionPrototype prototype = gameContext.constructionFactory.getPrototype(prototypeId);
