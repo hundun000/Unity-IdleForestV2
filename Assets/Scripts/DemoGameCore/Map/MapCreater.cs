@@ -16,6 +16,6 @@ namespace Map
     [Serializable]
     public class NestMapInfo
     {
-        public Cell.CellState[] rowMapInfo;                          // 地图的一行
+        public CellState[] rowMapInfo;                          // 地图的一行
     }
 }

@@ -3,6 +3,7 @@ using Assets.Scripts.DemoGameCore.ui.sub;
 using hundun.idleshare.enginecore;
 using hundun.unitygame.enginecorelib;
 using hundun.unitygame.gamelib;
+using Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,9 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
         DemoGameEntityFactory gameEntityFactory;
         protected SpecialConstructionControlBoardVM specialConstructionControlBoardVM;
+        // bind by editer
+        public MapController mapController;
+
 
         Transform drawContaioner;
 
@@ -56,7 +60,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
                 child.gameObject.SetActive(false);
             }
 
-            screenBackgroundVM.postPrefabInitialization(this.game.textureManager);
+            //screenBackgroundVM.postPrefabInitialization(this.game.textureManager);
 
             popupInfoBoardVM.postPrefabInitialization(this);
             achievementMaskBoard.postPrefabInitialization(this);
@@ -72,6 +76,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             constructionControlBoardVM.postPrefabInitialization(this);
             constructionPrototypeControlBoardVM.postPrefabInitialization(this);
             specialConstructionControlBoardVM.postPrefabInitialization(this);
+            mapController.postPrefabInitialization(this);
             gameAreaControlBoardVM.postPrefabInitialization(this, GameArea.values);
         }
 
@@ -84,8 +89,9 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
             logicFrameListeners.Add(specialConstructionControlBoardVM);
             gameAreaChangeListeners.Add(specialConstructionControlBoardVM);
+            gameAreaChangeListeners.Add(mapController);
             this.game.idleGameplayExport.eventManagerRegisterListener(specialConstructionControlBoardVM);
-
+            this.game.idleGameplayExport.eventManagerRegisterListener(mapController);
         }
     }
 }

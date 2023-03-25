@@ -27,7 +27,7 @@ namespace hundun.idleshare.enginecore
         protected AudioSource audioSource;
 
         // ----- ui ------
-        protected IdleScreenBackgroundVM screenBackgroundVM;
+        //protected IdleScreenBackgroundVM screenBackgroundVM;
         protected StorageInfoBoardVM<T_GAME, T_SAVE> storageInfoBoardVM;
         protected FixedConstructionControlBoardVM<T_GAME, T_SAVE> constructionControlBoardVM;
         protected FixedConstructionPrototypeControlBoardVM<T_GAME, T_SAVE> constructionPrototypeControlBoardVM;
@@ -55,7 +55,7 @@ namespace hundun.idleshare.enginecore
             Templates = this.transform.Find("_templates").gameObject;
             audioSource = this.transform.Find("_audioSource").GetComponent<AudioSource>();
 
-            this.screenBackgroundVM = this.Contrainer.transform.Find("ScreenBackgroundVM").gameObject.GetComponent<IdleScreenBackgroundVM>();
+            //this.screenBackgroundVM = this.Contrainer.transform.Find("ScreenBackgroundVM").gameObject.GetComponent<IdleScreenBackgroundVM>();
             this.storageInfoBoardVM = this.UiRoot.transform.Find("cell_0/StorageInfoBoardVM").gameObject.GetComponent<StorageInfoBoardVM<T_GAME, T_SAVE>>();
             this.constructionControlBoardVM = this.UiRoot.transform.Find("cell_1/FixedConstructionControlBoardVM").gameObject.GetComponent<FixedConstructionControlBoardVM<T_GAME, T_SAVE>>();
             this.gameAreaControlBoardVM = this.UiRoot.transform.Find("cell_2/GameAreaControlBoardVM").gameObject.GetComponent<GameAreaControlBoardVM<T_GAME, T_SAVE>>();
@@ -119,7 +119,7 @@ namespace hundun.idleshare.enginecore
             logicFrameListeners.Add(constructionPrototypeControlBoardVM);
             logicFrameListeners.Add(game.idleGameplayExport);
 
-            gameAreaChangeListeners.Add(screenBackgroundVM);
+            //gameAreaChangeListeners.Add(screenBackgroundVM);
             gameAreaChangeListeners.Add(constructionControlBoardVM);
             gameAreaChangeListeners.Add(constructionPrototypeControlBoardVM);
             gameAreaChangeListeners.Add(gameAreaControlBoardVM);

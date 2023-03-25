@@ -12,8 +12,6 @@ namespace Assets.Scripts.DemoGameCore.logic
 {
     internal class DemoSaveHandler : PairChildrenSaveHandler<RootSaveData, SystemSettingSaveData, GameplaySaveData>
     {
-        public const int X_OFFSET = 10;
-        public const int Y_OFFSET = 10;
 
         public DemoSaveHandler(IFrontend frontEnd, ISaveTool<RootSaveData> saveTool) : base(frontEnd, Factory.INSTANCE, saveTool)
         {
@@ -39,42 +37,38 @@ namespace Assets.Scripts.DemoGameCore.logic
                                     .level(1)
                                     .workingLevel(1)
                                     .proficiency(48)
-                                    .position(new GridPosition(0, 1))
+                                    .position(new GridPosition(0, -1))
                                     .build()
                 );
             starterConstructionSaveDatas.Add(
                 ConstructionSaveData.builder()
                                     .prototypeId(ConstructionPrototypeId.DESERT)
                                     .proficiency(97)
-                                    .position(new GridPosition(0, 2))
+                                    .position(new GridPosition(0, -2))
                                     .build()
                 );
             starterConstructionSaveDatas.Add(
                 ConstructionSaveData.builder()
                                     .prototypeId(ConstructionPrototypeId.DIRT)
-                                    .position(new GridPosition(0, 3))
+                                    .position(new GridPosition(0, 1))
                                     .build()
                 );
             starterConstructionSaveDatas.Add(
                 ConstructionSaveData.builder()
                                     .prototypeId(ConstructionPrototypeId.RUBBISH)
-                                    .position(new GridPosition(0, 4))
+                                    .position(new GridPosition(0, 2))
                                     .build()
                 );
             starterConstructionSaveDatas.Add(
                 ConstructionSaveData.builder()
                                     .prototypeId(ConstructionPrototypeId.LAKE)
-                                    .position(new GridPosition(0, 5))
+                                    .position(new GridPosition(0, 3))
                                     .build()
                 );
-            starterConstructionSaveDatas.ForEach(it => { 
-                it.position.x += X_OFFSET;
-                it.position.y += Y_OFFSET;
-            });
             starterConstructionSaveDatas.Add(
                 ConstructionSaveData.builder()
                                     .prototypeId(ConstructionPrototypeId.GOVERNMENT)
-                                    .position(new GridPosition(-1, -1))
+                                    .position(new GridPosition(-100, -100))
                                     .build()
                 );
 
