@@ -17,7 +17,6 @@ namespace Map
     {
 
         public List<BaseConstruction> constructions;     // 棋盘信息
-        public readonly float cameraSize = 5; 
 
         internal static BackendLevelInfo from(List<BaseConstruction> constructions)
         {
@@ -35,25 +34,28 @@ namespace Map
     {
         public bool isTest = false;
 
-        public Camera sceneCamera;     // 场景的相机
-        public GameObject cellRoot;    // 格位根物体，下有全部格位
-        public Cell cellPrefab;        // 格位预制体
+        public Camera sceneCamera;           // 场景的相机
+        public float cameraSize = 5;         // 相机尺寸
+        public float cameraDistance = 10;    // 相机初始离屏幕位置
+        public GameObject cellRoot;          // 格位根物体，下有全部格位
+        public Cell cellPrefab;              // 格位预制体
         //public Cell[,] mapLayout;      // 地图布局
         private List<Cell> constructionControlNodes = new List<Cell>();  // Cell即为一种ConstructionControlNode——控制一个设施的UI
 
         DemoPlayScreen parent;      // 通过代码绑定
 
+        /*
         private void Awake()
         {
-            //gameObject.GetComponent<SpriteLoader>().SpriteLoad();
-            //gameObject.GetComponent<LevelInfo>().readMap();
-            //BuildBoard(gameObject.GetComponent<LevelInfo>());
+            gameObject.GetComponent<SpriteLoader>().SpriteLoad();
+            gameObject.GetComponent<LevelInfo>().readMap();
+            BuildBoard(gameObject.GetComponent<LevelInfo>());
 
         }
-
+        */
 
         
-        // 将地图打印到屏幕上，在读取地图后执行
+        // 将地图打印到屏幕上
         private void BuildBoard(BackendLevelInfo levelInfo)
         {
             // 清理
@@ -86,9 +88,9 @@ namespace Map
 
 
             // 相机调整
-            sceneCamera.orthographicSize = levelInfo.cameraSize;
+            sceneCamera.orthographicSize = cameraSize;
             Vector2 cameraPosVector2 = constructionControlNodes.First().transform.position;
-            sceneCamera.transform.position = new Vector3(cameraPosVector2.x, cameraPosVector2.y, -10);
+            sceneCamera.transform.position = new Vector3(cameraPosVector2.x, cameraPosVector2.y, -cameraDistance);
 
         }
 

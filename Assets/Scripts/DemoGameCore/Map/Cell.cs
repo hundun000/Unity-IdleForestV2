@@ -62,7 +62,12 @@ namespace Map
                     break;
             }
         }
-        
+
+        private void OnMouseUpAsButton()
+        {
+            fakeOnClick();
+        }
+
         public void testDataPrint(Camera _camera)
         {
             cellCanvas.worldCamera = _camera;

@@ -7,11 +7,11 @@ namespace Map
     public class LevelInfo : MonoBehaviour
     {
 
-        public CellState[,] mapInfo;     // 棋盘信息
+        //public CellState[,] mapInfo;     // 棋盘信息
         public Vector3 zeroPos;               // 六边形坐标系原点在屏幕中的位置
         public float cameraSize;         // 相机尺寸
         public Vector3 cameraPosition;     // 相机位置
-
+        /*
         public int mapCode = 0;               // 地图编号，0号为默认地图. 可以使用编号方便地切换要加载的地图
         public GameObject[] mapsToLoad;       // 存有所有挂载了MapCreater的物体，用编号可以调取其中的地图
 
@@ -47,7 +47,7 @@ namespace Map
             }
             Debug.Log("地图读取成功.");
         }
-
+        */
 
     }
 }
