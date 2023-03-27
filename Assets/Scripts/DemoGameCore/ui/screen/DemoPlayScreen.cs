@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.DemoGameCore.logic;
 using Assets.Scripts.DemoGameCore.ui.sub;
 using hundun.idleshare.enginecore;
+using hundun.idleshare.gamelib;
 using hundun.unitygame.enginecorelib;
 using hundun.unitygame.gamelib;
 using Map;
@@ -13,6 +14,7 @@ using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.MaterialProperty;
 
 namespace Assets.Scripts.DemoGameCore.ui.screen
 {
@@ -25,9 +27,10 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
         DemoGameEntityFactory gameEntityFactory;
         protected SpecialConstructionControlBoardVM specialConstructionControlBoardVM;
         public CellDetailBoardVM cellDetailBoardVM;
+        protected FirstLockedAchievementBoardVM firstLockedAchievementBoardVM;
         // bind by editer
         public MapController mapController;
-        
+
 
         Transform drawContaioner;
 
@@ -39,6 +42,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             this.drawContaioner = this.UiRoot.transform.Find("cell_drawContaioner/root").transform;
             this.specialConstructionControlBoardVM = this.UiRoot.transform.Find("cell_4/SpecialConstructionControlBoardVM").GetComponent<SpecialConstructionControlBoardVM>();
             this.cellDetailBoardVM = this.UiRoot.transform.Find("cellDetailBoardVM").GetComponent<CellDetailBoardVM>();
+            this.firstLockedAchievementBoardVM = this.UiRoot.transform.Find("firstLockedAchievementBoardVM").GetComponent<FirstLockedAchievementBoardVM>();
         }
 
 
@@ -68,6 +72,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             achievementMaskBoard.postPrefabInitialization(this);
             notificationMaskBoard.postPrefabInitialization(this);
             cellDetailBoardVM.postPrefabInitialization(this);
+            firstLockedAchievementBoardVM.postPrefabInitialization(this);
         }
 
 
@@ -93,8 +98,16 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             logicFrameListeners.Add(specialConstructionControlBoardVM);
             gameAreaChangeListeners.Add(specialConstructionControlBoardVM);
             gameAreaChangeListeners.Add(mapController);
+            gameAreaChangeListeners.Add(firstLockedAchievementBoardVM);
             this.game.idleGameplayExport.eventManagerRegisterListener(specialConstructionControlBoardVM);
             this.game.idleGameplayExport.eventManagerRegisterListener(mapController);
         }
+
+        override public void showAchievementMaskBoard(AbstractAchievement prototype)
+        {
+            base.showAchievementMaskBoard(prototype);
+            firstLockedAchievementBoardVM.updateData();
+        }
+
     }
 }

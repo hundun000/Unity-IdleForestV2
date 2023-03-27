@@ -15,6 +15,6 @@ namespace hundun.idleshare.gamelib
         public Dictionary<String, List<String>> areaShowEntityByOwnAmountResourceIds;
         public Dictionary<String, List<String>> areaShowEntityByChangeAmountResourceIds;
         public Dictionary<String, String> screenIdToFilePathMap;
-        public List<AchievementPrototype> achievementPrototypes;
+        public List<String> achievementPrototypeIds;
     }
 }

@@ -71,7 +71,7 @@ namespace hundun.idleshare.gamelib
             }
         }
 
-        public void notifyAchievementUnlock(AchievementPrototype prototype)
+        public void notifyAchievementUnlock(AbstractAchievement prototype)
         {
             gameContext.frontend.log(this.getClass().getSimpleName(), "notifyAchievementUnlock");
             foreach (IAchievementUnlockCallback listener in achievementUnlockListeners)

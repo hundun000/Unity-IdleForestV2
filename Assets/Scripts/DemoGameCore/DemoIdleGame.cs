@@ -33,6 +33,7 @@ namespace Assets.Scripts.DemoGameCore
                     frontend,
                     new DemoGameDictionary(),
                     new DemoBuiltinConstructionsLoader(),
+                    new IdleForestAchievementLoader(),
                     LOGIC_FRAME_PER_SECOND,
                     childGameConfig
                     );

@@ -101,20 +101,6 @@ namespace hundun.idleshare.enginecore
             costLabel.text = model.buyInstanceCostPack.modifiedValuesDescription;
 
             // ------ update clickable-state ------
-            Boolean canClickEffect = true;
-            //clickEffectButton.setTouchable(clickable ? Touchable.enabled : Touchable.disabled);
-
-
-            if (canClickEffect)
-            {
-                clickEffectButton.button.interactable = (true);
-                //clickEffectButton.SetColor(Color.white);
-            }
-            else
-            {
-                clickEffectButton.button.interactable = (false);
-                //clickEffectButton.SetColor(Color.red);
-            }
 
             updateCanCreateInstance();
         }

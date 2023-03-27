@@ -38,7 +38,7 @@ namespace hundun.idleshare.enginecore
             });
 
         }
-        public void setAchievementPrototype(AchievementPrototype prototype)
+        public void setAchievementPrototype(AbstractAchievement prototype)
         {
             label.text = prototype.description;
         }

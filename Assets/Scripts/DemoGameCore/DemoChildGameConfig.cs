@@ -62,13 +62,10 @@ namespace Assets.Scripts.DemoGameCore
                 );
             this.screenIdToFilePathMap = (screenIdToFilePathMap);
 
-            List<AchievementPrototype> achievementPrototypes = JavaFeatureForGwt.arraysAsList(
-                    new AchievementPrototype("Game win", "You win the game!",
-                            JavaFeatureForGwt.mapOf(BuffId.WIN, 1),
-                            null
-                            )
+            List<String> achievementPrototypeIds = JavaFeatureForGwt.arraysAsList(
+                    IdleForestAchievementId.STEP_1
                     );
-            this.achievementPrototypes = (achievementPrototypes);
+            this.achievementPrototypeIds = (achievementPrototypeIds);
         }
     }
 }

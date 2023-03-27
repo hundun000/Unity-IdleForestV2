@@ -203,8 +203,12 @@ namespace hundun.idleshare.gamelib
             AbstractConstructionPrototype prototype = gameContext.constructionFactory.getPrototype(prototypeId);
             bool isCostEnough = this.gameContext.storageManager.isEnough(prototype.buyInstanceCostPack.modifiedValues);
             bool positionAllow = runningConstructionModelMap
-                         .Where(pair => pair.Value.position.Equals(position) || pair.Value.allowPositionOverwrite)
-                         .Count() == 0;
+                         .Where(pair => pair.Value.position.Equals(position))
+                         .Count() == 0
+                         || runningConstructionModelMap
+                         .Where(pair => pair.Value.position.Equals(position) && pair.Value.allowPositionOverwrite)
+                         .Count() == 1
+                         ;
             return isCostEnough && positionAllow;
 
         }

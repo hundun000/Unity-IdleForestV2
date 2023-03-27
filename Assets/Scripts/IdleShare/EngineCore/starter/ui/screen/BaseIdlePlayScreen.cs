@@ -115,6 +115,7 @@ namespace hundun.idleshare.enginecore
                 game.childGameConfig.areaShowEntityByOwnAmountResourceIds, 
                 game.childGameConfig.areaShowEntityByChangeAmountResourceIds);
 
+            logicFrameListeners.Add(storageInfoBoardVM);
             logicFrameListeners.Add(constructionControlBoardVM);
             logicFrameListeners.Add(constructionPrototypeControlBoardVM);
             logicFrameListeners.Add(game.idleGameplayExport);
@@ -160,14 +161,14 @@ namespace hundun.idleshare.enginecore
             gameImageDrawer.allEntitiesMoveForFrameAndDraw();
         }
 
-        public void hideAchievementMaskBoard()
+        virtual public void hideAchievementMaskBoard()
         {
             game.frontend.log(this.getClass().getSimpleName(), "hideAchievementMaskBoard called");
             achievementMaskBoard.gameObject.SetActive(false);
             logicFrameHelper.logicFramePause = false;
         }
 
-        public void showAchievementMaskBoard(AchievementPrototype prototype)
+        virtual public void showAchievementMaskBoard(AbstractAchievement prototype)
         {
             game.frontend.log(this.getClass().getSimpleName(), "showAchievementMaskBoard called");
             achievementMaskBoard.gameObject.SetActive(true);

@@ -46,7 +46,7 @@ namespace Assets.Scripts.DemoGameCore.logic
             if (saveData.proficiency == 100)
             {
                 proficiencyComponent.cleanProficiency();
-                gameContext.eventManager.notifyNotification("政府进行了一次奖惩");
+                //gameContext.eventManager.notifyNotification("政府进行了一次奖惩");
             }
 
             

@@ -16,6 +16,7 @@ namespace hundun.idleshare.gamelib
     {
         private IdleGameplayContext gameplayContext;
         private IBuiltinConstructionsLoader builtinConstructionsLoader;
+        private IBuiltinAchievementsLoader builtinAchievementsLoader;
         private ChildGameConfig childGameConfig;
         public IGameDictionary gameDictionary;
         public Language language;
@@ -24,11 +25,13 @@ namespace hundun.idleshare.gamelib
                 IFrontend frontEnd,
                 IGameDictionary gameDictionary,
                 IBuiltinConstructionsLoader builtinConstructionsLoader,
+                IBuiltinAchievementsLoader builtinAchievementsLoader,
                 int LOGIC_FRAME_PER_SECOND, ChildGameConfig childGameConfig)
         {
             this.gameDictionary = gameDictionary;
             this.childGameConfig = childGameConfig;
             this.builtinConstructionsLoader = builtinConstructionsLoader;
+            this.builtinAchievementsLoader = builtinAchievementsLoader;
             this.gameplayContext = new IdleGameplayContext(frontEnd, gameDictionary, LOGIC_FRAME_PER_SECOND);
         }
 
@@ -113,6 +116,12 @@ namespace hundun.idleshare.gamelib
             gameplayContext.constructionManager.transferInstanceAndNotify(id);
         }
 
+        public AbstractAchievement getFirstLockedAchievement()
+        {
+            return gameplayContext.achievementManager.getFirstLockedAchievement();
+        }
+
+
         public void applyGameplaySaveData(GameplaySaveData gameplaySaveData)
         {
             gameplaySaveData.constructionSaveDataMap.Values.ToList().ForEach(it => {
@@ -121,7 +130,7 @@ namespace hundun.idleshare.gamelib
 
             gameplayContext.storageManager.unlockedResourceTypes = (gameplaySaveData.unlockedResourceTypes);
             gameplayContext.storageManager.ownResoueces = (gameplaySaveData.ownResoueces);
-            gameplayContext.achievementManager.unlockedAchievementNames = (gameplaySaveData.unlockedAchievementNames);
+            gameplayContext.achievementManager.unlockedAchievementIds = (gameplaySaveData.unlockedAchievementIds);
         }
 
         public void currentSituationToGameplaySaveData(GameplaySaveData gameplaySaveData)
@@ -135,7 +144,7 @@ namespace hundun.idleshare.gamelib
                     );
             gameplaySaveData.unlockedResourceTypes = (gameplayContext.storageManager.unlockedResourceTypes);
             gameplaySaveData.ownResoueces = (gameplayContext.storageManager.ownResoueces);
-            gameplaySaveData.unlockedAchievementNames = (gameplayContext.achievementManager.unlockedAchievementNames);
+            gameplaySaveData.unlockedAchievementIds = (gameplayContext.achievementManager.unlockedAchievementIds);
         }
 
         public void applySystemSetting(SystemSettingSaveData systemSettingSave)
@@ -144,7 +153,8 @@ namespace hundun.idleshare.gamelib
             gameplayContext.allLazyInit(
                     systemSettingSave.language,
                     childGameConfig,
-                    builtinConstructionsLoader.getProviderMap(language)
+                    builtinConstructionsLoader.getProviderMap(language),
+                    builtinAchievementsLoader.getProviderMap(language)
                     );
             gameplayContext.frontend.log(this.getClass().getSimpleName(), "applySystemSetting done");
         }

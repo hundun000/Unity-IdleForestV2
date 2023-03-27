@@ -85,7 +85,7 @@ namespace Assets.Scripts.DemoGameCore.logic
             gameplaySaveData.unlockedResourceTypes.Add(ResourceType.COIN);
             gameplaySaveData.unlockedResourceTypes.Add(ResourceType.WOOD);
             gameplaySaveData.unlockedResourceTypes.Add(ResourceType.CARBON);
-            gameplaySaveData.unlockedAchievementNames = (new HashSet<String>());
+            gameplaySaveData.unlockedAchievementIds = (new HashSet<String>());
 
             var systemSettingSaveData = new SystemSettingSaveData();
             systemSettingSaveData.language = Language.CN;
