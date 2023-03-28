@@ -37,18 +37,21 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
         internal void updateData()
         {
-            AbstractAchievement data = parent.game.idleGameplayExport.getFirstLockedAchievement();
-            if (data != null)
+            AchievementInfoPackage data = parent.game.idleGameplayExport.getAchievementInfoPackage();
+            if (data.firstLockedAchievement != null)
             {
-                nameLabel.text = data.name;
-                descriptionLabel.text = data.description;
+                nameLabel.text = data.firstLockedAchievement.name;
+                descriptionLabel.text = data.firstLockedAchievement.description;
             } 
             else
             {
-                nameLabel.text = "无";
+                nameLabel.text = "已完成";
                 descriptionLabel.text = "无";
             }
-            
+
+            nameLabel.text += " " + data.unLockedSize + "/" + data.total;
+
+
         }
 
         public void onGameAreaChange(string last, string current)

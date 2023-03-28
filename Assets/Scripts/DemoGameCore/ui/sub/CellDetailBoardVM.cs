@@ -26,6 +26,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         DemoConstructionPrototypeControlNodeVM constructionPrototypeControlNodePrefab;
 
         public BaseConstruction data;
+        private List<object> contents = new List<object>();
 
         void Awake()
         {
@@ -34,6 +35,20 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             this.nodesRoot = this.transform.Find("_nodesRoot").gameObject;
             this.constructionControlNodePrefab = this.transform.Find("_templates/constructionControlNodePrefab").GetComponent<DemoConstructionControlNodeVM>();
             this.constructionPrototypeControlNodePrefab = this.transform.Find("_templates/constructionPrototypeControlNodePrefab").GetComponent<DemoConstructionPrototypeControlNodeVM>();
+        }
+
+        void Update()
+        {
+            contents.ForEach(it => {
+                if (it is DemoConstructionControlNodeVM constructionControlNodeVM)
+                {
+                    constructionControlNodeVM.update();
+                }
+                else if (it is DemoConstructionPrototypeControlNodeVM constructionPrototypeControlNodeVM)
+                {
+                    constructionPrototypeControlNodeVM.update();
+                }
+            });
         }
 
         public void postPrefabInitialization(DemoPlayScreen parent)
@@ -75,11 +90,13 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         private void updateAsConstructionDetail(BaseConstruction construction)
         {
             nodesRoot.transform.AsTableClear();
+            contents.Clear();
 
             DemoConstructionControlNodeVM content = nodesRoot.transform.AsTableAdd<DemoConstructionControlNodeVM>(constructionControlNodePrefab.gameObject);
             content.postPrefabInitialization(parent);
             content.setModel(construction);
             content.update();
+            contents.Add(content);
 
             posLabel.text = construction.name + "(" +
                 construction.saveData.position.x + ", " +
@@ -89,6 +106,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         private void updateAsConstructionPrototypeDetail(BaseConstruction construction)
         {
             nodesRoot.transform.AsTableClear();
+            contents.Clear();
 
             List<AbstractConstructionPrototype> constructionPrototypes = parent.game.idleGameplayExport.getAreaShownConstructionPrototypesOrEmpty(parent.area);
 
@@ -97,6 +115,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
                 content.postPrefabInitialization(parent);
                 content.setModel(constructionPrototype);
                 content.update();
+                contents.Add(content);
             });
 
             posLabel.text = construction.name + "(" +

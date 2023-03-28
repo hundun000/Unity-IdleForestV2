@@ -121,9 +121,9 @@ namespace hundun.idleshare.gamelib
             gameplayContext.constructionManager.transferInstanceAndNotify(id);
         }
 
-        public AbstractAchievement getFirstLockedAchievement()
+        public AchievementInfoPackage getAchievementInfoPackage()
         {
-            return gameplayContext.achievementManager.getFirstLockedAchievement();
+            return gameplayContext.achievementManager.getAchievementInfoPackage();
         }
 
 
