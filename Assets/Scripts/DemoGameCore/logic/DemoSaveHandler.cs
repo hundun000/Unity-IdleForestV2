@@ -81,6 +81,7 @@ namespace Assets.Scripts.DemoGameCore.logic
                 );
             gameplaySaveData.ownResoueces = (new Dictionary<String, long>());
             gameplaySaveData.ownResoueces.Add(ResourceType.COIN, 10000);
+            gameplaySaveData.ownResoueces.Add(ResourceType.CARBON, 512);
             gameplaySaveData.unlockedResourceTypes = (new HashSet<String>());
             gameplaySaveData.unlockedResourceTypes.Add(ResourceType.COIN);
             gameplaySaveData.unlockedResourceTypes.Add(ResourceType.WOOD);

@@ -26,11 +26,12 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
         DemoGameEntityFactory gameEntityFactory;
         protected SpecialConstructionControlBoardVM specialConstructionControlBoardVM;
+        [HideInInspector]
         public CellDetailBoardVM cellDetailBoardVM;
         protected FirstLockedAchievementBoardVM firstLockedAchievementBoardVM;
-        // bind by editer
+        // ------ bind by editer ------
         public MapController mapController;
-
+        public StatusBarController statusBarController;
 
         Transform drawContaioner;
 
@@ -83,6 +84,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
             specialConstructionControlBoardVM.postPrefabInitialization(this);
             mapController.postPrefabInitialization(this);
+            statusBarController.postPrefabInitialization(this);
         }
 
         override protected void lazyInitLogicContext()
@@ -93,6 +95,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             gameImageDrawer.lazyInit(this, gameEntityFactory);
 
             logicFrameListeners.Add(specialConstructionControlBoardVM);
+            logicFrameListeners.Add(statusBarController);
             gameAreaChangeListeners.Add(specialConstructionControlBoardVM);
             gameAreaChangeListeners.Add(mapController);
             gameAreaChangeListeners.Add(firstLockedAchievementBoardVM);

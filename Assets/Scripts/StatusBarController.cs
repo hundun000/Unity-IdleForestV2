@@ -1,9 +1,14 @@
+using Assets.Scripts.DemoGameCore.logic;
+using Assets.Scripts.DemoGameCore.ui.screen;
+using hundun.idleshare.gamelib;
+using hundun.unitygame.gamelib;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StatusBarController : MonoBehaviour
+public class StatusBarController : MonoBehaviour, ILogicFrameListener
 {
     private GameObject fill;
     private Image fillImage;
@@ -24,6 +29,8 @@ public class StatusBarController : MonoBehaviour
     [SerializeField]
     float[] lineWidth=new float[4]; //各条线的宽度（比例）
 
+    DemoPlayScreen parent;      // 通过代码绑定
+
     private void Start()
     {
         fill=transform.GetChild(0).gameObject;
@@ -39,6 +46,12 @@ public class StatusBarController : MonoBehaviour
             line[i].GetComponent<RectTransform>().offsetMin=new Vector2(width*linePosition[i]-lineWidth[i]*width/2,0);
             line[i].GetComponent<RectTransform>().offsetMax=new Vector2(-width*(1-linePosition[i])+lineWidth[i]*width/2,0);
         }
+    }
+
+    public void postPrefabInitialization(DemoPlayScreen playScreen)
+    {
+        // 通过代码绑定引用
+        this.parent = playScreen;
     }
 
     //设置当前碳量
@@ -60,5 +73,17 @@ public class StatusBarController : MonoBehaviour
         {
             fillImage.color=fillAreaColor[2];
         }
+    }
+
+    private float amountToRate(long amount)
+    {
+        return (float)(5.0 * Math.Log(amount * 1.0f));
+    }
+
+    void ILogicFrameListener.onLogicFrame()
+    {
+        // 后端逻辑帧到达，说明后端数据可能有变，让this更新使用最新数据
+        long amount = parent.game.idleGameplayExport.getResourceNumOrZero(ResourceType.CARBON);
+        SetValue(amountToRate(amount));
     }
 }
