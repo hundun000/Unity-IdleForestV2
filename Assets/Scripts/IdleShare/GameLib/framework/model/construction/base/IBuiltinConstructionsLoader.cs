@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mono.Cecil.Cil;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,11 @@ namespace hundun.idleshare.gamelib
 
         public abstract BaseConstruction getInstance(GridPosition position);
 
+        internal void lazyInitDescription(IdleGameplayContext gameContext, Language language)
+        {
+            // TODO language
+            buyInstanceCostPack.descriptionStart = "购买费用";
+        }
     }
 
 

@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.DemoGameCore.logic;
 using hundun.idleshare.enginecore;
+using hundun.unitygame.adapters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,15 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 {
     public class DemoConstructionControlNodeVM : ConstructionControlNodeVM<DemoIdleGame, RootSaveData>
     {
+        override protected void OnMouseEnter()
+        {
+            // not base
+        }
+
+
+        override protected void OnMouseExit()
+        {
+            // not base
+        }
     }
 }

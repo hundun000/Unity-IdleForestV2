@@ -24,6 +24,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
         DemoConstructionControlNodeVM constructionControlNodePrefab;
         DemoConstructionPrototypeControlNodeVM constructionPrototypeControlNodePrefab;
+        CellDetailInnerBoardVM innerBoardVMPrefab;
 
         public BaseConstruction data;
         private List<object> contents = new List<object>();
@@ -35,6 +36,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             this.nodesRoot = this.transform.Find("_nodesRoot").gameObject;
             this.constructionControlNodePrefab = this.transform.Find("_templates/constructionControlNodePrefab").GetComponent<DemoConstructionControlNodeVM>();
             this.constructionPrototypeControlNodePrefab = this.transform.Find("_templates/constructionPrototypeControlNodePrefab").GetComponent<DemoConstructionPrototypeControlNodeVM>();
+            this.innerBoardVMPrefab = this.transform.Find("_templates/innerBoardVMPrefab").GetComponent<CellDetailInnerBoardVM>();
         }
 
         void Update()
@@ -92,11 +94,16 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             nodesRoot.transform.AsTableClear();
             contents.Clear();
 
-            DemoConstructionControlNodeVM content = nodesRoot.transform.AsTableAdd<DemoConstructionControlNodeVM>(constructionControlNodePrefab.gameObject);
-            content.postPrefabInitialization(parent);
-            content.setModel(construction);
-            content.update();
-            contents.Add(content);
+            DemoConstructionControlNodeVM constructionControlNodeVM = nodesRoot.transform.AsTableAdd<DemoConstructionControlNodeVM>(constructionControlNodePrefab.gameObject);
+            constructionControlNodeVM.postPrefabInitialization(parent);
+            constructionControlNodeVM.setModel(construction);
+            constructionControlNodeVM.update();
+            contents.Add(constructionControlNodeVM);
+
+            CellDetailInnerBoardVM innerBoardVM = nodesRoot.transform.AsTableAdd<CellDetailInnerBoardVM>(innerBoardVMPrefab.gameObject);
+            innerBoardVM.postPrefabInitialization(parent);
+            innerBoardVM.update(construction);
+            contents.Add(innerBoardVM);
 
             posLabel.text = construction.name + "(" +
                 construction.saveData.position.x + ", " +
@@ -116,6 +123,11 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
                 content.setModel(constructionPrototype);
                 content.update();
                 contents.Add(content);
+
+                CellDetailInnerBoardVM innerBoardVM = nodesRoot.transform.AsTableAdd<CellDetailInnerBoardVM>(innerBoardVMPrefab.gameObject);
+                innerBoardVM.postPrefabInitialization(parent);
+                innerBoardVM.update(constructionPrototype);
+                contents.Add(innerBoardVM);
             });
 
             posLabel.text = construction.name + "(" +

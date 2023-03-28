@@ -30,7 +30,9 @@ namespace hundun.idleshare.gamelib
 
         internal AbstractConstructionPrototype getPrototype(string prototypeId)
         {
-            return providerMap.get(prototypeId);
+            AbstractConstructionPrototype prototype = providerMap.get(prototypeId);
+            prototype.lazyInitDescription(gameContext, language);
+            return prototype;
         }
 
 

@@ -28,7 +28,7 @@ namespace hundun.idleshare.enginecore
         TextButton transferButton;
         Image background;
         
-        void OnMouseEnter()
+        virtual protected void OnMouseEnter()
         {
             if (model != null)
             {
@@ -39,7 +39,7 @@ namespace hundun.idleshare.enginecore
         }
 
 
-        void OnMouseExit()
+        virtual protected void OnMouseExit()
         {
             parent.hideAndCleanGuideInfo();
         }
