@@ -185,6 +185,7 @@ namespace hundun.idleshare.gamelib
                 saveData.workingLevel = (saveData.level);
             }
             updateModifiedValues();
+            gameContext.eventManager.notifyConstructionCollectionChange();
         }
 
         public Boolean canDestory() 

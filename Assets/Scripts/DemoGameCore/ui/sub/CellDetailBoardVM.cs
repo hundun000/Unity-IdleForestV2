@@ -14,7 +14,7 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.DemoGameCore.ui.sub
 {
-    public class CellDetailBoardVM : MonoBehaviour
+    public class CellDetailBoardVM : MonoBehaviour, IConstructionCollectionListener
     {
         DemoPlayScreen parent;
 
@@ -24,6 +24,8 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
         DemoConstructionControlNodeVM constructionControlNodePrefab;
         DemoConstructionPrototypeControlNodeVM constructionPrototypeControlNodePrefab;
+
+        public BaseConstruction data;
 
         void Awake()
         {
@@ -46,6 +48,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
         public void updateDetail(BaseConstruction construction)
         {
+            this.data = construction;
             if (construction == null)
             {
                 updateAsEmpty();
@@ -64,6 +67,8 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         }
         private void updateAsEmpty()
         {
+            nodesRoot.transform.AsTableClear();
+
             posLabel.text = "点击一个地块可查看详情";
         }
 
@@ -72,6 +77,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             nodesRoot.transform.AsTableClear();
 
             DemoConstructionControlNodeVM content = nodesRoot.transform.AsTableAdd<DemoConstructionControlNodeVM>(constructionControlNodePrefab.gameObject);
+            content.postPrefabInitialization(parent);
             content.setModel(construction);
             content.update();
 
@@ -88,6 +94,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
             constructionPrototypes.ForEach(constructionPrototype => {
                 DemoConstructionPrototypeControlNodeVM content = nodesRoot.transform.AsTableAdd<DemoConstructionPrototypeControlNodeVM>(constructionPrototypeControlNodePrefab.gameObject);
+                content.postPrefabInitialization(parent);
                 content.setModel(constructionPrototype);
                 content.update();
             });
@@ -97,5 +104,14 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
                 construction.saveData.position.y + ")"; ;
         }
 
+        public void onConstructionCollectionChange()
+        {
+            if (data != null)
+            {
+                data = parent.game.idleGameplayExport.getConstructionAt(data.position);
+                updateDetail(data);
+            }
+            
+        }
     }
 }

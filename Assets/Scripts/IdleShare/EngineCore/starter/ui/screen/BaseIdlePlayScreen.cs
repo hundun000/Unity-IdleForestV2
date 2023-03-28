@@ -29,10 +29,7 @@ namespace hundun.idleshare.enginecore
         // ----- ui ------
         //protected IdleScreenBackgroundVM screenBackgroundVM;
         protected StorageInfoBoardVM<T_GAME, T_SAVE> storageInfoBoardVM;
-        protected FixedConstructionControlBoardVM<T_GAME, T_SAVE> constructionControlBoardVM;
-        protected FixedConstructionPrototypeControlBoardVM<T_GAME, T_SAVE> constructionPrototypeControlBoardVM;
         protected GameImageDrawer<T_GAME, T_SAVE> gameImageDrawer;
-        protected GameAreaControlBoardVM<T_GAME, T_SAVE> gameAreaControlBoardVM;
         
         // ----- popup ui ------
         protected AchievementMaskBoard<T_GAME, T_SAVE> achievementMaskBoard;
@@ -57,10 +54,7 @@ namespace hundun.idleshare.enginecore
 
             //this.screenBackgroundVM = this.Contrainer.transform.Find("ScreenBackgroundVM").gameObject.GetComponent<IdleScreenBackgroundVM>();
             this.storageInfoBoardVM = this.UiRoot.transform.Find("cell_0/StorageInfoBoardVM").gameObject.GetComponent<StorageInfoBoardVM<T_GAME, T_SAVE>>();
-            this.constructionControlBoardVM = this.UiRoot.transform.Find("cell_1/FixedConstructionControlBoardVM").gameObject.GetComponent<FixedConstructionControlBoardVM<T_GAME, T_SAVE>>();
-            this.gameAreaControlBoardVM = this.UiRoot.transform.Find("cell_2/GameAreaControlBoardVM").gameObject.GetComponent<GameAreaControlBoardVM<T_GAME, T_SAVE>>();
-            this.constructionPrototypeControlBoardVM = this.UiRoot.transform.Find("cell_3/constructionPrototypeControlBoardVM").gameObject.GetComponent<FixedConstructionPrototypeControlBoardVM<T_GAME, T_SAVE>>();
-
+            
             this.popupInfoBoardVM = this.PopoupRoot.transform.Find("PopupInfoBoardVM").gameObject.GetComponent<PopupInfoBoardVM<T_GAME, T_SAVE>>();
             this.achievementMaskBoard = this.PopoupRoot.transform.Find("AchievementMaskBoard").gameObject.GetComponent<AchievementMaskBoard<T_GAME, T_SAVE>>();
             this.notificationMaskBoard = this.PopoupRoot.transform.Find("NotificationMaskBoard").gameObject.GetComponent<NotificationMaskBoard<T_GAME, T_SAVE>>();
@@ -116,17 +110,11 @@ namespace hundun.idleshare.enginecore
                 game.childGameConfig.areaShowEntityByChangeAmountResourceIds);
 
             logicFrameListeners.Add(storageInfoBoardVM);
-            logicFrameListeners.Add(constructionControlBoardVM);
-            logicFrameListeners.Add(constructionPrototypeControlBoardVM);
             logicFrameListeners.Add(game.idleGameplayExport);
 
             //gameAreaChangeListeners.Add(screenBackgroundVM);
-            gameAreaChangeListeners.Add(constructionControlBoardVM);
-            gameAreaChangeListeners.Add(constructionPrototypeControlBoardVM);
-            gameAreaChangeListeners.Add(gameAreaControlBoardVM);
 
             this.game.idleGameplayExport.eventManagerRegisterListener(this);
-            this.game.idleGameplayExport.eventManagerRegisterListener(constructionControlBoardVM);
             this.game.idleGameplayExport.eventManagerRegisterListener(gameImageDrawer);
         }
 

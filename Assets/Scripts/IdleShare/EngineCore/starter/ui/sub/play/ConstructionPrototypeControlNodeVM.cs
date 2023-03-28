@@ -37,7 +37,7 @@ namespace hundun.idleshare.enginecore
             this.yInputField = this.transform.Find("yInputField").GetComponent<InputField>();
         }
 
-        public void postPrefabInitialization(BaseIdlePlayScreen<T_GAME, T_SAVE> parent, int index)
+        public void postPrefabInitialization(BaseIdlePlayScreen<T_GAME, T_SAVE> parent)
         {
 
             this.parent = parent;

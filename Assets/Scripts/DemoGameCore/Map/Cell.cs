@@ -37,8 +37,9 @@ namespace Map
         public DemoPlayScreen parent; // 后端Screen引用
         public BaseConstruction construction; // 后端数据引用
 
-        public void StateChangeTo(BaseConstruction construction)
+        public void StateChangeTo(DemoPlayScreen parent, BaseConstruction construction)
         {
+            this.parent = parent;
             this.construction = construction;
             switch (construction.prototypeId)
             {
@@ -65,7 +66,7 @@ namespace Map
 
         private void OnMouseUpAsButton()
         {
-            fakeOnClick();
+            parent.cellDetailBoardVM.updateDetail(construction);
         }
 
         public void testDataPrint(Camera _camera)
@@ -84,9 +85,10 @@ namespace Map
             this.isRunning = construction.saveData.workingLevel == construction.saveData.level;
         }
 
-        internal void fakeOnClick()
+        internal bool IsShowingDetail()
         {
-            parent.cellDetailBoardVM.updateDetail(construction);
+            return parent.cellDetailBoardVM.data != null && this.construction != null 
+                && parent.cellDetailBoardVM.data.position.Equals(this.construction.position);
         }
     }
 }

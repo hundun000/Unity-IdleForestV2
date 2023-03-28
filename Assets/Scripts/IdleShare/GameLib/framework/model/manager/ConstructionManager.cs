@@ -115,6 +115,13 @@ namespace hundun.idleshare.gamelib
             return result;
         }
 
+        public BaseConstruction getConstructionAt(GridPosition target)
+        {
+            return runningConstructionModelMap.Values
+                .Where(it => it.saveData.position.Equals(target))
+                .FirstOrDefault();
+        }
+
         public List<BaseConstruction> getConstructions()
         {
             return runningConstructionModelMap.Values.ToList();
@@ -238,10 +245,7 @@ namespace hundun.idleshare.gamelib
 
         BaseConstruction ITileNodeMap<BaseConstruction>.getValidNodeOrNull(GridPosition position)
         {
-            return runningConstructionModelMap.Values
-                .Where(it => it.saveData.position.x == position.x && it.saveData.position.y == position.y)
-                .FirstOrDefault()
-                ;
+            return getConstructionAt(position);
         }
     }
 }

@@ -4,6 +4,7 @@ using hundun.idleshare.enginecore;
 using hundun.idleshare.gamelib;
 using hundun.unitygame.adapters;
 using hundun.unitygame.gamelib;
+using Mono.Cecil.Cil;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -69,7 +70,7 @@ namespace Map
 
             levelInfo.constructions.ForEach(construction => { 
                 var cell = Instantiate(cellPrefab, cellRoot.transform);
-                cell.StateChangeTo(construction);
+                cell.StateChangeTo(parent, construction);
                 cell.transform.position = CalculatePosition(construction.saveData.position.x, construction.saveData.position.y);
                 constructionControlNodes.Add(cell);
             });
@@ -142,6 +143,11 @@ namespace Map
             return constructions
                 .Where(it => !SpecialConstructionControlBoardVM.specialConstructionPrototypeIds.Contains(it.saveData.prototypeId))
                 .ToList();
+        }
+
+        private void OnMouseUpOutsideCells()
+        {
+            parent.cellDetailBoardVM.updateDetail(null);
         }
     }
 

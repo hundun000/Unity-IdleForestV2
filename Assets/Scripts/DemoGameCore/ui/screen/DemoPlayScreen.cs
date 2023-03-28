@@ -81,11 +81,8 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
         {
             storageInfoBoardVM.postPrefabInitialization(this, ResourceType.VALUES_FOR_SHOW_ORDER);
 
-            constructionControlBoardVM.postPrefabInitialization(this);
-            constructionPrototypeControlBoardVM.postPrefabInitialization(this);
             specialConstructionControlBoardVM.postPrefabInitialization(this);
             mapController.postPrefabInitialization(this);
-            gameAreaControlBoardVM.postPrefabInitialization(this, GameArea.values);
         }
 
         override protected void lazyInitLogicContext()
@@ -101,6 +98,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             gameAreaChangeListeners.Add(firstLockedAchievementBoardVM);
             this.game.idleGameplayExport.eventManagerRegisterListener(specialConstructionControlBoardVM);
             this.game.idleGameplayExport.eventManagerRegisterListener(mapController);
+            this.game.idleGameplayExport.eventManagerRegisterListener(cellDetailBoardVM);
         }
 
         override public void showAchievementMaskBoard(AbstractAchievement prototype)

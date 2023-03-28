@@ -42,7 +42,7 @@ namespace hundun.idleshare.enginecore
             for (int i = 0; i < childrenSize; i++)
             {
                 ConstructionPrototypeControlNodeVM<T_GAME, T_SAVE> constructionView = nodesRoot.transform.AsTableAdd<ConstructionPrototypeControlNodeVM<T_GAME, T_SAVE>>(nodePrefab.gameObject);
-                constructionView.postPrefabInitialization(parent, i);
+                constructionView.postPrefabInitialization(parent);
                 constructionControlNodes.Add(constructionView);
             }
 

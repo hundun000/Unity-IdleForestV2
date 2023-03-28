@@ -89,6 +89,11 @@ namespace hundun.idleshare.gamelib
             model.onClick();
         }
 
+        public BaseConstruction getConstructionAt(GridPosition position)
+        {
+            return gameplayContext.constructionManager.getConstructionAt(position);
+        }
+
         public Boolean constructionCanClickEffect(String id)
         {
             BaseConstruction model = gameplayContext.constructionManager.getConstruction(id);

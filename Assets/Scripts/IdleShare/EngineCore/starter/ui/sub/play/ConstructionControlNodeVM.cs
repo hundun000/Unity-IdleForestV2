@@ -60,7 +60,7 @@ namespace hundun.idleshare.enginecore
             this.transferButton = this.transform.Find("transferButton").GetComponent<TextButton>();
         }
 
-        public void postPrefabInitialization(BaseIdlePlayScreen<T_GAME, T_SAVE> parent, int index)
+        public void postPrefabInitialization(BaseIdlePlayScreen<T_GAME, T_SAVE> parent)
         {
 
             this.parent = parent;
