@@ -40,22 +40,33 @@ namespace Map
         public float cameraDistance = 10;    // 相机初始离屏幕位置
         public GameObject cellRoot;          // 格位根物体，下有全部格位
         public Cell cellPrefab;              // 格位预制体
+        public GameObject focusCircle;       // 选中格位时显示的聚焦圈
         //public Cell[,] mapLayout;      // 地图布局
         private List<Cell> constructionControlNodes = new List<Cell>();  // Cell即为一种ConstructionControlNode——控制一个设施的UI
 
         DemoPlayScreen parent;      // 通过代码绑定
 
-        /*
+        
         private void Awake()
         {
-            gameObject.GetComponent<SpriteLoader>().SpriteLoad();
-            gameObject.GetComponent<LevelInfo>().readMap();
-            BuildBoard(gameObject.GetComponent<LevelInfo>());
+
+            //gameObject.GetComponent<SpriteLoader>().SpriteLoad();
+            //gameObject.GetComponent<LevelInfo>().readMap();
+            //BuildBoard(gameObject.GetComponent<LevelInfo>());
 
         }
-        */
 
-        
+        private void Update()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Collider2D[] col = Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                Debug.Log(col.Length);
+                if (col.Length == 0) focusDisappear();
+                else focusAppear(col[0].transform.position);
+            }
+        }
+
         // 将地图打印到屏幕上
         private void BuildBoard(BackendLevelInfo levelInfo)
         {
@@ -91,7 +102,8 @@ namespace Map
             // 相机调整
             sceneCamera.orthographicSize = cameraSize;
             Vector2 cameraPosVector2 = constructionControlNodes.First().transform.position;
-            sceneCamera.transform.position = new Vector3(cameraPosVector2.x, cameraPosVector2.y, -cameraDistance);
+            GetComponent<CameraController>().zeroPos =
+                new Vector3(cameraPosVector2.x, cameraPosVector2.y, -cameraDistance);
 
         }
 
@@ -145,9 +157,19 @@ namespace Map
                 .ToList();
         }
 
-        private void OnMouseUpOutsideCells()
+
+        // 在指定位置打印聚焦圈
+        public void focusAppear(Vector3 destPos)
         {
-            parent.cellDetailBoardVM.updateDetail(null);
+            focusCircle.transform.position = destPos;
+            focusCircle.SetActive(true);
+        }
+
+        // 在鼠标点击空位置时隐藏聚焦圈
+        private void focusDisappear()
+        {
+            focusCircle.SetActive(false);
+            //parent.cellDetailBoardVM.updateDetail(null);
         }
     }
 

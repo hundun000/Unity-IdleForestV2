@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 namespace Map
 {
-    // 格子状态. 一块格子不可能同时拥有多种状态
+    // 已启用的特性 格子状态. 一块格子不可能同时拥有多种状态
     public enum CellState
     {
         None,          // 关卡不涉及的土地
@@ -28,7 +28,9 @@ namespace Map
     {
         public int level;             // 工厂或森林的等级
         public bool isRunning;        // 工厂和森林的运营状态，关停或砍伐中则为false
-        
+
+        public GameObject colorCover;      // 格位颜色遮罩，用于视图切换
+
         public SpriteRenderer fieldRenderer;  // 土地贴图渲染器
         public SpriteRenderer upperRenderer;  // 工厂/森林渲染器
         public Canvas cellCanvas;             // 每个格位自己的画布
@@ -67,6 +69,8 @@ namespace Map
         private void OnMouseUpAsButton()
         {
             parent.cellDetailBoardVM.updateDetail(construction);
+            // 通知地图全局将聚焦圈打印至格位位置
+            // GameObject.Find("/SceneManager").GetComponent<MapController>().focusAppear(transform.position);
         }
 
         public void testDataPrint(Camera _camera)
