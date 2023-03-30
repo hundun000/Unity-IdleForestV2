@@ -85,6 +85,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         private void updateAsEmpty()
         {
             nodesRoot.transform.AsTableClear();
+            contents.Clear();
 
             posLabel.text = "点击一个地块可查看详情";
         }

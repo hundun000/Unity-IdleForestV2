@@ -169,7 +169,7 @@ namespace Map
         private void focusDisappear()
         {
             focusCircle.SetActive(false);
-            //parent.cellDetailBoardVM.updateDetail(null);
+            parent.cellDetailBoardVM.updateDetail(null);
         }
     }
 
