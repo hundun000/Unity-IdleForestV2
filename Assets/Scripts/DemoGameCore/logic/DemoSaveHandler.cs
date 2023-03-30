@@ -19,7 +19,7 @@ namespace Assets.Scripts.DemoGameCore.logic
 
         }
 
-        override protected RootSaveData genereateStarterRootSaveData()
+        override protected List<RootSaveData> genereateStarterRootSaveData()
         {
             var starterConstructionSaveDatas = new List<ConstructionSaveData>();
             starterConstructionSaveDatas.Add(
@@ -90,8 +90,10 @@ namespace Assets.Scripts.DemoGameCore.logic
 
             var systemSettingSaveData = new SystemSettingSaveData();
             systemSettingSaveData.language = Language.CN;
-            var rootSaveData = new RootSaveData(gameplaySaveData, systemSettingSaveData);
-            return rootSaveData;
+            return new List<RootSaveData>() { 
+                new RootSaveData(null, systemSettingSaveData),
+                new RootSaveData(gameplaySaveData, null)
+            };
 
         }
     }

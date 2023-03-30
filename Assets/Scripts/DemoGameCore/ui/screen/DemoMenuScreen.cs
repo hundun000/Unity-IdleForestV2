@@ -9,28 +9,28 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.DemoGameCore.ui.screen
 {
     public class DemoMenuScreen : BaseIdleMenuScreen<DemoIdleGame, RootSaveData>
     {
 
+        public InputField inputField;
 
-
-
-        
 
         override public void postMonoBehaviourInitialization(DemoIdleGame game) {
             base.postMonoBehaviourInitialization(
             game,
             () =>
             {
-                game.saveHandler.gameplayLoadOrStarter(true);
+                game.saveHandler.gameplayLoadOrStarter(-1);
                 SceneManager.LoadScene(DemoPlayScreen.SCENE_NAME);
             },
             () =>
             {
-                game.saveHandler.gameplayLoadOrStarter(false);
+                int starterIndex = int.Parse(inputField.text);
+                game.saveHandler.gameplayLoadOrStarter(starterIndex);
                 SceneManager.LoadScene(DemoPlayScreen.SCENE_NAME);
             }
             );
