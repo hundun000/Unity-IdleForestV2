@@ -106,9 +106,9 @@ namespace hundun.idleshare.gamelib
             return model.levelComponent.canChangeWorkingLevel(delta);
         }
 
-        public void destoryConstruction(String id)
+        public void destoryConstruction(String id, String constructionPrototypeIdOfEmpty)
         {
-            gameplayContext.constructionManager.destoryInstanceAndNotify(id);
+            gameplayContext.constructionManager.destoryInstanceAndNotify(id, constructionPrototypeIdOfEmpty);
         }
 
         internal AbstractConstructionPrototype previewPrototype(string prototypeId)

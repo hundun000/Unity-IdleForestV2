@@ -3,6 +3,7 @@ using Assets.Scripts.DemoGameCore.ui.screen;
 using hundun.idleshare.enginecore;
 using hundun.idleshare.gamelib;
 using hundun.unitygame.adapters;
+using hundun.unitygame.gamelib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,39 +15,30 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.DemoGameCore.ui.sub
 {
-    public class CellDetailBoardVM : MonoBehaviour, IConstructionCollectionListener
+    public class CellDetailBoardVM : MonoBehaviour, IConstructionCollectionListener, ILogicFrameListener
     {
         DemoPlayScreen parent;
 
         GameObject nodesRoot;
         Image background;
-        Text posLabel;
 
         
         CellDetailInnerBoardVM innerBoardVMPrefab;
 
         public BaseConstruction data;
-        private List<object> contents = new List<object>();
+        private List<CellDetailInnerBoardVM> contents = new List<CellDetailInnerBoardVM>();
 
         void Awake()
         {
             this.background = this.transform.Find("background").GetComponent<Image>();
-            this.posLabel = this.transform.Find("posLabel").GetComponent<Text>();
             this.nodesRoot = this.transform.Find("_nodesRoot").gameObject;
             this.innerBoardVMPrefab = this.transform.Find("_templates/innerBoardVMPrefab").GetComponent<CellDetailInnerBoardVM>();
         }
 
-        void Update()
+        public void onLogicFrame()
         {
             contents.ForEach(it => {
-                if (it is DemoConstructionControlNodeVM constructionControlNodeVM)
-                {
-                    constructionControlNodeVM.update();
-                }
-                else if (it is DemoConstructionPrototypeControlNodeVM constructionPrototypeControlNodeVM)
-                {
-                    constructionPrototypeControlNodeVM.update();
-                }
+                it.update();
             });
         }
 
@@ -83,8 +75,6 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         {
             nodesRoot.transform.AsTableClear();
             contents.Clear();
-
-            posLabel.text = "点击一个地块可查看详情";
         }
 
         private void updateAsConstructionDetail(BaseConstruction construction)
@@ -97,9 +87,6 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             innerBoardVM.update(construction, construction.saveData.position);
             contents.Add(innerBoardVM);
 
-            posLabel.text = construction.name + "(" +
-                construction.saveData.position.x + ", " +
-                construction.saveData.position.y + ")"; ;
         }
 
         private void updateAsConstructionPrototypeDetail(BaseConstruction construction)
@@ -116,9 +103,6 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
                 contents.Add(innerBoardVM);
             });
 
-            posLabel.text = construction.name + "(" +
-                construction.saveData.position.x + ", " +
-                construction.saveData.position.y + ")"; ;
         }
 
         public void onConstructionCollectionChange()

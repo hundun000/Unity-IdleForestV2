@@ -16,8 +16,6 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
     public class DemoMenuScreen : BaseIdleMenuScreen<DemoIdleGame, RootSaveData>
     {
 
-        public InputField inputField;
-
 
         override public void postMonoBehaviourInitialization(DemoIdleGame game) {
             base.postMonoBehaviourInitialization(
@@ -29,7 +27,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             },
             () =>
             {
-                int starterIndex = int.Parse(inputField.text);
+                int starterIndex = 0;
                 game.saveHandler.gameplayLoadOrStarter(starterIndex);
                 SceneManager.LoadScene(DemoPlayScreen.SCENE_NAME);
             }

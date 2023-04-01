@@ -7,16 +7,33 @@ namespace Assets.Scripts.DemoGameCore.logic
 {
     public class RubbishPrototype : AbstractConstructionPrototype
     {
+        private static DescriptionPackage descriptionPackageEN = new DescriptionPackage(
+                null, null, null, null, null, null, "清理费用", "清理", null,
+                DescriptionPackageFactory.ANY_EMPTY_LEVEL_IMP,
+                DescriptionPackageFactory.ANY_EMPTY_PROFICIENCY_IMP);
+        private static DescriptionPackage descriptionPackageCN = new DescriptionPackage(
+                null, null, null, null, null, null, "清理费用", "清理", null,
+                DescriptionPackageFactory.ANY_EMPTY_LEVEL_IMP,
+                DescriptionPackageFactory.ANY_EMPTY_PROFICIENCY_IMP);
 
         public RubbishPrototype(Language language) : base(ConstructionPrototypeId.RUBBISH, language, null)
         {
-
+            // override descriptionPackage
+            switch (language)
+            {
+                case Language.CN:
+                    this.descriptionPackage = RubbishPrototype.descriptionPackageCN;
+                    break;
+                default:
+                    this.descriptionPackage = RubbishPrototype.descriptionPackageEN;
+                    break;
+            }
         }
 
         public override BaseConstruction getInstance(GridPosition position)
         {
             String id = prototypeId + "_" + System.Guid.NewGuid().ToString();
-            BaseConstruction construction = new BaseIdleForestConstruction(prototypeId, id, position, language);
+            BaseConstruction construction = new BaseIdleForestConstruction(prototypeId, id, position, descriptionPackage);
 
             construction.destoryCostPack = DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
                     ResourceType.COIN, 1000

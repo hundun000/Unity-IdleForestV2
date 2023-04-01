@@ -16,7 +16,7 @@ namespace Assets.Scripts.DemoGameCore.logic
         public override BaseConstruction getInstance(GridPosition position)
         {
             String id = prototypeId + "_" + System.Guid.NewGuid().ToString();
-            BaseConstruction construction = new GovernmentConstruction(prototypeId, id, position, language);
+            BaseConstruction construction = new GovernmentConstruction(prototypeId, id, position, descriptionPackage);
 
             return construction;
         }

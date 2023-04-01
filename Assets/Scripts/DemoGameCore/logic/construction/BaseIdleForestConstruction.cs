@@ -11,23 +11,20 @@ namespace Assets.Scripts.DemoGameCore.logic
 {
     public class BaseIdleForestConstruction : BaseConstruction
     {
-
+        static ProficiencySpeedCalculator DEFAULT = (thiz) =>
+        {
+            return 0;
+        };
+        public ProficiencySpeedCalculator proficiencySpeedCalculator = null;
         public BaseIdleForestConstruction(
             String prototypeId, 
             String id, 
-            GridPosition position, 
-            Language language) : base(prototypeId, id)
+            GridPosition position,
+            DescriptionPackage descriptionPackage) : base(prototypeId, id)
         {
 
-            switch (language)
-            {
-                case Language.CN:
-                    this.descriptionPackage = DemoBuiltinConstructionsLoader.descriptionPackageCN;
-                    break;
-                default:
-                    this.descriptionPackage = DemoBuiltinConstructionsLoader.descriptionPackageEN;
-                    break;
-            }
+            this.descriptionPackage = descriptionPackage;
+
             
 
             OutputComponent outputComponent = new OutputComponent(this);

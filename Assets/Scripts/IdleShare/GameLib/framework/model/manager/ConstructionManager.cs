@@ -158,7 +158,7 @@ namespace hundun.idleshare.gamelib
             gameContext.eventManager.notifyConstructionCollectionChange();
         }
 
-        internal void destoryInstanceAndNotify(String id)
+        internal void destoryInstanceAndNotify(String id, String constructionPrototypeIdOfEmpty)
         {
             BaseConstruction construction = runningConstructionModelMap[id];
             removeInstance(construction);
@@ -169,6 +169,10 @@ namespace hundun.idleshare.gamelib
             if (construction.destoryGainPack != null)
             {
                 gameContext.storageManager.modifyAllResourceNum(construction.destoryGainPack.modifiedValues, true);
+            }
+            if (constructionPrototypeIdOfEmpty != null)
+            {
+                createInstanceOfPrototype(constructionPrototypeIdOfEmpty, construction.position);
             }
             gameContext.eventManager.notifyConstructionCollectionChange();
         }

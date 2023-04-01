@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.DemoGameCore.ui.screen;
+﻿using Assets.Scripts.DemoGameCore.logic;
+using Assets.Scripts.DemoGameCore.ui.screen;
 using hundun.idleshare.enginecore;
 using hundun.idleshare.gamelib;
 using hundun.unitygame.adapters;
@@ -18,7 +19,6 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
     {
         DemoPlayScreen parent;
 
-        Image background;
         GameObject childrenRoot;
         GameObject mainBoardContainer;
 
@@ -30,9 +30,9 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         DemoConstructionPrototypeControlNodeVM constructionPrototypeControlNodePrefab;
 
         GridPosition position;
+        object mainBoardModel;
         void Awake()
         {
-            this.background = this.transform.Find("background").GetComponent<Image>();
             this.childrenRoot = this.transform.Find("childrenRoot").gameObject;
             this.mainBoardContainer = this.transform.Find("mainBoardContainer").gameObject;
 
@@ -50,11 +50,10 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         {
             //super("GUIDE_TEXT", parent.game.getButtonSkin());
             this.parent = parent;
-            this.background.sprite = parent.game.textureManager.defaultBoardNinePatchTexture;
         }
 
 
-        private void updateAsConstruction(BaseConstruction model)
+        private void updateAsConstruction(BaseIdleForestConstruction model)
         {
             // ------ main part ------
             mainBoardContainer.transform.AsTableClear();
@@ -63,6 +62,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             mainBoard.postPrefabInitialization(parent);
             mainBoard.setModel(model);
             mainBoard.update();
+            mainBoardModel = mainBoard;
 
             // ------ details part ------
             childrenRoot.transform.AsTableClear();
@@ -106,6 +106,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             mainBoard.postPrefabInitialization(parent);
             mainBoard.setModel(constructionPrototype, position);
             mainBoard.update();
+            mainBoardModel = mainBoard;
 
             // ------ details part ------
             childrenRoot.transform.AsTableClear();
@@ -139,7 +140,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
         public void update(object data, GridPosition position)
         {
-            if (data is BaseConstruction construction)
+            if (data is BaseIdleForestConstruction construction)
             {
                 updateAsConstruction(construction);
             }
@@ -148,6 +149,18 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
                 updateAsConstructionPrototype(constructionPrototype, position);
             }
             
+        }
+
+        internal void update()
+        {
+            if (mainBoardModel != null && mainBoardModel is DemoConstructionPrototypeControlNodeVM constructionPrototypeControlNodeVM)
+            {
+                constructionPrototypeControlNodeVM.update();
+            }
+            else if (mainBoardModel != null && mainBoardModel is DemoConstructionControlNodeVM constructionControlNodeVM)
+            {
+                constructionControlNodeVM.update();
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Mono.Cecil.Cil;
+﻿using Assets.Scripts.DemoGameCore.logic;
+using Mono.Cecil.Cil;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,12 @@ namespace hundun.idleshare.gamelib
         public readonly Language language;
         public ResourcePack buyInstanceCostPack;
 
-        protected AbstractConstructionPrototype(String prototypeId, Language language, ResourcePack buyInstanceCostPack)
+        protected DescriptionPackage descriptionPackage;
+
+        protected AbstractConstructionPrototype(String prototypeId, 
+            Language language, 
+            ResourcePack buyInstanceCostPack
+            )
         {
             this.prototypeId = prototypeId;
             this.language = language;
@@ -32,7 +38,17 @@ namespace hundun.idleshare.gamelib
                                     + "; "
                     );
             }
-            
+
+            // default descriptionPackage
+            switch (language)
+            {
+                case Language.CN:
+                    this.descriptionPackage = DemoBuiltinConstructionsLoader.descriptionPackageCN;
+                    break;
+                default:
+                    this.descriptionPackage = DemoBuiltinConstructionsLoader.descriptionPackageEN;
+                    break;
+            }
         }
 
         public abstract BaseConstruction getInstance(GridPosition position);

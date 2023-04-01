@@ -17,8 +17,8 @@ namespace Assets.Scripts.DemoGameCore.logic
     {
         public static DescriptionPackage descriptionPackageEN = new DescriptionPackage(
                             "TODO", "TODO", "TODO", "TODO", "TODO", "TODO", "TODO", "TODO", "TODO",
-                            DescriptionPackageFactory.CN_ONLY_LEVEL_IMP,
-                            DescriptionPackageFactory.CN_PROFICIENCY_IMP);
+                            DescriptionPackageFactory.ONLY_LEVEL_IMP,
+                            DescriptionPackageFactory.EN_PROFICIENCY_IMP);
         public static DescriptionPackage descriptionPackageCN = new DescriptionPackage(
                             "自动消耗", "自动产出", "升级费用", "(已达到最大等级)", "升级", "摧毁产出", "摧毁费用", "摧毁", "转职",
                             DescriptionPackageFactory.CN_ONLY_LEVEL_IMP,

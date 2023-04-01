@@ -20,9 +20,9 @@ namespace Assets.Scripts.DemoGameCore.logic
         public GovernmentConstruction(
             String prototypeId, 
             String id, 
-            GridPosition position, 
-            Language language
-            ) : base(prototypeId, id, position, language)
+            GridPosition position,
+            DescriptionPackage descriptionPackage
+            ) : base(prototypeId, id, position, descriptionPackage)
         {
         }
 

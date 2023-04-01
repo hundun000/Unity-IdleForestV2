@@ -96,6 +96,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
             //logicFrameListeners.Add(specialConstructionControlBoardVM);
             //logicFrameListeners.Add(statusBarController);
+            logicFrameListeners.Add(cellDetailBoardVM);
             //gameAreaChangeListeners.Add(specialConstructionControlBoardVM);
             gameAreaChangeListeners.Add(mapController);
             gameAreaChangeListeners.Add(firstLockedAchievementBoardVM);

@@ -75,7 +75,7 @@ namespace hundun.idleshare.enginecore
             destoryButton.button.onClick.AddListener(() => {
 
                 parent.game.frontend.log(this.getClass().getSimpleName(), "destoryButton clicked");
-                parent.game.idleGameplayExport.destoryConstruction(model.id);
+                parent.game.idleGameplayExport.destoryConstruction(model.id, null);
 
             });
             transferButton.button.onClick.AddListener(() => {

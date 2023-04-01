@@ -15,11 +15,8 @@ namespace Assets.Scripts.DemoGameCore.logic
 
     public class AutoProficiencyConstruction : BaseIdleForestConstruction
     {
-        static ProficiencySpeedCalculator DEFAULT = (thiz) =>
-        {
-            return 0;
-        };
-        public ProficiencySpeedCalculator proficiencySpeedCalculator = DEFAULT;
+        
+        
 
         protected int autoOutputProgress = 0;
         protected int autoProficiencyProgress = 0;
@@ -28,9 +25,9 @@ namespace Assets.Scripts.DemoGameCore.logic
         public AutoProficiencyConstruction(
             String prototypeId, 
             String id, 
-            GridPosition position, 
-            Language language
-            ) : base(prototypeId, id, position, language)
+            GridPosition position,
+            DescriptionPackage descriptionPackage
+            ) : base(prototypeId, id, position, descriptionPackage)
         {
         }
 
@@ -57,7 +54,10 @@ namespace Assets.Scripts.DemoGameCore.logic
 
         virtual protected void tryProficiencyOnce()
         {
-            proficiencyComponent.changeProficiency(proficiencySpeedCalculator.Invoke(this));
+            if (proficiencySpeedCalculator != null)
+            {
+                proficiencyComponent.changeProficiency(proficiencySpeedCalculator.Invoke(this));
+            }
         }
 
         private void tryAutoOutputOnce()

@@ -16,7 +16,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
     public class DemoConstructionControlNodeVM : MonoBehaviour
     {
         DemoPlayScreen parent;
-        BaseConstruction model;
+        BaseIdleForestConstruction model;
 
         Text constructionNameLabel;
         Text workingLevelLabel;
@@ -62,7 +62,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             destoryButton.button.onClick.AddListener(() => {
 
                 parent.game.frontend.log(this.getClass().getSimpleName(), "destoryButton clicked");
-                parent.game.idleGameplayExport.destoryConstruction(model.id);
+                parent.game.idleGameplayExport.destoryConstruction(model.id, ConstructionPrototypeId.DIRT);
 
             });
 
@@ -93,7 +93,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
         }
 
-        public void setModel(BaseConstruction constructionExportData)
+        public void setModel(BaseIdleForestConstruction constructionExportData)
         {
             this.model = constructionExportData;
             if (constructionExportData != null)
@@ -130,33 +130,57 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             constructionNameLabel.text = (model.name);
             
             workingLevelLabel.text = (model.levelComponent.getWorkingLevelDescroption());
-            proficiencyLabel.text = (model.proficiencyComponent.getProficiencyDescroption());
-            destoryButton.label.text = (model.descriptionPackage.destoryButtonDescroption);
+
+            if (model.proficiencySpeedCalculator != null)
+            {
+                proficiencyLabel.text = (model.proficiencyComponent.getProficiencyDescroption());
+            }
+            else
+            {
+                proficiencyLabel.text = "";
+            }
+
+            
 
             // ------ update clickable-state ------
-            if (model.canClickEffect())
+            if (model.descriptionPackage.buttonDescroption == null)
             {
+                clickEffectButton.gameObject.SetActive(false);
+            }
+            else if (model.canClickEffect())
+            {
+                clickEffectButton.gameObject.SetActive(true);
                 clickEffectButton.button.interactable = (true);
                 clickEffectButton.label.text = (model.descriptionPackage.buttonDescroption);
             }
             else if (model.upgradeComponent.canTransfer())
             {
+                clickEffectButton.gameObject.SetActive(true);
                 clickEffectButton.button.interactable = (true);
                 clickEffectButton.label.text = (model.descriptionPackage.transferButtonDescroption);
             }
-            else
+            else if (model.descriptionPackage.buttonDescroption == null)
             {
+                clickEffectButton.gameObject.SetActive(true);
                 clickEffectButton.button.interactable = (false);
                 clickEffectButton.label.text = (model.descriptionPackage.buttonDescroption);
             }
 
-            if (model.canDestory())
+            if (model.descriptionPackage.destoryButtonDescroption == null)
             {
+                destoryButton.gameObject.SetActive(false);
+            } 
+            else if(model.canDestory())
+            {
+                destoryButton.gameObject.SetActive(true);
                 destoryButton.button.interactable = (true);
+                destoryButton.label.text = (model.descriptionPackage.destoryButtonDescroption);
             }
             else
             {
+                destoryButton.gameObject.SetActive(true);
                 destoryButton.button.interactable = (false);
+                destoryButton.label.text = (model.descriptionPackage.destoryButtonDescroption);
             }
         }
     }

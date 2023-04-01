@@ -11,7 +11,10 @@ namespace hundun.idleshare.gamelib
     public class DescriptionPackageFactory
     {
 
-        public static ILevelDescroptionProvider EMPTY_IMP = (level, workingLevel, reachMaxLevel) => "";
+        public static ILevelDescroptionProvider ANY_EMPTY_LEVEL_IMP = (level, workingLevel, reachMaxLevel) => "";
+        public static IProficiencyDescroptionProvider ANY_EMPTY_PROFICIENCY_IMP = (proficiency, reachMaxProficiency) => "";
+
+
         public static ILevelDescroptionProvider ONLY_LEVEL_IMP = (level, workingLevel, reachMaxLevel) => {
             return "lv." + level;
         };
@@ -21,9 +24,11 @@ namespace hundun.idleshare.gamelib
         public static ILevelDescroptionProvider LOCK_IMP = (level, workingLevel, reachMaxLevel) => {
             return (reachMaxLevel ? "Unlocked" : "");
         };
-        
-        
-        public static ILevelDescroptionProvider CN_EMPTY_IMP = (level, workingLevel, reachMaxLevel) => "";
+        public static IProficiencyDescroptionProvider EN_PROFICIENCY_IMP = (proficiency, reachMaxProficiency) => {
+            return "proficiency" + proficiency;
+        };
+
+
         public static ILevelDescroptionProvider CN_ONLY_LEVEL_IMP = (level, workingLevel, reachMaxLevel) => {
             return "等级" + level;
         };
@@ -34,8 +39,11 @@ namespace hundun.idleshare.gamelib
             return (reachMaxLevel ? "已解锁" : "");
         };
         public static IProficiencyDescroptionProvider CN_PROFICIENCY_IMP = (proficiency, reachMaxProficiency) => {
-            return "熟练度" + proficiency;
+            return "效率" + proficiency;
         };
+
+
+
 
         public static DescriptionPackage getWorkingLevelAutoDescriptionPackage(Language language)
         {
@@ -96,12 +104,12 @@ namespace hundun.idleshare.gamelib
                 case Language.CN:
                     return new DescriptionPackage(
                             "消耗", "获得", null, null, "采集",
-                            CN_EMPTY_IMP,
+                            ANY_EMPTY_LEVEL_IMP,
                             CN_PROFICIENCY_IMP);
                 default:
                     return new DescriptionPackage(
                             "Pay", "Gain", null, null, "Gather",
-                            EMPTY_IMP,
+                            ANY_EMPTY_LEVEL_IMP,
                             CN_PROFICIENCY_IMP);
             }
         }

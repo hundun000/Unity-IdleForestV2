@@ -22,7 +22,6 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         Text constructionNameLabel;
         Image previewImage;
         TextButton clickEffectButton;
-        Image background;
 
 
 
@@ -30,7 +29,6 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
         void Awake()
         {
-            this.background = this.transform.Find("background").GetComponent<Image>();
             this.constructionNameLabel = this.transform.Find("constructionNameLabel").GetComponent<Text>();
             this.previewImage = this.transform.Find("previewImage").GetComponent<Image>();
             this.clickEffectButton = this.transform.Find("clickEffectButton").GetComponent<TextButton>();
@@ -47,7 +45,6 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
                 parent.game.idleGameplayExport.buyInstanceOfPrototype(model.prototypeId, position);
             });
 
-            background.sprite = parent.game.textureManager.defaultBoardNinePatchTexture;
         }
 
         private void updateCanCreateInstance()
