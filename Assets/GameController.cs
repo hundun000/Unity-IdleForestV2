@@ -53,7 +53,7 @@ public class GameController: MonoBehaviour
             test.GetComponent<CanvasGroup>().alpha = 0;
         }
     }
-    public void Update()
+    public void _Update()
     {
         if (Keyboard.current.lKey.wasPressedThisFrame)
         {

@@ -22,8 +22,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         Image background;
         Text posLabel;
 
-        DemoConstructionControlNodeVM constructionControlNodePrefab;
-        DemoConstructionPrototypeControlNodeVM constructionPrototypeControlNodePrefab;
+        
         CellDetailInnerBoardVM innerBoardVMPrefab;
 
         public BaseConstruction data;
@@ -34,8 +33,6 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             this.background = this.transform.Find("background").GetComponent<Image>();
             this.posLabel = this.transform.Find("posLabel").GetComponent<Text>();
             this.nodesRoot = this.transform.Find("_nodesRoot").gameObject;
-            this.constructionControlNodePrefab = this.transform.Find("_templates/constructionControlNodePrefab").GetComponent<DemoConstructionControlNodeVM>();
-            this.constructionPrototypeControlNodePrefab = this.transform.Find("_templates/constructionPrototypeControlNodePrefab").GetComponent<DemoConstructionPrototypeControlNodeVM>();
             this.innerBoardVMPrefab = this.transform.Find("_templates/innerBoardVMPrefab").GetComponent<CellDetailInnerBoardVM>();
         }
 
@@ -95,12 +92,6 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             nodesRoot.transform.AsTableClear();
             contents.Clear();
 
-            DemoConstructionControlNodeVM constructionControlNodeVM = nodesRoot.transform.AsTableAdd<DemoConstructionControlNodeVM>(constructionControlNodePrefab.gameObject);
-            constructionControlNodeVM.postPrefabInitialization(parent);
-            constructionControlNodeVM.setModel(construction);
-            constructionControlNodeVM.update();
-            contents.Add(constructionControlNodeVM);
-
             CellDetailInnerBoardVM innerBoardVM = nodesRoot.transform.AsTableAdd<CellDetailInnerBoardVM>(innerBoardVMPrefab.gameObject);
             innerBoardVM.postPrefabInitialization(parent);
             innerBoardVM.update(construction);
@@ -119,12 +110,6 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             List<AbstractConstructionPrototype> constructionPrototypes = parent.game.idleGameplayExport.getAreaShownConstructionPrototypesOrEmpty(parent.area);
 
             constructionPrototypes.ForEach(constructionPrototype => {
-                DemoConstructionPrototypeControlNodeVM content = nodesRoot.transform.AsTableAdd<DemoConstructionPrototypeControlNodeVM>(constructionPrototypeControlNodePrefab.gameObject);
-                content.postPrefabInitialization(parent);
-                content.setModel(constructionPrototype);
-                content.update();
-                contents.Add(content);
-
                 CellDetailInnerBoardVM innerBoardVM = nodesRoot.transform.AsTableAdd<CellDetailInnerBoardVM>(innerBoardVMPrefab.gameObject);
                 innerBoardVM.postPrefabInitialization(parent);
                 innerBoardVM.update(constructionPrototype);

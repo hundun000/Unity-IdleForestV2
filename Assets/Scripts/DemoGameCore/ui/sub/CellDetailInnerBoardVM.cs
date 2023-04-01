@@ -2,6 +2,7 @@
 using hundun.idleshare.enginecore;
 using hundun.idleshare.gamelib;
 using hundun.unitygame.adapters;
+using Mono.Cecil.Cil;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +20,14 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
         Image background;
         GameObject childrenRoot;
+        GameObject mainBoardContainer;
 
         Text detailDescroptionConstPartTextTemplate;
         GameObject onePackTemplate;
         ResourceAmountPairNode resourceAmountPairNodeTemplate;
         GameObject maxLevelGroupTemplate;
+        DemoConstructionControlNodeVM constructionControlNodePrefab;
+        DemoConstructionPrototypeControlNodeVM constructionPrototypeControlNodePrefab;
 
         void Awake()
         {
@@ -34,6 +38,9 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             this.onePackTemplate = this.transform.Find("_templates/onePackTemplate").gameObject;
             this.resourceAmountPairNodeTemplate = this.transform.Find("_templates/resourceAmountPairNodeTemplate").GetComponent<ResourceAmountPairNode>();
             this.maxLevelGroupTemplate = this.transform.Find("_templates/maxLevelGroupTemplate").gameObject;
+
+            this.constructionControlNodePrefab = this.transform.Find("_mainBoardTemplates/constructionControlNodePrefab").GetComponent<DemoConstructionControlNodeVM>();
+            this.constructionPrototypeControlNodePrefab = this.transform.Find("_mainBoardTemplates/constructionPrototypeControlNodePrefab").GetComponent<DemoConstructionPrototypeControlNodeVM>();
 
         }
 
@@ -47,6 +54,15 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
         private void updateAsConstruction(BaseConstruction model)
         {
+            // ------ main part ------
+            mainBoardContainer.transform.AsTableClear();
+
+            DemoConstructionControlNodeVM mainBoard = mainBoardContainer.transform.AsTableAdd<DemoConstructionControlNodeVM>(constructionControlNodePrefab.gameObject);
+            mainBoard.postPrefabInitialization(parent);
+            mainBoard.setModel(model);
+            mainBoard.update();
+
+            // ------ details part ------
             childrenRoot.transform.AsTableClear();
 
             Text detailDescroptionConstPartText = childrenRoot.transform.AsTableAdd<Text>(detailDescroptionConstPartTextTemplate.gameObject);
@@ -81,6 +97,15 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
         private void updateAsConstructionPrototype(AbstractConstructionPrototype constructionPrototype)
         {
+            // ------ main part ------
+            mainBoardContainer.transform.AsTableClear();
+
+            DemoConstructionPrototypeControlNodeVM mainBoard = mainBoardContainer.transform.AsTableAdd<DemoConstructionPrototypeControlNodeVM>(constructionPrototypeControlNodePrefab.gameObject);
+            mainBoard.postPrefabInitialization(parent);
+            mainBoard.setModel(constructionPrototype);
+            mainBoard.update();
+
+            // ------ details part ------
             childrenRoot.transform.AsTableClear();
 
             Text detailDescroptionConstPartText = childrenRoot.transform.AsTableAdd<Text>(detailDescroptionConstPartTextTemplate.gameObject);

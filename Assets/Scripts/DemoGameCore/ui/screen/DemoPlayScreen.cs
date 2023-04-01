@@ -25,13 +25,13 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
         public const String SCENE_NAME = "PlayScene";
 
         DemoGameEntityFactory gameEntityFactory;
-        protected SpecialConstructionControlBoardVM specialConstructionControlBoardVM;
+        //protected SpecialConstructionControlBoardVM specialConstructionControlBoardVM;
         [HideInInspector]
         public CellDetailBoardVM cellDetailBoardVM;
         protected FirstLockedAchievementBoardVM firstLockedAchievementBoardVM;
         // ------ bind by editer ------
         public MapController mapController;
-        public StatusBarController statusBarController;
+        //public StatusBarController statusBarController;
 
         Transform drawContaioner;
 
@@ -41,7 +41,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
             this.gameEntityFactory = this.UiRoot.transform.Find("cell_drawContaioner/GameEntityFactory").GetComponent<DemoGameEntityFactory>();
             this.drawContaioner = this.UiRoot.transform.Find("cell_drawContaioner/root").transform;
-            this.specialConstructionControlBoardVM = this.UiRoot.transform.Find("cell_4/SpecialConstructionControlBoardVM").GetComponent<SpecialConstructionControlBoardVM>();
+            //this.specialConstructionControlBoardVM = this.UiRoot.transform.Find("cell_4/SpecialConstructionControlBoardVM").GetComponent<SpecialConstructionControlBoardVM>();
             this.cellDetailBoardVM = this.UiRoot.transform.Find("cellDetailBoardVM").GetComponent<CellDetailBoardVM>();
             this.firstLockedAchievementBoardVM = this.UiRoot.transform.Find("firstLockedAchievementBoardVM").GetComponent<FirstLockedAchievementBoardVM>();
         }
@@ -82,9 +82,9 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
         {
             storageInfoBoardVM.postPrefabInitialization(this, ResourceType.VALUES_FOR_SHOW_ORDER);
 
-            specialConstructionControlBoardVM.postPrefabInitialization(this);
+            //specialConstructionControlBoardVM.postPrefabInitialization(this);
             mapController.postPrefabInitialization(this);
-            statusBarController.postPrefabInitialization(this);
+            //statusBarController.postPrefabInitialization(this);
         }
 
         override protected void lazyInitLogicContext()
@@ -94,12 +94,12 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             gameEntityFactory.postPrefabInitialization(this, drawContaioner);
             gameImageDrawer.lazyInit(this, gameEntityFactory);
 
-            logicFrameListeners.Add(specialConstructionControlBoardVM);
-            logicFrameListeners.Add(statusBarController);
-            gameAreaChangeListeners.Add(specialConstructionControlBoardVM);
+            //logicFrameListeners.Add(specialConstructionControlBoardVM);
+            //logicFrameListeners.Add(statusBarController);
+            //gameAreaChangeListeners.Add(specialConstructionControlBoardVM);
             gameAreaChangeListeners.Add(mapController);
             gameAreaChangeListeners.Add(firstLockedAchievementBoardVM);
-            this.game.idleGameplayExport.eventManagerRegisterListener(specialConstructionControlBoardVM);
+            //this.game.idleGameplayExport.eventManagerRegisterListener(specialConstructionControlBoardVM);
             this.game.idleGameplayExport.eventManagerRegisterListener(mapController);
             this.game.idleGameplayExport.eventManagerRegisterListener(cellDetailBoardVM);
         }
