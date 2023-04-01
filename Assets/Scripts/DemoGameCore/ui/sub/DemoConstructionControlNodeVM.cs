@@ -19,29 +19,24 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         BaseConstruction model;
 
         Text constructionNameLabel;
-        TextButton upWorkingLevelButton;
-        TextButton downWorkingLevelButton;
         Text workingLevelLabel;
         Text proficiencyLabel;
-        Text positionLabel;
 
         TextButton clickEffectButton;
         TextButton destoryButton;
-        TextButton transferButton;
+
         Image background;
 
         void Awake()
         {
             this.background = this.transform.Find("background").GetComponent<Image>();
             this.constructionNameLabel = this.transform.Find("constructionNameLabel").GetComponent<Text>();
-            this.clickEffectButton = this.transform.Find("clickEffectButton").GetComponent<TextButton>();
-            this.upWorkingLevelButton = this.transform.Find("group/upWorkingLevelButton").GetComponent<TextButton>();
-            this.workingLevelLabel = this.transform.Find("group/workingLevelLabel").GetComponent<Text>();
-            this.downWorkingLevelButton = this.transform.Find("group/downWorkingLevelButton").GetComponent<TextButton>();
+            this.workingLevelLabel = this.transform.Find("workingLevelLabel").GetComponent<Text>();
             this.proficiencyLabel = this.transform.Find("proficiencyLabel").GetComponent<Text>();
-            this.positionLabel = this.transform.Find("positionLabel").GetComponent<Text>();
+
+            this.clickEffectButton = this.transform.Find("clickEffectButton").GetComponent<TextButton>();
+
             this.destoryButton = this.transform.Find("destoryButton").GetComponent<TextButton>();
-            this.transferButton = this.transform.Find("transferButton").GetComponent<TextButton>();
         }
 
         public void postPrefabInitialization(DemoPlayScreen parent)
@@ -52,36 +47,22 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
             clickEffectButton.button.onClick.AddListener(() => {
 
-                parent.game.frontend.log(this.getClass().getSimpleName(), "clickEffectButton clicked");
-                parent.game.idleGameplayExport.constructionOnClick(model.id);
+                if(model.upgradeComponent.canTransfer()) 
+                {
+                    parent.game.frontend.log(this.getClass().getSimpleName(), "transferButton clicked");
+                    parent.game.idleGameplayExport.transferConstruction(model.id);
+                }
+                else
+                {
+                    parent.game.frontend.log(this.getClass().getSimpleName(), "clickEffectButton clicked");
+                    parent.game.idleGameplayExport.constructionOnClick(model.id);
+                }
 
             });
             destoryButton.button.onClick.AddListener(() => {
 
                 parent.game.frontend.log(this.getClass().getSimpleName(), "destoryButton clicked");
                 parent.game.idleGameplayExport.destoryConstruction(model.id);
-
-            });
-            transferButton.button.onClick.AddListener(() => {
-
-                parent.game.frontend.log(this.getClass().getSimpleName(), "transferButton clicked");
-                parent.game.idleGameplayExport.transferConstruction(model.id);
-
-            });
-
-
-            // ------ changeWorkingLevelGroup ------
-            downWorkingLevelButton.button.onClick.AddListener(() => {
-                parent.game.frontend.log(this.getClass().getSimpleName(), "level down clicked");
-                parent.game.idleGameplayExport.constructionChangeWorkingLevel(model.id, -1);
-            });
-
-
-
-            upWorkingLevelButton.button.onClick.AddListener(() => {
-
-                parent.game.frontend.log(this.getClass().getSimpleName(), "level up clicked");
-                parent.game.idleGameplayExport.constructionChangeWorkingLevel(model.id, 1);
 
             });
 
@@ -94,8 +75,6 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         private void initAsNormalStyle()
         {
 
-            this.upWorkingLevelButton.gameObject.SetActive(false);
-            this.downWorkingLevelButton.gameObject.SetActive(false);
 
             //changeWorkingLevelGroup.setVisible(false);
 
@@ -108,8 +87,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             //clearStyle();
 
             //changeWorkingLevelGroup.setVisible(true);
-            this.upWorkingLevelButton.gameObject.SetActive(true);
-            this.downWorkingLevelButton.gameObject.SetActive(true);
+
 
 
 
@@ -150,21 +128,28 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             }
             // ------ update text ------
             constructionNameLabel.text = (model.name);
-            clickEffectButton.label.text = (model.descriptionPackage.buttonDescroption);
+            
             workingLevelLabel.text = (model.levelComponent.getWorkingLevelDescroption());
             proficiencyLabel.text = (model.proficiencyComponent.getProficiencyDescroption());
-            positionLabel.text = (model.saveData.position.toShowText());
             destoryButton.label.text = (model.descriptionPackage.destoryButtonDescroption);
 
             // ------ update clickable-state ------
             if (model.canClickEffect())
             {
                 clickEffectButton.button.interactable = (true);
+                clickEffectButton.label.text = (model.descriptionPackage.buttonDescroption);
+            }
+            else if (model.upgradeComponent.canTransfer())
+            {
+                clickEffectButton.button.interactable = (true);
+                clickEffectButton.label.text = (model.descriptionPackage.transferButtonDescroption);
             }
             else
             {
                 clickEffectButton.button.interactable = (false);
+                clickEffectButton.label.text = (model.descriptionPackage.buttonDescroption);
             }
+
             if (model.canDestory())
             {
                 destoryButton.button.interactable = (true);
@@ -173,35 +158,6 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             {
                 destoryButton.button.interactable = (false);
             }
-            if (model.upgradeComponent.canTransfer())
-            {
-                transferButton.button.interactable = (true);
-            }
-            else
-            {
-                transferButton.button.interactable = (false);
-            }
-
-            Boolean canUpWorkingLevel = parent.game.idleGameplayExport.constructionCanChangeWorkingLevel(model.id, 1);
-            if (canUpWorkingLevel)
-            {
-                upWorkingLevelButton.button.interactable = (true);
-            }
-            else
-            {
-                upWorkingLevelButton.button.interactable = (false);
-            }
-
-            Boolean canDownWorkingLevel = parent.game.idleGameplayExport.constructionCanChangeWorkingLevel(model.id, -1);
-            if (canDownWorkingLevel)
-            {
-                downWorkingLevelButton.button.interactable = (true);
-            }
-            else
-            {
-                downWorkingLevelButton.button.interactable = (false);
-            }
-
         }
     }
 }

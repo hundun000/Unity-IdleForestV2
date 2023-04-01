@@ -94,7 +94,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
             CellDetailInnerBoardVM innerBoardVM = nodesRoot.transform.AsTableAdd<CellDetailInnerBoardVM>(innerBoardVMPrefab.gameObject);
             innerBoardVM.postPrefabInitialization(parent);
-            innerBoardVM.update(construction);
+            innerBoardVM.update(construction, construction.saveData.position);
             contents.Add(innerBoardVM);
 
             posLabel.text = construction.name + "(" +
@@ -112,7 +112,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             constructionPrototypes.ForEach(constructionPrototype => {
                 CellDetailInnerBoardVM innerBoardVM = nodesRoot.transform.AsTableAdd<CellDetailInnerBoardVM>(innerBoardVMPrefab.gameObject);
                 innerBoardVM.postPrefabInitialization(parent);
-                innerBoardVM.update(constructionPrototype);
+                innerBoardVM.update(constructionPrototype, construction.saveData.position);
                 contents.Add(innerBoardVM);
             });
 

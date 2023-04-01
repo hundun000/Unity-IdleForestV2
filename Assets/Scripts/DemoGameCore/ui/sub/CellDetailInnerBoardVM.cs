@@ -29,10 +29,12 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         DemoConstructionControlNodeVM constructionControlNodePrefab;
         DemoConstructionPrototypeControlNodeVM constructionPrototypeControlNodePrefab;
 
+        GridPosition position;
         void Awake()
         {
             this.background = this.transform.Find("background").GetComponent<Image>();
             this.childrenRoot = this.transform.Find("childrenRoot").gameObject;
+            this.mainBoardContainer = this.transform.Find("mainBoardContainer").gameObject;
 
             this.detailDescroptionConstPartTextTemplate = this.transform.Find("_templates/detailDescroptionConstPartTextTemplate").GetComponent<Text>();
             this.onePackTemplate = this.transform.Find("_templates/onePackTemplate").gameObject;
@@ -95,14 +97,14 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
         }
 
-        private void updateAsConstructionPrototype(AbstractConstructionPrototype constructionPrototype)
+        private void updateAsConstructionPrototype(AbstractConstructionPrototype constructionPrototype, GridPosition position)
         {
             // ------ main part ------
             mainBoardContainer.transform.AsTableClear();
 
             DemoConstructionPrototypeControlNodeVM mainBoard = mainBoardContainer.transform.AsTableAdd<DemoConstructionPrototypeControlNodeVM>(constructionPrototypeControlNodePrefab.gameObject);
             mainBoard.postPrefabInitialization(parent);
-            mainBoard.setModel(constructionPrototype);
+            mainBoard.setModel(constructionPrototype, position);
             mainBoard.update();
 
             // ------ details part ------
@@ -135,7 +137,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         }
 
 
-        public void update(object data)
+        public void update(object data, GridPosition position)
         {
             if (data is BaseConstruction construction)
             {
@@ -143,7 +145,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             }
             else if (data is AbstractConstructionPrototype constructionPrototype)
             {
-                updateAsConstructionPrototype(constructionPrototype);
+                updateAsConstructionPrototype(constructionPrototype, position);
             }
             
         }

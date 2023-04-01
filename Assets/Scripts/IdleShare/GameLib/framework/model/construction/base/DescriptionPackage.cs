@@ -19,7 +19,8 @@ namespace hundun.idleshare.gamelib
         public String destoryCostDescriptionStart;
         public ILevelDescroptionProvider levelDescroptionProvider;
         public IProficiencyDescroptionProvider proficiencyDescroptionProvider;
-        public String destoryButtonDescroption = "DESTORY";
+        public String destoryButtonDescroption;
+        public String transferButtonDescroption;
 
         /**
          * for idleShare
@@ -40,6 +41,8 @@ namespace hundun.idleshare.gamelib
                 buttonDescroption,
                 null,
                 null,
+                null,
+                null,
                 levelDescroptionProvider,
                 proficiencyDescroptionProvider
                 )
@@ -57,6 +60,8 @@ namespace hundun.idleshare.gamelib
             string buttonDescroption,
             String destoryGainDescriptionStart,
             String destoryCostDescriptionStart,
+            String destoryButtonDescroption,
+            String transferButtonDescroption,
             ILevelDescroptionProvider levelDescroptionProvider,
             IProficiencyDescroptionProvider proficiencyDescroptionProvider
             )
@@ -68,6 +73,8 @@ namespace hundun.idleshare.gamelib
             this.buttonDescroption = buttonDescroption;
             this.destoryGainDescriptionStart = destoryGainDescriptionStart;
             this.destoryCostDescriptionStart = destoryCostDescriptionStart;
+            this.destoryButtonDescroption = destoryButtonDescroption;
+            this.transferButtonDescroption = transferButtonDescroption;
             this.levelDescroptionProvider = levelDescroptionProvider;
             this.proficiencyDescroptionProvider = proficiencyDescroptionProvider;
         }
