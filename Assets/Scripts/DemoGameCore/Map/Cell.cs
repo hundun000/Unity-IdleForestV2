@@ -69,8 +69,6 @@ namespace Map
         private void OnMouseUpAsButton()
         {
             parent.cellDetailBoardVM.updateDetail(construction);
-            // 通知地图全局将聚焦圈打印至格位位置
-            // GameObject.Find("/SceneManager").GetComponent<MapController>().focusAppear(transform.position);
         }
 
         public void testDataPrint(Camera _camera)
