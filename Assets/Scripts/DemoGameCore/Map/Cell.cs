@@ -31,8 +31,8 @@ namespace Map
 
         public GameObject colorCover;      // 格位颜色遮罩，用于视图切换
 
-        public SpriteRenderer fieldRenderer;  // 土地贴图渲染器
-        public SpriteRenderer upperRenderer;  // 工厂/森林渲染器
+        public SpriteRenderer fieldRenderer;  // 底层贴图渲染器
+        public SpriteRenderer upperRenderer;  // 上层贴图渲染器
         public Canvas cellCanvas;             // 每个格位自己的画布
         public GameObject coordinateText;     // 测试时用的坐标显示器
 
@@ -45,21 +45,38 @@ namespace Map
             this.construction = construction;
             switch (construction.prototypeId)
             {
+                case ConstructionPrototypeId.DIRT:
+                    upperRenderer.sprite = SpriteLoader.field[0];
+                    break;
+                case ConstructionPrototypeId.RUBBISH:
+                    upperRenderer.sprite = SpriteLoader.field[1];
+                    break;
                 case ConstructionPrototypeId.SMALL_FACTORY:
+                    upperRenderer.sprite = SpriteLoader.factory[0];
+                    break;
+                    /* TODO
+                case ConstructionPrototypeId.MID_FACTORY:
+                    upperRenderer.sprite = SpriteLoader.factory[1];
+                    break;
+                    */
                 case ConstructionPrototypeId.BIG_FACTORY:
-                    upperRenderer.color = new Color(0.75f, 0f, 0.5f);
+                    upperRenderer.sprite = SpriteLoader.factory[2];
+                    //upperRenderer.color = new Color(0.75f, 0f, 0.5f);
                     break;
                 case ConstructionPrototypeId.SMALL_TREE:
+                    upperRenderer.sprite = SpriteLoader.forest[0];
+                    break;
                 case ConstructionPrototypeId.BIG_TREE:
-                    upperRenderer.color = new Color(0f, 0.75f, 0f);
+                    upperRenderer.sprite = SpriteLoader.forest[1];
+                    //upperRenderer.color = new Color(0f, 0.75f, 0f);
                     break;
                 case ConstructionPrototypeId.LAKE:
-                    //upperRenderer.sprite = SpriteLoader.field[3];
-                    upperRenderer.color = new Color(0f, 0.5f, 1f);
+                    upperRenderer.sprite = SpriteLoader.lake;
+                    //upperRenderer.color = new Color(0f, 0.5f, 1f);
                     break;
                 case ConstructionPrototypeId.DESERT:
-                    //upperRenderer.sprite = SpriteLoader.field[3];
-                    upperRenderer.color = new Color(0.8f, 0.8f, 0f);
+                    upperRenderer.sprite = SpriteLoader.desert;
+                    //upperRenderer.color = new Color(0.8f, 0.8f, 0f);
                     break;
                 default: 
                     break;

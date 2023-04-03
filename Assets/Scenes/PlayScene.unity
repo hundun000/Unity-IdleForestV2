@@ -3033,7 +3033,7 @@ SpriteRenderer:
   m_SortingLayerID: -593758783
   m_SortingLayer: 1
   m_SortingOrder: 3
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8a7a3767dea703840958f92ca5c010c4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5448,6 +5448,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1822472818}
+  - component: {fileID: 1822472819}
   m_Layer: 0
   m_Name: CellRoot
   m_TagString: Untagged
@@ -5470,6 +5471,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1822472819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822472817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71741c05d7e17ad4e908272b11cc932a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1839284378
 GameObject:
   m_ObjectHideFlags: 0

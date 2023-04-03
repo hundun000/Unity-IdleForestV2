@@ -45,11 +45,13 @@ namespace Map
         private List<Cell> constructionControlNodes = new List<Cell>();  // Cell即为一种ConstructionControlNode——控制一个设施的UI
 
         DemoPlayScreen parent;      // 通过代码绑定
+        private bool firstCome;     // 判断是否是初次加载地图
 
-        
+
         private void Awake()
         {
-
+            cellRoot.GetComponent<SpriteLoader>().SpriteLoad();
+            firstCome = true;
             //gameObject.GetComponent<SpriteLoader>().SpriteLoad();
             //gameObject.GetComponent<LevelInfo>().readMap();
             //BuildBoard(gameObject.GetComponent<LevelInfo>());
@@ -61,9 +63,13 @@ namespace Map
             if (Input.GetMouseButtonDown(0))
             {
                 Collider2D[] col = Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-                Debug.Log(col.Length);
-                if (col.Length == 0) focusDisappear();
-                else focusAppear(col[0].transform.position);
+                //Debug.Log(col.Length);
+                if (col.Length != 0)
+                {
+                    if (col[0].gameObject.layer == 7)
+                    focusAppear(col[0].transform.position);
+                }
+                else focusDisappear();
             }
         }
 
@@ -99,11 +105,15 @@ namespace Map
             });
 
 
-            // 相机调整
-            sceneCamera.orthographicSize = cameraSize;
-            Vector2 cameraPosVector2 = constructionControlNodes.First().transform.position;
-            GetComponent<CameraController>().zeroPos =
-                new Vector3(cameraPosVector2.x, cameraPosVector2.y, -cameraDistance);
+            // 若是初次加载地图，则进行相机调整
+            if(firstCome)
+            {
+                firstCome = false;
+                sceneCamera.orthographicSize = cameraSize;
+                Vector2 cameraPosVector2 = constructionControlNodes.First().transform.position;
+                GetComponent<CameraController>().zeroPos =
+                    new Vector3(cameraPosVector2.x, cameraPosVector2.y, -cameraDistance);
+            }
 
         }
 
@@ -173,18 +183,5 @@ namespace Map
         }
     }
 
-    /// <summary>
-    /// 精灵贴图加载器类
-    /// </summary>
-    public class SpriteLoader
-    {
-        public static Sprite[] field;         // 地面纹理
-        public static Sprite[] factory;       // 工厂纹理
-        public static Sprite[] forest;        // 森林纹理
 
-        public void SpriteLoad()
-        {
-            
-        }
-    }
 }
