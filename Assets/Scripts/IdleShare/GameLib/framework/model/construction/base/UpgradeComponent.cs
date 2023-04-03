@@ -11,7 +11,8 @@ namespace hundun.idleshare.gamelib
     {
         NO_UPGRADE,
         HAS_NEXT_UPGRADE,
-        REACHED_MAX_UPGRADE
+        REACHED_MAX_UPGRADE_NO_TRANSFER,
+        REACHED_MAX_UPGRADE_HAS_TRANSFER
 
     }
 
@@ -63,9 +64,25 @@ namespace hundun.idleshare.gamelib
             {
                 if (reachMaxLevel)
                 {
-                    upgradeState = UpgradeState.REACHED_MAX_UPGRADE;
+                    
                     this.upgradeCostPack.modifiedValues = (null);
                     this.upgradeCostPack.modifiedValuesDescription = (null);
+                    if (transferCostPack != null)
+                    {
+                        upgradeState = UpgradeState.REACHED_MAX_UPGRADE_HAS_TRANSFER;
+
+                        this.transferCostPack.modifiedValues = transferCostPack.baseValues;
+                        this.transferCostPack.modifiedValuesDescription = (String.Join(", ",
+                                transferCostPack.modifiedValues
+                                        .Select(pair => pair.type + "x" + pair.amount)
+                                        .ToList())
+                                        + "; "
+                        );
+                    } 
+                    else
+                    {
+                        upgradeState = UpgradeState.REACHED_MAX_UPGRADE_NO_TRANSFER;
+                    }
                 }
                 else
                 {
@@ -86,16 +103,7 @@ namespace hundun.idleshare.gamelib
                     );
                 }
             }
-            if (transferCostPack != null)
-            {
-                this.transferCostPack.modifiedValues = transferCostPack.baseValues;
-                this.transferCostPack.modifiedValuesDescription = (String.Join(", ",
-                        transferCostPack.modifiedValues
-                                .Select(pair => pair.type + "x" + pair.amount)
-                                .ToList())
-                                + "; "
-                );
-            }
+            
         }
 
         public Boolean canUpgrade()

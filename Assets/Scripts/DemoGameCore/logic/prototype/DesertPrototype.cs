@@ -9,14 +9,12 @@ namespace Assets.Scripts.DemoGameCore.logic
 {
     public class DesertPrototype : AbstractConstructionPrototype
     {
-        private static DescriptionPackage descriptionPackageEN = new DescriptionPackage(
-                null, null, null, null, null, null, null, null, null,
-                DescriptionPackageFactory.ANY_EMPTY_LEVEL_IMP,
-                DescriptionPackageFactory.EN_PROFICIENCY_IMP);
-        private static DescriptionPackage descriptionPackageCN = new DescriptionPackage(
-                null, null, null, null, null, null, null, null, null,
-                DescriptionPackageFactory.ANY_EMPTY_LEVEL_IMP,
-                DescriptionPackageFactory.CN_PROFICIENCY_IMP);
+        private static DescriptionPackage descriptionPackageEN = new DescriptionPackageBuilder()
+            .proficiency("TODO", DescriptionPackageFactory.EN_PROFICIENCY_IMP)
+            .build();
+        private static DescriptionPackage descriptionPackageCN = new DescriptionPackageBuilder()
+            .proficiency("绿化度", DescriptionPackageFactory.CN_PROFICIENCY_IMP)
+            .build();
 
         static ProficiencySpeedCalculator DESERT_PROFICIENCY_SPEED_CALCULATOR = (thiz) =>
         {

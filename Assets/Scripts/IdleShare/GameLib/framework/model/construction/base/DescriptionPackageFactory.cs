@@ -45,91 +45,91 @@ namespace hundun.idleshare.gamelib
 
 
 
-        public static DescriptionPackage getWorkingLevelAutoDescriptionPackage(Language language)
-        {
-            switch (language)
-            {
-                case Language.CN:
-                    return new DescriptionPackage(
-                            "自动消耗", "自动产出", "升级费用", "(已达到最大等级)", "升级",
-                            CN_WORKING_LEVEL_IMP,
-                            CN_PROFICIENCY_IMP);
-                default:
-                    return new DescriptionPackage(
-                            "AutoCost", "AutoGain", "UpgradeCost", "(max level)", "Upgrade",
-                            WORKING_LEVEL_IMP,
-                            CN_PROFICIENCY_IMP);
-            }
-        }
+        //public static DescriptionPackage getWorkingLevelAutoDescriptionPackage(Language language)
+        //{
+        //    switch (language)
+        //    {
+        //        case Language.CN:
+        //            return new DescriptionPackage(
+        //                    "自动消耗", "自动产出", "升级费用", "(已达到最大等级)", "升级",
+        //                    CN_WORKING_LEVEL_IMP,
+        //                    CN_PROFICIENCY_IMP);
+        //        default:
+        //            return new DescriptionPackage(
+        //                    "AutoCost", "AutoGain", "UpgradeCost", "(max level)", "Upgrade",
+        //                    WORKING_LEVEL_IMP,
+        //                    CN_PROFICIENCY_IMP);
+        //    }
+        //}
 
-        public static DescriptionPackage getMaxLevelAutoDescriptionPackage(Language language)
-        {
-            switch (language)
-            {
-                case Language.CN:
-                    return new DescriptionPackage(
-                            "自动消耗", "自动产出", "升级费用", "(已达到最大等级)", "升级",
-                            CN_ONLY_LEVEL_IMP,
-                            CN_PROFICIENCY_IMP);
-                default:
-                    return new DescriptionPackage(
-                            "AutoCost", "AutoGain", "UpgradeCost", "(max level)", "Upgrade",
-                            ONLY_LEVEL_IMP,
-                            CN_PROFICIENCY_IMP);
-            }
-        }
+        //public static DescriptionPackage getMaxLevelAutoDescriptionPackage(Language language)
+        //{
+        //    switch (language)
+        //    {
+        //        case Language.CN:
+        //            return new DescriptionPackage(
+        //                    "自动消耗", "自动产出", "升级费用", "(已达到最大等级)", "升级",
+        //                    CN_ONLY_LEVEL_IMP,
+        //                    CN_PROFICIENCY_IMP);
+        //        default:
+        //            return new DescriptionPackage(
+        //                    "AutoCost", "AutoGain", "UpgradeCost", "(max level)", "Upgrade",
+        //                    ONLY_LEVEL_IMP,
+        //                    CN_PROFICIENCY_IMP);
+        //    }
+        //}
 
-        public static DescriptionPackage getSellingDescriptionPackage(Language language)
-        {
-            switch (language)
-            {
-                case Language.CN:
-                    return new DescriptionPackage(
-                            "自动出售", "自动获得", "升级费用", "(已达到最大等级)", "升级",
-                            CN_WORKING_LEVEL_IMP,
-                            CN_PROFICIENCY_IMP);
-                default:
-                    return new DescriptionPackage(
-                            "Sell", "Gain", "UpgradeCost", "(max level)", "Upgrade",
-                            WORKING_LEVEL_IMP,
-                            CN_PROFICIENCY_IMP);
-            }
-        }
-
-
-        public static DescriptionPackage getGatherDescriptionPackage(Language language)
-        {
-            switch (language)
-            {
-                case Language.CN:
-                    return new DescriptionPackage(
-                            "消耗", "获得", null, null, "采集",
-                            ANY_EMPTY_LEVEL_IMP,
-                            CN_PROFICIENCY_IMP);
-                default:
-                    return new DescriptionPackage(
-                            "Pay", "Gain", null, null, "Gather",
-                            ANY_EMPTY_LEVEL_IMP,
-                            CN_PROFICIENCY_IMP);
-            }
-        }
+        //public static DescriptionPackage getSellingDescriptionPackage(Language language)
+        //{
+        //    switch (language)
+        //    {
+        //        case Language.CN:
+        //            return new DescriptionPackage(
+        //                    "自动出售", "自动获得", "升级费用", "(已达到最大等级)", "升级",
+        //                    CN_WORKING_LEVEL_IMP,
+        //                    CN_PROFICIENCY_IMP);
+        //        default:
+        //            return new DescriptionPackage(
+        //                    "Sell", "Gain", "UpgradeCost", "(max level)", "Upgrade",
+        //                    WORKING_LEVEL_IMP,
+        //                    CN_PROFICIENCY_IMP);
+        //    }
+        //}
 
 
-        public static DescriptionPackage getWinDescriptionPackage(Language language)
-        {
-            switch (language)
-            {
-                case Language.CN:
-                    return new DescriptionPackage(
-                            null, null, "支付", null, "解锁",
-                            CN_LOCK_IMP,
-                            CN_PROFICIENCY_IMP);
-                default:
-                    return new DescriptionPackage(
-                            null, null, "Pay", null, "Unlock",
-                            LOCK_IMP,
-                            CN_PROFICIENCY_IMP);
-            }
-        }
+        //public static DescriptionPackage getGatherDescriptionPackage(Language language)
+        //{
+        //    switch (language)
+        //    {
+        //        case Language.CN:
+        //            return new DescriptionPackage(
+        //                    "消耗", "获得", null, null, "采集",
+        //                    ANY_EMPTY_LEVEL_IMP,
+        //                    CN_PROFICIENCY_IMP);
+        //        default:
+        //            return new DescriptionPackage(
+        //                    "Pay", "Gain", null, null, "Gather",
+        //                    ANY_EMPTY_LEVEL_IMP,
+        //                    CN_PROFICIENCY_IMP);
+        //    }
+        //}
+
+
+        //public static DescriptionPackage getWinDescriptionPackage(Language language)
+        //{
+        //    switch (language)
+        //    {
+        //        case Language.CN:
+        //            return new DescriptionPackage(
+        //                    null, null, "支付", null, "解锁",
+        //                    CN_LOCK_IMP,
+        //                    CN_PROFICIENCY_IMP);
+        //        default:
+        //            return new DescriptionPackage(
+        //                    null, null, "Pay", null, "Unlock",
+        //                    LOCK_IMP,
+        //                    CN_PROFICIENCY_IMP);
+        //    }
+        //}
     }
 }

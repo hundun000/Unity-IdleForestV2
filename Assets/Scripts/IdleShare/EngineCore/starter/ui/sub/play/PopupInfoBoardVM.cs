@@ -60,14 +60,18 @@ namespace hundun.idleshare.enginecore
             {
                 buildOnePack(model.upgradeComponent.upgradeCostPack);
             }
-            else if (model.upgradeComponent.upgradeState == UpgradeState.REACHED_MAX_UPGRADE)
+            else if (model.upgradeComponent.upgradeState == UpgradeState.REACHED_MAX_UPGRADE_HAS_TRANSFER)
+            {
+
+            }
+            else if (model.upgradeComponent.upgradeState == UpgradeState.REACHED_MAX_UPGRADE_HAS_TRANSFER)
             {
                 GameObject maxLevelGroup = childrenRoot.transform.AsTableAddGameobject(maxLevelGroupTemplate.gameObject);
                 Text maxLevelGroupLabel_0 = maxLevelGroup.transform.Find("label_0").GetComponent<Text>();
                 Text maxLevelGroupLabel_1 = maxLevelGroup.transform.Find("label_1").GetComponent<Text>();
 
                 maxLevelGroupLabel_0.text = model.upgradeComponent.upgradeCostPack.descriptionStart;
-                maxLevelGroupLabel_1.text = model.descriptionPackage.upgradeMaxLevelDescription;
+                maxLevelGroupLabel_1.text = model.descriptionPackage.upgradeMaxLevelNoTransferDescription;
 
                 buildOnePack(model.upgradeComponent.transferCostPack);
             }

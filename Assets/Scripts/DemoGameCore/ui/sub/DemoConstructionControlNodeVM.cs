@@ -24,6 +24,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
         TextButton clickEffectButton;
         TextButton destoryButton;
+        TextButton transferButton;
 
         Image background;
 
@@ -37,6 +38,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             this.clickEffectButton = this.transform.Find("clickEffectButton").GetComponent<TextButton>();
 
             this.destoryButton = this.transform.Find("destoryButton").GetComponent<TextButton>();
+            this.transferButton = this.transform.Find("transferButton").GetComponent<TextButton>();
         }
 
         public void postPrefabInitialization(DemoPlayScreen parent)
@@ -46,24 +48,16 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
 
             clickEffectButton.button.onClick.AddListener(() => {
-
-                if(model.upgradeComponent.canTransfer()) 
-                {
-                    parent.game.frontend.log(this.getClass().getSimpleName(), "transferButton clicked");
-                    parent.game.idleGameplayExport.transferConstruction(model.id);
-                }
-                else
-                {
-                    parent.game.frontend.log(this.getClass().getSimpleName(), "clickEffectButton clicked");
-                    parent.game.idleGameplayExport.constructionOnClick(model.id);
-                }
-
+                parent.game.frontend.log(this.getClass().getSimpleName(), "clickEffectButton clicked");
+                parent.game.idleGameplayExport.constructionOnClick(model.id);
+            });
+            transferButton.button.onClick.AddListener(() => {
+                parent.game.frontend.log(this.getClass().getSimpleName(), "transferButton clicked");
+                parent.game.idleGameplayExport.transferConstruction(model.id);
             });
             destoryButton.button.onClick.AddListener(() => {
-
                 parent.game.frontend.log(this.getClass().getSimpleName(), "destoryButton clicked");
                 parent.game.idleGameplayExport.destoryConstruction(model.id, ConstructionPrototypeId.DIRT);
-
             });
 
 
@@ -129,7 +123,17 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             // ------ update text ------
             constructionNameLabel.text = (model.name);
             
-            workingLevelLabel.text = (model.levelComponent.getWorkingLevelDescroption());
+            
+
+            if (model.upgradeComponent.upgradeState != UpgradeState.NO_UPGRADE)
+            {
+                workingLevelLabel.text = (model.levelComponent.getWorkingLevelDescroption());
+            }
+            else
+            {
+                workingLevelLabel.text = "";
+            }
+
 
             if (model.proficiencySpeedCalculator != null)
             {
@@ -153,20 +157,32 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
                 clickEffectButton.button.interactable = (true);
                 clickEffectButton.label.text = (model.descriptionPackage.buttonDescroption);
             }
-            else if (model.upgradeComponent.canTransfer())
-            {
-                clickEffectButton.gameObject.SetActive(true);
-                clickEffectButton.button.interactable = (true);
-                clickEffectButton.label.text = (model.descriptionPackage.transferButtonDescroption);
-            }
-            else if (model.descriptionPackage.buttonDescroption == null)
+            else
             {
                 clickEffectButton.gameObject.SetActive(true);
                 clickEffectButton.button.interactable = (false);
                 clickEffectButton.label.text = (model.descriptionPackage.buttonDescroption);
             }
 
-            if (model.descriptionPackage.destoryButtonDescroption == null)
+            if (model.descriptionPackage.transferButtonDescroption == null)
+            {
+                transferButton.gameObject.SetActive(false);
+            }
+            else if (model.canTransfer())
+            {
+                transferButton.gameObject.SetActive(true);
+                transferButton.button.interactable = (true);
+                transferButton.label.text = (model.descriptionPackage.transferButtonDescroption);
+            }
+            else
+            {
+                transferButton.gameObject.SetActive(true);
+                transferButton.button.interactable = (false);
+                transferButton.label.text = (model.descriptionPackage.transferButtonDescroption);
+            }
+
+
+            if (model.descriptionPackage.destroyButtonDescroption == null)
             {
                 destoryButton.gameObject.SetActive(false);
             } 
@@ -174,13 +190,13 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             {
                 destoryButton.gameObject.SetActive(true);
                 destoryButton.button.interactable = (true);
-                destoryButton.label.text = (model.descriptionPackage.destoryButtonDescroption);
+                destoryButton.label.text = (model.descriptionPackage.destroyButtonDescroption);
             }
             else
             {
                 destoryButton.gameObject.SetActive(true);
                 destoryButton.button.interactable = (false);
-                destoryButton.label.text = (model.descriptionPackage.destoryButtonDescroption);
+                destoryButton.label.text = (model.descriptionPackage.destroyButtonDescroption);
             }
         }
     }

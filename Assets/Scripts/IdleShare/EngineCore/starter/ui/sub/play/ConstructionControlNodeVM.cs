@@ -170,7 +170,7 @@ namespace hundun.idleshare.enginecore
             workingLevelLabel.text = (model.levelComponent.getWorkingLevelDescroption());
             proficiencyLabel.text = (model.proficiencyComponent.getProficiencyDescroption());
             positionLabel.text = (model.saveData.position.toShowText());
-            destoryButton.label.text = (model.descriptionPackage.destoryButtonDescroption);
+            destoryButton.label.text = (model.descriptionPackage.destroyButtonDescroption);
 
             // ------ update clickable-state ------
             if (model.canClickEffect())

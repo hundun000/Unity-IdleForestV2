@@ -7,14 +7,10 @@ namespace Assets.Scripts.DemoGameCore.logic
 {
     public class DirtPrototype : AbstractConstructionPrototype
     {
-        private static DescriptionPackage descriptionPackageEN = new DescriptionPackage(
-                    null, null, null, null, null, null, null, null, null,
-                    DescriptionPackageFactory.ANY_EMPTY_LEVEL_IMP,
-                    DescriptionPackageFactory.ANY_EMPTY_PROFICIENCY_IMP);
-        private static DescriptionPackage descriptionPackageCN = new DescriptionPackage(
-                    null, null, null, null, null, null, null, null, null,
-                    DescriptionPackageFactory.ANY_EMPTY_LEVEL_IMP,
-                    DescriptionPackageFactory.ANY_EMPTY_PROFICIENCY_IMP);
+        private static DescriptionPackage descriptionPackageEN = new DescriptionPackageBuilder()
+            .build();
+        private static DescriptionPackage descriptionPackageCN = new DescriptionPackageBuilder()
+            .build();
 
         public DirtPrototype(Language language) : base(ConstructionPrototypeId.DIRT, language, null)
         {

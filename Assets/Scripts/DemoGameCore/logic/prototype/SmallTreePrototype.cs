@@ -8,14 +8,22 @@ namespace Assets.Scripts.DemoGameCore.logic
 {
     public class SmallTreePrototype : AbstractConstructionPrototype
     {
-        public static DescriptionPackage descriptionPackageEN = new DescriptionPackage(
-                    "TODO", "TODO", "TODO", "TODO", "TODO", "TODO", "TODO", "TODO", "TODO",
-                    DescriptionPackageFactory.ONLY_LEVEL_IMP,
-                    DescriptionPackageFactory.EN_PROFICIENCY_IMP);
-        public static DescriptionPackage descriptionPackageCN = new DescriptionPackage(
-                    "自动消耗", "自动产出", "升级费用", "(已达到最大等级)", "升级", "砍伐产出", "砍伐费用", "摧毁", "转职",
-                    DescriptionPackageFactory.CN_ONLY_LEVEL_IMP,
-                    DescriptionPackageFactory.CN_PROFICIENCY_IMP);
+        public static DescriptionPackage descriptionPackageEN = new DescriptionPackageBuilder()
+            .button("升级")
+            .output("自动消耗", "自动产出")
+            .upgrade("升级费用", "(已达到最大等级)", DescriptionPackageFactory.CN_ONLY_LEVEL_IMP)
+            .destroy("砍伐", "砍伐产出", null)
+            .transfer("转职", "转职费用", "可以转职")
+            .proficiency("熟练度", DescriptionPackageFactory.CN_PROFICIENCY_IMP)
+            .build();
+        public static DescriptionPackage descriptionPackageCN = new DescriptionPackageBuilder()
+            .button("升级")
+            .output("自动消耗", "自动产出")
+            .upgrade("升级费用", "(已达到最大等级)", DescriptionPackageFactory.CN_ONLY_LEVEL_IMP)
+            .destroy("砍伐", "砍伐产出", null)
+            .transfer("转职", "转职费用", "可以转职")
+            .proficiency("熟练度", DescriptionPackageFactory.CN_PROFICIENCY_IMP)
+            .build();
 
         protected static ProficiencySpeedCalculator TREE_PROFICIENCY_SPEED_CALCULATOR = (thiz) =>
         {

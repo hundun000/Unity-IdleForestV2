@@ -87,8 +87,8 @@ namespace hundun.idleshare.gamelib
             upgradeComponent.lazyInitDescription();
             if (destoryGainPack != null)
             {
-                this.destoryGainPack.descriptionStart = descriptionPackage.destoryGainDescriptionStart;
-                this.destoryCostPack.descriptionStart = descriptionPackage.destoryCostDescriptionStart;
+                this.destoryGainPack.descriptionStart = descriptionPackage.destroyGainDescriptionStart;
+                this.destoryCostPack.descriptionStart = descriptionPackage.destroyCostDescriptionStart;
             }
 
             updateModifiedValues();
@@ -170,12 +170,17 @@ namespace hundun.idleshare.gamelib
             }
         }
 
-        protected Boolean canUpgrade()
+        public Boolean canUpgrade()
         {
             return upgradeComponent.canUpgrade();
         }
 
-        protected void doUpgrade()
+        public Boolean canTransfer()
+        {
+            return upgradeComponent.canTransfer();
+        }
+
+        public void doUpgrade()
         {
             List<ResourcePair> upgradeCostRule = upgradeComponent.upgradeCostPack.modifiedValues;
             gameContext.storageManager.modifyAllResourceNum(upgradeCostRule, false);

@@ -7,14 +7,13 @@ namespace Assets.Scripts.DemoGameCore.logic
 {
     public class RubbishPrototype : AbstractConstructionPrototype
     {
-        private static DescriptionPackage descriptionPackageEN = new DescriptionPackage(
-                null, null, null, null, null, null, "清理费用", "清理", null,
-                DescriptionPackageFactory.ANY_EMPTY_LEVEL_IMP,
-                DescriptionPackageFactory.ANY_EMPTY_PROFICIENCY_IMP);
-        private static DescriptionPackage descriptionPackageCN = new DescriptionPackage(
-                null, null, null, null, null, null, "清理费用", "清理", null,
-                DescriptionPackageFactory.ANY_EMPTY_LEVEL_IMP,
-                DescriptionPackageFactory.ANY_EMPTY_PROFICIENCY_IMP);
+        private static DescriptionPackage descriptionPackageEN = new DescriptionPackageBuilder()
+            .destroy("清理", null, "清理费用")
+            .build();
+        private static DescriptionPackage descriptionPackageCN = new DescriptionPackageBuilder()
+            .destroy("清理", null, "清理费用")
+            .build();
+
 
         public RubbishPrototype(Language language) : base(ConstructionPrototypeId.RUBBISH, language, null)
         {
