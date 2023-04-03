@@ -54,10 +54,13 @@ namespace hundun.idleshare.gamelib
             if (upgradeCostPack != null)
             {
                 upgradeState = UpgradeState.HAS_NEXT_UPGRADE;
-                upgradeCostPack.descriptionStart = (construction.descriptionPackage.upgradeCostDescriptionStart);
+                upgradeCostPack.descriptionStart = construction.descriptionPackage.upgradeCostDescriptionStart;
+            }
+            if (transferCostPack != null)
+            {
+                transferCostPack.descriptionStart = construction.descriptionPackage.transferCostDescriptionStart;
             }
         }
-
         public void updateModifiedValues(Boolean reachMaxLevel)
         {
             if (upgradeCostPack != null)
@@ -112,6 +115,10 @@ namespace hundun.idleshare.gamelib
             {
                 return false;
             }
+            if (construction.saveData.proficiency < construction.maxProficiency)
+            {
+                return false;
+            }
 
             List<ResourcePair> compareTarget = upgradeCostPack.modifiedValues;
             return construction.gameContext.storageManager.isEnough(compareTarget);
@@ -120,6 +127,10 @@ namespace hundun.idleshare.gamelib
         public Boolean canTransfer()
         {
             if (construction.saveData.level != construction.maxLevel || transferCostPack == null)
+            {
+                return false;
+            }
+            if (construction.saveData.proficiency < construction.maxProficiency)
             {
                 return false;
             }

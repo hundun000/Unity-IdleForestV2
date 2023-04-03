@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.DemoGameCore.ui.screen;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GameController: MonoBehaviour
+public class SystemMenuController: MonoBehaviour
 {
+    DemoPlayScreen parent;
     //the ButtonPauseMenu
     public GameObject ingameMenu;
     private PlayerInput playerInput;
@@ -12,6 +14,12 @@ public class GameController: MonoBehaviour
     void Start()
     {
         playerInput = GameObject.FindObjectOfType<PlayerInput>();
+    }
+
+    public void postPrefabInitialization(DemoPlayScreen playScreen)
+    {
+        // 通过代码绑定引用
+        this.parent = playScreen;
     }
 
     public void OnPause()//�������ͣ��ʱִ�д˷���
@@ -28,13 +36,16 @@ public class GameController: MonoBehaviour
         ingameMenu.SetActive(false);
     }
 
-    public void OnRestart()
-    {
-        playerInput.SwitchCurrentActionMap("Player");
-        //Loading Scene0
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene_1");
-        Time.timeScale = 1f;
-    }
+    //public void OnRestart()
+    //{
+    //    //playerInput.SwitchCurrentActionMap("Player");
+    //    // Loading Scene0
+    //    UnityEngine.SceneManagement.SceneManager.LoadScene(DemoMenuScreen.SCENE_NAME);
+    //    // 保存游戏进度，这样从MenuScreen继续游戏时才是正确的数据
+    //    parent.game.saveHandler.gameSaveCurrent();
+
+    //    Time.timeScale = 1f;
+    //}
 
     public void OnExit()
     {

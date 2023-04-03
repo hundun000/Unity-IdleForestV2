@@ -71,6 +71,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
         public void update()
         {
+            previewImage.sprite = parent.game.textureManager.getConstructionEntity(model.prototypeId);
             // ------ update show-state ------
             if (model == null)
             {

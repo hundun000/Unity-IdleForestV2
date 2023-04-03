@@ -15,7 +15,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 {
     public class DemoMenuScreen : BaseIdleMenuScreen<DemoIdleGame, RootSaveData>
     {
-
+        public const String SCENE_NAME = "MenuScene";
 
         override public void postMonoBehaviourInitialization(DemoIdleGame game) {
             base.postMonoBehaviourInitialization(

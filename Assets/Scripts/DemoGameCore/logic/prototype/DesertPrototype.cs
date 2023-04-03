@@ -13,7 +13,7 @@ namespace Assets.Scripts.DemoGameCore.logic
             .proficiency("TODO", DescriptionPackageFactory.EN_PROFICIENCY_IMP)
             .build();
         private static DescriptionPackage descriptionPackageCN = new DescriptionPackageBuilder()
-            .proficiency("绿化度", DescriptionPackageFactory.CN_PROFICIENCY_IMP)
+            .proficiency("土壤化进度", DescriptionPackageFactory.CN_PROFICIENCY_IMP)
             .build();
 
         static ProficiencySpeedCalculator DESERT_PROFICIENCY_SPEED_CALCULATOR = (thiz) =>

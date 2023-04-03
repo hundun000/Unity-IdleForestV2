@@ -30,9 +30,9 @@ namespace hundun.idleshare.enginecore
         public void postPrefabInitialization(BaseIdlePlayScreen<T_GAME, T_SAVE> parent)
         {
             this.parent = parent;
-            this.background.sprite = parent.game.textureManager.winTexture;
+            this.background.sprite = parent.game.textureManager.achievementMaskBoardTexture;
 
-            this.buttonText.text = "OK";
+            this.buttonText.text = parent.game.idleGameplayExport.gameDictionary.getPlayScreenTexts(parent.game.idleGameplayExport.language)[2];
             this.button.onClick.AddListener(() => {
                 parent.hideAchievementMaskBoard();
             });
@@ -40,7 +40,7 @@ namespace hundun.idleshare.enginecore
         }
         public void setAchievementPrototype(AbstractAchievement prototype)
         {
-            label.text = prototype.description;
+            label.text = prototype.congratulationText;
         }
     }
 }

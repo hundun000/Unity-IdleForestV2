@@ -12,6 +12,8 @@ namespace hundun.idleshare.gamelib
 {
     public abstract class BaseConstruction : ILogicFrameListener, IBuffChangeListener, ITileNode<BaseConstruction>
     {
+        public int maxProficiency = 100;
+        internal bool allowAnyProficiencyDestory = true;
 
         public static readonly int DEFAULT_MAX_LEVEL = 10;
         public int maxLevel = DEFAULT_MAX_LEVEL;
@@ -189,12 +191,17 @@ namespace hundun.idleshare.gamelib
             {
                 saveData.workingLevel = (saveData.level);
             }
+            saveData.proficiency = maxProficiency / 2;
             updateModifiedValues();
             gameContext.eventManager.notifyConstructionCollectionChange();
         }
 
         public Boolean canDestory() 
         {
+            if (!allowAnyProficiencyDestory && this.saveData.proficiency < this.maxProficiency)
+            {
+                return false;
+            }
             return destoryCostPack != null && gameContext.storageManager.isEnough(destoryCostPack.modifiedValues);
         }
 

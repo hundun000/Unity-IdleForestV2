@@ -6,13 +6,9 @@ using System.Linq;
 
 namespace Assets.Scripts.DemoGameCore.logic
 {
-    public class SmallFactoryPrototype : AbstractConstructionPrototype
+    public class MidFactoryPrototype : AbstractConstructionPrototype
     {
-        public SmallFactoryPrototype(Language language) : base(ConstructionPrototypeId.SMALL_FACTORY, language,
-            DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COIN, 100
-                    ))
-            )
+        public MidFactoryPrototype(Language language) : base(ConstructionPrototypeId.MID_FACTORY, language, null)
         {
 
         }
@@ -26,18 +22,13 @@ namespace Assets.Scripts.DemoGameCore.logic
             construction.destoryGainPack = DemoBuiltinConstructionsLoader.toPack(new Dictionary<string, int>());
 
             construction.outputComponent.outputGainPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COIN, 10,
-                    ResourceType.CARBON, 10
+                    ResourceType.COIN, 30,
+                    ResourceType.CARBON, 30
                     )));
 
             construction.upgradeComponent.upgradeCostPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COIN, 60
+                    ResourceType.COIN, 100
                     )));
-            construction.upgradeComponent.transferCostPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COIN, 400,
-                    ResourceType.WOOD, 5
-                    )));
-            construction.upgradeComponent.transferConstructionPrototypeId = ConstructionPrototypeId.MID_FACTORY;
 
             return construction;
         }

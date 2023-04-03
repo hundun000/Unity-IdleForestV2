@@ -29,8 +29,10 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
         [HideInInspector]
         public CellDetailBoardVM cellDetailBoardVM;
         protected FirstLockedAchievementBoardVM firstLockedAchievementBoardVM;
+        protected DemoStorageInfoBoardVM storageInfoBoardVM;
         // ------ bind by editer ------
         public MapController mapController;
+        public SystemMenuController systemMenuController;
         //public StatusBarController statusBarController;
 
         Transform drawContaioner;
@@ -44,6 +46,8 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             //this.specialConstructionControlBoardVM = this.UiRoot.transform.Find("cell_4/SpecialConstructionControlBoardVM").GetComponent<SpecialConstructionControlBoardVM>();
             this.cellDetailBoardVM = this.UiRoot.transform.Find("cellDetailBoardVM").GetComponent<CellDetailBoardVM>();
             this.firstLockedAchievementBoardVM = this.UiRoot.transform.Find("firstLockedAchievementBoardVM").GetComponent<FirstLockedAchievementBoardVM>();
+            this.storageInfoBoardVM = this.UiRoot.transform.Find("cell_0/StorageInfoBoardVM").gameObject.GetComponent<DemoStorageInfoBoardVM>();
+
         }
 
 
@@ -74,6 +78,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             notificationMaskBoard.postPrefabInitialization(this);
             cellDetailBoardVM.postPrefabInitialization(this);
             firstLockedAchievementBoardVM.postPrefabInitialization(this);
+            systemMenuController.postPrefabInitialization(this);
         }
 
 
@@ -97,6 +102,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             //logicFrameListeners.Add(specialConstructionControlBoardVM);
             //logicFrameListeners.Add(statusBarController);
             logicFrameListeners.Add(cellDetailBoardVM);
+            logicFrameListeners.Add(storageInfoBoardVM);
             //gameAreaChangeListeners.Add(specialConstructionControlBoardVM);
             gameAreaChangeListeners.Add(mapController);
             gameAreaChangeListeners.Add(firstLockedAchievementBoardVM);

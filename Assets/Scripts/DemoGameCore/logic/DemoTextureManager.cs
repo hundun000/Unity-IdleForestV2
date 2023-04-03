@@ -46,7 +46,7 @@ namespace Assets.Scripts.DemoGameCore.logic
 
         public override void lazyInitOnGameCreateStage2()
         {
-            winTexture = getSprite("win.png");
+            achievementMaskBoardTexture = getSprite("letter.png");
             menuTexture = getSprite("menu.png");
             defaultBoardNinePatchTexture = getSprite("defaultBoardNinePatch.png");
             {
@@ -55,10 +55,10 @@ namespace Assets.Scripts.DemoGameCore.logic
 
 
                 defaultIcon = regions[0][0];
-                resourceIconMap.Add(ResourceType.COIN, regions[0][1]);
+                resourceIconMap.Add(ResourceType.COIN, getSprite("COIN"));
                 //resourceIconMap.Add(ResourceType.COOKIE, regions[0][2]);
-                resourceIconMap.Add(ResourceType.WOOD, regions[0][3]);
-                resourceIconMap.Add(ResourceType.CARBON, regions[0][4]);
+                resourceIconMap.Add(ResourceType.WOOD, getSprite("WOOD"));
+                resourceIconMap.Add(ResourceType.CARBON, getSprite("CARBON"));
             }
             {
                 var texture = getTexture2D("resourceEntities.png");
@@ -69,10 +69,8 @@ namespace Assets.Scripts.DemoGameCore.logic
                 resourceEntityMap.Add(ResourceType.CARBON, regions[0][4]);
             }
             {
-                var texture = getTexture2D("constructionEntities.png");
-                Sprite[][] regions = split(texture, 32, 32);
-                //constructionEntityMap.Add(ConstructionId.COOKIE_CLICK_PROVIDER, regions[0][0]);
-                //constructionEntityMap.Add(ConstructionId.WIN_PROVIDER, regions[0][3]);
+                constructionEntityMap.Add(ConstructionPrototypeId.SMALL_TREE, getSprite("SMALL_TREE"));
+                constructionEntityMap.Add(ConstructionPrototypeId.SMALL_FACTORY, getSprite("SMALL_FACTORY"));
             }
             {
                 var texture = getTexture2D("gameAreaIcons.png");

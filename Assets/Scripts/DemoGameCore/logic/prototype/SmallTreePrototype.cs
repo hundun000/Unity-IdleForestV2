@@ -9,29 +9,21 @@ namespace Assets.Scripts.DemoGameCore.logic
     public class SmallTreePrototype : AbstractConstructionPrototype
     {
         public static DescriptionPackage descriptionPackageEN = new DescriptionPackageBuilder()
-            .button("升级")
             .output("自动消耗", "自动产出")
-            .upgrade("升级费用", "(已达到最大等级)", DescriptionPackageFactory.CN_ONLY_LEVEL_IMP)
             .destroy("砍伐", "砍伐产出", null)
             .transfer("转职", "转职费用", "可以转职")
             .proficiency("熟练度", DescriptionPackageFactory.CN_PROFICIENCY_IMP)
             .build();
         public static DescriptionPackage descriptionPackageCN = new DescriptionPackageBuilder()
-            .button("升级")
             .output("自动消耗", "自动产出")
-            .upgrade("升级费用", "(已达到最大等级)", DescriptionPackageFactory.CN_ONLY_LEVEL_IMP)
             .destroy("砍伐", "砍伐产出", null)
             .transfer("转职", "转职费用", "可以转职")
             .proficiency("熟练度", DescriptionPackageFactory.CN_PROFICIENCY_IMP)
             .build();
 
-        protected static ProficiencySpeedCalculator TREE_PROFICIENCY_SPEED_CALCULATOR = (thiz) =>
-        {
-            return 1;
-        };
         public SmallTreePrototype(Language language) : base(ConstructionPrototypeId.SMALL_TREE, language,
             DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COIN, 100
+                    ResourceType.COIN, 30
                     ))
             )
         {
@@ -51,27 +43,19 @@ namespace Assets.Scripts.DemoGameCore.logic
         {
             String id = prototypeId + "_" + System.Guid.NewGuid().ToString();
             AutoProficiencyConstruction construction = new AutoProficiencyConstruction(prototypeId, id, position, descriptionPackage);
-            construction.proficiencySpeedCalculator = TREE_PROFICIENCY_SPEED_CALCULATOR;
+            construction.allowAnyProficiencyDestory = false;
+
             construction.destoryCostPack = DemoBuiltinConstructionsLoader.toPack(new Dictionary<string, int>());
             construction.destoryGainPack = DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.WOOD, 1000
+                    ResourceType.WOOD, 300
                     ));
 
+            construction.outputComponent.outputCostPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
+                    ResourceType.CARBON, 10
+                    )));
             construction.outputComponent.outputGainPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.WOOD, 1
+                    ResourceType.WOOD, 10
                     )));
-
-            construction.upgradeComponent.upgradeCostPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COIN, 10
-                    )));
-            construction.upgradeComponent.transferCostPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COIN, 50
-                    )));
-            construction.upgradeComponent.transferCostPack.modifiedValuesDescription = "转职费用";
-            construction.upgradeComponent.transferConstructionPrototypeId = ConstructionPrototypeId.BIG_TREE;
-
-            // FIXME for debug
-            construction.saveData.proficiency = 47 + UnityEngine.Random.Range(0, 2) * 50;
 
             return construction;
         }

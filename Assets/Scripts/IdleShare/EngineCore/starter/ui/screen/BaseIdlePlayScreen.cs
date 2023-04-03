@@ -28,7 +28,7 @@ namespace hundun.idleshare.enginecore
 
         // ----- ui ------
         //protected IdleScreenBackgroundVM screenBackgroundVM;
-        protected StorageInfoBoardVM<T_GAME, T_SAVE> storageInfoBoardVM;
+        
         protected GameImageDrawer<T_GAME, T_SAVE> gameImageDrawer;
         
         // ----- popup ui ------
@@ -53,7 +53,6 @@ namespace hundun.idleshare.enginecore
             audioSource = this.transform.Find("_audioSource").GetComponent<AudioSource>();
 
             //this.screenBackgroundVM = this.Contrainer.transform.Find("ScreenBackgroundVM").gameObject.GetComponent<IdleScreenBackgroundVM>();
-            this.storageInfoBoardVM = this.UiRoot.transform.Find("cell_0/StorageInfoBoardVM").gameObject.GetComponent<StorageInfoBoardVM<T_GAME, T_SAVE>>();
             
             this.popupInfoBoardVM = this.PopoupRoot.transform.Find("PopupInfoBoardVM").gameObject.GetComponent<PopupInfoBoardVM<T_GAME, T_SAVE>>();
             this.achievementMaskBoard = this.PopoupRoot.transform.Find("AchievementMaskBoard").gameObject.GetComponent<AchievementMaskBoard<T_GAME, T_SAVE>>();
@@ -109,7 +108,7 @@ namespace hundun.idleshare.enginecore
                 game.childGameConfig.areaShowEntityByOwnAmountResourceIds, 
                 game.childGameConfig.areaShowEntityByChangeAmountResourceIds);
 
-            logicFrameListeners.Add(storageInfoBoardVM);
+            
             logicFrameListeners.Add(game.idleGameplayExport);
 
             //gameAreaChangeListeners.Add(screenBackgroundVM);

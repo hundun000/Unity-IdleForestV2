@@ -11,10 +11,44 @@ namespace Assets.Scripts.DemoGameCore.logic
 {
     public class BaseIdleForestConstruction : BaseConstruction
     {
-        static ProficiencySpeedCalculator DEFAULT = (thiz) =>
+        public static ProficiencySpeedCalculator IDLE_FOREST_PROFICIENCY_SPEED_CALCULATOR = (thiz) =>
         {
-            return 0;
+            int neighborTreeCount = thiz.neighbors.Values.ToList()
+                .Where(it => it != null && it.saveData.prototypeId.Equals(ConstructionPrototypeId.SMALL_TREE))
+                .Count()
+                ;
+            int neighborFactoryCount = thiz.neighbors.Values.ToList()
+                .Where(it => it != null)
+                .Where(it => it.saveData.prototypeId.Equals(ConstructionPrototypeId.SMALL_FACTORY)
+                    || it.saveData.prototypeId.Equals(ConstructionPrototypeId.MID_FACTORY)
+                    || it.saveData.prototypeId.Equals(ConstructionPrototypeId.BIG_FACTORY)
+                )
+                .Count()
+                ;
+            int neighborLakeCount = thiz.neighbors.Values.ToList()
+                .Where(it => it != null)
+                .Where(it => it.saveData.prototypeId.Equals(ConstructionPrototypeId.LAKE))
+                .Count()
+                ;
+
+            switch (thiz.prototypeId)
+            { 
+                case ConstructionPrototypeId.SMALL_TREE:
+                    return Math.Max(0, neighborTreeCount * 2 - 1) + neighborLakeCount;
+                case ConstructionPrototypeId.SMALL_FACTORY:
+                case ConstructionPrototypeId.MID_FACTORY:
+                case ConstructionPrototypeId.BIG_FACTORY:
+                    return Math.Max(0, neighborFactoryCount * 2 - 1) + neighborLakeCount;
+                case ConstructionPrototypeId.LAKE:
+                case ConstructionPrototypeId.DESERT:
+                    return neighborTreeCount * -1 + neighborFactoryCount * 1;
+                default:
+                    return 0;
+            }
+
+            
         };
+
         public ProficiencySpeedCalculator proficiencySpeedCalculator = null;
         public BaseIdleForestConstruction(
             String prototypeId, 
@@ -38,6 +72,7 @@ namespace Assets.Scripts.DemoGameCore.logic
 
             ProficiencyComponent proficiencyComponent = new ProficiencyComponent(this);
             this.proficiencyComponent = (proficiencyComponent);
+            this.proficiencySpeedCalculator = IDLE_FOREST_PROFICIENCY_SPEED_CALCULATOR;
 
             this.saveData.position = position;
             this.saveData.level = 1;
@@ -70,12 +105,12 @@ namespace Assets.Scripts.DemoGameCore.logic
 
         override public long calculateModifiedOutput(long baseValue, int level, int proficiency)
         {
-            return (long)(baseValue * level * (proficiency / 50.0));
+            return (long)((baseValue + Math.Pow(10, 1 + 1.0 * level)) * proficiency * 0.01);
         }
 
         override public long calculateModifiedOutputCost(long baseValue, int level, int proficiency)
         {
-            return (long)(baseValue * level * (proficiency / 50.0));
+            return (long)((baseValue + Math.Pow(10, 1 + 1.0 * level)) * proficiency * 0.01);
         }
 
         public override void onLogicFrame()

@@ -3,6 +3,7 @@ using Assets.Scripts.DemoGameCore.ui.screen;
 using hundun.idleshare.enginecore;
 using hundun.idleshare.gamelib;
 using hundun.unitygame.adapters;
+using Mono.Cecil.Cil;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -135,7 +136,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             }
 
 
-            if (model.proficiencySpeedCalculator != null)
+            if (model.descriptionPackage.proficiencyDescroptionProvider != null)
             {
                 proficiencyLabel.text = (model.proficiencyComponent.getProficiencyDescroption());
             }

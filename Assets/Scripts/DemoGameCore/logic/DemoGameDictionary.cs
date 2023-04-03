@@ -113,5 +113,16 @@ namespace Assets.Scripts.DemoGameCore.logic
                 Language.EN, "English"
                 );
         }
+
+        public List<string> getPlayScreenTexts(Language language)
+        {
+            switch (language)
+            {
+                case Language.CN:
+                    return JavaFeatureForGwt.arraysAsList("当前任务：", "已完成：", "回到游戏");
+                default:
+                    return JavaFeatureForGwt.arraysAsList("Quest: ", "Completed: ", "back");
+            }
+        }
     }
 }

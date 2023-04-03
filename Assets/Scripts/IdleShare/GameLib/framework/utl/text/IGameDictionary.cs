@@ -12,7 +12,7 @@ namespace hundun.idleshare.gamelib
         String constructionPrototypeIdToShowName(Language language, String prototypeId);
         String constructionPrototypeIdToDetailDescroptionConstPart(Language language, String prototypeId);
         List<String> getMemuScreenTexts(Language language);
-
+        List<String> getPlayScreenTexts(Language language);
         Dictionary<Language, String> getLanguageShowNameMap();
     }
 }

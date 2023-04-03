@@ -14,10 +14,10 @@ namespace Assets.Scripts.DemoGameCore.logic
         public Dictionary<String, KeyValuePair<int, int>> requireds;
 
 
-        public OwnConstructionAchievement(String id, string name, string description,
+        public OwnConstructionAchievement(String id, string name, string description, string congratulationText,
             Dictionary<String, KeyValuePair<int, int>> requireds
             )
-                : base(id, name, description)
+                : base(id, name, description, congratulationText)
         {
             this.requireds = requireds;
         }
@@ -53,9 +53,9 @@ namespace Assets.Scripts.DemoGameCore.logic
             // FIXEME swich case language
             map.Add(IdleForestAchievementId.STEP_1, new OwnConstructionAchievement(
                     IdleForestAchievementId.STEP_1, 
-                    "建设第一步", "拥有两个至少1级小工厂",
+                    "植树第一步", "拥有两个至少1级森林", "你完成了植树第一步。感谢你为环保做出的贡献！",
                     JavaFeatureForGwt.mapOf(
-                        ConstructionPrototypeId.SMALL_FACTORY, new KeyValuePair<int, int>(2, 1)
+                        ConstructionPrototypeId.SMALL_TREE, new KeyValuePair<int, int>(2, 1)
                         )
                     ));
             return map;

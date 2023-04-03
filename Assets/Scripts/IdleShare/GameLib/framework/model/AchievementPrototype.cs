@@ -14,13 +14,14 @@ namespace hundun.idleshare.gamelib
         public String id;
         public String name;
         public String description;
+        public String congratulationText;
 
-
-        public AbstractAchievement(String id, string name, string description)
+        public AbstractAchievement(String id, string name, string description, string congratulationText)
         {
             this.id = id;
             this.name = name;
             this.description = description;
+            this.congratulationText = congratulationText;
         }
 
         public abstract bool checkUnloack();
