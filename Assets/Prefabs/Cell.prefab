@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2120291174797722107}
   - component: {fileID: 6290521987293249890}
   - component: {fileID: 4881162581005592340}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 1644385172865298067}
   - component: {fileID: 8826037693472062639}
   - component: {fileID: 1401753429915289882}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: CoordinateText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -191,7 +191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3917182877538602715}
   - component: {fileID: 3341602165642371736}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ColorCover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 4907949901902875200}
   - component: {fileID: 4907949901902875201}
   - component: {fileID: 9138746346805871732}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +460,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4907949902122105125}
   - component: {fileID: 4907949902122105126}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
