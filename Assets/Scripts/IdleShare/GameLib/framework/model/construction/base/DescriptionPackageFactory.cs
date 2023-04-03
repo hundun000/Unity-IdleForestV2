@@ -16,10 +16,10 @@ namespace hundun.idleshare.gamelib
 
 
         public static ILevelDescroptionProvider ONLY_LEVEL_IMP = (level, workingLevel, reachMaxLevel) => {
-            return "lv." + level;
+            return "lv." + level + (reachMaxLevel ? "(max)" : "");
         };
         public static ILevelDescroptionProvider WORKING_LEVEL_IMP = (level, workingLevel, reachMaxLevel) => {
-            return "lv." + workingLevel + "/" + level + (reachMaxLevel ? "(最大)" : "");
+            return "lv." + workingLevel + "/" + level + (reachMaxLevel ? "(max)" : "");
         };
         public static ILevelDescroptionProvider LOCK_IMP = (level, workingLevel, reachMaxLevel) => {
             return (reachMaxLevel ? "Unlocked" : "");
@@ -30,7 +30,7 @@ namespace hundun.idleshare.gamelib
 
 
         public static ILevelDescroptionProvider CN_ONLY_LEVEL_IMP = (level, workingLevel, reachMaxLevel) => {
-            return "等级" + level;
+            return "等级" + level + (reachMaxLevel ? "(最大)" : "");
         };
         public static ILevelDescroptionProvider CN_WORKING_LEVEL_IMP = (level, workingLevel, reachMaxLevel) => {
             return "等级" + workingLevel + "/" + level + (reachMaxLevel ? "(最大)" : "");

@@ -12,13 +12,13 @@ namespace Assets.Scripts.DemoGameCore.logic
             .output("自动消耗", "自动产出")
             .destroy("砍伐", "砍伐产出", null)
             .transfer("转职", "转职费用", "可以转职")
-            .proficiency("熟练度", DescriptionPackageFactory.CN_PROFICIENCY_IMP)
+            .proficiency(DescriptionPackageFactory.CN_PROFICIENCY_IMP)
             .build();
         public static DescriptionPackage descriptionPackageCN = new DescriptionPackageBuilder()
             .output("自动消耗", "自动产出")
             .destroy("砍伐", "砍伐产出", null)
             .transfer("转职", "转职费用", "可以转职")
-            .proficiency("熟练度", DescriptionPackageFactory.CN_PROFICIENCY_IMP)
+            .proficiency(DescriptionPackageFactory.CN_PROFICIENCY_IMP)
             .build();
 
         public SmallTreePrototype(Language language) : base(ConstructionPrototypeId.SMALL_TREE, language,

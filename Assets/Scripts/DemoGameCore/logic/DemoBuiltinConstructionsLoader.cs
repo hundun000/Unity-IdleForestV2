@@ -21,7 +21,7 @@ namespace Assets.Scripts.DemoGameCore.logic
             .upgrade("升级费用", "(已达到最大等级)", DescriptionPackageFactory.ONLY_LEVEL_IMP)
             .destroy("摧毁", "摧毁产出", "摧毁费用")
             .transfer("转职", "转职费用", "可以转职")
-            .proficiency("熟练度", DescriptionPackageFactory.EN_PROFICIENCY_IMP)
+            .proficiency(DescriptionPackageFactory.EN_PROFICIENCY_IMP)
             .build();
 
 
@@ -31,7 +31,7 @@ namespace Assets.Scripts.DemoGameCore.logic
             .upgrade("升级费用", "(已达到最大等级)", DescriptionPackageFactory.CN_ONLY_LEVEL_IMP)
             .destroy("摧毁", "摧毁产出", "摧毁费用")
             .transfer("转职", "转职费用", "可以转职")
-            .proficiency("熟练度", DescriptionPackageFactory.CN_PROFICIENCY_IMP)
+            .proficiency(DescriptionPackageFactory.CN_PROFICIENCY_IMP)
             .build();
 
         public Dictionary<String, AbstractConstructionPrototype> getProviderMap(Language language)

@@ -29,7 +29,6 @@ namespace hundun.idleshare.gamelib
 
         private ILevelDescroptionProvider levelDescroptionProvider;
 
-        private String proficiencyShowName;
         private IProficiencyDescroptionProvider proficiencyDescroptionProvider;
 
         public DescriptionPackageBuilder button(String buttonDescroption)
@@ -73,10 +72,10 @@ namespace hundun.idleshare.gamelib
             return this;
         }
 
-        public DescriptionPackageBuilder proficiency(String proficiencyShowName,
+        public DescriptionPackageBuilder proficiency(
             IProficiencyDescroptionProvider proficiencyDescroptionProvider)
         {
-            this.proficiencyShowName = proficiencyShowName;
+
             this.proficiencyDescroptionProvider = proficiencyDescroptionProvider;
             return this;
         }
@@ -102,7 +101,6 @@ namespace hundun.idleshare.gamelib
 
                     levelDescroptionProvider,
 
-                    proficiencyShowName,
                     proficiencyDescroptionProvider
                 );
         }
@@ -128,7 +126,6 @@ namespace hundun.idleshare.gamelib
 
         public ILevelDescroptionProvider levelDescroptionProvider;
 
-        public String proficiencyShowName;
         public IProficiencyDescroptionProvider proficiencyDescroptionProvider;
 
         public DescriptionPackage(
@@ -144,7 +141,6 @@ namespace hundun.idleshare.gamelib
             string destroyGainDescriptionStart, 
             string destroyCostDescriptionStart, 
             ILevelDescroptionProvider levelDescroptionProvider,
-            String proficiencyShowName,
             IProficiencyDescroptionProvider proficiencyDescroptionProvider)
         {
             this.buttonDescroption = buttonDescroption;
@@ -159,7 +155,6 @@ namespace hundun.idleshare.gamelib
             this.destroyGainDescriptionStart = destroyGainDescriptionStart;
             this.destroyCostDescriptionStart = destroyCostDescriptionStart;
             this.levelDescroptionProvider = levelDescroptionProvider;
-            this.proficiencyShowName = proficiencyShowName;
             this.proficiencyDescroptionProvider = proficiencyDescroptionProvider;
         }
     }

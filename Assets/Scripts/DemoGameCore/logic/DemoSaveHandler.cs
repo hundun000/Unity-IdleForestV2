@@ -62,13 +62,8 @@ namespace Assets.Scripts.DemoGameCore.logic
             starterConstructionSaveDatas.Add(
                 ConstructionSaveData.builder()
                                     .prototypeId(ConstructionPrototypeId.LAKE)
+                                    .proficiency(50)
                                     .position(new GridPosition(0, 3))
-                                    .build()
-                );
-            starterConstructionSaveDatas.Add(
-                ConstructionSaveData.builder()
-                                    .prototypeId(ConstructionPrototypeId.GOVERNMENT)
-                                    .position(new GridPosition(-100, -100))
                                     .build()
                 );
 

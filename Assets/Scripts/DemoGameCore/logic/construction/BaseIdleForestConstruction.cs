@@ -34,14 +34,15 @@ namespace Assets.Scripts.DemoGameCore.logic
             switch (thiz.prototypeId)
             { 
                 case ConstructionPrototypeId.SMALL_TREE:
-                    return Math.Max(0, neighborTreeCount * 2 - 1) + neighborLakeCount;
+                    return 1 + Math.Max(0, neighborTreeCount * 2 - 1) + neighborLakeCount;
                 case ConstructionPrototypeId.SMALL_FACTORY:
                 case ConstructionPrototypeId.MID_FACTORY:
                 case ConstructionPrototypeId.BIG_FACTORY:
-                    return Math.Max(0, neighborFactoryCount * 2 - 1) + neighborLakeCount;
+                    return 1 + Math.Max(0, neighborFactoryCount * 2 - 1) + neighborLakeCount;
                 case ConstructionPrototypeId.LAKE:
-                case ConstructionPrototypeId.DESERT:
                     return neighborTreeCount * -1 + neighborFactoryCount * 1;
+                case ConstructionPrototypeId.DESERT:
+                    return neighborTreeCount * 1 + neighborFactoryCount * -1;
                 default:
                     return 0;
             }

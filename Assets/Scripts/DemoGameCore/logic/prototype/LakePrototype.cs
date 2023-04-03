@@ -9,10 +9,14 @@ namespace Assets.Scripts.DemoGameCore.logic
     public class LakePrototype : AbstractConstructionPrototype
     {
         private static DescriptionPackage descriptionPackageEN = new DescriptionPackageBuilder()
-            .proficiency("干涸进度", DescriptionPackageFactory.EN_PROFICIENCY_IMP)
+            .proficiency((proficiency, reachMaxProficiency) => {
+                return "TODO" + proficiency;
+            })
             .build();
         private static DescriptionPackage descriptionPackageCN = new DescriptionPackageBuilder()
-            .proficiency("干涸进度", DescriptionPackageFactory.CN_PROFICIENCY_IMP)
+            .proficiency((proficiency, reachMaxProficiency) => {
+                return "干涸进度" + proficiency;
+            })
             .build();
 
         public LakePrototype(Language language) : base(ConstructionPrototypeId.LAKE, language, null)
@@ -34,7 +38,7 @@ namespace Assets.Scripts.DemoGameCore.logic
             String id = prototypeId + "_" + System.Guid.NewGuid().ToString();
             AutoProficiencyConstruction construction = new AutoProficiencyConstruction(prototypeId, id, position, descriptionPackage);
 
-            construction.proficiencyComponent.demoteConstructionPrototypeId = ConstructionPrototypeId.DIRT;
+            construction.proficiencyComponent.promoteConstructionPrototypeId = ConstructionPrototypeId.DIRT;
 
             return construction;
         }
