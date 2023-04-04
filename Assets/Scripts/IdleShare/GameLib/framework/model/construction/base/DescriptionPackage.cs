@@ -19,8 +19,8 @@ namespace hundun.idleshare.gamelib
         private String upgradeCostDescriptionStart;
         private String upgradeMaxLevelNoTransferDescription;
 
-        private String transferButtonDescroption;
-        private String transferCostDescriptionStart;
+        private String transformButtonDescroption;
+        private String transformCostDescriptionStart;
         private String upgradeMaxLevelHasTransferDescription;
 
         private String destroyButtonDescroption;
@@ -52,12 +52,12 @@ namespace hundun.idleshare.gamelib
             return this;
         }
 
-        public DescriptionPackageBuilder transfer(String transferButtonDescroption,
-                String transferCostDescriptionStart,
+        public DescriptionPackageBuilder transform(String transformButtonDescroption,
+                String transformCostDescriptionStart,
                 String upgradeMaxLevelHasTransferDescription)
         {
-            this.transferButtonDescroption = transferButtonDescroption;
-            this.transferCostDescriptionStart = transferCostDescriptionStart;
+            this.transformButtonDescroption = transformButtonDescroption;
+            this.transformCostDescriptionStart = transformCostDescriptionStart;
             this.upgradeMaxLevelHasTransferDescription = upgradeMaxLevelHasTransferDescription;
             return this;
         }
@@ -91,8 +91,8 @@ namespace hundun.idleshare.gamelib
                     upgradeCostDescriptionStart,
                     upgradeMaxLevelNoTransferDescription,
 
-                    transferButtonDescroption,
-                    transferCostDescriptionStart,
+                    transformButtonDescroption,
+                    transformCostDescriptionStart,
                     upgradeMaxLevelHasTransferDescription,
 
                     destroyButtonDescroption,
@@ -116,8 +116,8 @@ namespace hundun.idleshare.gamelib
         public String upgradeCostDescriptionStart;
         public String upgradeMaxLevelNoTransferDescription;
 
-        public String transferButtonDescroption;
-        public String transferCostDescriptionStart;
+        public String transformButtonDescroption;
+        public String transformCostDescriptionStart;
         public String upgradeMaxLevelHasTransferDescription;
 
         public String destroyButtonDescroption;
@@ -134,8 +134,8 @@ namespace hundun.idleshare.gamelib
             string outputGainDescriptionStart, 
             string upgradeCostDescriptionStart, 
             string upgradeMaxLevelNoTransferDescription, 
-            string transferButtonDescroption, 
-            string transferCostDescriptionStart, 
+            string transformButtonDescroption, 
+            string transformCostDescriptionStart, 
             string upgradeMaxLevelHasTransferDescription, 
             string destroyButtonDescroption, 
             string destroyGainDescriptionStart, 
@@ -148,8 +148,8 @@ namespace hundun.idleshare.gamelib
             this.outputGainDescriptionStart = outputGainDescriptionStart;
             this.upgradeCostDescriptionStart = upgradeCostDescriptionStart;
             this.upgradeMaxLevelNoTransferDescription = upgradeMaxLevelNoTransferDescription;
-            this.transferButtonDescroption = transferButtonDescroption;
-            this.transferCostDescriptionStart = transferCostDescriptionStart;
+            this.transformButtonDescroption = transformButtonDescroption;
+            this.transformCostDescriptionStart = transformCostDescriptionStart;
             this.upgradeMaxLevelHasTransferDescription = upgradeMaxLevelHasTransferDescription;
             this.destroyButtonDescroption = destroyButtonDescroption;
             this.destroyGainDescriptionStart = destroyGainDescriptionStart;

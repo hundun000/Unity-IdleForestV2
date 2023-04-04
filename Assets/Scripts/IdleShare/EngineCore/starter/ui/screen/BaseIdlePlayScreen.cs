@@ -29,8 +29,6 @@ namespace hundun.idleshare.enginecore
         // ----- ui ------
         //protected IdleScreenBackgroundVM screenBackgroundVM;
         
-        protected GameImageDrawer<T_GAME, T_SAVE> gameImageDrawer;
-        
         // ----- popup ui ------
         protected AchievementMaskBoard<T_GAME, T_SAVE> achievementMaskBoard;
         protected NotificationMaskBoard<T_GAME, T_SAVE> notificationMaskBoard;
@@ -101,7 +99,6 @@ namespace hundun.idleshare.enginecore
 
         virtual protected void lazyInitLogicContext()
         {
-            this.gameImageDrawer = new GameImageDrawer<T_GAME, T_SAVE>();
             this.gameEntityManager = new GameEntityManager<T_GAME, T_SAVE>();
             gameEntityManager.lazyInit(this.game, 
                 game.childGameConfig.areaShowEntityByOwnAmountConstructionPrototypeIds, 
@@ -114,7 +111,6 @@ namespace hundun.idleshare.enginecore
             //gameAreaChangeListeners.Add(screenBackgroundVM);
 
             this.game.idleGameplayExport.eventManagerRegisterListener(this);
-            this.game.idleGameplayExport.eventManagerRegisterListener(gameImageDrawer);
         }
 
 
@@ -145,7 +141,7 @@ namespace hundun.idleshare.enginecore
 
         override protected void gameObjectDraw(float delta)
         {
-            gameImageDrawer.allEntitiesMoveForFrameAndDraw();
+
         }
 
         virtual public void hideAchievementMaskBoard()

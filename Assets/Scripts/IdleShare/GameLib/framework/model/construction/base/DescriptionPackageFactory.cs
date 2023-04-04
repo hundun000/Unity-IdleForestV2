@@ -25,7 +25,7 @@ namespace hundun.idleshare.gamelib
             return (reachMaxLevel ? "Unlocked" : "");
         };
         public static IProficiencyDescroptionProvider EN_PROFICIENCY_IMP = (proficiency, reachMaxProficiency) => {
-            return "proficiency" + proficiency;
+            return "efficiency: " + proficiency;
         };
 
 

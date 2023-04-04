@@ -24,7 +24,6 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
         public const String SCENE_NAME = "PlayScene";
 
-        DemoGameEntityFactory gameEntityFactory;
         //protected SpecialConstructionControlBoardVM specialConstructionControlBoardVM;
         [HideInInspector]
         public CellDetailBoardVM cellDetailBoardVM;
@@ -41,8 +40,6 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
         {
             base.Awake();
 
-            this.gameEntityFactory = this.UiRoot.transform.Find("cell_drawContaioner/GameEntityFactory").GetComponent<DemoGameEntityFactory>();
-            this.drawContaioner = this.UiRoot.transform.Find("cell_drawContaioner/root").transform;
             //this.specialConstructionControlBoardVM = this.UiRoot.transform.Find("cell_4/SpecialConstructionControlBoardVM").GetComponent<SpecialConstructionControlBoardVM>();
             this.cellDetailBoardVM = this.UiRoot.transform.Find("cellDetailBoardVM").GetComponent<CellDetailBoardVM>();
             this.firstLockedAchievementBoardVM = this.UiRoot.transform.Find("firstLockedAchievementBoardVM").GetComponent<FirstLockedAchievementBoardVM>();
@@ -95,9 +92,6 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
         override protected void lazyInitLogicContext()
         {
             base.lazyInitLogicContext();
-
-            gameEntityFactory.postPrefabInitialization(this, drawContaioner);
-            gameImageDrawer.lazyInit(this, gameEntityFactory);
 
             //logicFrameListeners.Add(specialConstructionControlBoardVM);
             //logicFrameListeners.Add(statusBarController);

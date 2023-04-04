@@ -116,9 +116,9 @@ namespace hundun.idleshare.gamelib
             return gameplayContext.constructionFactory.getPrototype(prototypeId);
         }
 
-        public void transferConstruction(String id)
+        public void transformConstruction(String id)
         {
-            gameplayContext.constructionManager.transferInstanceAndNotify(id);
+            gameplayContext.constructionManager.transformInstanceAndNotify(id);
         }
 
         public AchievementInfoPackage getAchievementInfoPackage()

@@ -15,25 +15,6 @@ namespace Assets.Scripts.DemoGameCore.logic
 
     public class DemoBuiltinConstructionsLoader : IBuiltinConstructionsLoader
     {
-        public static DescriptionPackage descriptionPackageEN = new DescriptionPackageBuilder()
-            .button("升级")
-            .output("自动消耗", "自动产出")
-            .upgrade("升级费用", "(已达到最大等级)", DescriptionPackageFactory.ONLY_LEVEL_IMP)
-            .destroy("摧毁", "摧毁产出", "摧毁费用")
-            .transfer("转职", "转职费用", "可以转职")
-            .proficiency(DescriptionPackageFactory.EN_PROFICIENCY_IMP)
-            .build();
-
-
-        public static DescriptionPackage descriptionPackageCN = new DescriptionPackageBuilder()
-            .button("升级")
-            .output("自动消耗", "自动产出")
-            .upgrade("升级费用", "(已达到最大等级)", DescriptionPackageFactory.CN_ONLY_LEVEL_IMP)
-            .destroy("摧毁", "摧毁产出", "摧毁费用")
-            .transfer("转职", "转职费用", "可以转职")
-            .proficiency(DescriptionPackageFactory.CN_PROFICIENCY_IMP)
-            .build();
-
         public Dictionary<String, AbstractConstructionPrototype> getProviderMap(Language language)
         {
             Dictionary < String, AbstractConstructionPrototype > map = new Dictionary<string, AbstractConstructionPrototype>();

@@ -73,7 +73,7 @@ namespace hundun.idleshare.enginecore
                 maxLevelGroupLabel_0.text = model.upgradeComponent.upgradeCostPack.descriptionStart;
                 maxLevelGroupLabel_1.text = model.descriptionPackage.upgradeMaxLevelNoTransferDescription;
 
-                buildOnePack(model.upgradeComponent.transferCostPack);
+                buildOnePack(model.upgradeComponent.transformCostPack);
             }
 
             buildOnePack(model.destoryCostPack);

@@ -12,7 +12,6 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
     public class SpecialConstructionControlBoardVM : FixedConstructionControlBoardVM<DemoIdleGame, RootSaveData>
     {
         public static readonly HashSet<String> specialConstructionPrototypeIds = new HashSet<String>() {
-            ConstructionPrototypeId.WIN_PROVIDER,
             ConstructionPrototypeId.GOVERNMENT,
             ConstructionPrototypeId.ORGANIZATION
         };

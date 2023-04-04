@@ -18,7 +18,6 @@ namespace Assets.Scripts.DemoGameCore.logic
         public const String MID_FACTORY = "ENUM_CSTR@MID_FACTORY";
         public const String BIG_FACTORY = "ENUM_CSTR@BIG_FACTORY";
 
-        public const String WIN_PROVIDER = "ENUM_CSTR@WIN_PROVIDER";
         public const String GOVERNMENT = "ENUM_CSTR@GOVERNMENT";
         public const String ORGANIZATION = "ENUM_CSTR@ORGANIZATION";
     }

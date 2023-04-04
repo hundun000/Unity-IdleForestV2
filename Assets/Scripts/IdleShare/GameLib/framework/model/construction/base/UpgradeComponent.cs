@@ -22,8 +22,8 @@ namespace hundun.idleshare.gamelib
 
         public ResourcePack upgradeCostPack { get; set; }
 
-        public ResourcePack transferCostPack { get; set; }
-        public string transferConstructionPrototypeId;
+        public ResourcePack transformCostPack { get; set; }
+        public string transformConstructionPrototypeId;
         public UpgradeState upgradeState { get; private set; }
 
 
@@ -56,9 +56,9 @@ namespace hundun.idleshare.gamelib
                 upgradeState = UpgradeState.HAS_NEXT_UPGRADE;
                 upgradeCostPack.descriptionStart = construction.descriptionPackage.upgradeCostDescriptionStart;
             }
-            if (transferCostPack != null)
+            if (transformCostPack != null)
             {
-                transferCostPack.descriptionStart = construction.descriptionPackage.transferCostDescriptionStart;
+                transformCostPack.descriptionStart = construction.descriptionPackage.transformCostDescriptionStart;
             }
         }
         public void updateModifiedValues(Boolean reachMaxLevel)
@@ -70,13 +70,13 @@ namespace hundun.idleshare.gamelib
                     
                     this.upgradeCostPack.modifiedValues = (null);
                     this.upgradeCostPack.modifiedValuesDescription = (null);
-                    if (transferCostPack != null)
+                    if (transformCostPack != null)
                     {
                         upgradeState = UpgradeState.REACHED_MAX_UPGRADE_HAS_TRANSFER;
 
-                        this.transferCostPack.modifiedValues = transferCostPack.baseValues;
-                        this.transferCostPack.modifiedValuesDescription = (String.Join(", ",
-                                transferCostPack.modifiedValues
+                        this.transformCostPack.modifiedValues = transformCostPack.baseValues;
+                        this.transformCostPack.modifiedValuesDescription = (String.Join(", ",
+                                transformCostPack.modifiedValues
                                         .Select(pair => pair.type + "x" + pair.amount)
                                         .ToList())
                                         + "; "
@@ -126,7 +126,7 @@ namespace hundun.idleshare.gamelib
 
         public Boolean canTransfer()
         {
-            if (construction.saveData.level != construction.maxLevel || transferCostPack == null)
+            if (construction.saveData.level != construction.maxLevel || transformCostPack == null)
             {
                 return false;
             }
@@ -135,7 +135,7 @@ namespace hundun.idleshare.gamelib
                 return false;
             }
 
-            List<ResourcePair> compareTarget = transferCostPack.modifiedValues;
+            List<ResourcePair> compareTarget = transformCostPack.modifiedValues;
             return construction.gameContext.storageManager.isEnough(compareTarget);
         }
     }

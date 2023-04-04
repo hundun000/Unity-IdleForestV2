@@ -25,7 +25,7 @@ namespace hundun.idleshare.enginecore
 
         TextButton clickEffectButton;
         TextButton destoryButton;
-        TextButton transferButton;
+        TextButton transformButton;
         Image background;
         
         virtual protected void OnMouseEnter()
@@ -57,7 +57,7 @@ namespace hundun.idleshare.enginecore
             this.proficiencyLabel = this.transform.Find("proficiencyLabel").GetComponent<Text>();
             this.positionLabel = this.transform.Find("positionLabel").GetComponent<Text>();
             this.destoryButton = this.transform.Find("destoryButton").GetComponent<TextButton>();
-            this.transferButton = this.transform.Find("transferButton").GetComponent<TextButton>();
+            this.transformButton = this.transform.Find("transformButton").GetComponent<TextButton>();
         }
 
         public void postPrefabInitialization(BaseIdlePlayScreen<T_GAME, T_SAVE> parent)
@@ -78,10 +78,10 @@ namespace hundun.idleshare.enginecore
                 parent.game.idleGameplayExport.destoryConstruction(model.id, null);
 
             });
-            transferButton.button.onClick.AddListener(() => {
+            transformButton.button.onClick.AddListener(() => {
 
-                parent.game.frontend.log(this.getClass().getSimpleName(), "transferButton clicked");
-                parent.game.idleGameplayExport.transferConstruction(model.id);
+                parent.game.frontend.log(this.getClass().getSimpleName(), "transformButton clicked");
+                parent.game.idleGameplayExport.transformConstruction(model.id);
 
             });
 
@@ -191,11 +191,11 @@ namespace hundun.idleshare.enginecore
             }
             if (model.upgradeComponent.canTransfer())
             {
-                transferButton.button.interactable = (true);
+                transformButton.button.interactable = (true);
             }
             else
             {
-                transferButton.button.interactable = (false);
+                transformButton.button.interactable = (false);
             }
 
             Boolean canUpWorkingLevel = parent.game.idleGameplayExport.constructionCanChangeWorkingLevel(model.id, 1);

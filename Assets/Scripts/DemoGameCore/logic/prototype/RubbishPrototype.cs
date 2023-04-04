@@ -8,7 +8,7 @@ namespace Assets.Scripts.DemoGameCore.logic
     public class RubbishPrototype : AbstractConstructionPrototype
     {
         private static DescriptionPackage descriptionPackageEN = new DescriptionPackageBuilder()
-            .destroy("清理", null, "清理费用")
+            .destroy("Clear", null, "Clear cost")
             .build();
         private static DescriptionPackage descriptionPackageCN = new DescriptionPackageBuilder()
             .destroy("清理", null, "清理费用")

@@ -9,15 +9,15 @@ namespace Assets.Scripts.DemoGameCore.logic
     public class SmallTreePrototype : AbstractConstructionPrototype
     {
         public static DescriptionPackage descriptionPackageEN = new DescriptionPackageBuilder()
-            .output("自动消耗", "自动产出")
-            .destroy("砍伐", "砍伐产出", null)
-            .transfer("转职", "转职费用", "可以转职")
-            .proficiency(DescriptionPackageFactory.CN_PROFICIENCY_IMP)
+            .output("Consume", "Produce")
+            .destroy("Destroy", "Destroy gain", null)
+            .transform("Transform", "Transform cost", "Can be transformed")
+            .proficiency(DescriptionPackageFactory.EN_PROFICIENCY_IMP)
             .build();
         public static DescriptionPackage descriptionPackageCN = new DescriptionPackageBuilder()
             .output("自动消耗", "自动产出")
             .destroy("砍伐", "砍伐产出", null)
-            .transfer("转职", "转职费用", "可以转职")
+            .transform("转职", "转职费用", "可以转职")
             .proficiency(DescriptionPackageFactory.CN_PROFICIENCY_IMP)
             .build();
 

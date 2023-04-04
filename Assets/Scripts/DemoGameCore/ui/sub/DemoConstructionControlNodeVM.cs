@@ -25,7 +25,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
         TextButton clickEffectButton;
         TextButton destoryButton;
-        TextButton transferButton;
+        TextButton transformButton;
 
         Image background;
 
@@ -39,7 +39,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             this.clickEffectButton = this.transform.Find("clickEffectButton").GetComponent<TextButton>();
 
             this.destoryButton = this.transform.Find("destoryButton").GetComponent<TextButton>();
-            this.transferButton = this.transform.Find("transferButton").GetComponent<TextButton>();
+            this.transformButton = this.transform.Find("transformButton").GetComponent<TextButton>();
         }
 
         public void postPrefabInitialization(DemoPlayScreen parent)
@@ -52,9 +52,9 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
                 parent.game.frontend.log(this.getClass().getSimpleName(), "clickEffectButton clicked");
                 parent.game.idleGameplayExport.constructionOnClick(model.id);
             });
-            transferButton.button.onClick.AddListener(() => {
-                parent.game.frontend.log(this.getClass().getSimpleName(), "transferButton clicked");
-                parent.game.idleGameplayExport.transferConstruction(model.id);
+            transformButton.button.onClick.AddListener(() => {
+                parent.game.frontend.log(this.getClass().getSimpleName(), "transformButton clicked");
+                parent.game.idleGameplayExport.transformConstruction(model.id);
             });
             destoryButton.button.onClick.AddListener(() => {
                 parent.game.frontend.log(this.getClass().getSimpleName(), "destoryButton clicked");
@@ -165,21 +165,21 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
                 clickEffectButton.label.text = (model.descriptionPackage.buttonDescroption);
             }
 
-            if (model.descriptionPackage.transferButtonDescroption == null)
+            if (model.descriptionPackage.transformButtonDescroption == null)
             {
-                transferButton.gameObject.SetActive(false);
+                transformButton.gameObject.SetActive(false);
             }
             else if (model.canTransfer())
             {
-                transferButton.gameObject.SetActive(true);
-                transferButton.button.interactable = (true);
-                transferButton.label.text = (model.descriptionPackage.transferButtonDescroption);
+                transformButton.gameObject.SetActive(true);
+                transformButton.button.interactable = (true);
+                transformButton.label.text = (model.descriptionPackage.transformButtonDescroption);
             }
             else
             {
-                transferButton.gameObject.SetActive(true);
-                transferButton.button.interactable = (false);
-                transferButton.label.text = (model.descriptionPackage.transferButtonDescroption);
+                transformButton.gameObject.SetActive(true);
+                transformButton.button.interactable = (false);
+                transformButton.label.text = (model.descriptionPackage.transformButtonDescroption);
             }
 
 

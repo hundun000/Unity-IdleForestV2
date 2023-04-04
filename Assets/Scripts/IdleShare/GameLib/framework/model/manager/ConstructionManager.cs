@@ -150,11 +150,11 @@ namespace hundun.idleshare.gamelib
             gameContext.eventManager.notifyConstructionCollectionChange();
         }
 
-        internal void transferInstanceAndNotify(String id)
+        internal void transformInstanceAndNotify(String id)
         {
             BaseConstruction construction = runningConstructionModelMap[id];
             removeInstance(construction);
-            createInstanceOfPrototype(construction.upgradeComponent.transferConstructionPrototypeId, construction.position);
+            createInstanceOfPrototype(construction.upgradeComponent.transformConstructionPrototypeId, construction.position);
             gameContext.eventManager.notifyConstructionCollectionChange();
         }
 

@@ -10,7 +10,15 @@ namespace Assets.Scripts.DemoGameCore.logic
     {
         public MidFactoryPrototype(Language language) : base(ConstructionPrototypeId.MID_FACTORY, language, null)
         {
-
+            switch (language)
+            {
+                case Language.CN:
+                    this.descriptionPackage = SmallFactoryPrototype.descriptionPackageCN;
+                    break;
+                default:
+                    this.descriptionPackage = SmallFactoryPrototype.descriptionPackageEN;
+                    break;
+            }
         }
 
         public override BaseConstruction getInstance(GridPosition position)

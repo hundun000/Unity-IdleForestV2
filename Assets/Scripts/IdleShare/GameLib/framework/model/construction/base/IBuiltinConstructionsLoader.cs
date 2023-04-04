@@ -38,17 +38,6 @@ namespace hundun.idleshare.gamelib
                                     + "; "
                     );
             }
-
-            // default descriptionPackage
-            switch (language)
-            {
-                case Language.CN:
-                    this.descriptionPackage = DemoBuiltinConstructionsLoader.descriptionPackageCN;
-                    break;
-                default:
-                    this.descriptionPackage = DemoBuiltinConstructionsLoader.descriptionPackageEN;
-                    break;
-            }
         }
 
         public abstract BaseConstruction getInstance(GridPosition position);

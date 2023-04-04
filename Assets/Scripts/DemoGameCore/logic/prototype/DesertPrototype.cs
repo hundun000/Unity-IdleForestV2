@@ -11,7 +11,7 @@ namespace Assets.Scripts.DemoGameCore.logic
     {
         private static DescriptionPackage descriptionPackageEN = new DescriptionPackageBuilder()
             .proficiency((proficiency, reachMaxProficiency) => {
-                return "TODO" + proficiency;
+                return "reclamation: " + proficiency;
             })
             .build();
         private static DescriptionPackage descriptionPackageCN = new DescriptionPackageBuilder()
