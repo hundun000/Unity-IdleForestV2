@@ -7,8 +7,9 @@ namespace Map
     public class CameraController : MonoBehaviour
     {
         public Camera mainCamera;                // 脚本控制的相机
-        public Vector3 zeroPos;                  // 坐标原点
-        public Vector3 cameraPoint;              // 相机中心点
+        public Vector3 zeroPos;                  // 地图坐标原点
+        public Vector3 cameraPoint;              // 相机跟踪点
+        public Vector2 pointSkew;                // 跟踪点相对于相机中心的偏移量
         private Transform cameraTrans;           // 相机此时的transfrom
 
         private int xAxisCoefficient = 1;     // X轴反转
@@ -34,7 +35,7 @@ namespace Map
         private void Start()
         {
             cameraTrans = mainCamera.transform;
-            cameraTrans.position = zeroPos;
+            cameraTrans.position = new(zeroPos.x + pointSkew.x, zeroPos.y + pointSkew.y, cameraTrans.position.z);
             isDragging = false;
 
             xAxisCoefficient = xAxisinversion ? -1 : 1;
@@ -44,8 +45,8 @@ namespace Map
         private void Update()
         {
             if (cameraTrans == null) return;
-            // 正交视角下，相机的中心投影点就为相机的xy坐标
-            cameraPoint = new(cameraTrans.position.x, cameraTrans.position.y, 0);
+            // 正交视角下，相机的中心投影点减去偏移量就为相机跟踪点的xy坐标
+            cameraPoint = new(cameraTrans.position.x - pointSkew.x, cameraTrans.position.y - pointSkew.y, 0);
 
             KeyBoardControl();
 
