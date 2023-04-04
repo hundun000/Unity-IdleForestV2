@@ -149,7 +149,7 @@ namespace Assets.Scripts.DemoGameCore.logic
                 );
         }
 
-        public List<string> getPlayScreenTexts(Language language)
+        public List<string> getAchievementTexts(Language language)
         {
             switch (language)
             {

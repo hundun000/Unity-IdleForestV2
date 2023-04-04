@@ -53,17 +53,17 @@ namespace Assets.Scripts.DemoGameCore.logic
             switch (language) 
             {
                 case Language.CN:
-                    textMap.Add(IdleForestAchievementId.STEP_1, new List<string> { 
-                        "Quest-1",
-                        "Owns two forests of at least level 1.",
-                        "You completed Quest-1. Thank you for your tireless efforts to protect our planet and make it a better place for future generations."
-                    });
-                    break;
-                default:
                     textMap.Add(IdleForestAchievementId.STEP_1, new List<string> {
                         "植树第一步",
                         "拥有两个至少1级森林",
                         "你完成了植树第一步。感谢你为环保做出的贡献！"
+                    });
+                    break;
+                default:
+                    textMap.Add(IdleForestAchievementId.STEP_1, new List<string> {
+                        "Quest-1",
+                        "Owns two forests of at least level 1.",
+                        "You completed Quest-1. Thank you for your tireless efforts to protect our planet and make it a better place for future generations."
                     });
                     break;
             }

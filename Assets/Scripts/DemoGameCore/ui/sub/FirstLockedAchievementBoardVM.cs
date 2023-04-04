@@ -39,8 +39,8 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             this.parent = parent;
             this.background.sprite = parent.game.textureManager.defaultBoardNinePatchTexture;
 
-            nameStartLabel.text = parent.game.idleGameplayExport.gameDictionary.getPlayScreenTexts(parent.game.idleGameplayExport.language)[0];
-            countStartLabel.text = parent.game.idleGameplayExport.gameDictionary.getPlayScreenTexts(parent.game.idleGameplayExport.language)[1];
+            nameStartLabel.text = parent.game.idleGameplayExport.gameDictionary.getAchievementTexts(parent.game.idleGameplayExport.language)[0];
+            countStartLabel.text = parent.game.idleGameplayExport.gameDictionary.getAchievementTexts(parent.game.idleGameplayExport.language)[1];
 
             updateData();
         }
