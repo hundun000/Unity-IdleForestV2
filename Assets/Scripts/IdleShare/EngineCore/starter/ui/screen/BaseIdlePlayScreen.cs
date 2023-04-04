@@ -21,7 +21,7 @@ namespace hundun.idleshare.enginecore
     {
         // ----- unity adapter ------
         protected GameObject Contrainer { get; private set; }
-        protected GameObject PopoupRoot { get; private set; }
+        protected GameObject PopupRoot { get; private set; }
         protected GameObject UiRoot { get; private set; }
         protected GameObject Templates { get; private set; }
         protected AudioSource audioSource;
@@ -45,16 +45,16 @@ namespace hundun.idleshare.enginecore
         virtual protected void Awake()
         {
             Contrainer = this.gameObject;
-            PopoupRoot = this.transform.Find("_popupRoot").gameObject;
+            PopupRoot = this.transform.Find("_popupRoot").gameObject;
             UiRoot = this.transform.Find("_uiRoot").gameObject;
             Templates = this.transform.Find("_templates").gameObject;
             audioSource = this.transform.Find("_audioSource").GetComponent<AudioSource>();
 
             //this.screenBackgroundVM = this.Contrainer.transform.Find("ScreenBackgroundVM").gameObject.GetComponent<IdleScreenBackgroundVM>();
             
-            this.popupInfoBoardVM = this.PopoupRoot.transform.Find("PopupInfoBoardVM").gameObject.GetComponent<PopupInfoBoardVM<T_GAME, T_SAVE>>();
-            this.achievementMaskBoard = this.PopoupRoot.transform.Find("AchievementMaskBoard").gameObject.GetComponent<AchievementMaskBoard<T_GAME, T_SAVE>>();
-            this.notificationMaskBoard = this.PopoupRoot.transform.Find("NotificationMaskBoard").gameObject.GetComponent<NotificationMaskBoard<T_GAME, T_SAVE>>();
+            this.popupInfoBoardVM = this.PopupRoot.transform.Find("PopupInfoBoardVM").gameObject.GetComponent<PopupInfoBoardVM<T_GAME, T_SAVE>>();
+            this.achievementMaskBoard = this.PopupRoot.transform.Find("AchievementMaskBoard").gameObject.GetComponent<AchievementMaskBoard<T_GAME, T_SAVE>>();
+            this.notificationMaskBoard = this.PopupRoot.transform.Find("NotificationMaskBoard").gameObject.GetComponent<NotificationMaskBoard<T_GAME, T_SAVE>>();
         }
 
         virtual public void postMonoBehaviourInitialization(T_GAME game, String startArea,

@@ -16,5 +16,6 @@ namespace hundun.idleshare.gamelib
         List<String> getPlayScreenTexts(Language language);
         List<String> getAchievementTexts(Language language);
         Dictionary<Language, String> getLanguageShowNameMap();
+        List<String> getStageSelectMaskBoardTexts(Language language);
     }
 }

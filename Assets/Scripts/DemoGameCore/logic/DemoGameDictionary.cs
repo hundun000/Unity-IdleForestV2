@@ -170,5 +170,16 @@ namespace Assets.Scripts.DemoGameCore.logic
                     return JavaFeatureForGwt.arraysAsList("Build", "Build cost");
             }
         }
+
+        public List<string> getStageSelectMaskBoardTexts(Language language)
+        {
+            switch (language)
+            {
+                case Language.CN:
+                    return JavaFeatureForGwt.arraysAsList("返回", "关卡1", "关卡2", "关卡3");
+                default:
+                    return JavaFeatureForGwt.arraysAsList("Back", "Stage1", "Stage2", "Stage3");
+            }
+        }
     }
 }

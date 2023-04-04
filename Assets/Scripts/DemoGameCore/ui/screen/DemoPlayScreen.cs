@@ -61,7 +61,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
         protected override void lazyInitBackUiAndPopupUiContent()
         {
-            foreach (Transform child in this.PopoupRoot.transform)
+            foreach (Transform child in this.PopupRoot.transform)
             {
                 // temp Active make awak() called
                 child.gameObject.SetActive(true);
