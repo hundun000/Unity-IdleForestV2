@@ -45,6 +45,8 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
                 parent.game.idleGameplayExport.buyInstanceOfPrototype(model.prototypeId, position);
             });
 
+
+            clickEffectButton.label.text = parent.game.idleGameplayExport.gameDictionary.getPlayScreenTexts(parent.game.idleGameplayExport.language)[0];
         }
 
         private void updateCanCreateInstance()

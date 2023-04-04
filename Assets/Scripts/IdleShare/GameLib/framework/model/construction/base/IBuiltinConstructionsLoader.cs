@@ -44,8 +44,7 @@ namespace hundun.idleshare.gamelib
 
         internal void lazyInitDescription(IdleGameplayContext gameContext, Language language)
         {
-            // TODO language
-            buyInstanceCostPack.descriptionStart = "购买费用";
+            buyInstanceCostPack.descriptionStart = gameContext.gameDictionary.getPlayScreenTexts(language)[1];
         }
     }
 

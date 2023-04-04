@@ -365,7 +365,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u8D2D\u4E70"
+  m_Text: clickEffectButton
 --- !u!222 &70852224
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3805,7 +3805,7 @@ MonoBehaviour:
   mainCamera: {fileID: 106864027}
   zeroPos: {x: 0, y: 0, z: 0}
   cameraPoint: {x: 0, y: 0, z: 0}
-  pointSkew: {x: -3, y: 0.5}
+  pointSkew: {x: 0, y: 0}
   cameraSizeMin: 2
   cameraSizeMax: 10
   keyMoveSpeed: 8

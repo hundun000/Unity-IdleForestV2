@@ -159,5 +159,16 @@ namespace Assets.Scripts.DemoGameCore.logic
                     return JavaFeatureForGwt.arraysAsList("Quest: ", "Completed: ", "back");
             }
         }
+
+        public List<string> getPlayScreenTexts(Language language)
+        {
+            switch (language)
+            {
+                case Language.CN:
+                    return JavaFeatureForGwt.arraysAsList("购买", "购买费用");
+                default:
+                    return JavaFeatureForGwt.arraysAsList("Build", "Build cost");
+            }
+        }
     }
 }
