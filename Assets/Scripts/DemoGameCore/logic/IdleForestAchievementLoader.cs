@@ -49,11 +49,31 @@ namespace Assets.Scripts.DemoGameCore.logic
     {
         public Dictionary<String, AbstractAchievement> getProviderMap(Language language)
         {
+            Dictionary<String, List<String>> textMap = new Dictionary<String, List<String>>();
+            switch (language) 
+            {
+                case Language.CN:
+                    textMap.Add(IdleForestAchievementId.STEP_1, new List<string> { 
+                        "Quest-1",
+                        "Owns two forests of at least level 1.",
+                        "You completed Quest-1. Thank you for your tireless efforts to protect our planet and make it a better place for future generations."
+                    });
+                    break;
+                default:
+                    textMap.Add(IdleForestAchievementId.STEP_1, new List<string> {
+                        "植树第一步",
+                        "拥有两个至少1级森林",
+                        "你完成了植树第一步。感谢你为环保做出的贡献！"
+                    });
+                    break;
+            }
+
+
+
             Dictionary<String, AbstractAchievement> map = new Dictionary<string, AbstractAchievement>();
-            // FIXEME swich case language
             map.Add(IdleForestAchievementId.STEP_1, new OwnConstructionAchievement(
-                    IdleForestAchievementId.STEP_1, 
-                    "植树第一步", "拥有两个至少1级森林", "你完成了植树第一步。感谢你为环保做出的贡献！",
+                    IdleForestAchievementId.STEP_1,
+                    textMap[IdleForestAchievementId.STEP_1][0], textMap[IdleForestAchievementId.STEP_1][1], textMap[IdleForestAchievementId.STEP_1][2],
                     JavaFeatureForGwt.mapOf(
                         ConstructionPrototypeId.SMALL_TREE, new KeyValuePair<int, int>(2, 1)
                         )

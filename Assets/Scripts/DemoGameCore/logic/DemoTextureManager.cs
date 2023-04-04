@@ -48,7 +48,7 @@ namespace Assets.Scripts.DemoGameCore.logic
         {
             achievementMaskBoardTexture = getSprite("letter.png");
             menuTexture = getSprite("menu.png");
-            defaultBoardNinePatchTexture = getSprite("defaultBoardNinePatch.png");
+            defaultBoardNinePatchTexture = getSprite("board.png");
             {
                 var texture = getTexture2D("resourceIcons.png");
                 Sprite[][] regions = split(texture, 16, 16);
