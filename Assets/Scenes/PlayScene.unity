@@ -3805,6 +3805,7 @@ MonoBehaviour:
   mainCamera: {fileID: 106864027}
   zeroPos: {x: 0, y: 0, z: 0}
   cameraPoint: {x: 0, y: 0, z: 0}
+  pointSkew: {x: -3, y: 0.5}
   cameraSizeMin: 2
   cameraSizeMax: 10
   keyMoveSpeed: 8
