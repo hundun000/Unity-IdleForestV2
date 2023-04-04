@@ -122,7 +122,7 @@ namespace Map
         {
             Vector3 newposition = new Vector3(0, 0, 0);
             newposition.y += 0.75f * gridY;
-            newposition.x += Mathf.Sqrt(3) / 2  * (gridX - (gridY % 2) / 2.0f);
+            newposition.x += Mathf.Sqrt(3) / 2  * (gridX - (Math.Abs(gridY) % 2) / 2.0f);
             return newposition;
         }
 
