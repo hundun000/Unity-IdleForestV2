@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.MaterialProperty;
 
 namespace hundun.idleshare.enginecore
 {

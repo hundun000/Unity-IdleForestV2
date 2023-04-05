@@ -20,13 +20,13 @@ namespace hundun.idleshare.gamelib
 
         public String getProficiencyDescroption()
         {
-            Boolean reachMaxLevel = construction.saveData.proficiency >= 100;
+            Boolean reachMaxLevel = construction.saveData.proficiency >= construction.maxProficiency;
             return construction.descriptionPackage.proficiencyDescroptionProvider.Invoke(construction.saveData.proficiency, reachMaxLevel);
         }
 
         public Boolean canPromote()
         {
-            return (construction.saveData.proficiency >= 100) && promoteConstructionPrototypeId != null;
+            return (construction.saveData.proficiency >= construction.maxProficiency) && promoteConstructionPrototypeId != null;
         }
 
         public Boolean canDemote()
@@ -36,12 +36,9 @@ namespace hundun.idleshare.gamelib
 
         public void changeProficiency(int delta)
         {
-
-            construction.saveData.proficiency = (construction.saveData.proficiency + delta);
+            construction.saveData.proficiency = Math.Max(0, Math.Min(construction.saveData.proficiency + delta, construction.maxProficiency));
             construction.updateModifiedValues();
             construction.gameContext.frontend.log(construction.name, "changeProficiency delta = " + delta + ", success to " + construction.saveData.proficiency);
-
-
         }
 
         public void cleanProficiency()

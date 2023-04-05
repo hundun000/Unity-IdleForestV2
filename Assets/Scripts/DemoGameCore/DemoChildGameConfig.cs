@@ -58,12 +58,17 @@ namespace Assets.Scripts.DemoGameCore
 
             Dictionary<String, String> screenIdToFilePathMap = JavaFeatureForGwt.mapOf(
                     typeof(DemoMenuScreen).Name, "audio/Loop-Menu.wav",
-                    typeof(DemoPlayScreen).Name, "audio/forest.mp3"
+                    typeof(DemoPlayScreen).Name, "audio/relax.wav"
                 );
             this.screenIdToFilePathMap = (screenIdToFilePathMap);
 
             List<String> achievementPrototypeIds = JavaFeatureForGwt.arraysAsList(
-                    IdleForestAchievementId.STEP_1
+                    IdleForestAchievementId.STEP_1,
+                    IdleForestAchievementId.STEP_2,
+                    IdleForestAchievementId.STEP_3,
+                    IdleForestAchievementId.STEP_4,
+                    IdleForestAchievementId.STEP_5,
+                    IdleForestAchievementId.STEP_6
                     );
             this.achievementPrototypeIds = (achievementPrototypeIds);
         }

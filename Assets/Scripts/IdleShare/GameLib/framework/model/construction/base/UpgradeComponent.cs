@@ -30,7 +30,7 @@ namespace hundun.idleshare.gamelib
         /**
          * 影响升级后下一级费用，详见具体公式
          */
-        private static readonly double upgradeCostLevelUpArg = 1.05;
+        private static readonly double upgradeCostLevelUpArg = 1.00;
         private static readonly Func<long, int, long> DEFAULT_CALCULATE_COST_FUNCTION = (baseValue, level) =>
         {
             return (long)(

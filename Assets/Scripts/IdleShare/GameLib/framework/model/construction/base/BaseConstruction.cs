@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Unity.VisualScripting.Icons;
 
 namespace hundun.idleshare.gamelib
 {
@@ -15,7 +14,7 @@ namespace hundun.idleshare.gamelib
         public int maxProficiency = 100;
         internal bool allowAnyProficiencyDestory = true;
 
-        public static readonly int DEFAULT_MAX_LEVEL = 10;
+        public static readonly int DEFAULT_MAX_LEVEL = 5;
         public int maxLevel = DEFAULT_MAX_LEVEL;
 
         public static readonly int DEFAULT_MAX_DRAW_NUM = 5;

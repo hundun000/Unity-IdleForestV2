@@ -22,6 +22,8 @@ namespace Assets.Scripts.DemoGameCore.logic
                         
                         case ConstructionPrototypeId.SMALL_TREE:
                             return "小树";
+                        case ConstructionPrototypeId.MID_TREE:
+                            return "中树";
                         case ConstructionPrototypeId.BIG_TREE:
                             return "大树";
                         case ConstructionPrototypeId.SMALL_FACTORY:
@@ -47,7 +49,9 @@ namespace Assets.Scripts.DemoGameCore.logic
                     switch (prototypeId)
                     {
                         case ConstructionPrototypeId.SMALL_TREE:
-                            return "forest";
+                            return "small forest";
+                        case ConstructionPrototypeId.MID_TREE:
+                            return "medium forest";
                         case ConstructionPrototypeId.BIG_TREE:
                             return "big forest";
                         case ConstructionPrototypeId.SMALL_FACTORY:
@@ -83,6 +87,7 @@ namespace Assets.Scripts.DemoGameCore.logic
                     {
                         
                         case ConstructionPrototypeId.SMALL_TREE:
+                        case ConstructionPrototypeId.MID_TREE:
                         case ConstructionPrototypeId.BIG_TREE:
                             return "消耗二氧化碳，产出木头。相邻的森林能更快提高工作效率。";
                         case ConstructionPrototypeId.SMALL_FACTORY:
@@ -106,6 +111,7 @@ namespace Assets.Scripts.DemoGameCore.logic
                     switch (prototypeId)
                     {
                         case ConstructionPrototypeId.SMALL_TREE:
+                        case ConstructionPrototypeId.MID_TREE:
                         case ConstructionPrototypeId.BIG_TREE:
                             return "The forest consumes carbon dioxide and produce wood. Adjacent forests can increase work efficiency faster.";
                         case ConstructionPrototypeId.SMALL_FACTORY:

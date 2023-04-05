@@ -29,7 +29,8 @@ namespace Assets.Scripts.DemoGameCore.logic
 
         public SmallFactoryPrototype(Language language) : base(ConstructionPrototypeId.SMALL_FACTORY, language,
             DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COIN, 100
+                    ResourceType.COIN, 50,
+                    ResourceType.WOOD, 50
                     ))
             )
         {
@@ -53,16 +54,17 @@ namespace Assets.Scripts.DemoGameCore.logic
             construction.destoryGainPack = DemoBuiltinConstructionsLoader.toPack(new Dictionary<string, int>());
 
             construction.outputComponent.outputGainPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COIN, 10,
-                    ResourceType.CARBON, 10
+                    ResourceType.COIN, 5,
+                    ResourceType.CARBON, 5
                     )));
 
             construction.upgradeComponent.upgradeCostPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COIN, 60
+                    ResourceType.COIN, 50,
+                    ResourceType.WOOD, 50
                     )));
             construction.upgradeComponent.transformCostPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COIN, 400,
-                    ResourceType.WOOD, 5
+                    ResourceType.COIN, 500,
+                    ResourceType.WOOD, 500
                     )));
             construction.upgradeComponent.transformConstructionPrototypeId = ConstructionPrototypeId.MID_FACTORY;
 

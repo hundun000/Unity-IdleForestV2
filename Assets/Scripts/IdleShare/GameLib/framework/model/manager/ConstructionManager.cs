@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine.UIElements;
-using static UnityEditor.Progress;
 
 namespace hundun.idleshare.gamelib
 {

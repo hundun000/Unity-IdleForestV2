@@ -8,7 +8,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.MaterialProperty;
 
 namespace hundun.idleshare.enginecore
 {
@@ -125,6 +124,11 @@ namespace hundun.idleshare.enginecore
             foreach (ILogicFrameListener logicFrameListener in logicFrameListeners)
             {
                 logicFrameListener.onLogicFrame();
+            }
+
+            if (logicFrameHelper.clockCount % logicFrameHelper.secondToFrameNum(10) == 0)
+            {
+                game.saveHandler.gameSaveCurrent();
             }
         }
 

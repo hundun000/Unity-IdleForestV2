@@ -34,6 +34,8 @@ namespace Assets.Scripts.DemoGameCore.logic
             switch (thiz.prototypeId)
             { 
                 case ConstructionPrototypeId.SMALL_TREE:
+                case ConstructionPrototypeId.MID_TREE:
+                case ConstructionPrototypeId.BIG_TREE:
                     return 1 + Math.Max(0, neighborTreeCount * 2 - 1) + neighborLakeCount;
                 case ConstructionPrototypeId.SMALL_FACTORY:
                 case ConstructionPrototypeId.MID_FACTORY:
@@ -106,12 +108,12 @@ namespace Assets.Scripts.DemoGameCore.logic
 
         override public long calculateModifiedOutput(long baseValue, int level, int proficiency)
         {
-            return (long)((baseValue + Math.Pow(10, 1 + 1.0 * level)) * proficiency * 0.01);
+            return (long)((baseValue * level) * (0.5 + proficiency / 100.0 * 0.5));
         }
 
         override public long calculateModifiedOutputCost(long baseValue, int level, int proficiency)
         {
-            return (long)((baseValue + Math.Pow(10, 1 + 1.0 * level)) * proficiency * 0.01);
+            return (long)((baseValue  * level) * (0.5 + proficiency / 100.0 * 0.5));
         }
 
         public override void onLogicFrame()

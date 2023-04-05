@@ -30,13 +30,19 @@ namespace Assets.Scripts.DemoGameCore.logic
             construction.destoryGainPack = DemoBuiltinConstructionsLoader.toPack(new Dictionary<string, int>());
 
             construction.outputComponent.outputGainPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COIN, 30,
-                    ResourceType.CARBON, 30
+                    ResourceType.COIN, 25,
+                    ResourceType.CARBON, 25
                     )));
 
             construction.upgradeComponent.upgradeCostPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COIN, 100
+                    ResourceType.COIN, 250,
+                    ResourceType.WOOD, 250
                     )));
+            construction.upgradeComponent.transformCostPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
+                    ResourceType.COIN, 2500,
+                    ResourceType.WOOD, 2500
+                    )));
+            construction.upgradeComponent.transformConstructionPrototypeId = ConstructionPrototypeId.BIG_FACTORY;
 
             return construction;
         }

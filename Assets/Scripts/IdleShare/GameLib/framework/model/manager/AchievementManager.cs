@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static UnityEditor.Progress;
 using Unity.VisualScripting;
 using hundun.unitygame.adapters;
-using static UnityEditor.MaterialProperty;
 
 namespace hundun.idleshare.gamelib
 {

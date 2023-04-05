@@ -35,7 +35,7 @@ namespace Assets.Scripts.DemoGameCore.logic
             BaseConstruction construction = new BaseIdleForestConstruction(prototypeId, id, position, descriptionPackage);
 
             construction.destoryCostPack = DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COIN, 150
+                    ResourceType.COIN, 1000
                     ));
             construction.destoryGainPack = DemoBuiltinConstructionsLoader.toPack(new Dictionary<string, int>()); 
 

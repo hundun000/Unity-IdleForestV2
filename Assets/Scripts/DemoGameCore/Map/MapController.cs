@@ -100,7 +100,7 @@ namespace Map
                 cell.updateBackendData();
                 if (isTest)
                 {
-                    cell.testDataPrint(sceneCamera);
+                    //cell.testDataPrint(sceneCamera);
                 }
             });
 

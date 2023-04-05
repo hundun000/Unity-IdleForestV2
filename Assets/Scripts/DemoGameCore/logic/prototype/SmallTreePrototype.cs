@@ -9,21 +9,25 @@ namespace Assets.Scripts.DemoGameCore.logic
     public class SmallTreePrototype : AbstractConstructionPrototype
     {
         public static DescriptionPackage descriptionPackageEN = new DescriptionPackageBuilder()
+            .button("Upgrade")
             .output("Consume", "Produce")
-            .destroy("Destroy", "Destroy gain", null)
+            .upgrade("Upgrade cost", "(max)", DescriptionPackageFactory.ONLY_LEVEL_IMP)
+            .destroy("Destroy", null, null)
             .transform("Transform", "Transform cost", "Can be transformed")
             .proficiency(DescriptionPackageFactory.EN_PROFICIENCY_IMP)
             .build();
         public static DescriptionPackage descriptionPackageCN = new DescriptionPackageBuilder()
+            .button("升级")
             .output("自动消耗", "自动产出")
-            .destroy("砍伐", "砍伐产出", null)
+            .upgrade("升级费用", "(已达到最大等级)", DescriptionPackageFactory.CN_ONLY_LEVEL_IMP)
+            .destroy("砍伐", null, null)
             .transform("转职", "转职费用", "可以转职")
             .proficiency(DescriptionPackageFactory.CN_PROFICIENCY_IMP)
             .build();
 
         public SmallTreePrototype(Language language) : base(ConstructionPrototypeId.SMALL_TREE, language,
             DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.COIN, 30
+                    ResourceType.COIN, 40
                     ))
             )
         {
@@ -46,16 +50,22 @@ namespace Assets.Scripts.DemoGameCore.logic
             construction.allowAnyProficiencyDestory = false;
 
             construction.destoryCostPack = DemoBuiltinConstructionsLoader.toPack(new Dictionary<string, int>());
-            construction.destoryGainPack = DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.WOOD, 300
-                    ));
+            construction.destoryGainPack = DemoBuiltinConstructionsLoader.toPack(new Dictionary<string, int>());
 
             construction.outputComponent.outputCostPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.CARBON, 10
+                    ResourceType.CARBON, 2
                     )));
             construction.outputComponent.outputGainPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
-                    ResourceType.WOOD, 10
+                    ResourceType.WOOD, 2
                     )));
+            construction.upgradeComponent.upgradeCostPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
+                    ResourceType.COIN, 40
+                    )));
+            construction.upgradeComponent.transformCostPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
+                    ResourceType.COIN, 400
+                    )));
+            construction.upgradeComponent.transformConstructionPrototypeId = ConstructionPrototypeId.MID_FACTORY;
+
 
             return construction;
         }

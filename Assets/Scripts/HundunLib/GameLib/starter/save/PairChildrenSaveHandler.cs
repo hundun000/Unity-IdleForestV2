@@ -134,7 +134,7 @@ namespace hundun.unitygame.gamelib
             T_SYSTEM_SAVE systemSettingSave;
             systemSettingSave = rootSaveExtension.newSystemSave();
             subSystemSettingSaveHandlers.ForEach(it => it.currentSituationToSystemSetting(systemSettingSave));
-
+            frontend.log(this.getClass().getSimpleName(), "systemSettingSave = " + systemSettingSave);
             return rootSaveExtension.newRootSave(
                     gameplaySave,
                     systemSettingSave

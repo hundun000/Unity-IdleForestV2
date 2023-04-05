@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnityEditor.Tilemaps;
 
 namespace Assets.Scripts.DemoGameCore.logic
 {
@@ -73,8 +72,8 @@ namespace Assets.Scripts.DemoGameCore.logic
                     it => it
                 );
             gameplaySaveData.ownResoueces = (new Dictionary<String, long>());
-            gameplaySaveData.ownResoueces.Add(ResourceType.COIN, 10000);
-            gameplaySaveData.ownResoueces.Add(ResourceType.CARBON, 512);
+            gameplaySaveData.ownResoueces.Add(ResourceType.COIN, 150);
+            gameplaySaveData.ownResoueces.Add(ResourceType.CARBON, 100);
             gameplaySaveData.unlockedResourceTypes = (new HashSet<String>());
             gameplaySaveData.unlockedResourceTypes.Add(ResourceType.COIN);
             gameplaySaveData.unlockedResourceTypes.Add(ResourceType.WOOD);
@@ -205,7 +204,7 @@ namespace Assets.Scripts.DemoGameCore.logic
                 );
 
             var systemSettingSaveData = new SystemSettingSaveData();
-            systemSettingSaveData.language = Language.CN;
+            systemSettingSaveData.language = Language.EN;
             return new List<RootSaveData>() { 
                 new RootSaveData(null, systemSettingSaveData),
                 new RootSaveData(quickGameplaySaveData(posMap), null),

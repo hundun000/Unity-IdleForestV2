@@ -14,7 +14,6 @@ using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.MaterialProperty;
 
 namespace Assets.Scripts.DemoGameCore.ui.screen
 {
@@ -95,6 +94,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
             //logicFrameListeners.Add(specialConstructionControlBoardVM);
             //logicFrameListeners.Add(statusBarController);
+            logicFrameListeners.Add(mapController);
             logicFrameListeners.Add(cellDetailBoardVM);
             logicFrameListeners.Add(storageInfoBoardVM);
             //gameAreaChangeListeners.Add(specialConstructionControlBoardVM);

@@ -105,7 +105,10 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
                 game.idleGameplayExport.language,
                 memuScreenTexts.get(3),
                 memuScreenTexts.get(4),
-                it => game.idleGameplayExport.language = it
+                it => { 
+                    game.idleGameplayExport.language = it;
+                    game.saveHandler.gameSaveCurrent();
+                }
                 );
 
             // unity adapter
