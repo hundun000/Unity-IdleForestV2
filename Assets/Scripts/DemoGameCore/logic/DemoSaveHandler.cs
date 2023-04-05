@@ -64,6 +64,25 @@ namespace Assets.Scripts.DemoGameCore.logic
                                     .build();
         }
 
+        private GameplaySaveData quickGameplaySaveData(Dictionary<KeyValuePair<int, int>, ConstructionSaveData> posMap)
+        {
+            var gameplaySaveData = new GameplaySaveData();
+            gameplaySaveData.constructionSaveDataMap = posMap.Values
+                .ToDictionary(
+                    it => it.prototypeId + System.Guid.NewGuid().ToString(),
+                    it => it
+                );
+            gameplaySaveData.ownResoueces = (new Dictionary<String, long>());
+            gameplaySaveData.ownResoueces.Add(ResourceType.COIN, 10000);
+            gameplaySaveData.ownResoueces.Add(ResourceType.CARBON, 512);
+            gameplaySaveData.unlockedResourceTypes = (new HashSet<String>());
+            gameplaySaveData.unlockedResourceTypes.Add(ResourceType.COIN);
+            gameplaySaveData.unlockedResourceTypes.Add(ResourceType.WOOD);
+            gameplaySaveData.unlockedResourceTypes.Add(ResourceType.CARBON);
+            gameplaySaveData.unlockedAchievementIds = (new HashSet<String>());
+            return gameplaySaveData;
+        }
+
         override protected List<RootSaveData> genereateStarterRootSaveData()
         {
             
@@ -116,26 +135,82 @@ namespace Assets.Scripts.DemoGameCore.logic
                 }
             }
 
-            var gameplaySaveData = new GameplaySaveData();
-            gameplaySaveData.constructionSaveDataMap = posMap.Values
-                .ToDictionary(
-                    it => it.prototypeId + System.Guid.NewGuid().ToString(),
-                    it => it
+            //第二关
+            Dictionary<KeyValuePair<int, int>, ConstructionSaveData> posMap2 = new();
+
+            // 所有 DIRT 的坐标
+            (new List<KeyValuePair<int, int>>() {
+                new(2, 1),new(3,1),new(4,1),new(5,1),new(2,2),new(4,2),new(3,3),new(4,3),new(3,4)
+            }).ForEach(it =>
+                posMap2.Add(it, quickDirt(it.Key, it.Value))
                 );
-            gameplaySaveData.ownResoueces = (new Dictionary<String, long>());
-            gameplaySaveData.ownResoueces.Add(ResourceType.COIN, 10000);
-            gameplaySaveData.ownResoueces.Add(ResourceType.CARBON, 512);
-            gameplaySaveData.unlockedResourceTypes = (new HashSet<String>());
-            gameplaySaveData.unlockedResourceTypes.Add(ResourceType.COIN);
-            gameplaySaveData.unlockedResourceTypes.Add(ResourceType.WOOD);
-            gameplaySaveData.unlockedResourceTypes.Add(ResourceType.CARBON);
-            gameplaySaveData.unlockedAchievementIds = (new HashSet<String>());
+
+            // 所有 RUBBISH 的坐标
+            (new List<KeyValuePair<int, int>>() {
+               new(0,-1),new(0,0),new(1,1),new(1,2),new(2,3),new(2,4),new(3,5),new(3,6),new(4,5),
+               new(4,4),new(5,3),new(5,2),new(6,1),new(6,0),new(7,-1),new(6,-1),new(5,-1),new(4,0),
+               new(4,-1),new(3,-1),new(2,0),new(2,-1),new(1,-1)
+            }).ForEach(it =>
+                posMap2.Add(it, quickRubbish(it.Key, it.Value))
+                 );
+
+            // 所有 LAKE 的坐标
+            (new List<KeyValuePair<int, int>>() {
+                new(3, 2)
+            }).ForEach(it =>
+                posMap2.Add(it, quickLake(it.Key, it.Value))
+                );
+
+            // 所有 DESERT 的坐标
+            (new List<KeyValuePair<int, int>>() {
+                new(1,0),new(3,0),new(5,0)
+            }).ForEach(it =>
+                posMap2.Add(it, quickDesert(it.Key, it.Value))
+                );
+
+            //第三关
+            Dictionary<KeyValuePair<int, int>, ConstructionSaveData> posMap3 = new();
+
+            // 所有 DIRT 的坐标
+            (new List<KeyValuePair<int, int>>() {
+             new(-2,1),new(-3,0),new(-2,-1),new(-2,-2),new(-1,-2),new(0,-3),new(1,-3),new(1,-2),new(2,-2),
+                new(3,-1),new(3,0),new(3,1),new(2,1),new(1,1),new(0,1),new(-1,1),new(-1,0),new(-1,-1),new(0,-1),
+                new(1,-1),new(1,0),new(2,-1)
+            }).ForEach(it =>
+                posMap3.Add(it, quickDirt(it.Key, it.Value))
+                );
+
+            // 所有 RUBBISH 的坐标
+            (new List<KeyValuePair<int, int>>() {
+               new(0,-5),new(-1,-4),new(-1,-3),new(-2,-3),new(-3,-2),new(-3,-1),new(-4,0),new(-3,1),new(-3,2),new(-2,3),
+                new(-1,3),new(-1,2),new(0,2),new(1,2),new(2,3),new(3,3),new(3,2),new(4,1),new(4,0),new(4,-1),new(3,-2),
+                new(3,-3),new(2,-3),new(1,-4),new(1,-5)
+            }).ForEach(it =>
+                posMap3.Add(it, quickRubbish(it.Key, it.Value))
+                 );
+
+            // 所有 LAKE 的坐标
+            (new List<KeyValuePair<int, int>>() {
+                new(-2,0),new(0,0),new(2,0),new(0,-2)
+
+            }).ForEach(it =>
+                posMap3.Add(it, quickLake(it.Key, it.Value))
+                );
+
+            // 所有 DESERT 的坐标
+            (new List<KeyValuePair<int, int>>() {
+                new(-2,2),new(2,2),new(0,-4)
+            }).ForEach(it =>
+                posMap3.Add(it, quickDesert(it.Key, it.Value))
+                );
 
             var systemSettingSaveData = new SystemSettingSaveData();
             systemSettingSaveData.language = Language.CN;
             return new List<RootSaveData>() { 
                 new RootSaveData(null, systemSettingSaveData),
-                new RootSaveData(gameplaySaveData, null)
+                new RootSaveData(quickGameplaySaveData(posMap), null),
+                new RootSaveData(quickGameplaySaveData(posMap2), null),
+                new RootSaveData(quickGameplaySaveData(posMap3), null)
             };
 
         }
