@@ -47,7 +47,7 @@ namespace Assets.Scripts.DemoGameCore.logic
         {
             String id = prototypeId + "_" + System.Guid.NewGuid().ToString();
             AutoProficiencyConstruction construction = new AutoProficiencyConstruction(prototypeId, id, position, descriptionPackage);
-            construction.allowAnyProficiencyDestory = false;
+            //construction.allowAnyProficiencyDestory = false;
 
             construction.destoryCostPack = DemoBuiltinConstructionsLoader.toPack(new Dictionary<string, int>());
             construction.destoryGainPack = DemoBuiltinConstructionsLoader.toPack(new Dictionary<string, int>());
@@ -64,7 +64,7 @@ namespace Assets.Scripts.DemoGameCore.logic
             construction.upgradeComponent.transformCostPack = (DemoBuiltinConstructionsLoader.toPack(JavaFeatureForGwt.mapOf(
                     ResourceType.COIN, 400
                     )));
-            construction.upgradeComponent.transformConstructionPrototypeId = ConstructionPrototypeId.MID_FACTORY;
+            construction.upgradeComponent.transformConstructionPrototypeId = ConstructionPrototypeId.MID_TREE;
 
 
             return construction;

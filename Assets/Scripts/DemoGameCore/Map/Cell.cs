@@ -54,11 +54,9 @@ namespace Map
                 case ConstructionPrototypeId.SMALL_FACTORY:
                     upperRenderer.sprite = SpriteLoader.factory[0];
                     break;
-                    /* TODO
                 case ConstructionPrototypeId.MID_FACTORY:
                     upperRenderer.sprite = SpriteLoader.factory[1];
                     break;
-                    */
                 case ConstructionPrototypeId.BIG_FACTORY:
                     upperRenderer.sprite = SpriteLoader.factory[2];
                     //upperRenderer.color = new Color(0.75f, 0f, 0.5f);
@@ -66,8 +64,11 @@ namespace Map
                 case ConstructionPrototypeId.SMALL_TREE:
                     upperRenderer.sprite = SpriteLoader.forest[0];
                     break;
-                case ConstructionPrototypeId.BIG_TREE:
+                case ConstructionPrototypeId.MID_TREE:
                     upperRenderer.sprite = SpriteLoader.forest[1];
+                    break;
+                case ConstructionPrototypeId.BIG_TREE:
+                    upperRenderer.sprite = SpriteLoader.forest[2];
                     //upperRenderer.color = new Color(0f, 0.75f, 0f);
                     break;
                 case ConstructionPrototypeId.LAKE:

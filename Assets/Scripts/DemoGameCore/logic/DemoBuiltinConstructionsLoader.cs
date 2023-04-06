@@ -19,8 +19,10 @@ namespace Assets.Scripts.DemoGameCore.logic
         {
             Dictionary < String, AbstractConstructionPrototype > map = new Dictionary<string, AbstractConstructionPrototype>();
             map.Add(ConstructionPrototypeId.SMALL_TREE, (AbstractConstructionPrototype)new SmallTreePrototype(language));
+            map.Add(ConstructionPrototypeId.MID_TREE, (AbstractConstructionPrototype)new MidForestPrototype(language));
             map.Add(ConstructionPrototypeId.BIG_TREE, (AbstractConstructionPrototype)new BigTreePrototype(language));
             map.Add(ConstructionPrototypeId.SMALL_FACTORY, (AbstractConstructionPrototype)new SmallFactoryPrototype(language));
+            map.Add(ConstructionPrototypeId.MID_FACTORY, (AbstractConstructionPrototype)new MidFactoryPrototype(language));
             map.Add(ConstructionPrototypeId.BIG_FACTORY, (AbstractConstructionPrototype)new BigFactoryPrototype(language));
             map.Add(ConstructionPrototypeId.DESERT, (AbstractConstructionPrototype)new DesertPrototype(language));
             map.Add(ConstructionPrototypeId.DIRT, (AbstractConstructionPrototype)new DirtPrototype(language));

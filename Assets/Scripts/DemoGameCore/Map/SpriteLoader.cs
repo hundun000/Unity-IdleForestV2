@@ -18,7 +18,7 @@ namespace Map
         public void SpriteLoad()
         {
             field = new Sprite[2];
-            forest = new Sprite[2];
+            forest = new Sprite[3];
             factory = new Sprite[3];
 
             var sprites = Resources.LoadAll("game/CellIcons");
@@ -28,6 +28,7 @@ namespace Map
             field[1] = (Sprite)sprites[2];
             forest[0] = (Sprite)sprites[5];
             forest[1] = (Sprite)sprites[6];
+            forest[2] = (Sprite)sprites[6];
             factory[0] = (Sprite)sprites[7];
             factory[1] = (Sprite)sprites[8];
             factory[2] = (Sprite)sprites[9];

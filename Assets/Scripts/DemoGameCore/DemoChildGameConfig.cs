@@ -23,8 +23,10 @@ namespace Assets.Scripts.DemoGameCore
             Dictionary<String, List<String>> areaControlableConstructionVMPrototypeIds = new Dictionary<String, List<String>>();
             areaControlableConstructionVMPrototypeIds.put(GameArea.AREA_SINGLE, JavaFeatureForGwt.arraysAsList(
                      ConstructionPrototypeId.SMALL_TREE,
+                     ConstructionPrototypeId.MID_TREE,
                      ConstructionPrototypeId.BIG_TREE,
                      ConstructionPrototypeId.SMALL_FACTORY,
+                     ConstructionPrototypeId.MID_FACTORY,
                      ConstructionPrototypeId.BIG_FACTORY,
                      ConstructionPrototypeId.DESERT,
                      ConstructionPrototypeId.DIRT,

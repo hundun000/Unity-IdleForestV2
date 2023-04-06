@@ -38,7 +38,7 @@ namespace hundun.idleshare.gamelib
         {
             construction.saveData.proficiency = Math.Max(0, Math.Min(construction.saveData.proficiency + delta, construction.maxProficiency));
             construction.updateModifiedValues();
-            construction.gameContext.frontend.log(construction.name, "changeProficiency delta = " + delta + ", success to " + construction.saveData.proficiency);
+            //construction.gameContext.frontend.log(construction.name, "changeProficiency delta = " + delta + ", success to " + construction.saveData.proficiency);
         }
 
         public void cleanProficiency()
