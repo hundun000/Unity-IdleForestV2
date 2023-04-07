@@ -16,8 +16,8 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
     public class DemoConstructionPrototypeControlNodeVM : MonoBehaviour
     {
         DemoPlayScreen parent;
-        AbstractConstructionPrototype model;
-        GridPosition position;
+        public AbstractConstructionPrototype model;
+        public GridPosition position;
 
         Text constructionNameLabel;
         Image previewImage;

@@ -17,7 +17,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
     public class DemoConstructionControlNodeVM : MonoBehaviour
     {
         DemoPlayScreen parent;
-        BaseIdleForestConstruction model;
+        public BaseIdleForestConstruction model;
 
         Text constructionNameLabel;
         Text workingLevelLabel;

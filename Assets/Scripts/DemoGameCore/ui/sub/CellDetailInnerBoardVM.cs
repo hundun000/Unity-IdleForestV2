@@ -25,7 +25,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         Text detailDescroptionConstPartTextTemplate;
         GameObject onePackTemplate;
         ResourceAmountPairNode resourceAmountPairNodeTemplate;
-        GameObject maxLevelGroupTemplate;
+
         DemoConstructionControlNodeVM constructionControlNodePrefab;
         DemoConstructionPrototypeControlNodeVM constructionPrototypeControlNodePrefab;
 
@@ -39,8 +39,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             this.detailDescroptionConstPartTextTemplate = this.transform.Find("_templates/detailDescroptionConstPartTextTemplate").GetComponent<Text>();
             this.onePackTemplate = this.transform.Find("_templates/onePackTemplate").gameObject;
             this.resourceAmountPairNodeTemplate = this.transform.Find("_templates/resourceAmountPairNodeTemplate").GetComponent<ResourceAmountPairNode>();
-            this.maxLevelGroupTemplate = this.transform.Find("_templates/maxLevelGroupTemplate").gameObject;
-
+            
             this.constructionControlNodePrefab = this.transform.Find("_mainBoardTemplates/constructionControlNodePrefab").GetComponent<DemoConstructionControlNodeVM>();
             this.constructionPrototypeControlNodePrefab = this.transform.Find("_mainBoardTemplates/constructionPrototypeControlNodePrefab").GetComponent<DemoConstructionPrototypeControlNodeVM>();
 
@@ -81,12 +80,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             }
             else if (model.upgradeComponent.upgradeState == UpgradeState.REACHED_MAX_UPGRADE_NO_TRANSFER)
             {
-                GameObject maxLevelGroup = childrenRoot.transform.AsTableAddGameobject(maxLevelGroupTemplate.gameObject);
-                Text maxLevelGroupLabel_0 = maxLevelGroup.transform.Find("label_0").GetComponent<Text>();
-                Text maxLevelGroupLabel_1 = maxLevelGroup.transform.Find("label_1").GetComponent<Text>();
-
-                maxLevelGroupLabel_0.text = "";
-                maxLevelGroupLabel_1.text = model.descriptionPackage.upgradeMaxLevelNoTransferDescription;
+                // do nothing
             }
             else if (model.upgradeComponent.upgradeState == UpgradeState.REACHED_MAX_UPGRADE_HAS_TRANSFER)
             {
@@ -158,11 +152,14 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             if (mainBoardModel != null && mainBoardModel is DemoConstructionPrototypeControlNodeVM constructionPrototypeControlNodeVM)
             {
                 constructionPrototypeControlNodeVM.update();
+                //updateAsConstructionPrototype(constructionPrototypeControlNodeVM.model, constructionPrototypeControlNodeVM.position);
             }
             else if (mainBoardModel != null && mainBoardModel is DemoConstructionControlNodeVM constructionControlNodeVM)
             {
                 constructionControlNodeVM.update();
+                //updateAsConstruction(constructionControlNodeVM.model);
             }
+
         }
     }
 }

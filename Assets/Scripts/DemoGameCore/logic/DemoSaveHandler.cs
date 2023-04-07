@@ -18,13 +18,13 @@ namespace Assets.Scripts.DemoGameCore.logic
 
         }
 
-        private ConstructionSaveData quickSmallTree(int x, int y)
+        private ConstructionSaveData testBigTree(int x, int y)
         {
             return ConstructionSaveData.builder()
-                                    .prototypeId(ConstructionPrototypeId.SMALL_TREE)
-                                    .level(1)
-                                    .workingLevel(1)
-                                    .proficiency(50)
+                                    .prototypeId(ConstructionPrototypeId.BIG_TREE)
+                                    .level(3)
+                                    .workingLevel(3)
+                                    .proficiency(90)
                                     .position(new GridPosition(x, y))
                                     .build();
         }
@@ -201,6 +201,22 @@ namespace Assets.Scripts.DemoGameCore.logic
                 new(-2,2),new(2,2),new(0,-4)
             }).ForEach(it =>
                 posMap3.Add(it, quickDesert(it.Key, it.Value))
+                );
+
+            //test关
+            Dictionary<KeyValuePair<int, int>, ConstructionSaveData> posMapTest = new();
+
+            // 所有 BigTree 的坐标
+            (new List<KeyValuePair<int, int>>() {
+                new(0, 1)
+            }).ForEach(it =>
+                posMapTest.Add(it, testBigTree(it.Key, it.Value))
+                );
+            // 所有 LAKE 的坐标
+            (new List<KeyValuePair<int, int>>() {
+                new(0, 0), new(0, 2)
+            }).ForEach(it =>
+                posMapTest.Add(it, quickLake(it.Key, it.Value))
                 );
 
             var systemSettingSaveData = new SystemSettingSaveData();
