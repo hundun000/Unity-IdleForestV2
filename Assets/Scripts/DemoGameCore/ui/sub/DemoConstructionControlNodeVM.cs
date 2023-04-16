@@ -23,9 +23,9 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         Text workingLevelLabel;
         Text proficiencyLabel;
 
-        TextButton clickEffectButton;
-        TextButton destoryButton;
-        TextButton transformButton;
+        DemoTextButton clickEffectButton;
+        DemoTextButton destoryButton;
+        DemoTextButton transformButton;
 
         Image background;
 
@@ -36,10 +36,10 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             this.workingLevelLabel = this.transform.Find("workingLevelLabel").GetComponent<Text>();
             this.proficiencyLabel = this.transform.Find("proficiencyLabel").GetComponent<Text>();
 
-            this.clickEffectButton = this.transform.Find("clickEffectButton").GetComponent<TextButton>();
+            this.clickEffectButton = this.transform.Find("clickEffectButton").GetComponent<DemoTextButton>();
 
-            this.destoryButton = this.transform.Find("destoryButton").GetComponent<TextButton>();
-            this.transformButton = this.transform.Find("transformButton").GetComponent<TextButton>();
+            this.destoryButton = this.transform.Find("destoryButton").GetComponent<DemoTextButton>();
+            this.transformButton = this.transform.Find("transformButton").GetComponent<DemoTextButton>();
         }
 
         public void postPrefabInitialization(DemoPlayScreen parent)

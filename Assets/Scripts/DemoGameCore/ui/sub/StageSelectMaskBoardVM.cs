@@ -18,18 +18,18 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         DemoMenuScreen parent;
 
 
-        TextButton backTextButton;
+        DemoTextButton backTextButton;
 
-        TextButton stage1TextButton;
-        TextButton stage2TextButton;
-        TextButton stage3TextButton;
+        DemoTextButton stage1TextButton;
+        DemoTextButton stage2TextButton;
+        DemoTextButton stage3TextButton;
 
         void Awake()
         {
-            this.backTextButton = this.transform.Find("backTextButton").GetComponent<TextButton>();
-            this.stage1TextButton = this.transform.Find("board/childrenRoot/stage1Board/textButton").GetComponent<TextButton>();
-            this.stage2TextButton = this.transform.Find("board/childrenRoot/stage2Board/textButton").GetComponent<TextButton>();
-            this.stage3TextButton = this.transform.Find("board/childrenRoot/stage3Board/textButton").GetComponent<TextButton>();
+            this.backTextButton = this.transform.Find("backTextButton").GetComponent<DemoTextButton>();
+            this.stage1TextButton = this.transform.Find("board/childrenRoot/stage1Board/textButton").GetComponent<DemoTextButton>();
+            this.stage2TextButton = this.transform.Find("board/childrenRoot/stage2Board/textButton").GetComponent<DemoTextButton>();
+            this.stage3TextButton = this.transform.Find("board/childrenRoot/stage3Board/textButton").GetComponent<DemoTextButton>();
         }
 
         public void postPrefabInitialization(DemoMenuScreen parent)

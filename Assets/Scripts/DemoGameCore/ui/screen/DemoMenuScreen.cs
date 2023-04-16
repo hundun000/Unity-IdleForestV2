@@ -31,9 +31,9 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
         private IdleScreenBackgroundVM screenBackgroundVM;
         protected Text title;
-        protected TextButton buttonContinueGame;
-        protected TextButton buttonNewGame;
-        protected LanguageSwitchBoardVM<DemoIdleGame, RootSaveData> languageSwitchBoardVM;
+        protected DemoTextButton buttonContinueGame;
+        protected DemoTextButton buttonNewGame;
+        protected DemoLanguageSwitchBoardVM languageSwitchBoardVM;
         protected StageSelectMaskBoardVM stageSelectMaskBoardVM;
 
 
@@ -69,9 +69,9 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             audioSource = this.transform.Find("_audioSource").GetComponent<AudioSource>();
 
             this.title = this.UiRoot.transform.Find("title").gameObject.GetComponent<Text>();
-            this.buttonContinueGame = this.UiRoot.transform.Find("buttonContinueGame").gameObject.GetComponent<TextButton>();
-            this.buttonNewGame = this.UiRoot.transform.Find("buttonNewGame").gameObject.GetComponent<TextButton>();
-            this.languageSwitchBoardVM = this.UiRoot.transform.Find("languageSwitchBoardVM").gameObject.GetComponent<LanguageSwitchBoardVM<DemoIdleGame, RootSaveData>>();
+            this.buttonContinueGame = this.UiRoot.transform.Find("buttonContinueGame").gameObject.GetComponent<DemoTextButton>();
+            this.buttonNewGame = this.UiRoot.transform.Find("buttonNewGame").gameObject.GetComponent<DemoTextButton>();
+            this.languageSwitchBoardVM = this.UiRoot.transform.Find("languageSwitchBoardVM").gameObject.GetComponent<DemoLanguageSwitchBoardVM>();
             this.screenBackgroundVM = gameObject.transform.transform.Find("ScreenBackgroundVM").gameObject.GetComponent<IdleScreenBackgroundVM>();
             this.stageSelectMaskBoardVM = this.PopupRoot.transform.Find("stageSelectMaskBoardVM").gameObject.GetComponent<StageSelectMaskBoardVM>();
         }

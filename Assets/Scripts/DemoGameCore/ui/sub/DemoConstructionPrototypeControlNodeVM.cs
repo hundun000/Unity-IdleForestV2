@@ -21,7 +21,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
         Text constructionNameLabel;
         Image previewImage;
-        TextButton clickEffectButton;
+        DemoTextButton clickEffectButton;
 
 
 
@@ -31,7 +31,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         {
             this.constructionNameLabel = this.transform.Find("constructionNameLabel").GetComponent<Text>();
             this.previewImage = this.transform.Find("previewImage").GetComponent<Image>();
-            this.clickEffectButton = this.transform.Find("clickEffectButton").GetComponent<TextButton>();
+            this.clickEffectButton = this.transform.Find("clickEffectButton").GetComponent<DemoTextButton>();
         }
 
         public void postPrefabInitialization(DemoPlayScreen parent)

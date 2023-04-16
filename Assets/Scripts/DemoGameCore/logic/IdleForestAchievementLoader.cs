@@ -17,7 +17,7 @@ namespace Assets.Scripts.DemoGameCore.logic
         public OwnConstructionAchievement(String id, string name, string description, string congratulationText,
             Dictionary<String, KeyValuePair<int, int>> requireds
             )
-                : base(id, name, description, congratulationText)
+                : base(id, name, description, congratulationText, new())
         {
             this.requireds = requireds;
         }

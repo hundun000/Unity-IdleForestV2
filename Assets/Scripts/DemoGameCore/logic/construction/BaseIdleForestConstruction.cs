@@ -106,7 +106,7 @@ namespace Assets.Scripts.DemoGameCore.logic
 
         
 
-        override public long calculateModifiedOutput(long baseValue, int level, int proficiency)
+        override public long calculateModifiedOutputGain(long baseValue, int level, int proficiency)
         {
             return (long)((baseValue * level) * (0.5 + proficiency / 100.0 * 0.5));
         }
