@@ -86,7 +86,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
                 entry.Value.Insert(entry.Value.Count, changeMap.getOrDefault(node.getResourceType(), 0));
                 while (entry.Value.Count > DemoIdleGame.LOGIC_FRAME_PER_SECOND)
                 {
-                    entry.Value.RemoveAt(entry.Value.Count - 1);
+                    entry.Value.RemoveAt(0);
                 }
                 long historySum = entry.Value.Sum();
                 node.update(historySum, parent.game.idleGameplayExport.getResourceNumOrZero(node.getResourceType()));

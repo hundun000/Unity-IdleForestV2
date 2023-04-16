@@ -11,8 +11,8 @@ namespace hundun.idleshare.enginecore
 {
     public class StorageInfoBoardResourceAmountPairNode : MonoBehaviour
     {
-
-
+        static readonly Color PLUS_COLOR = new Color(0f, 0.5f, 0f);
+        static readonly Color MINUS_COLOR = new Color(0.5f, 0f, 0f);
 
         String resourceType;
         // ------ replace-lombok ------
@@ -22,12 +22,14 @@ namespace hundun.idleshare.enginecore
         }
 
         Image image;
-        Text label;
+        Text amountLabel;
+        Text deltaLabel;
 
         void Awake()
         {
             this.image = this.transform.Find("image").GetComponent<Image>();
-            this.label = this.transform.Find("label").GetComponent<Text>();
+            this.amountLabel = this.transform.Find("amountLabel").GetComponent<Text>();
+            this.deltaLabel = this.transform.Find("deltaLabel").GetComponent<Text>();
         }
 
         public void postPrefabInitialization(AbstractTextureManager textureManager, String resourceType)
@@ -36,25 +38,28 @@ namespace hundun.idleshare.enginecore
             this.resourceType = resourceType;
             Sprite textureRegion = textureManager.getResourceIcon(resourceType);
             this.image.sprite = textureRegion;
-            this.label.text = "";
+            this.amountLabel.text = "";
+            this.deltaLabel.text = "";
         }
 
         public void update(long delta, long amout)
         {
-            label.text = (
+            amountLabel.text = (
                     amout + ""
                     );
             if (delta > 0)
             {
-                label.text += "(+" + delta + ")"; 
+                deltaLabel.text = "(+" + delta + ")";
+                deltaLabel.color = PLUS_COLOR;
             } 
             else if(delta == 0)
             {
-
+                deltaLabel.text = "";
             }
             else
             {
-                label.text += "(-" + Math.Abs(delta) + ")";
+                deltaLabel.text = "(-" + Math.Abs(delta) + ")";
+                deltaLabel.color = MINUS_COLOR;
             }
         }
     }
