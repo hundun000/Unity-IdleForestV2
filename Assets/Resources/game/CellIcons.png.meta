@@ -152,7 +152,7 @@ TextureImporter:
       name: cellIcons_1
       rect:
         serializedVersion: 2
-        x: 789
+        x: 796
         y: 1487
         width: 548
         height: 623
@@ -233,11 +233,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cellIcons_5
+      name: cellIcons_7
       rect:
         serializedVersion: 2
-        x: 2084
-        y: 808
+        x: 2082
+        y: 780
         width: 555
         height: 626
       alignment: 0
@@ -254,11 +254,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cellIcons_6
+      name: cellIcons_8
       rect:
         serializedVersion: 2
         x: 136
-        y: 72
+        y: 80
         width: 550
         height: 628
       alignment: 0
@@ -275,7 +275,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cellIcons_7
+      name: cellIcons_9
       rect:
         serializedVersion: 2
         x: 782
@@ -296,7 +296,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cellIcons_8
+      name: cellIcons_10
       rect:
         serializedVersion: 2
         x: 1462
@@ -316,6 +316,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: cellIcons_5
+      rect:
+        serializedVersion: 2
+        x: 789
+        y: 775
+        width: 531
+        height: 620
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ae2eabf37bc68b44a97e918019c34ac
+      internalID: -1703332823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cellIcons_6
+      rect:
+        serializedVersion: 2
+        x: 1462
+        y: 774
+        width: 538
+        height: 622
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19344ee6ed7075b43923b3529ed36427
+      internalID: 1078129485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -327,15 +369,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      cellIcons_8: -1695344373
+      cellIcons_8: 824513242
       cellIcons_3: 1294754331
       cellIcons_0: -1469324865
       cellIcons_2: 240013742
       cellIcons_4: -1410227305
       cellIcons_1: -304316437
-      cellIcons_7: 808798097
-      cellIcons_5: 2089572346
-      cellIcons_6: 824513242
+      cellIcons_10: -1695344373
+      cellIcons_9: 808798097
+      cellIcons_7: 2089572346
+      cellIcons_5: -1703332823
+      cellIcons_6: 1078129485
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

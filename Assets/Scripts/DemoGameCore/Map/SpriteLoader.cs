@@ -26,14 +26,15 @@ namespace Map
             
             field[0] = (Sprite)sprites[1];
             field[1] = (Sprite)sprites[2];
-            forest[0] = (Sprite)sprites[5];
-            forest[1] = (Sprite)sprites[6];
-            forest[2] = (Sprite)sprites[6];
-            factory[0] = (Sprite)sprites[7];
-            factory[1] = (Sprite)sprites[8];
-            factory[2] = (Sprite)sprites[9];
             desert = (Sprite)sprites[3];
             lake = (Sprite)sprites[4];
+            forest[0] = (Sprite)sprites[6];
+            forest[1] = (Sprite)sprites[7];
+            forest[2] = (Sprite)sprites[8];
+            factory[0] = (Sprite)sprites[9];
+            factory[1] = (Sprite)sprites[10];
+            factory[2] = (Sprite)sprites[11];
+            
 
         }
     }
