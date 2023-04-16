@@ -13,7 +13,7 @@ namespace Assets.Scripts.DemoGameCore
 {
     public class DemoIdleGame : BaseIdleGame<DemoIdleGame, RootSaveData>
     {
-        public const int LOGIC_FRAME_PER_SECOND = 30;
+        public const int LOGIC_FRAME_PER_SECOND = 10;
 
         public DemoIdleGame() : base(1024, 768)
         {

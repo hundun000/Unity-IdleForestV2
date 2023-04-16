@@ -96,12 +96,12 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             //logicFrameListeners.Add(statusBarController);
             logicFrameListeners.Add(mapController);
             logicFrameListeners.Add(cellDetailBoardVM);
-            logicFrameListeners.Add(storageInfoBoardVM);
             //gameAreaChangeListeners.Add(specialConstructionControlBoardVM);
             gameAreaChangeListeners.Add(mapController);
             gameAreaChangeListeners.Add(firstLockedAchievementBoardVM);
             //this.game.idleGameplayExport.eventManagerRegisterListener(specialConstructionControlBoardVM);
             this.game.idleGameplayExport.eventManagerRegisterListener(mapController);
+            this.game.idleGameplayExport.eventManagerRegisterListener(storageInfoBoardVM);
             this.game.idleGameplayExport.eventManagerRegisterListener(cellDetailBoardVM);
         }
 
