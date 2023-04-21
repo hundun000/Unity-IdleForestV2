@@ -110,7 +110,7 @@ namespace Map
             {
                 firstCome = false;
                 sceneCamera.orthographicSize = cameraSize;
-                Vector2 cameraPosVector2 = constructionControlNodes.First().transform.position;
+                Vector2 cameraPosVector2 = constructionControlNodes.Count > 0 ? constructionControlNodes.First().transform.position : new Vector2(0, 0);
                 GetComponent<CameraController>().zeroPos =
                     new Vector3(cameraPosVector2.x, cameraPosVector2.y, -cameraDistance);
             }
