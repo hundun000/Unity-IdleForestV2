@@ -30,7 +30,6 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
         protected DemoStorageInfoBoardVM storageInfoBoardVM;
         // ------ bind by editer ------
         public MapController mapController;
-        public SystemMenuController systemMenuController;
         //public StatusBarController statusBarController;
 
         Transform drawContaioner;
@@ -74,7 +73,6 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             notificationMaskBoard.postPrefabInitialization(this);
             cellDetailBoardVM.postPrefabInitialization(this);
             firstLockedAchievementBoardVM.postPrefabInitialization(this);
-            systemMenuController.postPrefabInitialization(this);
         }
 
 
