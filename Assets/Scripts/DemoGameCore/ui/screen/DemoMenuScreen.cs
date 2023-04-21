@@ -29,7 +29,6 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
         protected GameObject PopupRoot { get; private set; }
         protected AudioSource audioSource;
 
-        private IdleScreenBackgroundVM screenBackgroundVM;
         protected Text title;
         protected DemoTextButton buttonContinueGame;
         protected DemoTextButton buttonNewGame;
@@ -48,7 +47,6 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
                 child.gameObject.SetActive(false);
             }
 
-            screenBackgroundVM.postPrefabInitialization(this.game.textureManager);
             stageSelectMaskBoardVM.postPrefabInitialization(this);
 
             this.buttonContinueGameInputListener = () =>
@@ -72,7 +70,6 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             this.buttonContinueGame = this.UiRoot.transform.Find("buttonContinueGame").gameObject.GetComponent<DemoTextButton>();
             this.buttonNewGame = this.UiRoot.transform.Find("buttonNewGame").gameObject.GetComponent<DemoTextButton>();
             this.languageSwitchBoardVM = this.UiRoot.transform.Find("languageSwitchBoardVM").gameObject.GetComponent<DemoLanguageSwitchBoardVM>();
-            this.screenBackgroundVM = gameObject.transform.transform.Find("ScreenBackgroundVM").gameObject.GetComponent<IdleScreenBackgroundVM>();
             this.stageSelectMaskBoardVM = this.PopupRoot.transform.Find("stageSelectMaskBoardVM").gameObject.GetComponent<StageSelectMaskBoardVM>();
         }
 
