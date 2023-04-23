@@ -40,6 +40,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
         override protected void dispose()
         {
+            base.dispose();
             this.game.idleGameplayExport.eventManagerUnregisterListener(storageInfoBoardVM);
         }
 

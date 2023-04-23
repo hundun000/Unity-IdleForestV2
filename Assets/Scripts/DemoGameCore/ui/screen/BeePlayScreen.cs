@@ -93,7 +93,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
         protected override void dispose()
         {
-            this.game.idleGameplayExport.eventManagerUnregisterListener(storageInfoBoardVM);
+            base.dispose();
         }
     }
 }

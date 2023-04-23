@@ -104,6 +104,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
         protected override void dispose()
         {
+            base.dispose();
             this.game.idleGameplayExport.eventManagerUnregisterListener(mapController);
             this.game.idleGameplayExport.eventManagerUnregisterListener(storageInfoBoardVM);
             this.game.idleGameplayExport.eventManagerUnregisterListener(cellDetailBoardVM);
