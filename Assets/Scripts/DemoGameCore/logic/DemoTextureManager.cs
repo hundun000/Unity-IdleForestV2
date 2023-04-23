@@ -75,14 +75,16 @@ namespace Assets.Scripts.DemoGameCore.logic
             {
                 var texture = getTexture2D("gameAreaIcons.png");
                 Sprite[][] regions = split(texture, 100, 50);
-                gameAreaLeftPartRegionMap.Add(GameArea.AREA_SINGLE, regions[2][0]);
+                gameAreaLeftPartRegionMap.Add(GameArea.AREA_BEE, regions[1][0]);
+                gameAreaLeftPartRegionMap.Add(GameArea.AREA_WORLD, regions[2][0]);
                 //gameAreaLeftPartRegionMap.Add(GameArea.AREA_WIN, regions[0][0]);
-                gameAreaRightPartRegionMap.Add(GameArea.AREA_SINGLE, regions[2][1]);
+                gameAreaRightPartRegionMap.Add(GameArea.AREA_BEE, regions[1][1]);
+                gameAreaRightPartRegionMap.Add(GameArea.AREA_WORLD, regions[2][1]);
                 //gameAreaRightPartRegionMap.Add(GameArea.AREA_WIN, regions[0][1]);
             }
             {
                 defaultAreaBack = getSprite("areas_0.png");
-                gameAreaBackMap.Add(GameArea.AREA_SINGLE, getSprite("areas_1.png"));
+                gameAreaBackMap.Add(GameArea.AREA_WORLD, getSprite("areas_1.png"));
                 //gameAreaBackMap.Add(GameArea.AREA_WIN, getSprite("areas_3.png"));
             }
         }

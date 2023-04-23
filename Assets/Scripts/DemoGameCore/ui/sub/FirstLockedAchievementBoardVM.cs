@@ -15,7 +15,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 {
     public class FirstLockedAchievementBoardVM : MonoBehaviour, IGameAreaChangeListener
     {
-        DemoPlayScreen parent;
+        WorldPlayScreen parent;
 
         Image background;
         Text nameStartLabel;
@@ -34,7 +34,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             this.countValueLabel = this.transform.Find("countValueLabel").GetComponent<Text>();
         }
 
-        public void postPrefabInitialization(DemoPlayScreen parent)
+        public void postPrefabInitialization(WorldPlayScreen parent)
         {
             this.parent = parent;
             this.background.sprite = parent.game.textureManager.defaultBoardNinePatchTexture;

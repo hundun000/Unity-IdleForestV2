@@ -23,5 +23,7 @@ namespace Assets.Scripts.DemoGameCore.logic
 
         public const String GOVERNMENT = "ENUM_CSTR@GOVERNMENT";
         public const String ORGANIZATION = "ENUM_CSTR@ORGANIZATION";
+
+        public const String SMALL_BEEHIVE = "ENUM_CSTR@SMALL_BEEHIVE";
     }
 }

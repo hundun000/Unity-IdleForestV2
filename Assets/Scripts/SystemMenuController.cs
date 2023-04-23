@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class SystemMenuController: MonoBehaviour
 {
-    DemoPlayScreen parent;
+    WorldPlayScreen parent;
     //the ButtonPauseMenu
     public GameObject ingameMenu;
     private PlayerInput playerInput;
@@ -16,7 +16,7 @@ public class SystemMenuController: MonoBehaviour
         playerInput = GameObject.FindObjectOfType<PlayerInput>();
     }
 
-    public void postPrefabInitialization(DemoPlayScreen playScreen)
+    public void postPrefabInitialization(WorldPlayScreen playScreen)
     {
         // 通过代码绑定引用
         this.parent = playScreen;

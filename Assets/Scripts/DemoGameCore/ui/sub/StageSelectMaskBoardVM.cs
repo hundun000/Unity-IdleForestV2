@@ -37,6 +37,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             this.parent = parent;
             var texts = parent.game.idleGameplayExport.gameDictionary.getStageSelectMaskBoardTexts(parent.game.idleGameplayExport.language);
 
+            
 
             this.backTextButton.label.text = texts[0];
             this.backTextButton.button.onClick.AddListener(() => {
@@ -45,19 +46,19 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
             this.stage1TextButton.button.onClick.AddListener(() => {
                 parent.game.saveHandler.gameplayLoadOrStarter(0);
-                SceneManager.LoadScene(DemoPlayScreen.SCENE_NAME);
+                SceneManager.LoadScene(DemoMenuScreen.START_PLAY_SCREEN);
             });
             this.stage1TextButton.label.text = texts[1];
 
             this.stage2TextButton.button.onClick.AddListener(() => {
                 parent.game.saveHandler.gameplayLoadOrStarter(1);
-                SceneManager.LoadScene(DemoPlayScreen.SCENE_NAME);
+                SceneManager.LoadScene(DemoMenuScreen.START_PLAY_SCREEN);
             });
             this.stage2TextButton.label.text = texts[2];
 
             this.stage3TextButton.button.onClick.AddListener(() => {
                 parent.game.saveHandler.gameplayLoadOrStarter(2);
-                SceneManager.LoadScene(DemoPlayScreen.SCENE_NAME);
+                SceneManager.LoadScene(DemoMenuScreen.START_PLAY_SCREEN);
             });
             this.stage3TextButton.label.text = texts[3];
         }

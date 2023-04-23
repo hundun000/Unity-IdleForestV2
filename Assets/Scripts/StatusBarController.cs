@@ -29,7 +29,7 @@ public class StatusBarController : MonoBehaviour, ILogicFrameListener
     [SerializeField]
     float[] lineWidth=new float[4]; //各条线的宽度（比例）
 
-    DemoPlayScreen parent;      // 通过代码绑定
+    WorldPlayScreen parent;      // 通过代码绑定
 
     private void Start()
     {
@@ -48,7 +48,7 @@ public class StatusBarController : MonoBehaviour, ILogicFrameListener
         }
     }
 
-    public void postPrefabInitialization(DemoPlayScreen playScreen)
+    public void postPrefabInitialization(WorldPlayScreen playScreen)
     {
         // 通过代码绑定引用
         this.parent = playScreen;

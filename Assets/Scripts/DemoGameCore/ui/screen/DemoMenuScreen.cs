@@ -19,7 +19,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
     public class DemoMenuScreen : BaseHundunScreen<DemoIdleGame, RootSaveData>
     {
         public const String SCENE_NAME = "MenuScene";
-
+        public const String START_PLAY_SCREEN = WorldPlayScreen.SCENE_NAME;
 
         private JRunable buttonContinueGameInputListener;
         private JRunable buttonNewGameInputListener;
@@ -52,7 +52,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             this.buttonContinueGameInputListener = () =>
             {
                 game.saveHandler.gameplayLoadOrStarter(-1);
-                SceneManager.LoadScene(DemoPlayScreen.SCENE_NAME);
+                SceneManager.LoadScene(DemoMenuScreen.START_PLAY_SCREEN);
             };
             this.buttonNewGameInputListener = () =>
             {

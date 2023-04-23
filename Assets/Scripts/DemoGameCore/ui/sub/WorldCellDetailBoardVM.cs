@@ -14,44 +14,12 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.DemoGameCore.ui.sub
 {
-    public class CellDetailBoardVM : MonoBehaviour, IConstructionCollectionListener, ILogicFrameListener
+    public class WorldCellDetailBoardVM : BaseCellDetailBoardVM, IConstructionCollectionListener
     {
-        DemoPlayScreen parent;
-
-        GameObject nodesRoot;
-        Image background;
-
-        
-        CellDetailInnerBoardVM innerBoardVMPrefab;
-
-        public BaseConstruction data;
-        private List<CellDetailInnerBoardVM> contents = new List<CellDetailInnerBoardVM>();
-
-        void Awake()
-        {
-            this.background = this.transform.Find("background").GetComponent<Image>();
-            this.nodesRoot = this.transform.Find("_nodesRoot").gameObject;
-            this.innerBoardVMPrefab = this.transform.Find("_templates/innerBoardVMPrefab").GetComponent<CellDetailInnerBoardVM>();
-        }
-
-        public void onLogicFrame()
-        {
-            contents.ForEach(it => {
-                it.update();
-            });
-        }
-
-        public void postPrefabInitialization(DemoPlayScreen parent)
-        {
-            //super("GUIDE_TEXT", parent.game.getButtonSkin());
-            this.parent = parent;
-            this.background.sprite = parent.game.textureManager.defaultBoardNinePatchTexture;
-
-            updateDetail(null);
-        }
 
 
-        public void updateDetail(BaseConstruction construction)
+
+        override public void updateDetail(BaseConstruction construction)
         {
             this.data = construction;
             if (construction == null)

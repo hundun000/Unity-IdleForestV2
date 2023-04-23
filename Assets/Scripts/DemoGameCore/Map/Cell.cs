@@ -36,10 +36,10 @@ namespace Map
         public Canvas cellCanvas;             // 每个格位自己的画布
         public GameObject coordinateText;     // 测试时用的坐标显示器
 
-        public DemoPlayScreen parent; // 后端Screen引用
+        public WorldPlayScreen parent; // 后端Screen引用
         public BaseConstruction construction; // 后端数据引用
 
-        public void StateChangeTo(DemoPlayScreen parent, BaseConstruction construction)
+        public void StateChangeTo(WorldPlayScreen parent, BaseConstruction construction)
         {
             this.parent = parent;
             this.construction = construction;
@@ -105,10 +105,5 @@ namespace Map
             this.isRunning = construction.saveData.workingLevel == construction.saveData.level;
         }
 
-        internal bool IsShowingDetail()
-        {
-            return parent.cellDetailBoardVM.data != null && this.construction != null 
-                && parent.cellDetailBoardVM.data.position.Equals(this.construction.position);
-        }
     }
 }

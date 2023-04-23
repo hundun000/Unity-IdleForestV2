@@ -16,7 +16,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 {
     public class DemoConstructionControlNodeVM : MonoBehaviour
     {
-        DemoPlayScreen parent;
+        WorldPlayScreen parent;
         public BaseIdleForestConstruction model;
 
         Text constructionNameLabel;
@@ -42,7 +42,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             this.transformButton = this.transform.Find("transformButton").GetComponent<DemoTextButton>();
         }
 
-        public void postPrefabInitialization(DemoPlayScreen parent)
+        public void postPrefabInitialization(WorldPlayScreen parent)
         {
 
             this.parent = parent;

@@ -78,6 +78,7 @@ namespace Assets.Scripts.DemoGameCore.logic
             gameplaySaveData.unlockedResourceTypes.Add(ResourceType.COIN);
             gameplaySaveData.unlockedResourceTypes.Add(ResourceType.WOOD);
             gameplaySaveData.unlockedResourceTypes.Add(ResourceType.CARBON);
+            gameplaySaveData.unlockedResourceTypes.Add(ResourceType.HONEY);
             gameplaySaveData.unlockedAchievementIds = (new HashSet<String>());
             return gameplaySaveData;
         }

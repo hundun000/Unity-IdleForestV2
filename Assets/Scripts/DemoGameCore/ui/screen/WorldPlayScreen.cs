@@ -17,32 +17,29 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.DemoGameCore.ui.screen
 {
-    public class DemoPlayScreen : BaseIdlePlayScreen<DemoIdleGame, RootSaveData>
+    public class WorldPlayScreen : BaseIdleForestPlayScreen
     {
 
 
-        public const String SCENE_NAME = "PlayScene";
+        public const String SCENE_NAME = "WorldPlayScene";
 
         //protected SpecialConstructionControlBoardVM specialConstructionControlBoardVM;
         [HideInInspector]
-        public CellDetailBoardVM cellDetailBoardVM;
+        public WorldCellDetailBoardVM cellDetailBoardVM;
         protected FirstLockedAchievementBoardVM firstLockedAchievementBoardVM;
-        protected DemoStorageInfoBoardVM storageInfoBoardVM;
+        
         // ------ bind by editer ------
         public MapController mapController;
         //public StatusBarController statusBarController;
-
-        Transform drawContaioner;
 
         override protected void Awake()
         {
             base.Awake();
 
             //this.specialConstructionControlBoardVM = this.UiRoot.transform.Find("cell_4/SpecialConstructionControlBoardVM").GetComponent<SpecialConstructionControlBoardVM>();
-            this.cellDetailBoardVM = this.UiRoot.transform.Find("cellDetailBoardVM").GetComponent<CellDetailBoardVM>();
+            this.cellDetailBoardVM = this.UiRoot.transform.Find("cellDetailBoardVM").GetComponent<WorldCellDetailBoardVM>();
             this.firstLockedAchievementBoardVM = this.UiRoot.transform.Find("firstLockedAchievementBoardVM").GetComponent<FirstLockedAchievementBoardVM>();
-            this.storageInfoBoardVM = this.UiRoot.transform.Find("cell_0/StorageInfoBoardVM").gameObject.GetComponent<DemoStorageInfoBoardVM>();
-
+            
         }
 
 
@@ -54,7 +51,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
         override public void postMonoBehaviourInitialization(DemoIdleGame game)
         {
-            base.postMonoBehaviourInitialization(game, GameArea.AREA_SINGLE, DemoIdleGame.LOGIC_FRAME_PER_SECOND);
+            base.postMonoBehaviourInitialization(game, GameArea.AREA_WORLD, DemoIdleGame.LOGIC_FRAME_PER_SECOND);
         }
 
         protected override void lazyInitBackUiAndPopupUiContent()
@@ -79,6 +76,8 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
         protected override void lazyInitUiRootContext()
         {
+            base.lazyInitUiRootContext();
+
             storageInfoBoardVM.postPrefabInitialization(this, ResourceType.VALUES_FOR_SHOW_ORDER);
 
             //specialConstructionControlBoardVM.postPrefabInitialization(this);
@@ -101,6 +100,13 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             this.game.idleGameplayExport.eventManagerRegisterListener(mapController);
             this.game.idleGameplayExport.eventManagerRegisterListener(storageInfoBoardVM);
             this.game.idleGameplayExport.eventManagerRegisterListener(cellDetailBoardVM);
+        }
+
+        protected override void dispose()
+        {
+            this.game.idleGameplayExport.eventManagerUnregisterListener(mapController);
+            this.game.idleGameplayExport.eventManagerUnregisterListener(storageInfoBoardVM);
+            this.game.idleGameplayExport.eventManagerUnregisterListener(cellDetailBoardVM);
         }
 
         override public void showAchievementMaskBoard(AbstractAchievement prototype)

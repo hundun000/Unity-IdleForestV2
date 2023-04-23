@@ -16,7 +16,7 @@ using UnityEngine.UI;
 namespace Assets.Scripts.DemoGameCore.ui.sub
 {
 
-    public class DemoStorageInfoBoardVM : MonoBehaviour, IOneFrameResourceChangeListener
+    public class DemoStorageInfoBoardVM : MonoBehaviour, IOneFrameResourceChangeListener, IGameAreaChangeListener
     {
         private Image background;
         protected GameObject nodesRoot;
@@ -25,9 +25,9 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
         List<String> shownOrders;
         HashSet<String> shownTypes = new HashSet<String>();
-        DemoPlayScreen parent;
+        BaseIdleForestPlayScreen parent;
 
-        Dictionary<StorageInfoBoardResourceAmountPairNode, List<long>> nodeToDeltaHistoryMap = new();
+        List<StorageInfoBoardResourceAmountPairNode> nodeMap = new();
 
 
 
@@ -39,7 +39,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             this.nodePrefab = this.transform.Find("_templates/nodePrefab").gameObject;
         }
 
-        public void postPrefabInitialization(DemoPlayScreen parent, List<String> shownOrders)
+        public void postPrefabInitialization(BaseIdleForestPlayScreen parent, List<String> shownOrders)
         {
             this.parent = parent;
             background.sprite = (parent.game.textureManager.defaultBoardNinePatchTexture);
@@ -52,7 +52,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         private void rebuildCells()
         {
             nodesRoot.transform.AsTableClear();
-            nodeToDeltaHistoryMap.Clear();
+            nodeMap.Clear();
 
             for (int i = 0; i < shownOrders.size(); i++)
             {
@@ -61,7 +61,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
                 {
                     StorageInfoBoardResourceAmountPairNode node = nodesRoot.transform.AsTableAdd<StorageInfoBoardResourceAmountPairNode>(nodePrefab);
                     node.postPrefabInitialization(parent.game.textureManager, resourceType);
-                    nodeToDeltaHistoryMap.Add(node, new());
+                    nodeMap.Add(node);
                     shownTypes.Add(resourceType);
                 }
             }
@@ -70,9 +70,14 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
 
 
-        private void updateViewData(Dictionary<string, long> changeMap)
+        private void updateViewData(Dictionary<string, long> changeMap, Dictionary<string, List<long>> deltaHistoryMap)
         {
-            Boolean needRebuildCells = !shownTypes.SetEquals(parent.game.idleGameplayExport.getUnlockedResourceTypes());
+            Boolean needRebuildCells = !shownTypes.SetEquals(
+                new HashSet<string>(
+                    parent.game.idleGameplayExport.getUnlockedResourceTypes()
+                    .Where(it => shownOrders.Contains(it))
+                    .ToList())
+                );
             if (needRebuildCells)
             {
                 shownTypes.Clear();
@@ -80,23 +85,32 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
                 rebuildCells();
             }
 
-            nodeToDeltaHistoryMap.ToList().ForEach(entry => {
-                var node = entry.Key;
-                entry.Value.Insert(entry.Value.Count, changeMap.getOrDefault(node.getResourceType(), 0));
-                while (entry.Value.Count > DemoIdleGame.LOGIC_FRAME_PER_SECOND)
+            nodeMap.ForEach(node => {
+                long historySum;
+                if (deltaHistoryMap.ContainsKey(node.getResourceType()))
                 {
-                    entry.Value.RemoveAt(0);
+                    historySum = deltaHistoryMap.get(node.getResourceType()).TakeLast(DemoIdleGame.LOGIC_FRAME_PER_SECOND).Sum();
+                } 
+                else
+                {
+                    historySum = 0;
                 }
-                long historySum = entry.Value.Sum();
+
                 node.update(historySum, parent.game.idleGameplayExport.getResourceNumOrZero(node.getResourceType()));
             });
 
 
         }
 
-        public void onResourceChange(Dictionary<string, long> changeMap)
+
+        void IGameAreaChangeListener.onGameAreaChange(string last, string current)
         {
-            updateViewData(changeMap);
+            updateViewData(new(), new());
+        }
+
+        void IOneFrameResourceChangeListener.onResourceChange(Dictionary<string, long> changeMap, Dictionary<string, List<long>> deltaHistoryMap)
+        {
+            updateViewData(changeMap, deltaHistoryMap);
         }
     }
 }

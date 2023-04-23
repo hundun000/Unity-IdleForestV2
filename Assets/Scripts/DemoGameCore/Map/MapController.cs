@@ -44,7 +44,7 @@ namespace Map
         //public Cell[,] mapLayout;      // 地图布局
         private List<Cell> constructionControlNodes = new List<Cell>();  // Cell即为一种ConstructionControlNode——控制一个设施的UI
 
-        DemoPlayScreen parent;      // 通过代码绑定
+        WorldPlayScreen parent;      // 通过代码绑定
         private bool firstCome;     // 判断是否是初次加载地图
 
 
@@ -126,7 +126,7 @@ namespace Map
             return newposition;
         }
 
-        public void postPrefabInitialization(DemoPlayScreen playScreen)
+        public void postPrefabInitialization(WorldPlayScreen playScreen)
         {
             // 通过代码绑定引用
             this.parent = playScreen;

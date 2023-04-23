@@ -21,7 +21,7 @@ namespace Assets.Scripts.DemoGameCore
 
 
             Dictionary<String, List<String>> areaControlableConstructionVMPrototypeIds = new Dictionary<String, List<String>>();
-            areaControlableConstructionVMPrototypeIds.put(GameArea.AREA_SINGLE, JavaFeatureForGwt.arraysAsList(
+            areaControlableConstructionVMPrototypeIds.put(GameArea.AREA_WORLD, JavaFeatureForGwt.arraysAsList(
                      ConstructionPrototypeId.SMALL_TREE,
                      ConstructionPrototypeId.MID_TREE,
                      ConstructionPrototypeId.BIG_TREE,
@@ -34,12 +34,14 @@ namespace Assets.Scripts.DemoGameCore
                      ConstructionPrototypeId.LAKE,
                      ConstructionPrototypeId.GOVERNMENT
             ));
-
+            areaControlableConstructionVMPrototypeIds.put(GameArea.AREA_BEE, JavaFeatureForGwt.arraysAsList(
+                     ConstructionPrototypeId.SMALL_BEEHIVE
+            ));
 
             this.areaControlableConstructionVMPrototypeIds = areaControlableConstructionVMPrototypeIds;
 
             Dictionary<String, List<String>> areaControlableConstructionPrototypeVMPrototypeIds = new Dictionary<String, List<String>>();
-            areaControlableConstructionPrototypeVMPrototypeIds.put(GameArea.AREA_SINGLE, JavaFeatureForGwt.arraysAsList(
+            areaControlableConstructionPrototypeVMPrototypeIds.put(GameArea.AREA_WORLD, JavaFeatureForGwt.arraysAsList(
                      ConstructionPrototypeId.SMALL_TREE,
                      ConstructionPrototypeId.SMALL_FACTORY
             ));
@@ -51,16 +53,11 @@ namespace Assets.Scripts.DemoGameCore
             this.areaShowEntityByOwnAmountResourceIds = (areaShowEntityByOwnAmountResourceIds);
 
             Dictionary<String, List<String>> areaShowEntityByChangeAmountResourceIds = new Dictionary<String, List<String>>();
-            areaShowEntityByChangeAmountResourceIds.put(GameArea.AREA_SINGLE, JavaFeatureForGwt.arraysAsList(
-                ResourceType.COIN,
-                ResourceType.WOOD,
-                ResourceType.CARBON
-            ));
             this.areaShowEntityByChangeAmountResourceIds = (areaShowEntityByChangeAmountResourceIds);
 
             Dictionary<String, String> screenIdToFilePathMap = JavaFeatureForGwt.mapOf(
                     typeof(DemoMenuScreen).Name, "audio/Loop-Menu.wav",
-                    typeof(DemoPlayScreen).Name, "audio/relax.wav"
+                    typeof(WorldPlayScreen).Name, "audio/relax.wav"
                 );
             this.screenIdToFilePathMap = (screenIdToFilePathMap);
 

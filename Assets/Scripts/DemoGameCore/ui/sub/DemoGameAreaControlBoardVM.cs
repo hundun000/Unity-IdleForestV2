@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.DemoGameCore.ui.sub
 {
-    internal class DemoGameAreaControlBoardVM : GameAreaControlBoardVM<DemoIdleGame, RootSaveData>
+    public class DemoGameAreaControlBoardVM : GameAreaControlBoardVM<DemoIdleGame, RootSaveData>
     {
     }
 }

@@ -26,7 +26,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
         
 
-        public void postPrefabInitialization(DemoPlayScreen parent, Transform drawContaioner)
+        public void postPrefabInitialization(WorldPlayScreen parent, Transform drawContaioner)
         {
             base.postPrefabInitialization(parent, drawContaioner);
         }

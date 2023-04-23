@@ -11,8 +11,9 @@ namespace Assets.Scripts.DemoGameCore.logic
 {
     internal class GameArea
     {
-        public const String AREA_SINGLE = "ENUM_AREA@AREA_SINGLE";
-    
-        public static readonly List<String> values = JavaFeatureExtension.ArraysAsList(AREA_SINGLE);
+        public const String AREA_WORLD = "ENUM_AREA@AREA_WORLD";
+        public const String AREA_BEE = "ENUM_AREA@AREA_BEE";
+
+        public static readonly List<String> values = JavaFeatureExtension.ArraysAsList(AREA_WORLD, AREA_BEE);
     }
 }

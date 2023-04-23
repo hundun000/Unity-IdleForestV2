@@ -14,8 +14,9 @@ namespace Assets.Scripts.DemoGameCore.logic
         public const String WOOD = "ENUM_RESC@WOOD";
         public const String CARBON = "ENUM_RESC@CARBON";
         //public static final String WIN_TROPHY = "ENUM_RESC@TROPHY";
+        public const String HONEY = "ENUM_RESC@HONEY";
 
-        public static readonly List<String> VALUES_FOR_SHOW_ORDER = JavaFeatureExtension.ArraysAsList(COIN, WOOD, CARBON);
+        public static readonly List<String> VALUES_FOR_SHOW_ORDER = JavaFeatureExtension.ArraysAsList(COIN, WOOD, CARBON, HONEY);
 
     }
 }
