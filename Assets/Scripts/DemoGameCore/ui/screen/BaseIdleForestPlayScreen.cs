@@ -35,13 +35,13 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             gameAreaChangeListeners.Add(this);
             gameAreaChangeListeners.Add(storageInfoBoardVM);
 
-            this.game.idleGameplayExport.eventManagerRegisterListener(storageInfoBoardVM);
+            this.game.idleGameplayExport.gameplayContext.eventManager.registerListener(storageInfoBoardVM);
         }
 
         override protected void dispose()
         {
             base.dispose();
-            this.game.idleGameplayExport.eventManagerUnregisterListener(storageInfoBoardVM);
+            this.game.idleGameplayExport.gameplayContext.eventManager.unregisterListener(storageInfoBoardVM);
         }
 
         override protected void lazyInitUiRootContext()

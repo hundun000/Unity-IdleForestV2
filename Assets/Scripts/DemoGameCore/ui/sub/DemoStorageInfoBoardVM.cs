@@ -74,14 +74,14 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         {
             Boolean needRebuildCells = !shownTypes.SetEquals(
                 new HashSet<string>(
-                    parent.game.idleGameplayExport.getUnlockedResourceTypes()
+                    parent.game.idleGameplayExport.gameplayContext.storageManager.unlockedResourceTypes
                     .Where(it => shownOrders.Contains(it))
                     .ToList())
                 );
             if (needRebuildCells)
             {
                 shownTypes.Clear();
-                shownTypes.AddRange(parent.game.idleGameplayExport.getUnlockedResourceTypes());
+                shownTypes.AddRange(parent.game.idleGameplayExport.gameplayContext.storageManager.unlockedResourceTypes);
                 rebuildCells();
             }
 
@@ -96,7 +96,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
                     historySum = 0;
                 }
 
-                node.update(historySum, parent.game.idleGameplayExport.getResourceNumOrZero(node.getResourceType()));
+                node.update(historySum, parent.game.idleGameplayExport.gameplayContext.storageManager.getResourceNumOrZero(node.getResourceType()));
             });
 
 

@@ -147,7 +147,7 @@ namespace Map
 
         public void onConstructionCollectionChange()
         {
-            List<BaseConstruction> constructions = parent.game.idleGameplayExport.getAreaShownConstructionsOrEmpty(parent.area);
+            List<BaseConstruction> constructions = parent.game.idleGameplayExport.gameplayContext.constructionManager.getAreaShownConstructionsOrEmpty(parent.area);
             constructions = filterConstructions(constructions);
 
             BackendLevelInfo backendLevelInfo = BackendLevelInfo.from(constructions);

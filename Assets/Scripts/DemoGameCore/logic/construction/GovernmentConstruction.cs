@@ -27,7 +27,7 @@ namespace Assets.Scripts.DemoGameCore.logic
         }
 
 
-        override public void onLogicFrame()
+        override public void onSubLogicFrame()
         {
             autoProficiencyProgress++;
             int proficiencyFrameCountMax = AUTO_PROFICIENCY_SECOND_MAX * gameContext.LOGIC_FRAME_PER_SECOND;

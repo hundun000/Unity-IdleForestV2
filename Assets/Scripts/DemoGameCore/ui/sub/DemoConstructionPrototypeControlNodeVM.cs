@@ -42,7 +42,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             clickEffectButton.button.onClick.AddListener(() => {
 
                 parent.game.frontend.log(this.getClass().getSimpleName(), "clicked");
-                parent.game.idleGameplayExport.buyInstanceOfPrototype(model.prototypeId, position);
+                parent.game.idleGameplayExport.gameplayContext.constructionManager.buyInstanceOfPrototypeAndNotify(model.prototypeId, position);
             });
 
 
@@ -54,7 +54,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             bool enable;
             try
             {
-                enable = parent.game.idleGameplayExport.canBuyInstanceOfPrototype(model.prototypeId, position);
+                enable = parent.game.idleGameplayExport.gameplayContext.constructionManager.canBuyInstanceOfPrototype(model.prototypeId, position);
             }
             catch
             {

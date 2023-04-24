@@ -96,18 +96,18 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             //gameAreaChangeListeners.Add(specialConstructionControlBoardVM);
             gameAreaChangeListeners.Add(mapController);
             gameAreaChangeListeners.Add(firstLockedAchievementBoardVM);
-            //this.game.idleGameplayExport.eventManagerRegisterListener(specialConstructionControlBoardVM);
-            this.game.idleGameplayExport.eventManagerRegisterListener(mapController);
-            this.game.idleGameplayExport.eventManagerRegisterListener(storageInfoBoardVM);
-            this.game.idleGameplayExport.eventManagerRegisterListener(cellDetailBoardVM);
+            //this.game.idleGameplayExport.gameplayContext.eventManager.registerListener(specialConstructionControlBoardVM);
+            this.game.idleGameplayExport.gameplayContext.eventManager.registerListener(mapController);
+            this.game.idleGameplayExport.gameplayContext.eventManager.registerListener(storageInfoBoardVM);
+            this.game.idleGameplayExport.gameplayContext.eventManager.registerListener(cellDetailBoardVM);
         }
 
         protected override void dispose()
         {
             base.dispose();
-            this.game.idleGameplayExport.eventManagerUnregisterListener(mapController);
-            this.game.idleGameplayExport.eventManagerUnregisterListener(storageInfoBoardVM);
-            this.game.idleGameplayExport.eventManagerUnregisterListener(cellDetailBoardVM);
+            this.game.idleGameplayExport.gameplayContext.eventManager.unregisterListener(mapController);
+            this.game.idleGameplayExport.gameplayContext.eventManager.unregisterListener(storageInfoBoardVM);
+            this.game.idleGameplayExport.gameplayContext.eventManager.unregisterListener(cellDetailBoardVM);
         }
 
         override public void showAchievementMaskBoard(AbstractAchievement prototype)

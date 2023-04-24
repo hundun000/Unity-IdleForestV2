@@ -85,7 +85,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
             //gameAreaChangeListeners.Add(specialConstructionControlBoardVM);
 
-            //this.game.idleGameplayExport.eventManagerRegisterListener(specialConstructionControlBoardVM);
+            //this.game.idleGameplayExport.gameplayContext.eventManager.registerListener(specialConstructionControlBoardVM);
 
             
 

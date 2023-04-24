@@ -61,7 +61,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             nodesRoot.transform.AsTableClear();
             contents.Clear();
 
-            List<AbstractConstructionPrototype> constructionPrototypes = parent.game.idleGameplayExport.getAreaShownConstructionPrototypesOrEmpty(parent.area);
+            List<AbstractConstructionPrototype> constructionPrototypes = parent.game.idleGameplayExport.gameplayContext.constructionManager.getAreaShownConstructionPrototypesOrEmpty(parent.area);
 
             constructionPrototypes.ForEach(constructionPrototype => {
                 CellDetailInnerBoardVM innerBoardVM = nodesRoot.transform.AsTableAdd<CellDetailInnerBoardVM>(innerBoardVMPrefab.gameObject);
@@ -76,7 +76,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         {
             if (data != null)
             {
-                data = parent.game.idleGameplayExport.getConstructionAt(data.position);
+                data = parent.game.idleGameplayExport.gameplayContext.constructionManager.getConstructionAt(data.position);
                 updateDetail(data);
             }
             

@@ -23,7 +23,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
         Text workingLevelLabel;
         Text proficiencyLabel;
 
-        DemoTextButton clickEffectButton;
+        DemoTextButton upgradeButton;
         DemoTextButton destoryButton;
         DemoTextButton transformButton;
 
@@ -36,7 +36,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             this.workingLevelLabel = this.transform.Find("workingLevelLabel").GetComponent<Text>();
             this.proficiencyLabel = this.transform.Find("proficiencyLabel").GetComponent<Text>();
 
-            this.clickEffectButton = this.transform.Find("clickEffectButton").GetComponent<DemoTextButton>();
+            this.upgradeButton = this.transform.Find("clickEffectButton").GetComponent<DemoTextButton>();
 
             this.destoryButton = this.transform.Find("destoryButton").GetComponent<DemoTextButton>();
             this.transformButton = this.transform.Find("transformButton").GetComponent<DemoTextButton>();
@@ -48,17 +48,17 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             this.parent = parent;
 
 
-            clickEffectButton.button.onClick.AddListener(() => {
-                parent.game.frontend.log(this.getClass().getSimpleName(), "clickEffectButton clicked");
-                parent.game.idleGameplayExport.constructionOnClick(model.id);
+            upgradeButton.button.onClick.AddListener(() => {
+                parent.game.frontend.log(this.getClass().getSimpleName(), "upgradeButton clicked");
+                model.doUpgrade();
             });
             transformButton.button.onClick.AddListener(() => {
                 parent.game.frontend.log(this.getClass().getSimpleName(), "transformButton clicked");
-                parent.game.idleGameplayExport.transformConstruction(model.id);
+                parent.game.idleGameplayExport.gameplayContext.constructionManager.transformInstanceAndNotify(model.id);
             });
             destoryButton.button.onClick.AddListener(() => {
                 parent.game.frontend.log(this.getClass().getSimpleName(), "destoryButton clicked");
-                parent.game.idleGameplayExport.destoryConstruction(model.id, ConstructionPrototypeId.DIRT);
+                parent.game.idleGameplayExport.gameplayContext.constructionManager.destoryInstanceAndNotify(model.id, ConstructionPrototypeId.DIRT);
             });
 
 
@@ -150,19 +150,19 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             // ------ update clickable-state ------
             if (model.descriptionPackage.buttonDescroption == null)
             {
-                clickEffectButton.gameObject.SetActive(false);
+                upgradeButton.gameObject.SetActive(false);
             }
-            else if (model.canClickEffect())
+            else if (model.canUpgrade())
             {
-                clickEffectButton.gameObject.SetActive(true);
-                clickEffectButton.button.interactable = (true);
-                clickEffectButton.label.text = (model.descriptionPackage.buttonDescroption);
+                upgradeButton.gameObject.SetActive(true);
+                upgradeButton.button.interactable = (true);
+                upgradeButton.label.text = (model.descriptionPackage.buttonDescroption);
             }
             else
             {
-                clickEffectButton.gameObject.SetActive(true);
-                clickEffectButton.button.interactable = (false);
-                clickEffectButton.label.text = (model.descriptionPackage.buttonDescroption);
+                upgradeButton.gameObject.SetActive(true);
+                upgradeButton.button.interactable = (false);
+                upgradeButton.label.text = (model.descriptionPackage.buttonDescroption);
             }
 
             if (model.descriptionPackage.transformButtonDescroption == null)

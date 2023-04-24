@@ -32,7 +32,7 @@ namespace Assets.Scripts.DemoGameCore.logic
         }
 
 
-        override public void onLogicFrame()
+        override public void onSubLogicFrame()
         {
             autoOutputProgress++;
             int outputFrameCountMax = outputComponent.autoOutputSecondCountMax * gameContext.LOGIC_FRAME_PER_SECOND;

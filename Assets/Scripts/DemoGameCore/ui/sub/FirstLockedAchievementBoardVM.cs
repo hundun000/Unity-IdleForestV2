@@ -47,7 +47,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
         internal void updateData()
         {
-            AchievementInfoPackage data = parent.game.idleGameplayExport.getAchievementInfoPackage();
+            AchievementInfoPackage data = parent.game.idleGameplayExport.gameplayContext.achievementManager.getAchievementInfoPackage();
             if (data.firstLockedAchievement != null)
             {
                 nameValueLabel.text = data.firstLockedAchievement.name;

@@ -82,25 +82,7 @@ namespace Assets.Scripts.DemoGameCore.logic
             this.saveData.workingLevel = 1;
         }
 
-        override protected void printDebugInfoAfterConstructed()
-        {
-        
-        }
 
-
-        override public void onClick()
-        {
-            if (!canClickEffect())
-            {
-                return;
-            }
-            doUpgrade();
-        }
-
-        override public Boolean canClickEffect()
-        {
-            return canUpgrade();
-        }
 
         
 
@@ -116,7 +98,7 @@ namespace Assets.Scripts.DemoGameCore.logic
             return (long)((baseValue  * level) * (0.5 + proficiency / 100.0 * 0.5));
         }
 
-        public override void onLogicFrame()
+        public override void onSubLogicFrame()
         {
             // base do nothing
         }

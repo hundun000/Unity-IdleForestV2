@@ -83,7 +83,7 @@ public class StatusBarController : MonoBehaviour, ILogicFrameListener
     void ILogicFrameListener.onLogicFrame()
     {
         // 后端逻辑帧到达，说明后端数据可能有变，让this更新使用最新数据
-        long amount = parent.game.idleGameplayExport.getResourceNumOrZero(ResourceType.CARBON);
+        long amount = parent.game.idleGameplayExport.gameplayContext.storageManager.getResourceNumOrZero(ResourceType.CARBON);
         SetValue(amountToRate(amount));
     }
 }
