@@ -28,7 +28,6 @@ namespace Assets.Scripts.DemoGameCore.logic
             map.Add(ConstructionPrototypeId.DIRT, (AbstractConstructionPrototype)new DirtPrototype(language));
             map.Add(ConstructionPrototypeId.LAKE, (AbstractConstructionPrototype)new LakePrototype(language));
             map.Add(ConstructionPrototypeId.RUBBISH, (AbstractConstructionPrototype)new RubbishPrototype(language));
-            map.Add(ConstructionPrototypeId.GOVERNMENT, (AbstractConstructionPrototype)new GovernmentPrototype(language));
             return map;
         }
 

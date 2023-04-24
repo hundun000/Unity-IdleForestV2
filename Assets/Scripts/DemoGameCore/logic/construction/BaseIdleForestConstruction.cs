@@ -52,8 +52,36 @@ namespace Assets.Scripts.DemoGameCore.logic
             
         };
 
-        public ProficiencySpeedCalculator proficiencySpeedCalculator = null;
-        public BaseIdleForestConstruction(
+        public static BaseIdleForestConstruction typeAutoProficiency(String prototypeId,
+            String id,
+            GridPosition position,
+            DescriptionPackage descriptionPackage)
+        {
+            BaseIdleForestConstruction thiz = new BaseIdleForestConstruction(prototypeId, id, position, descriptionPackage);
+
+            IdleForestProficiencyComponent proficiencyComponent = new IdleForestProficiencyComponent(thiz, 1);
+            thiz.proficiencyComponent = proficiencyComponent;
+            proficiencyComponent.proficiencySpeedCalculator = IDLE_FOREST_PROFICIENCY_SPEED_CALCULATOR;
+
+            return thiz;
+        }
+
+        public static BaseIdleForestConstruction typeNoProficiency(String prototypeId,
+            String id,
+            GridPosition position,
+            DescriptionPackage descriptionPackage)
+        {
+            BaseIdleForestConstruction thiz = new BaseIdleForestConstruction(prototypeId, id, position, descriptionPackage);
+
+            IdleForestProficiencyComponent proficiencyComponent = new IdleForestProficiencyComponent(thiz, null);
+            thiz.proficiencyComponent = proficiencyComponent;
+            proficiencyComponent.proficiencySpeedCalculator = IDLE_FOREST_PROFICIENCY_SPEED_CALCULATOR;
+
+            return thiz;
+        }
+
+
+        private BaseIdleForestConstruction(
             String prototypeId, 
             String id, 
             GridPosition position,
@@ -64,18 +92,17 @@ namespace Assets.Scripts.DemoGameCore.logic
 
             
 
-            OutputComponent outputComponent = new OutputComponent(this);
-            this.outputComponent = (outputComponent);
+            OutputComponent outputComponent = new IdleForestOutputComponent(this);
+            this.outputComponent = outputComponent;
 
             UpgradeComponent upgradeComponent = new UpgradeComponent(this);
-            this.upgradeComponent = (upgradeComponent);
+            this.upgradeComponent = upgradeComponent;
 
             LevelComponent levelComponent = new LevelComponent(this, false);
-            this.levelComponent = (levelComponent);
+            this.levelComponent = levelComponent;
 
-            ProficiencyComponent proficiencyComponent = new ProficiencyComponent(this);
-            this.proficiencyComponent = (proficiencyComponent);
-            this.proficiencySpeedCalculator = IDLE_FOREST_PROFICIENCY_SPEED_CALCULATOR;
+            ExistenceComponent existenceComponent = new ExistenceComponent(this);
+            this.existenceComponent = existenceComponent;
 
             this.saveData.position = position;
             this.saveData.level = 1;
@@ -88,19 +115,6 @@ namespace Assets.Scripts.DemoGameCore.logic
 
         
 
-        override public long calculateModifiedOutputGain(long baseValue, int level, int proficiency)
-        {
-            return (long)((baseValue * level) * (0.5 + proficiency / 100.0 * 0.5));
-        }
-
-        override public long calculateModifiedOutputCost(long baseValue, int level, int proficiency)
-        {
-            return (long)((baseValue  * level) * (0.5 + proficiency / 100.0 * 0.5));
-        }
-
-        public override void onSubLogicFrame()
-        {
-            // base do nothing
-        }
+        
     }
 }

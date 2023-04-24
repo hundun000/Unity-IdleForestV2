@@ -50,7 +50,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
             upgradeButton.button.onClick.AddListener(() => {
                 parent.game.frontend.log(this.getClass().getSimpleName(), "upgradeButton clicked");
-                model.doUpgrade();
+                model.upgradeComponent.doUpgrade();
             });
             transformButton.button.onClick.AddListener(() => {
                 parent.game.frontend.log(this.getClass().getSimpleName(), "transformButton clicked");
@@ -58,7 +58,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             });
             destoryButton.button.onClick.AddListener(() => {
                 parent.game.frontend.log(this.getClass().getSimpleName(), "destoryButton clicked");
-                parent.game.idleGameplayExport.gameplayContext.constructionManager.destoryInstanceAndNotify(model.id, ConstructionPrototypeId.DIRT);
+                model.existenceComponent.destoryInstanceAndNotify(ConstructionPrototypeId.DIRT);
             });
 
 
@@ -152,7 +152,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             {
                 upgradeButton.gameObject.SetActive(false);
             }
-            else if (model.canUpgrade())
+            else if (model.upgradeComponent.canUpgrade())
             {
                 upgradeButton.gameObject.SetActive(true);
                 upgradeButton.button.interactable = (true);
@@ -169,7 +169,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             {
                 transformButton.gameObject.SetActive(false);
             }
-            else if (model.canTransfer())
+            else if (model.upgradeComponent.canTransfer())
             {
                 transformButton.gameObject.SetActive(true);
                 transformButton.button.interactable = (true);
@@ -187,7 +187,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             {
                 destoryButton.gameObject.SetActive(false);
             } 
-            else if(model.canDestory())
+            else if(model.existenceComponent.canDestory())
             {
                 destoryButton.gameObject.SetActive(true);
                 destoryButton.button.interactable = (true);

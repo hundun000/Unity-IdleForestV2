@@ -87,8 +87,8 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
                 buildOnePack(model.upgradeComponent.transformCostPack);
             }
 
-            buildOnePack(model.destoryCostPack);
-            buildOnePack(model.destoryGainPack);
+            buildOnePack(model.existenceComponent.destoryCostPack);
+            buildOnePack(model.existenceComponent.destoryGainPack);
 
 
         }
