@@ -42,7 +42,7 @@ namespace Map
         public Cell cellPrefab;              // 格位预制体
         public GameObject focusCircle;       // 选中格位时显示的聚焦圈
         //public Cell[,] mapLayout;      // 地图布局
-        private List<Cell> constructionControlNodes = new List<Cell>();  // Cell即为一种ConstructionControlNode——控制一个设施的UI
+        private Dictionary<GridPosition, Cell> constructionControlNodes = new();  // Cell即为一种ConstructionControlNode——控制一个设施的UI
 
         WorldPlayScreen parent;      // 通过代码绑定
         private bool firstCome;     // 判断是否是初次加载地图
@@ -76,44 +76,46 @@ namespace Map
         // 将地图打印到屏幕上
         private void BuildBoard(BackendLevelInfo levelInfo)
         {
-            // 清理
-            foreach (Transform child in cellRoot.transform)
+            // 判断是否是初次加载地图
+            if (firstCome)
             {
-                Destroy(child.gameObject);
-            }
-            constructionControlNodes.Clear();
-
-            // 加载网格
-
-            levelInfo.constructions.ForEach(construction => { 
-                var cell = Instantiate(cellPrefab, cellRoot.transform);
-                cell.StateChangeTo(parent, construction);
-                cell.transform.position = CalculatePosition(construction.saveData.position.x, construction.saveData.position.y);
-                constructionControlNodes.Add(cell);
-            });
-
-
-            
-
-
-            constructionControlNodes.ForEach(cell => {
-                cell.updateBackendData();
-                if (isTest)
+                // 清理旧有地图
+                foreach (Transform child in cellRoot.transform)
                 {
-                    //cell.testDataPrint(sceneCamera);
+                    Destroy(child.gameObject);
                 }
-            });
+                constructionControlNodes.Clear();
 
+                // 初始化地图
+                levelInfo.constructions.ForEach(construction => {
+                    var cell = Instantiate(cellPrefab, cellRoot.transform);
+                    cell.StateChangeTo(parent, construction);
+                    cell.transform.position = CalculatePosition(construction.saveData.position.x, construction.saveData.position.y);
+                    constructionControlNodes.Add(construction.saveData.position, cell);
+                });
 
-            // 若是初次加载地图，则进行相机调整
-            if(firstCome)
-            {
-                firstCome = false;
+                // 初始化相机属性
                 sceneCamera.orthographicSize = cameraSize;
-                Vector2 cameraPosVector2 = constructionControlNodes.Count > 0 ? constructionControlNodes.First().transform.position : new Vector2(0, 0);
-                GetComponent<CameraController>().zeroPos =
-                    new Vector3(cameraPosVector2.x, cameraPosVector2.y, -cameraDistance);
+                GridPosition cameraPosVector2 = constructionControlNodes.Count > 0 ? constructionControlNodes.First().Key : new GridPosition(0, 0);
+                Vector3 cameraPosVector = CalculatePosition(cameraPosVector2.x, cameraPosVector2.y);
+                GetComponent<CameraController>().Initialize(cameraPosVector, cameraDistance);
+                firstCome = false;
             }
+            else
+            {
+                levelInfo.constructions.ForEach(construction => {
+                    Cell cell = constructionControlNodes[construction.position];
+                    if (cell.construction != construction)
+                    {
+                        cell.StateChangeTo(parent, construction);
+                    }
+                });
+            }
+
+
+            constructionControlNodes.Values.ToList().ForEach(cell => {
+                cell.updateBackendData();
+            });
 
         }
 
@@ -136,7 +138,7 @@ namespace Map
         public void onLogicFrame()
         {
             // 后端逻辑帧到达，说明后端数据可能有变，让constructionControlNode更新使用最新数据
-            constructionControlNodes.ForEach(item => item.updateBackendData());
+            constructionControlNodes.Values.ToList().ForEach(item => item.updateBackendData());
         }
 
         public void onGameAreaChange(string last, string current)

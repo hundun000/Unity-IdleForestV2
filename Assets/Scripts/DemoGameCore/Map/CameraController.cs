@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Map
@@ -32,10 +33,11 @@ namespace Map
         public bool yAsixinversion = false;
         #endregion
 
-        private void Start()
+        public void Initialize(Vector2 _zeroPos, float cameraDistance)
         {
+            zeroPos = _zeroPos;
             cameraTrans = mainCamera.transform;
-            cameraTrans.position = new(zeroPos.x + pointSkew.x, zeroPos.y + pointSkew.y, cameraTrans.position.z);
+            cameraTrans.position = new(zeroPos.x + pointSkew.x, zeroPos.y + pointSkew.y, -cameraDistance);
             isDragging = false;
 
             xAxisCoefficient = xAxisinversion ? -1 : 1;

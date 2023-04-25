@@ -42,7 +42,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             clickEffectButton.button.onClick.AddListener(() => {
 
                 parent.game.frontend.log(this.getClass().getSimpleName(), "clicked");
-                parent.game.idleGameplayExport.gameplayContext.constructionManager.buyInstanceOfPrototypeAndNotify(model.prototypeId, position);
+                parent.game.idleGameplayExport.gameplayContext.constructionManager.buyInstanceOfPrototype(model.prototypeId, position);
             });
 
 
