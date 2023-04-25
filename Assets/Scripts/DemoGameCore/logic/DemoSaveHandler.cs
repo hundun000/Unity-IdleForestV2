@@ -71,6 +71,14 @@ namespace Assets.Scripts.DemoGameCore.logic
                     it => it.prototypeId + System.Guid.NewGuid().ToString(),
                     it => it
                 );
+            gameplaySaveData.constructionSaveDataMap.Add(ConstructionPrototypeId.SMALL_BEEHIVE, 
+                ConstructionSaveData.builder()
+                    .prototypeId(ConstructionPrototypeId.SMALL_BEEHIVE)
+                    .proficiency(100)
+                    .position(new GridPosition(100, 100))
+                    .build()
+                );
+
             gameplaySaveData.ownResoueces = (new Dictionary<String, long>());
             gameplaySaveData.ownResoueces.Add(ResourceType.COIN, 150);
             gameplaySaveData.ownResoueces.Add(ResourceType.CARBON, 100);

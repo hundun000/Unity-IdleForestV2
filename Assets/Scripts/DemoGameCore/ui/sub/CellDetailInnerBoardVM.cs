@@ -17,7 +17,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
     public class CellDetailInnerBoardVM : MonoBehaviour
     {
-        WorldPlayScreen parent;
+        BaseIdleForestPlayScreen parent;
 
         GameObject childrenRoot;
         GameObject mainBoardContainer;
@@ -45,7 +45,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
         }
 
-        public void postPrefabInitialization(WorldPlayScreen parent)
+        public void postPrefabInitialization(BaseIdleForestPlayScreen parent)
         {
             //super("GUIDE_TEXT", parent.game.getButtonSkin());
             this.parent = parent;

@@ -59,6 +59,7 @@ namespace Assets.Scripts.DemoGameCore.logic
                 //resourceIconMap.Add(ResourceType.COOKIE, regions[0][2]);
                 resourceIconMap.Add(ResourceType.WOOD, getSprite("WOOD"));
                 resourceIconMap.Add(ResourceType.CARBON, getSprite("CARBON"));
+                resourceIconMap.Add(ResourceType.HONEY, regions[0][5]);
             }
             {
                 var texture = getTexture2D("resourceEntities.png");
@@ -69,6 +70,11 @@ namespace Assets.Scripts.DemoGameCore.logic
                 resourceEntityMap.Add(ResourceType.CARBON, regions[0][4]);
             }
             {
+                var texture = getTexture2D("construction.png");
+                Sprite[][] regions = split(texture, 16, 32);
+
+                constructionEntityMap.Add(ConstructionPrototypeId.SMALL_BEEHIVE, regions[0][0]);
+
                 constructionEntityMap.Add(ConstructionPrototypeId.SMALL_TREE, getSprite("SMALL_TREE"));
                 constructionEntityMap.Add(ConstructionPrototypeId.SMALL_FACTORY, getSprite("SMALL_FACTORY"));
             }

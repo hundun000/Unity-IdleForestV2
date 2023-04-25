@@ -68,7 +68,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             popupInfoBoardVM.postPrefabInitialization(this);
             achievementMaskBoard.postPrefabInitialization(this);
             notificationMaskBoard.postPrefabInitialization(this);
-            cellDetailBoardVM.postPrefabInitialization(this);
+            
             firstLockedAchievementBoardVM.postPrefabInitialization(this);
         }
 
@@ -81,6 +81,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             storageInfoBoardVM.postPrefabInitialization(this, ResourceType.VALUES_FOR_SHOW_ORDER);
 
             //specialConstructionControlBoardVM.postPrefabInitialization(this);
+            cellDetailBoardVM.postPrefabInitialization(this);
             mapController.postPrefabInitialization(this);
             //statusBarController.postPrefabInitialization(this);
         }

@@ -24,6 +24,8 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
 
         public const String SCENE_NAME = "BeePlayScene";
 
+        [HideInInspector]
+        public BeeCellDetailBoardVM cellDetailBoardVM;
         //protected SpecialConstructionControlBoardVM specialConstructionControlBoardVM;
         // ------ bind by editer ------
 
@@ -33,6 +35,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             base.Awake();
 
             //this.specialConstructionControlBoardVM = this.UiRoot.transform.Find("cell_4/SpecialConstructionControlBoardVM").GetComponent<SpecialConstructionControlBoardVM>();
+            this.cellDetailBoardVM = this.UiRoot.transform.Find("cellDetailBoardVM").GetComponent<BeeCellDetailBoardVM>();
 
         }
 
@@ -71,7 +74,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
         {
             base.lazyInitUiRootContext();
 
-            
+            cellDetailBoardVM.postPrefabInitialization(this);
 
 
         }
@@ -83,7 +86,7 @@ namespace Assets.Scripts.DemoGameCore.ui.screen
             //logicFrameListeners.Add(specialConstructionControlBoardVM);
             //logicFrameListeners.Add(statusBarController);
 
-            //gameAreaChangeListeners.Add(specialConstructionControlBoardVM);
+            gameAreaChangeListeners.Add(cellDetailBoardVM);
 
             //this.game.idleGameplayExport.gameplayContext.eventManager.registerListener(specialConstructionControlBoardVM);
 

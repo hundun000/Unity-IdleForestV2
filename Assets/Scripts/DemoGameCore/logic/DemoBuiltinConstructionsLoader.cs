@@ -17,17 +17,18 @@ namespace Assets.Scripts.DemoGameCore.logic
     {
         public Dictionary<String, AbstractConstructionPrototype> getProviderMap(Language language)
         {
-            Dictionary < String, AbstractConstructionPrototype > map = new Dictionary<string, AbstractConstructionPrototype>();
-            map.Add(ConstructionPrototypeId.SMALL_TREE, (AbstractConstructionPrototype)new SmallTreePrototype(language));
-            map.Add(ConstructionPrototypeId.MID_TREE, (AbstractConstructionPrototype)new MidForestPrototype(language));
-            map.Add(ConstructionPrototypeId.BIG_TREE, (AbstractConstructionPrototype)new BigTreePrototype(language));
-            map.Add(ConstructionPrototypeId.SMALL_FACTORY, (AbstractConstructionPrototype)new SmallFactoryPrototype(language));
-            map.Add(ConstructionPrototypeId.MID_FACTORY, (AbstractConstructionPrototype)new MidFactoryPrototype(language));
-            map.Add(ConstructionPrototypeId.BIG_FACTORY, (AbstractConstructionPrototype)new BigFactoryPrototype(language));
-            map.Add(ConstructionPrototypeId.DESERT, (AbstractConstructionPrototype)new DesertPrototype(language));
-            map.Add(ConstructionPrototypeId.DIRT, (AbstractConstructionPrototype)new DirtPrototype(language));
-            map.Add(ConstructionPrototypeId.LAKE, (AbstractConstructionPrototype)new LakePrototype(language));
-            map.Add(ConstructionPrototypeId.RUBBISH, (AbstractConstructionPrototype)new RubbishPrototype(language));
+            Dictionary<String, AbstractConstructionPrototype> map = new Dictionary<string, AbstractConstructionPrototype>();
+            map.Add(ConstructionPrototypeId.SMALL_TREE, new SmallTreePrototype(language));
+            map.Add(ConstructionPrototypeId.MID_TREE, new MidForestPrototype(language));
+            map.Add(ConstructionPrototypeId.BIG_TREE, new BigTreePrototype(language));
+            map.Add(ConstructionPrototypeId.SMALL_FACTORY, new SmallFactoryPrototype(language));
+            map.Add(ConstructionPrototypeId.MID_FACTORY, new MidFactoryPrototype(language));
+            map.Add(ConstructionPrototypeId.BIG_FACTORY, new BigFactoryPrototype(language));
+            map.Add(ConstructionPrototypeId.DESERT, new DesertPrototype(language));
+            map.Add(ConstructionPrototypeId.DIRT, new DirtPrototype(language));
+            map.Add(ConstructionPrototypeId.LAKE, new LakePrototype(language));
+            map.Add(ConstructionPrototypeId.RUBBISH, new RubbishPrototype(language));
+            map.Add(ConstructionPrototypeId.SMALL_BEEHIVE, new SmallBeehivePrototype(language));
             return map;
         }
 

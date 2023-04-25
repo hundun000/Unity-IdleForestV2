@@ -17,9 +17,15 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
     public class WorldCellDetailBoardVM : BaseCellDetailBoardVM, IConstructionCollectionListener
     {
 
+        public BaseConstruction data { get; protected set; }
 
+        public void postPrefabInitialization(WorldPlayScreen parent)
+        {
+            base.postPrefabInitialization(parent);
+            updateDetail(null);
+        }
 
-        override public void updateDetail(BaseConstruction construction)
+        public void updateDetail(BaseConstruction construction)
         {
             this.data = construction;
             if (construction == null)
@@ -72,7 +78,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
         }
 
-        public void onConstructionCollectionChange()
+        void IConstructionCollectionListener.onConstructionCollectionChange()
         {
             if (data != null)
             {

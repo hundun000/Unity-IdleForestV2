@@ -16,7 +16,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 {
     public abstract class BaseCellDetailBoardVM : MonoBehaviour, ILogicFrameListener
     {
-        protected WorldPlayScreen parent;
+        protected BaseIdleForestPlayScreen parent;
 
         protected GameObject nodesRoot;
         protected Image background;
@@ -24,7 +24,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 
         protected CellDetailInnerBoardVM innerBoardVMPrefab;
 
-        public BaseConstruction data { get; protected set; }
+        
         protected List<CellDetailInnerBoardVM> contents = new List<CellDetailInnerBoardVM>();
 
         virtual protected void Awake()
@@ -41,17 +41,14 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             });
         }
 
-        public void postPrefabInitialization(WorldPlayScreen parent)
+        virtual public void postPrefabInitialization(BaseIdleForestPlayScreen parent)
         {
             //super("GUIDE_TEXT", parent.game.getButtonSkin());
             this.parent = parent;
             this.background.sprite = parent.game.textureManager.defaultBoardNinePatchTexture;
 
-            updateDetail(null);
         }
 
-
-        public abstract void updateDetail(BaseConstruction construction);
 
     }
 }

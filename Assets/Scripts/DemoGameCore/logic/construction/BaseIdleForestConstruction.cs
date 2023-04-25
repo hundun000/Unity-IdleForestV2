@@ -63,6 +63,8 @@ namespace Assets.Scripts.DemoGameCore.logic
             thiz.proficiencyComponent = proficiencyComponent;
             proficiencyComponent.proficiencySpeedCalculator = IDLE_FOREST_PROFICIENCY_SPEED_CALCULATOR;
 
+            thiz.saveData.proficiency = 0;
+
             return thiz;
         }
 
@@ -76,6 +78,8 @@ namespace Assets.Scripts.DemoGameCore.logic
             IdleForestProficiencyComponent proficiencyComponent = new IdleForestProficiencyComponent(thiz, null);
             thiz.proficiencyComponent = proficiencyComponent;
             proficiencyComponent.proficiencySpeedCalculator = IDLE_FOREST_PROFICIENCY_SPEED_CALCULATOR;
+
+            thiz.saveData.proficiency = proficiencyComponent.maxProficiency;
 
             return thiz;
         }

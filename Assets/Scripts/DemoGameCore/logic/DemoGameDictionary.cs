@@ -42,6 +42,8 @@ namespace Assets.Scripts.DemoGameCore.logic
                             return "垃圾堆";
                         case ConstructionPrototypeId.GOVERNMENT:
                             return "政府";
+                        case ConstructionPrototypeId.SMALL_BEEHIVE:
+                            return "小蜂箱";
                         default:
                             return "口口";
                     }
@@ -104,6 +106,8 @@ namespace Assets.Scripts.DemoGameCore.logic
                             return "清理后变为建设用地。";
                         case ConstructionPrototypeId.GOVERNMENT:
                             return "TODO";
+                        case ConstructionPrototypeId.SMALL_BEEHIVE:
+                            return "产出蜂蜜。";
                         default:
                             return "[dic lost]";
                     }

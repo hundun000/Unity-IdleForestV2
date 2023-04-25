@@ -15,7 +15,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
 {
     public class DemoConstructionPrototypeControlNodeVM : MonoBehaviour
     {
-        WorldPlayScreen parent;
+        BaseIdleForestPlayScreen parent;
         public AbstractConstructionPrototype model;
         public GridPosition position;
 
@@ -34,7 +34,7 @@ namespace Assets.Scripts.DemoGameCore.ui.sub
             this.clickEffectButton = this.transform.Find("clickEffectButton").GetComponent<DemoTextButton>();
         }
 
-        public void postPrefabInitialization(WorldPlayScreen parent)
+        public void postPrefabInitialization(BaseIdleForestPlayScreen parent)
         {
 
             this.parent = parent;
