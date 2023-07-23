@@ -15,8 +15,14 @@ namespace Assets.Scripts.DemoGameCore.logic
     {
         public ProficiencySpeedCalculator proficiencySpeedCalculator;
 
-        public IdleForestProficiencyComponent(BaseIdleForestConstruction construction, int? second) : base(construction, 50, null)
+        public IdleForestProficiencyComponent(BaseIdleForestConstruction construction, int? second) : base(construction, second, 50)
         {
+        }
+
+        public override void onSubLogicFrame()
+        {
+            base.onSubLogicFrame();
+            checkAutoPromoteDemote();
         }
 
         protected override void tryProficiencyOnce()

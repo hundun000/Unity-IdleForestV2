@@ -46,7 +46,7 @@ namespace Assets.Scripts.DemoGameCore.logic
         public override BaseConstruction getInstance(GridPosition position)
         {
             String id = prototypeId + "_" + System.Guid.NewGuid().ToString();
-            BaseIdleForestConstruction construction = BaseIdleForestConstruction.typeAutoProficiency(prototypeId, id, position, descriptionPackage);
+            BaseIdleForestConstruction construction = BaseIdleForestConstruction.typeAuto(prototypeId, id, position, descriptionPackage);
             //construction.allowAnyProficiencyDestory = false;
 
             construction.existenceComponent.destoryCostPack = DemoBuiltinConstructionsLoader.toPack(new Dictionary<string, int>());

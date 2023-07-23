@@ -30,7 +30,7 @@ namespace Assets.Scripts.DemoGameCore.logic
         public override BaseConstruction getInstance(GridPosition position)
         {
             String id = prototypeId + "_" + System.Guid.NewGuid().ToString();
-            BaseIdleForestConstruction construction = BaseIdleForestConstruction.typeNoProficiency(prototypeId, id, position, descriptionPackage);
+            BaseIdleForestConstruction construction = BaseIdleForestConstruction.typeNoOutputConstProficiency(prototypeId, id, position, descriptionPackage);
 
             construction.allowPositionOverwrite = true;
 

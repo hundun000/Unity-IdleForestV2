@@ -17,12 +17,12 @@ namespace Assets.Scripts.DemoGameCore.logic
 
         override public long calculateModifiedOutputGain(long baseValue, int level, int proficiency)
         {
-            return (long)((baseValue * level) * (0.5 + proficiency / 100.0 * 0.5));
+            return (long)((baseValue * level) * (0.5 + proficiency / construction.proficiencyComponent.maxProficiency * 0.5));
         }
 
         override public long calculateModifiedOutputCost(long baseValue, int level, int proficiency)
         {
-            return (long)((baseValue * level) * (0.5 + proficiency / 100.0 * 0.5));
+            return (long)((baseValue * level) * (0.5 + proficiency / construction.proficiencyComponent.maxProficiency * 0.5));
         }
     }
 }

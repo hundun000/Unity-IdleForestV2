@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 
 namespace Assets.Scripts.DemoGameCore.logic
 {
@@ -52,34 +53,36 @@ namespace Assets.Scripts.DemoGameCore.logic
             
         };
 
-        public static BaseIdleForestConstruction typeAutoProficiency(String prototypeId,
+        public static BaseIdleForestConstruction typeAuto(String prototypeId,
             String id,
             GridPosition position,
             DescriptionPackage descriptionPackage)
         {
             BaseIdleForestConstruction thiz = new BaseIdleForestConstruction(prototypeId, id, position, descriptionPackage);
 
-            IdleForestProficiencyComponent proficiencyComponent = new IdleForestProficiencyComponent(thiz, 1);
+            var proficiencyComponent = new IdleForestProficiencyComponent(thiz, 1);
             thiz.proficiencyComponent = proficiencyComponent;
             proficiencyComponent.proficiencySpeedCalculator = IDLE_FOREST_PROFICIENCY_SPEED_CALCULATOR;
 
-            thiz.saveData.proficiency = 0;
+            var outputComponent = new IdleForestOutputComponent(thiz);
+            thiz.outputComponent = outputComponent;
 
             return thiz;
         }
 
-        public static BaseIdleForestConstruction typeNoProficiency(String prototypeId,
+        public static BaseIdleForestConstruction typeNoOutputConstProficiency(String prototypeId,
             String id,
             GridPosition position,
-            DescriptionPackage descriptionPackage)
+            DescriptionPackage descriptionPackage
+            )
         {
             BaseIdleForestConstruction thiz = new BaseIdleForestConstruction(prototypeId, id, position, descriptionPackage);
 
-            IdleForestProficiencyComponent proficiencyComponent = new IdleForestProficiencyComponent(thiz, null);
+            var proficiencyComponent = new ConstProficiencyComponent(thiz);
             thiz.proficiencyComponent = proficiencyComponent;
-            proficiencyComponent.proficiencySpeedCalculator = IDLE_FOREST_PROFICIENCY_SPEED_CALCULATOR;
 
-            thiz.saveData.proficiency = proficiencyComponent.maxProficiency;
+            var outputComponent = new EmptyOutputComponent(thiz);
+            thiz.outputComponent = outputComponent;
 
             return thiz;
         }
@@ -94,11 +97,6 @@ namespace Assets.Scripts.DemoGameCore.logic
 
             this.descriptionPackage = descriptionPackage;
 
-            
-
-            OutputComponent outputComponent = new IdleForestOutputComponent(this);
-            this.outputComponent = outputComponent;
-
             UpgradeComponent upgradeComponent = new UpgradeComponent(this);
             this.upgradeComponent = upgradeComponent;
 
@@ -111,6 +109,7 @@ namespace Assets.Scripts.DemoGameCore.logic
             this.saveData.position = position;
             this.saveData.level = 1;
             this.saveData.workingLevel = 1;
+            this.saveData.proficiency = 0;
         }
 
 
