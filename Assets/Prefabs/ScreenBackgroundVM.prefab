@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 82754160744006950}
-  - component: {fileID: 1845564866800880958}
+  - component: {fileID: 1128305255135644546}
   m_Layer: 0
   m_Name: ScreenBackgroundVM
   m_TagString: Untagged
@@ -38,7 +38,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1845564866800880958
+--- !u!114 &1128305255135644546
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1959302228513867643}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b0ccdb978038314fbda0261d439e37c, type: 3}
+  m_Script: {fileID: 11500000, guid: 6292b184daa5fbc4e991b61b5dcc05a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7321302964984662693
